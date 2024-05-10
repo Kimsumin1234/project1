@@ -1,6 +1,273 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
   <div layout:fragment="content">
-    <h1>입양 리스트 페이지 입니다</h1>
+    <h3>입양목록</h3>
+    <body>
+      <div class="wrap">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+              <p class="mb-0 phone pl-md-2">
+                <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +00 1234 567</a>
+                <a href="#"><span class="fa fa-paper-plane mr-1"></span> youremail@email.com</a>
+              </p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end">
+              <div class="social-media">
+                <p class="mb-0 d-flex">
+                  <a href="#" class="d-flex align-items-center justify-content-center"
+                    ><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a
+                  >
+                  <a href="#" class="d-flex align-items-center justify-content-center"
+                    ><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a
+                  >
+                  <a href="#" class="d-flex align-items-center justify-content-center"
+                    ><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a
+                  >
+                  <a href="#" class="d-flex align-items-center justify-content-center"
+                    ><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="ftco-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-1.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Lloyd Wilson</h3>
+                  <span class="position mb-2">Health Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-2.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Rachel Parker</h3>
+                  <span class="position mb-2">Life &amp; Business Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-3.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Ian Smith</h3>
+                  <span class="position mb-2">Executive Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-4.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Alicia Henderson</h3>
+                  <span class="position mb-2">Health Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-5.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Lloyd Wilson</h3>
+                  <span class="position mb-2">Executive Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-6.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Rachel Parker</h3>
+                  <span class="position mb-2">Health Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-7.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Ian Smith</h3>
+                  <span class="position mb-2">Health Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="staff">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <div class="img align-self-stretch" style="background-image: url(images/staff-8.jpg)"></div>
+                </div>
+                <div class="text pt-3 px-3 pb-4 text-center">
+                  <h3>Fred Henderson</h3>
+                  <span class="position mb-2">Executive Coach</span>
+                  <div class="faded">
+                    <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+                    <ul class="ftco-social text-center">
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+                      </li>
+                      <li class="ftco-animate">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </body>
   </div>
 </html>
