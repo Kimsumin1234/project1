@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+    <div class="hero-wrap js-fullheight" th:style="'background-image:url('+ @{/assets/images/bg_2.jpg} +');'" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row d-md-flex justify-content-center">
+          <div class="mt-5 col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+            <form action="#" class="appointment">
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="아이디" />
+                  </div>
+                </div>
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="비밀번호" />
+                  </div>
+                </div>
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary py-2" th:style="'font-size: 18px;'">로그인</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
