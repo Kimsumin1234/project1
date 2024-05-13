@@ -5,6 +5,9 @@ import com.example.project1.entity.Member;
 
 public interface AdoptUserService {
 
+    // 닉네임 수정
+    String nickNameUpdate(MemberDto upMemberDto);
+
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {
         return Member.builder()
