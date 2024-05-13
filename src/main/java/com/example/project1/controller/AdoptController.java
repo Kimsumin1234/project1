@@ -17,4 +17,9 @@ public class AdoptController {
         log.info("입양 리스트 페이지 요청");
     }
 
+    @GetMapping("/read")
+    public void getRead() {
+        log.info("입양 리스트 읽기");
+    }
+
 }
