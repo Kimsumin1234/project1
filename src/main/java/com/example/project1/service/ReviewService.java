@@ -8,7 +8,7 @@ import com.example.project1.entity.Review;
 
 public interface ReviewService {
 
-    PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto);
+    // PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto);
 
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, Member member, Long replyCount) {

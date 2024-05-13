@@ -9,6 +9,6 @@ import com.example.project1.entity.ReviewReply;
 
 public interface ReviewReplyRepository extends JpaRepository<ReviewReply, Long> {
 
-    List<ReviewReply> getReviewRepliesByReviewOrderByRno(Review review);
+    // List<ReviewReply> getReviewRepliesByReviewOrderByRno(Review review);
 
 }

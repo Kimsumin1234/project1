@@ -23,15 +23,17 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final ReviewReplyRepository replyRepository;
 
-    @Override
-    public PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto) {
+    // @Override
+    // public PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto)
+    // {
 
-        Page<Object[]> result = reviewRepository.list(requestDto.getType(), requestDto.getKeyword(),
-                requestDto.getPageable(Sort.by("rno").descending()));
+    // Page<Object[]> result = reviewRepository.list(requestDto.getType(),
+    // requestDto.getKeyword(),
+    // requestDto.getPageable(Sort.by("rno").descending()));
 
-        Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
-                (Member) entity[1], (Long) entity[2]));
-        return new PageResultDto<>(result, fn);
-    }
+    // Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
+    // (Member) entity[1], (Long) entity[2]));
+    // return new PageResultDto<>(result, fn);
+    // }
 
 }
