@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableMethodSecurity
 @EnableWebSecurity
@@ -21,6 +22,9 @@ public class SecurityConfig {
                 .anyRequest().permitAll());
         http.formLogin(login -> login
                 .loginPage("/member/login").permitAll());
+        http.logout(logout -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                .logoutSuccessUrl("/"));
         http.csrf(csrf -> csrf.disable()); // csrf 비활성화
         return http.build();
     }
