@@ -11,27 +11,24 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReviewDto {
-
-    private Long rno;
-
-    private String title;
+@ToString
+public class ReviewReplyDto {
+    private Long replyNo;
 
     private String text;
-
-    private Long replyCount;
 
     // member
     private Long mid;
     private String email;
     private String nickname;
 
+    // Review
+    private Long rno;
+
     private LocalDateTime createdDate;
 
     private LocalDateTime lastModifiedDate;
-
 }

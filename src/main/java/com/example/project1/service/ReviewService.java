@@ -1,14 +1,14 @@
 package com.example.project1.service;
 
-import org.springframework.data.domain.jaxb.SpringDataJaxb.PageRequestDto;
-
+import com.example.project1.dto.PageRequestDto;
+import com.example.project1.dto.PageResultDto;
 import com.example.project1.dto.ReviewDto;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 
 public interface ReviewService {
 
-    PageResultDto<Review, Object[]> getList(PageRequestDto requestDto);
+    PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto);
 
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, Member member, Long replyCount) {
@@ -19,7 +19,7 @@ public interface ReviewService {
                 .mid(member.getMid())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
-                // .replyCount(replyCount != null ? replyCount : 0)
+                .replyCount(replyCount != null ? replyCount : 0)
                 .createdDate(review.getCreatedDate())
                 .lastModifiedDate(review.getLastModifiedDate())
                 .build();
