@@ -6,8 +6,9 @@
         <div class="row d-flex justify-content-center no-gutters">
           <div class="col-md-7 pl-md-5 py-md-5">
             <div class="heading-section pt-md-5">
-              <h2 class="mb-1">홍길동 님</h2>
-              <h4 class="mb-1">안녕하세요</h4>
+              <h2 class="mb-1" th:text="${#authentication.principal.memberDto.nickname}+님"></h2>
+              <h5 class="mb-1">안녕하세요</h5>
+              <p class="mb-5" th:text="${#authentication.name}"></p>
             </div>
             <div class="row">
               <div class="col-md-6 services-2 w-100 d-flex">
