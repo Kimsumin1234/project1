@@ -17,7 +17,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/member/profile").hasAnyRole("MEMBER")
                 .anyRequest().permitAll());
+        http.formLogin(login -> login
+                .loginPage("/member/login").permitAll());
         http.csrf(csrf -> csrf.disable()); // csrf 비활성화
         return http.build();
     }
