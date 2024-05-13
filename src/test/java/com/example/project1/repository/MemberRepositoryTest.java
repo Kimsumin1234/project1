@@ -32,4 +32,5 @@ public class MemberRepositoryTest {
             memberRepository.save(member);
         });
     }
+
 }

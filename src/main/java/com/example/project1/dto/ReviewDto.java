@@ -1,5 +1,7 @@
 package com.example.project1.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +19,17 @@ public class ReviewDto {
 
     private Long rno;
 
-    private MemberDto member;
-
     private String title;
 
     private String text;
+
+    // member
+    private Long mid;
+    private String email;
+    private String nickname;
+
+    private LocalDateTime createdDate;
+
+    private LocalDateTime lastModifiedDate;
 
 }
