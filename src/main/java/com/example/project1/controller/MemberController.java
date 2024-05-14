@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,9 +49,8 @@ public class MemberController {
 
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/edit")
-    public String getEditProfile() {
+    public void getEditProfile(PasswordChangeDto pDto) {
         log.info("회원정보수정 페이지 요청");
-        return "/member/edit-profile";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -76,14 +77,19 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/password")
-    public String postEditPassword(PasswordChangeDto pDto, HttpSession session, RedirectAttributes rttr) {
+    public String postEditPassword(PasswordChangeDto pDto, HttpSession session, Model model, RedirectAttributes rttr) {
         log.info("비밀번호 수정 요청 {}", pDto);
 
+        if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
+            model.addAttribute("error2", "변경할 비밀번호와 다릅니다");
+            return "/member/edit";
+        }
+
         try {
-            // movieUserService.passwordUpdate(pDto);
+            adoptUserService.passwordUpdate(pDto);
         } catch (Exception e) {
-            rttr.addFlashAttribute("error", e.getMessage());
-            return "redirect:/member/edit";
+            model.addAttribute("error", e.getMessage());
+            return "/member/edit";
         }
 
         session.invalidate();

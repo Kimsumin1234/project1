@@ -18,18 +18,27 @@
 
             <hr class="my-8" />
 
-            <form action="#" class="p-5 bg-light">
+            <form th:action="@{/member/edit/password}" id="changeForm" method="post" class="p-5 bg-light">
+              <input type="hidden" name="email" th:value="${#authentication.name}" />
               <div class="form-group">
-                <label for="email">현재 비밀번호 *</label>
-                <input type="email" class="form-control" id="email" />
+                <label for="currentPassword">현재 비밀번호 *</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="currentPassword"
+                  name="currentPassword"
+                  th:value="${passwordChangeDto.currentPassword}"
+                />
+                <div class="text-danger email" th:if="${error}" th:text="${error}"></div>
               </div>
               <div class="form-group">
-                <label for="website">비밀번호 변경 *</label>
-                <input type="url" class="form-control" id="website" />
+                <label for="newPassword">비밀번호 변경 *</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" th:value="${passwordChangeDto.newPassword}" />
               </div>
               <div class="form-group">
-                <label for="website">비밀번호 변경 확인 *</label>
-                <input type="url" class="form-control" id="website" />
+                <label for="checkNewPassword">비밀번호 변경 확인 *</label>
+                <input type="password" class="form-control" id="checkNewPassword" name="checkNewPassword" />
+                <div class="text-danger email" th:if="${error2}" th:text="${error2}"></div>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary py-2" th:style="'font-size: 18px;'">비밀번호 변경</button>
@@ -39,5 +48,8 @@
         </div>
       </div>
     </div>
+    <th:block layout:fragment="script">
+      <script th:src="@{/js/edit-profile.js}"></script>
+    </th:block>
   </div>
 </html>
