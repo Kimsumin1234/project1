@@ -47,6 +47,9 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public String nickNameUpdate(MemberDto upMemberDto) {
         log.info("닉네임 수정 ServiceImpl {}", upMemberDto);
 
+        // 중복 검사
+        validateDuplicationMemberNickName(upMemberDto.getNickname());
+
         memberRepository.updateNickName(upMemberDto.getNickname(), upMemberDto.getEmail());
         return "닉네임 수정 완료";
     }
@@ -65,4 +68,12 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         }
     }
 
+    // 닉네임 중복 확인
+    private void validateDuplicationMemberNickName(String nickname) throws IllegalStateException {
+        Optional<Member> member = memberRepository.findByNickname(nickname);
+
+        if (member.isPresent()) {
+            throw new IllegalStateException("중복된 닉네임 입니다.");
+        }
+    }
 }

@@ -7,9 +7,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.example.project1.entity.Member;
+import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
+
+    Optional<Member> findByNickname(String nickname);
 
     @Modifying
     @Query("update Member m set m.nickname=?1 where m.email=?2")
