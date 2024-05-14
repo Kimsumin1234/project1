@@ -91,31 +91,30 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
         return new PageImpl<>(result.stream().map(t -> t.toArray()).collect(Collectors.toList()), pageable, count);
     }
 
-    // @Override
-    // public Object[] getRow(Long rno) {
-    // log.info("get Row SearchBoardRepository");
+    @Override
+    public Object[] getRow(Long rno) {
+        log.info("get Row SearchBoardRepository");
 
-    // // Q 클래스 사용
-    // QReview review = QReview.review;
-    // QMember member = QMember.member;
-    // QReviewReply reply = QReviewReply.reviewReply;
+        // Q 클래스 사용
+        QReview review = QReview.review;
+        QMember member = QMember.member;
+        QReviewReply reply = QReviewReply.reviewReply;
 
-    // // @Query("select b, m from board b left join b.writer m") // findby*
-    // JPQLQuery<Review> query = from(review);
-    // query.leftJoin(review.writer, member);
-    // query.where(review.rno.eq(rno));
+        // @Query("select b, m from board b left join b.writer m") // findby*
+        JPQLQuery<Review> query = from(review);
+        query.leftJoin(review.writer, member);
+        query.where(review.rno.eq(rno));
 
-    // // subquery => JPAEXpressions
-    // JPQLQuery<Long> replyCount =
-    // JPAExpressions.select(reply.replyNo.count().as("replycnt"))
-    // .from(reply)
-    // .where(reply.review.eq(review))
-    // .groupBy(reply.review);
+        // subquery => JPAEXpressions
+        JPQLQuery<Long> replyCount = JPAExpressions.select(reply.replyNo.count().as("replycnt"))
+                .from(reply)
+                .where(reply.review.eq(review))
+                .groupBy(reply.review);
 
-    // JPQLQuery<Tuple> tuple = query.select(review, member, replyCount);
-    // Tuple result = tuple.fetch().get(0);
+        JPQLQuery<Tuple> tuple = query.select(review, member, replyCount);
+        Tuple result = tuple.fetch().get(0);
 
-    // return result.toArray(); // Tuple -> Array
-    // }
+        return result.toArray(); // Tuple -> Array
+    }
 
 }

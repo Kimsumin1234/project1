@@ -10,5 +10,5 @@ public interface ReviewMemberReviewReplyRepository {
     // 전체 조회 시 review, member, reply 정보 다 조회
     Page<Object[]> list(String type, String keyword, Pageable pageable);
 
-    // Object[] getRow(Long rno);
+    Object[] getRow(Long rno);
 }
