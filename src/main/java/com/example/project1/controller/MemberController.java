@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,6 +72,24 @@ public class MemberController {
         rttr.addFlashAttribute("msg", msg);
 
         return "redirect:/member/profile";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/edit/password")
+    public String postEditPassword(PasswordChangeDto pDto, HttpSession session, RedirectAttributes rttr) {
+        log.info("비밀번호 수정 controller 요청 {}", pDto);
+        // 현재 비밀번호가 틀리면 /member/edit
+        try {
+            // movieUserService.passwordUpdate(pDto);
+        } catch (Exception e) {
+            rttr.addFlashAttribute("error", e.getMessage());
+            return "redirect:/member/edit";
+        }
+
+        // 비밀번호가 맞으면 세션 날리고 로그인 페이지로
+        session.invalidate();
+
+        return "redirect:/member/login";
     }
 
 }
