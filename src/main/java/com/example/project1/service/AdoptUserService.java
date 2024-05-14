@@ -1,12 +1,16 @@
 package com.example.project1.service;
 
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.entity.Member;
 
 public interface AdoptUserService {
 
     // 닉네임 수정
     String nickNameUpdate(MemberDto upMemberDto);
+
+    // 비밀번호 수정
+    void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException;
 
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {

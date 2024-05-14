@@ -55,7 +55,7 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/nickname")
     public String postEditNickname(MemberDto upMemberDto, RedirectAttributes rttr) {
-        log.info("닉네임 수정 controller 요청 {}", upMemberDto);
+        log.info("닉네임 수정 요청 {}", upMemberDto);
 
         String msg = adoptUserService.nickNameUpdate(upMemberDto);
 
@@ -77,8 +77,8 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/password")
     public String postEditPassword(PasswordChangeDto pDto, HttpSession session, RedirectAttributes rttr) {
-        log.info("비밀번호 수정 controller 요청 {}", pDto);
-        // 현재 비밀번호가 틀리면 /member/edit
+        log.info("비밀번호 수정 요청 {}", pDto);
+
         try {
             // movieUserService.passwordUpdate(pDto);
         } catch (Exception e) {
@@ -86,7 +86,6 @@ public class MemberController {
             return "redirect:/member/edit";
         }
 
-        // 비밀번호가 맞으면 세션 날리고 로그인 페이지로
         session.invalidate();
 
         return "redirect:/member/login";
