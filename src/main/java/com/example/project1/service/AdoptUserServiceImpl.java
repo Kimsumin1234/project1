@@ -44,7 +44,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
 
     @Transactional
     @Override
-    public String nickNameUpdate(MemberDto upMemberDto) {
+    public String nickNameUpdate(MemberDto upMemberDto) throws IllegalStateException {
         log.info("닉네임 수정 ServiceImpl {}", upMemberDto);
 
         // 중복 검사

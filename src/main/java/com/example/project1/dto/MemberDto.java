@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.example.project1.constant.MemberRole;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class MemberDto {
 
     private String phone;
 
+    @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
 
     private String password;

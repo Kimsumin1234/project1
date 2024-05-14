@@ -49,16 +49,28 @@ public class MemberController {
 
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/edit")
-    public void getEditProfile(PasswordChangeDto pDto) {
+    public void getEditProfile(PasswordChangeDto pDto, MemberDto memberDto) {
         log.info("회원정보수정 페이지 요청");
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/nickname")
-    public String postEditNickname(MemberDto upMemberDto, RedirectAttributes rttr) {
+    public String postEditNickname(@Valid MemberDto upMemberDto, BindingResult result, PasswordChangeDto pDto,
+            RedirectAttributes rttr, Model model) {
         log.info("닉네임 수정 요청 {}", upMemberDto);
 
-        String msg = adoptUserService.nickNameUpdate(upMemberDto);
+        if (result.hasErrors()) {
+            return "/member/edit";
+        }
+
+        String msg = "";
+
+        try {
+            msg = adoptUserService.nickNameUpdate(upMemberDto);
+        } catch (Exception e) {
+            model.addAttribute("error3", e.getMessage());
+            return "/member/edit";
+        }
 
         // Authentication 값을 업데이트
         SecurityContext context = SecurityContextHolder.getContext();
@@ -77,8 +89,13 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/password")
-    public String postEditPassword(PasswordChangeDto pDto, HttpSession session, Model model, RedirectAttributes rttr) {
+    public String postEditPassword(@Valid PasswordChangeDto pDto, BindingResult result, MemberDto upMemberDto,
+            HttpSession session, Model model, RedirectAttributes rttr) {
         log.info("비밀번호 수정 요청 {}", pDto);
+
+        if (result.hasErrors()) {
+            return "/member/edit";
+        }
 
         if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
             model.addAttribute("error2", "변경할 비밀번호와 다릅니다");
