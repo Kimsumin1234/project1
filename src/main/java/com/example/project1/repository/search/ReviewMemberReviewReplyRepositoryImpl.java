@@ -11,8 +11,10 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 
 import com.example.project1.entity.QMember;
 import com.example.project1.entity.QReview;
+import com.example.project1.entity.QReviewImage;
 import com.example.project1.entity.QReviewReply;
 import com.example.project1.entity.Review;
+import com.example.project1.entity.ReviewImage;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
@@ -33,24 +35,29 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
 
     @Override
     public Page<Object[]> list(String type, String keyword, Pageable pageable) {
-        log.info("review + reply + member join");
+        log.info("================== queryDsl List ====================");
+        log.info("review + reply + member + reviewimage join");
 
         // Q 클래스 사용
         QReview review = QReview.review;
         QMember member = QMember.member;
         QReviewReply reply = QReviewReply.reviewReply;
+        QReviewImage reviewImage = QReviewImage.reviewImage;
 
         // @Query("select r, m from review r left join r.writer m") // findby*
-        JPQLQuery<Review> query = from(review);
-        query.leftJoin(review.writer, member);
-
+        JPQLQuery<ReviewImage> query = from(reviewImage);
+        query.leftJoin(reviewImage.review, review);
         // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
         JPQLQuery<Long> replyCount = JPAExpressions.select(reply.replyNo.count().as("replycnt"))
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
 
-        JPQLQuery<Tuple> tuple = query.select(review, member, replyCount);
+        JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
+                JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
+                replyCount);
 
         // 검색
         BooleanBuilder builder = new BooleanBuilder();
@@ -99,6 +106,7 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
         QReview review = QReview.review;
         QMember member = QMember.member;
         QReviewReply reply = QReviewReply.reviewReply;
+        QReviewImage reviewImage = QReviewImage.reviewImage;
 
         // @Query("select b, m from board b left join b.writer m") // findby*
         JPQLQuery<Review> query = from(review);

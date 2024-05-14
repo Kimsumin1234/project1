@@ -1,6 +1,5 @@
 package com.example.project1.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,27 +14,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "writer")
-public class Review extends BaseEntity {
+@Builder
+@ToString(exclude = "review")
+@Entity
+public class ReviewImage {
 
-    @SequenceGenerator(name = "animal_review_seq_gen", sequenceName = "animal_review_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_review_seq_gen")
+    @SequenceGenerator(name = "animal_review_image_seq_gen", sequenceName = "animal_review_image_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_review_image_seq_gen")
     @Id
-    private Long rno;
+    private Long inum;
 
-    @Column
-    private String text;
+    private String uuid;
 
-    @Column
-    private String title;
+    private String imagename;
+
+    private String path;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member writer;
+    private Review review;
 
 }

@@ -1,6 +1,8 @@
 package com.example.project1.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +36,7 @@ public class ReviewDto {
 
     private LocalDateTime lastModifiedDate;
 
+    // 리뷰 이미지 리스트
+    @Builder.Default // Builder 를 쓰면
+    private List<ReviewImageDto> reviewImageDtos = new ArrayList<>();
 }

@@ -1,5 +1,7 @@
 package com.example.project1.service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import com.example.project1.dto.PageResultDto;
 import com.example.project1.dto.ReviewDto;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
+import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.repository.ReviewReplyRepository;
 import com.example.project1.repository.ReviewRepository;
@@ -33,7 +36,8 @@ public class ReviewServiceImpl implements ReviewService {
                 requestDto.getPageable(Sort.by("rno").descending()));
 
         Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
-                (Member) entity[1], (Long) entity[2]));
+                (List<ReviewImage>) Arrays.asList((ReviewImage) entity[1]), (Long) entity[2], (String) entity[3],
+                (String) entity[4], (Long) entity[5]));
         return new PageResultDto<>(result, fn);
     }
 

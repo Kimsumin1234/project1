@@ -14,7 +14,7 @@
                   <div class="img align-self-stretch" style="background-image: url(images/staff-1.jpg)"></div>
                 </div>
                 <div class="text pt-3 px-3 pb-4 text-center">
-                  <h3 th:text="${dto.title}"></h3>
+                  <a th:href="@{/review/read}"><h3 th:text="${dto.title}"></h3></a>
                   <span class="position mb-2" th:text="${dto.nickname}"></span>
                   <div class="faded">
                     <p th:text="${dto.text}"></p>

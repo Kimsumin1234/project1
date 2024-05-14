@@ -32,4 +32,9 @@ public class ReviewController {
         model.addAttribute("result", result);
     }
 
+    @GetMapping("/read")
+    public void getRead(@ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("review read 요청");
+    }
+
 }
