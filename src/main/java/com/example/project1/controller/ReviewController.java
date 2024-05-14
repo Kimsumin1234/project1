@@ -25,11 +25,11 @@ public class ReviewController {
     private final ReviewService service;
 
     @GetMapping("/list")
-    public void getReviewList() {
+    public void getReviewList(@ModelAttribute("requestDto") PageRequestDto requestDto, Model model) {
         log.info("review controller 요청");
 
-        // PageResultDto<ReviewDto, Object[]> result = service.getList(requestDto);
-        // model.addAttribute("result", result);
+        PageResultDto<ReviewDto, Object[]> result = service.getList(requestDto);
+        model.addAttribute("result", result);
     }
 
 }

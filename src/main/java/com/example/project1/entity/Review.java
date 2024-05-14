@@ -21,6 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review extends BaseEntity {
+
     @SequenceGenerator(name = "animal_review_seq_gen", sequenceName = "animal_review_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_review_seq_gen")
     @Id
