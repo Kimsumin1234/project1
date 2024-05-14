@@ -29,6 +29,7 @@ public class ReviewController {
         log.info("review controller 요청");
 
         PageResultDto<ReviewDto, Object[]> result = service.getList(requestDto);
+        log.info(result.getDtoList());
         model.addAttribute("result", result);
     }
 
