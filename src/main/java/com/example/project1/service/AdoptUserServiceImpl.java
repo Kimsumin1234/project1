@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
 
@@ -22,6 +24,8 @@ import lombok.extern.log4j.Log4j2;
 public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserService {
 
     private final MemberRepository memberRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,6 +49,20 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
 
         memberRepository.updateNickName(upMemberDto.getNickname(), upMemberDto.getEmail());
         return "닉네임 수정 완료";
+    }
+
+    @Override
+    public void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException {
+        log.info("비밀번호 수정 service {}", pDto);
+
+        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+
+        if (!passwordEncoder.matches(pDto.getCurrentPassword(), member.getPassword())) {
+            throw new IllegalStateException("현재 비밀번호가 다릅니다.");
+        } else {
+            member.setPassword(passwordEncoder.encode(pDto.getNewPassword()));
+            memberRepository.save(member);
+        }
     }
 
 }
