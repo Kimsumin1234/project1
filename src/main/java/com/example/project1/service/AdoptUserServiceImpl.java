@@ -6,8 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.dto.AuthMemberDto;
+import com.example.project1.dto.MemberDto;
 import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
 
@@ -34,6 +36,15 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Member member = result.get();
 
         return new AuthMemberDto(entityToDto(member));
+    }
+
+    @Transactional
+    @Override
+    public String nickNameUpdate(MemberDto upMemberDto) {
+        log.info("닉네임 수정 ServiceImpl {}", upMemberDto);
+
+        memberRepository.updateNickName(upMemberDto.getNickname(), upMemberDto.getEmail());
+        return "닉네임 수정 완료";
     }
 
 }
