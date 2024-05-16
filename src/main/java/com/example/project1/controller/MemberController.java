@@ -114,4 +114,10 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
+    @GetMapping("/leave")
+    public void getLeave() {
+        log.info("회원탈퇴 페이지 요청");
+    }
+
 }
