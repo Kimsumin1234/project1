@@ -19,6 +19,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/member/profile").hasAnyRole("MEMBER")
+                .requestMatchers("/member/register").permitAll()
                 .anyRequest().permitAll());
         http.formLogin(login -> login
                 .loginPage("/member/login").permitAll());

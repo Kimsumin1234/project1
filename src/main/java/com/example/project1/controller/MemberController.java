@@ -147,4 +147,10 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/register")
+    public void getRegister() {
+        log.info("회원가입 페이지 요청");
+    }
+
 }

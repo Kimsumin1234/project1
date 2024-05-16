@@ -8,6 +8,16 @@
             <form th:action="@{login}" method="post" class="appointment">
               <div class="row">
                 <div class="col-md-10">
+                  <div class="row no-gutters slider-text">
+                    <div class="col-md-12 ftco-animate pb-5 d-flex bd-highlight">
+                      <h1 class="flex-grow-1 bd-highlight mb-0 bread">Login</h1>
+                      <p class="breadcrumbs bd-highlight align-self-end mb-2">
+                        <span class="mr-0"
+                          ><a th:href="@{/member/register}" th:style="'font-size: 28px;'"><strong>회원가입</strong> </a></span
+                        >
+                      </p>
+                    </div>
+                  </div>
                   <div class="alert alert-danger col-md-12" th:if="${param.error}">
                     <strong>이메일 또는 비밀번호를 확인해 주세요.</strong>
                   </div>
@@ -32,4 +42,5 @@
       </div>
     </div>
   </div>
+  <th:block layout:fragment="script"> </th:block>
 </html>
