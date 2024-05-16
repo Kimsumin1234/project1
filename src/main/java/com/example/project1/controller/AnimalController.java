@@ -20,7 +20,7 @@ import com.example.project1.dto.PageRequestDto;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/adopt")
-public class AdoptController {
+public class AnimalController {
 
     private final AdoptApiService service;
 
