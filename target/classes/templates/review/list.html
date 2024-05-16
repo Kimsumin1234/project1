@@ -6,19 +6,20 @@
   <div layout:fragment="content">
       <section class="ftco-section bg-light">
         <div class="container">
+          <div><a th:href="@{/review/register}" class="btn btn-primary mb-3">글쓰기</a></div>
           <div class="row">
             <!-- 여기 div가 반복될 예정 -->
             <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate">
               <div class="staff">
                 <div class="img-wrap d-flex align-items-stretch">
                   <!-- style="background-image: url(images/staff-1.jpg)" -->
-                  <div class="img align-self-stretch" 
-                      th:src="|/upload/display?fileName=${dto.reviewImageDtos[0].getThumbImageURL()}|"
+                  <img class="img align-self-stretch" 
+                      th:src="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|"
                       loading="lazy"
-                      th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}"></div>
+                      th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}"/>
                 </div>
                 <div class="text pt-3 px-3 pb-4 text-center">
-                  <a th:href="@{/review/read}"><h3 th:text="${dto.title}"></h3></a>
+                  <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"><h3 th:text="${dto.title}"></h3></a>
                   <span class="position mb-2" th:text="${dto.nickname}"></span>
                   <div class="faded">
                     <p th:text="${dto.text}"></p>

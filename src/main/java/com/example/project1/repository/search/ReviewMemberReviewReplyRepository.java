@@ -1,5 +1,7 @@
 package com.example.project1.repository.search;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,5 +12,5 @@ public interface ReviewMemberReviewReplyRepository {
     // 전체 조회 시 review, member, reply 정보 다 조회
     Page<Object[]> list(String type, String keyword, Pageable pageable);
 
-    Object[] getRow(Long rno);
+    List<Object[]> getRow(Long rno);
 }

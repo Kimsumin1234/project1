@@ -32,8 +32,8 @@
             <p>
               <img src="images/image_1.jpg" alt="" class="img-fluid" />
             </p>
-            <h2 class="mb-3">title 글 제목 들어갈 자리</h2>
-            <p>
+            <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
+            <p th:text="${dto.text}">
               text 내용 들어갈 자리
             </p>
             <div class="tag-widget post-tag-container mb-5 mt-5">
@@ -50,8 +50,8 @@
                 <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4" />
               </div>
               <div class="desc">
-                <h3>George Washington</h3>
-                <p>
+                <h3 th:text="${dto.nickname}">George Washington</h3>
+                <p th:text="${dto.email}">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut,
                   sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!
                 </p>

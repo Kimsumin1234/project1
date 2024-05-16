@@ -18,6 +18,10 @@ public interface ReviewService {
 
     PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto);
 
+    ReviewDto getRow(Long rno);
+
+    Long reviewInsert(ReviewDto reviewDto);
+
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, List<ReviewImage> reviewImages, Long mid, String email,
             String nickname, Long replyCount) {

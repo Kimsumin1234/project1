@@ -57,7 +57,9 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
                 JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
-                replyCount);
+                replyCount)
+                .where(reviewImage.inum.in(
+                        JPAExpressions.select(reviewImage.inum.min()).from(reviewImage).groupBy(reviewImage.review)));
 
         // 검색
         BooleanBuilder builder = new BooleanBuilder();
@@ -99,7 +101,7 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
     }
 
     @Override
-    public Object[] getRow(Long rno) {
+    public List<Object[]> getRow(Long rno) {
         log.info("get Row SearchBoardRepository");
 
         // Q 클래스 사용
@@ -109,20 +111,25 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
         QReviewImage reviewImage = QReviewImage.reviewImage;
 
         // @Query("select b, m from board b left join b.writer m") // findby*
-        JPQLQuery<Review> query = from(review);
-        query.leftJoin(review.writer, member);
-        query.where(review.rno.eq(rno));
-
-        // subquery => JPAEXpressions
+        JPQLQuery<ReviewImage> query = from(reviewImage);
+        query.leftJoin(reviewImage.review, review);
+        // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
         JPQLQuery<Long> replyCount = JPAExpressions.select(reply.replyNo.count().as("replycnt"))
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
 
-        JPQLQuery<Tuple> tuple = query.select(review, member, replyCount);
-        Tuple result = tuple.fetch().get(0);
+        JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
+                JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
+                replyCount)
+                .where(reviewImage.review.rno.eq(rno))
+                .orderBy(reviewImage.inum.desc());
 
-        return result.toArray(); // Tuple -> Array
+        List<Tuple> result = tuple.fetch();
+
+        return result.stream().map(t -> t.toArray()).collect(Collectors.toList()); // Tuple -> Array
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.project1.repository;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.LongStream;
 
@@ -52,6 +53,14 @@ public class ReviewRepositoryTest {
         for (Object[] objects : list) {
             System.out.println(Arrays.toString(objects));
 
+        }
+    }
+
+    @Test
+    public void testeRow() {
+        List<Object[]> result = reviewImageRepository.getRow(1L);
+        for (Object[] objects : result) {
+            System.out.println(Arrays.toString(objects));
         }
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project1.dto.PageRequestDto;
 import com.example.project1.dto.PageResultDto;
@@ -15,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Log4j2
 @Controller
@@ -33,9 +36,32 @@ public class ReviewController {
         model.addAttribute("result", result);
     }
 
-    @GetMapping("/read")
-    public void getRead(@ModelAttribute("requestDto") PageRequestDto requestDto) {
-        log.info("review read 요청");
+    @GetMapping({ "/read", "/modify" })
+    public void getRead(@RequestParam Long rno, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("review read 요청", rno);
+        model.addAttribute("dto", service.getRow(rno));
+
+    }
+
+    @GetMapping("/register")
+    public void getCreate(@ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("review create 요청");
+
+    }
+
+    @PostMapping("/register")
+    public String postRegister(ReviewDto reviewDto, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto requestDto) {
+
+        Long rno = service.reviewInsert(reviewDto);
+        rttr.addFlashAttribute("msg", rno);
+
+        rttr.addAttribute("page", requestDto.getPage());
+        rttr.addAttribute("size", requestDto.getSize());
+        rttr.addAttribute("type", requestDto.getType());
+        rttr.addAttribute("keyword", requestDto.getKeyword());
+
+        return "redirect:/review/list";
     }
 
 }

@@ -100,6 +100,7 @@ public class UploadController {
     // 이미지 전송
     @GetMapping("/display")
     public ResponseEntity<byte[]> getFile(String fileName) {
+        log.info("disply 요청" + fileName);
         ResponseEntity<byte[]> result = null;
         try {
             String srcFileName = URLDecoder.decode(fileName, "UTF-8");
