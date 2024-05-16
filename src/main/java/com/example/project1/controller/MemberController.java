@@ -120,4 +120,21 @@ public class MemberController {
         log.info("회원탈퇴 페이지 요청");
     }
 
+    @PostMapping("/leave")
+    public String postLeave(RedirectAttributes rttr, HttpSession session, MemberDto leaveMemberDto) {
+        log.info("회원탈퇴 요청 {}", leaveMemberDto);
+
+        try {
+            // movieUserService.leave(leaveMemberDto);
+        } catch (Exception e) {
+            rttr.addFlashAttribute("error", "이메일이나 비밀번호를 확인해 주세요");
+            return "redirect:/member/leave";
+        }
+
+        // 회원탈퇴 성공하면 세션 날리기
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
 }

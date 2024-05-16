@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
   <div layout:fragment="content">
+    <!-- 회원탈퇴 (연관관계 가 있는걸 생각해야 한다)
+      - 영화등록 => Movie 는 회원정보와 상관없이 등록 된거라 생각안해도됨
+      - 리뷰등록 => Member 와 관계맺음
+      - 회원등록
+
+      따라서 회원삭제 전에 리뷰를 먼저 삭제해야한다
+      => 리뷰삭제 deleteById or delete 이거는 Id 기준이라 회원을 기준으로 삭제하는 기능을 만들려면 메소드를 새로 만들어야함
+  -->
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 ftco-animate">
           <div class="comment-form-wrap pt-5">
             <hr class="my-8" />
 
-            <form th:action="@{#}" id="changeForm" method="post" class="p-5 bg-light" th:object="${passwordChangeDto}" novalidate>
+            <form th:action="@{#}" id="changeForm" method="post" class="p-5 bg-light">
               <input type="hidden" name="email" th:value="${#authentication.name}" />
               <div class="form-group">
-                <label for="newPassword">현재 비밀번호 *</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword" />
+                <label for="password">현재 비밀번호 *</label>
+                <input type="password" class="form-control" id="password" name="password" />
                 <!-- <div th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}" class="text-danger"></div> -->
               </div>
               <div class="form-group">
-                <label for="checkNewPassword">비밀번호 확인 *</label>
-                <input type="password" class="form-control" id="checkNewPassword" name="checkNewPassword" />
+                <label for="checkPassword">비밀번호 확인 *</label>
+                <input type="password" class="form-control" id="checkPassword" name="checkPassword" />
                 <!-- <div class="text-danger email" th:if="${error2}" th:text="${error2}"></div> -->
               </div>
               <div class="form-group">
