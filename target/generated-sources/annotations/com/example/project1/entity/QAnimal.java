@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QAdoptApi is a Querydsl query type for AdoptApi
+ * QAnimal is a Querydsl query type for Animal
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QAdoptApi extends EntityPathBase<AdoptApi> {
+public class QAnimal extends EntityPathBase<Animal> {
 
-    private static final long serialVersionUID = 2125220656L;
+    private static final long serialVersionUID = -1396555166L;
 
-    public static final QAdoptApi adoptApi = new QAdoptApi("adoptApi");
+    public static final QAnimal animal = new QAnimal("animal");
 
     public final StringPath age = createString("age");
 
@@ -31,7 +31,7 @@ public class QAdoptApi extends EntityPathBase<AdoptApi> {
 
     public final StringPath filename = createString("filename");
 
-    public final NumberPath<Integer> happenDt = createNumber("happenDt", Integer.class);
+    public final StringPath happenDt = createString("happenDt");
 
     public final StringPath kindCd = createString("kindCd");
 
@@ -39,7 +39,7 @@ public class QAdoptApi extends EntityPathBase<AdoptApi> {
 
     public final StringPath noticeEdt = createString("noticeEdt");
 
-    public final NumberPath<Integer> noticeNo = createNumber("noticeNo", Integer.class);
+    public final StringPath noticeNo = createString("noticeNo");
 
     public final NumberPath<Integer> noticeSdt = createNumber("noticeSdt", Integer.class);
 
@@ -61,16 +61,16 @@ public class QAdoptApi extends EntityPathBase<AdoptApi> {
 
     public final StringPath weight = createString("weight");
 
-    public QAdoptApi(String variable) {
-        super(AdoptApi.class, forVariable(variable));
+    public QAnimal(String variable) {
+        super(Animal.class, forVariable(variable));
     }
 
-    public QAdoptApi(Path<? extends AdoptApi> path) {
+    public QAnimal(Path<? extends Animal> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QAdoptApi(PathMetadata metadata) {
-        super(AdoptApi.class, metadata);
+    public QAnimal(PathMetadata metadata) {
+        super(Animal.class, metadata);
     }
 
 }

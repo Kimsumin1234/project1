@@ -2,7 +2,6 @@ package com.example.project1.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,14 +16,14 @@ import lombok.ToString;
 @Setter
 @Getter
 @Entity
-public class AdoptApi {
+public class Animal {
 
     @Id
     private Long sId; // 유기번호
 
     private String filename; // 섬네일이미지
 
-    private int happenDt; // 접수일
+    private String happenDt; // 접수일
 
     private String kindCd; // 품종
 
@@ -34,7 +33,7 @@ public class AdoptApi {
 
     private String weight; // 몸무게
 
-    private int noticeNo; // 공고번호
+    private String noticeNo; // 공고번호
 
     private int noticeSdt; // 공고시작일
 

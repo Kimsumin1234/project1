@@ -13,13 +13,13 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class AdoptApiDto {
+public class AnimalDto {
 
     private Long sId; // 유기번호
 
     private String filename; // 섬네일이미지
 
-    private int happenDt; // 접수일
+    private String happenDt; // 접수일
 
     private String kindCd; // 품종
 
@@ -29,7 +29,7 @@ public class AdoptApiDto {
 
     private String weight; // 몸무게
 
-    private int noticeNo; // 공고번호
+    private String noticeNo; // 공고번호
 
     private int noticeSdt; // 공고시작일
 
