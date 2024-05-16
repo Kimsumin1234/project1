@@ -12,6 +12,9 @@ public interface AdoptUserService {
     // 비밀번호 수정
     void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException;
 
+    // 회원탈퇴
+    String leave(MemberDto leaveMemberDto) throws IllegalStateException;
+
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {
         return Member.builder()

@@ -76,4 +76,21 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("중복된 닉네임 입니다.");
         }
     }
+
+    @Override
+    public String leave(MemberDto leaveMemberDto) throws IllegalStateException {
+        log.info("회원탈퇴 service {}", leaveMemberDto);
+
+        // 아이디 와 비밀번호 일치 시
+        Member member = memberRepository.findByEmail(leaveMemberDto.getEmail()).get();
+        if (!passwordEncoder.matches(leaveMemberDto.getPassword(), member.getPassword())) {
+            throw new IllegalStateException("현재 비밀번호가 다릅니다.");
+
+        } else {
+            // reviewRepository.deleteByMember(member);
+            memberRepository.delete(member);
+        }
+
+        return "회원탈퇴 완료";
+    }
 }
