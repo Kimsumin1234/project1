@@ -116,23 +116,33 @@ public class MemberController {
 
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/leave")
-    public void getLeave() {
+    public void getLeave(MemberDto memberDto) {
         log.info("회원탈퇴 페이지 요청");
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/leave")
-    public String postLeave(RedirectAttributes rttr, HttpSession session, MemberDto leaveMemberDto) {
+    public String postLeave(RedirectAttributes rttr, HttpSession session, MemberDto leaveMemberDto, Model model) {
         log.info("회원탈퇴 요청 {}", leaveMemberDto);
 
+        if (!leaveMemberDto.getPassword().equals(leaveMemberDto.getCheckPassword())) {
+            model.addAttribute("error2", "비밀번호 확인을 다시 해주세요.");
+            return "/member/leave";
+        }
+
+        String msg = "";
+
         try {
-            // movieUserService.leave(leaveMemberDto);
+            msg = adoptUserService.leave(leaveMemberDto);
         } catch (Exception e) {
-            rttr.addFlashAttribute("error", "이메일이나 비밀번호를 확인해 주세요");
-            return "redirect:/member/leave";
+            model.addAttribute("error", e.getMessage());
+            return "/member/leave";
         }
 
         // 회원탈퇴 성공하면 세션 날리기
         session.invalidate();
+
+        rttr.addFlashAttribute("msg", msg);
 
         return "redirect:/";
     }

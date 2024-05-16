@@ -77,6 +77,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         }
     }
 
+    @Transactional
     @Override
     public String leave(MemberDto leaveMemberDto) throws IllegalStateException {
         log.info("회원탈퇴 service {}", leaveMemberDto);
