@@ -11,7 +11,7 @@ import com.example.project1.entity.QAnimal;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public interface AdoptApiRepository extends JpaRepository<Animal, Long>, QuerydslPredicateExecutor<Animal> {
+public interface AnimalRepository extends JpaRepository<Animal, Long>, QuerydslPredicateExecutor<Animal> {
 
     // @Query(value = "SELECT * FROM ANIMAL a", nativeQuery = true)
     // Page<Object[]> getListPage(Pageable pageable);

@@ -12,7 +12,7 @@ import com.example.project1.dto.AnimalDto;
 import com.example.project1.dto.PageRequestDto;
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
-import com.example.project1.repository.AdoptApiRepository;
+import com.example.project1.repository.AnimalRepository;
 import com.querydsl.core.BooleanBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -21,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdoptApiServiceImpl implements AdoptApiService {
 
-    private final AdoptApiRepository adoptApiRepository;
+    private final AnimalRepository animalRepository;
 
     @Override
     public PageResultDto<AnimalDto, Animal> getList(PageRequestDto requestDto) {
         Pageable pageable = requestDto.getPageable(Sort.by("sId").descending());
 
-        Page<Animal> result = adoptApiRepository
-                .findAll(adoptApiRepository.makePredicate(requestDto.getType(), requestDto.getKeyword()), pageable);
+        Page<Animal> result = animalRepository
+                .findAll(animalRepository.makePredicate(requestDto.getType(), requestDto.getKeyword()), pageable);
         Function<Animal, AnimalDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
     }
