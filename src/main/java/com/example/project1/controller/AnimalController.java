@@ -34,10 +34,11 @@ public class AnimalController {
 
     }
 
-    // @GetMapping("/read")
-    // public void getRead(@ModelAttribute("requestDto") PageRequestDto requestDto)
-    // {
-    // log.info("read 요청");
-    // }
+    @GetMapping("/read")
+    public void getRead(@RequestParam Long sId, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("read 요청");
+
+        model.addAttribute("dto", service.getRow(sId));
+    }
 
 }

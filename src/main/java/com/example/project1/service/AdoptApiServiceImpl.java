@@ -33,54 +33,11 @@ public class AdoptApiServiceImpl implements AdoptApiService {
         return new PageResultDto<>(result, fn);
     }
 
-    // @Override
-    // public PageResultDto<AdoptApiDto, AdoptApi> getList(PageRequestDto
-    // requestDto) {
-    // Pageable pageable = requestDto.getPageable(Sort.by("sId").descending());
+    @Override
+    public AnimalDto getRow(Long sId) {
+        Animal entity = animalRepository.findById(sId).get();
+        return entityToDto((entity));
 
-    // BooleanBuilder builder = getSearch(requestDto);
-    // Page<AdoptApi> result = adoptApiRepository.findAll(builder, pageable);
-
-    // Function<AdoptApi, AdoptApiDto> fn = (entity -> entityToDto(entity));
-    // return new PageResultDto<AdoptApiDto, AdoptApi>(result, fn);
-
-    // }
-
-    // 검색기능
-    // private BooleanBuilder getSearch(PageRequestDto requestDto) {
-    // BooleanBuilder builder = new BooleanBuilder();
-
-    // // Q 클래스 QGuestBook 사용
-    // QAdoptApi guestBook = QAdoptApi.adoptApi;
-
-    // // type, keyword 가져오기
-    // String type = requestDto.getType();
-    // String keyword = requestDto.getKeyword();
-
-    // // WHERE sId>0 AND title LIKE '%Title%' OR content LIKE '%content%'
-    // // sId > 0 (gt : graterthan)
-    // // sId > 0 쓰는 이유 : 성능이 좋아짐(빨라짐)
-    // builder.and(guestBook.sId.gt(0L));
-
-    // if (type == null || type.trim().length() == 0) {
-    // return builder;
-    // }
-
-    // // 검색 타입이 있는 경우
-    // // tc, tcw 때문에 contains 사용
-    // BooleanBuilder conditionBuilder = new BooleanBuilder();
-    // if (type.contains("t")) {
-    // // OR content LIKE '%content%'
-    // conditionBuilder.or(guestBook.orgNm.contains(keyword));
-    // }
-    // if (type.contains("c")) {
-    // // OR content LIKE '%content%'
-    // conditionBuilder.or(guestBook.orgNmC.contains(keyword));
-    // }
-
-    // builder.and(conditionBuilder);
-
-    // return builder;
-    // }
+    }
 
 }

@@ -47,7 +47,7 @@ public class QAnimal extends EntityPathBase<Animal> {
 
     public final StringPath orgNm = createString("orgNm");
 
-    public final StringPath orgNmC = createString("orgNmC");
+    public final StringPath orgNmc = createString("orgNmc");
 
     public final StringPath popfile = createString("popfile");
 

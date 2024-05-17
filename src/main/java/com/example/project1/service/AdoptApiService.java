@@ -9,7 +9,7 @@ public interface AdoptApiService {
 
     PageResultDto<AnimalDto, Animal> getList(PageRequestDto requestDto);
 
-    // AdoptApiDto getRow(Long sId);
+    AnimalDto getRow(Long sId);
 
     // entity → dto
     public default AnimalDto entityToDto(Animal adoptApi) {
@@ -33,7 +33,7 @@ public interface AdoptApiService {
                 .careTel(adoptApi.getCareTel())
                 .careAddr(adoptApi.getCareAddr())
                 .orgNm(adoptApi.getOrgNm())
-                .orgNmC(adoptApi.getOrgNmC())
+                .orgNmc(adoptApi.getOrgNmc())
                 .officetel(adoptApi.getOfficetel())
                 .build();
     }
@@ -60,7 +60,7 @@ public interface AdoptApiService {
                 .careTel(dto.getCareTel())
                 .careAddr(dto.getCareAddr())
                 .orgNm(dto.getOrgNm())
-                .orgNmC(dto.getOrgNmC())
+                .orgNmc(dto.getOrgNmc())
                 .officetel(dto.getOfficetel())
                 .build();
     }

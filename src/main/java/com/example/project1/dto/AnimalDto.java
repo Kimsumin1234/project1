@@ -53,7 +53,7 @@ public class AnimalDto {
 
     private String orgNm; // 관할기관(시,도)
 
-    private String orgNmC; // 관할기관(시,군,구)
+    private String orgNmc; // 관할기관(시,군,구)
 
     private String officetel; // 관할기관연락처
 }

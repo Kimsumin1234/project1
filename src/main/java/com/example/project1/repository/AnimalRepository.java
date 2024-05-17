@@ -32,8 +32,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>, QuerydslP
 
         if (type.equals("oNm")) {
             builder.and(adoptApi.orgNm.contains(keyword));
-        } else if (type.equals("oNmC")) {
-            builder.and(adoptApi.orgNmC.contains(keyword));
+        } else if (type.equals("oNmc")) {
+            builder.and(adoptApi.orgNmc.contains(keyword));
         }
 
         return builder;
