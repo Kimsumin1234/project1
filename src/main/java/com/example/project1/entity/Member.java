@@ -34,6 +34,7 @@ public class Member extends BaseEntity {
     @Column(unique = true) // 중복불가 유니크 제약조건
     private String email;
 
+    @Column(unique = true) // 중복불가 유니크 제약조건
     private String phone;
 
     @Column(unique = true) // 중복불가 유니크 제약조건
