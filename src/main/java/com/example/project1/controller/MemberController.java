@@ -153,4 +153,30 @@ public class MemberController {
         log.info("회원가입 페이지 요청");
     }
 
+    @PostMapping("/register")
+    public String postRegister(@Valid MemberDto insertDto, BindingResult result, RedirectAttributes rttr, Model model) {
+        log.info("회원가입 요청 {}", insertDto);
+        // 유효성 검사
+        if (result.hasErrors()) {
+            return "/member/register";
+        }
+
+        String newEmail = "";
+        // 중복 이메일 검사
+        try {
+            // newEmail = movieUserService.register(insertDto);
+        } catch (Exception e) {
+            // 이방식은 MemberDto insertDto 이거를 살릴수없음
+            // rttr.addFlashAttribute("Exception", e.getMessage());
+            // return "redirect:/member/register";
+
+            // model 에 담으면 Exception 메세지도 띄우고 MemberDto insertDto 도 살릴수있다
+            model.addAttribute("Exception", e.getMessage());
+            return "/member/register";
+        }
+
+        rttr.addFlashAttribute("newEmail", newEmail);
+        return "redirect:/member/login";
+    }
+
 }
