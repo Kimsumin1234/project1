@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+    <div class="container">
+      <div class="row d-md-flex justify-content-center">
+        <div class="mt-5 col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+          <form th:action="@{login}" method="post" class="bg-light appointment">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="alert alert-danger col-md-12" th:if="${param.error}">
+                  <strong>이메일 또는 비밀번호를 확인해 주세요.</strong>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="'-' 제외하고 전화번호를 입력해주세요." />
+                </div>
+              </div>
+              <div class="col-md-10">
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="인증번호" />
+                </div>
+              </div>
+              <div class="col-md-10">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary py-2" th:style="'font-size: 18px;'">인증완료</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <th:block layout:fragment="script">
+      <!-- <script th:src="@{/js/edit-profile.js}"></script> -->
+    </th:block>
+  </div>
+</html>

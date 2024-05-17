@@ -148,9 +148,9 @@ public class MemberController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/register")
-    public void getRegister() {
-        log.info("회원가입 페이지 요청");
+    @GetMapping("/sms")
+    public void getSms() {
+        log.info("문자인증 페이지 요청");
     }
 
     @PostMapping("/register")
