@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
+import com.example.project1.entity.ReviewReply;
 
 @SpringBootTest
 public class ReviewRepositoryTest {
@@ -23,6 +24,8 @@ public class ReviewRepositoryTest {
     private ReviewRepository reviewRepository;
     @Autowired
     private ReviewImageRepository reviewImageRepository;
+    @Autowired
+    private ReviewReplyRepository replyRepository;
 
     @Test
     public void testInsert() {
@@ -42,6 +45,20 @@ public class ReviewRepositoryTest {
                     .review(review)
                     .build();
             reviewImageRepository.save(reviewImage);
+        });
+    }
+
+    @Test
+    public void testInsertReply() {
+        LongStream.rangeClosed(1, 10).forEach(i -> {
+            Member member = Member.builder().mid(i).build();
+            Review review = Review.builder().rno(i).build();
+            ReviewReply reviewReply = ReviewReply.builder()
+                    .text("test..." + i)
+                    .replyer(member)
+                    .review(review)
+                    .build();
+            replyRepository.save(reviewReply);
         });
     }
 

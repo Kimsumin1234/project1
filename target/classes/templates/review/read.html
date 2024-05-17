@@ -29,9 +29,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 ftco-animate">
-            <p>
-              <img src="images/image_1.jpg" alt="" class="img-fluid" />
-            </p>
+            <div class="uploadResult mb-4">
+              <ul>
+                <!-- data-bs-toggle="modal" data-bs-target="#imgModal" 하단의 id="imgModal" 맞춰주기 / th:attr="data-file -->
+                <li th:each="image : ${dto.reviewImageDtos}" data-bs-toggle="modal" data-bs-target="#imgModal" th:attr="data-file=${image.getImageURL()}">
+                  <img class="block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
+                </li>
+              </ul>
+            </div>
             <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
             <p th:text="${dto.text}">
               text 내용 들어갈 자리
@@ -50,17 +55,57 @@
                 <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4" />
               </div>
               <div class="desc">
-                <h3 th:text="${dto.nickname}">George Washington</h3>
+                <h3 th:text="${dto.nickname}">멤버 정보</h3>
                 <p th:text="${dto.email}">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut,
-                  sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!
+                  멤버 정보
                 </p>
               </div>
             </div>
 
+            <!-- reply 들어갈 자리 -->
             <div class="pt-5 mt-5">
-              <h3 class="mb-5">6 Comments</h3>
-              <ul class="comment-list">
+              <h3 class="mb-5"><span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
+              <!-- <div
+                class="flex items-center justify-between p-3 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+              >
+                <span>
+                  <button
+                    class="px-1 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-full active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                    aria-label="Edit"
+                  >
+                    <svg class="review-edit w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                      ></path>
+                    </svg>
+                  </button>
+                </span>
+              </div> -->
+              <!-- js 에서 처리할꺼임 -->
+              <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form action="/review/add" class="review-form p-5 bg-light " method="post">
+                  <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
+                  <input type="hidden" name="replyNo" id="replyNo" />
+                  <div class="form-group">
+                    <label for="name">닉네임 *</label>
+                    <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly/>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}" readonly/>
+                  </div>
+                  <div class="form-group">
+                    <label for="message">text</label>
+                    <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn py-3 px-4 btn-primary">댓글 등록</button>
+                  </div>
+                </form>
+              </div>
+
+              <ul class="comment-list replyList" id="replyList">
                 <li class="comment">
                   <div class="vcard bio">
                     <img src="images/person_1.jpg" alt="Image placeholder" />
@@ -159,31 +204,7 @@
               </ul>
               <!-- END comment-list -->
 
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name" />
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email" />
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website" />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary" />
-                  </div>
-                </form>
-              </div>
+              
             </div>
           </div>
           <!-- .col-md-8 -->
@@ -294,6 +315,14 @@
       </div>
     </section>
     <!-- .section -->
-
-  </body>
+  </div>
+    <th:block layout:fragment="script"> 
+      <script>
+        const replyList = document.querySelector(".replyList");
+        const rno = "[[${dto.rno}]]";
+        const title = "[[${dto.title}]]";
+        const user = "[[${#authentication.name}]]";
+      </script>
+      <script th:src="@{/js/reply.js}"></script>
+    </th:block>
 </html>

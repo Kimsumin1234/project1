@@ -38,8 +38,10 @@ public class ReviewController {
 
     @GetMapping({ "/read", "/modify" })
     public void getRead(@RequestParam Long rno, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
-        log.info("review read 요청", rno);
-        model.addAttribute("dto", service.getRow(rno));
+        log.info("review read 요청 {}", rno);
+        ReviewDto result = service.getRow(rno);
+        log.info(result);
+        model.addAttribute("dto", result);
 
     }
 
