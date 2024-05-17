@@ -74,6 +74,10 @@
   </div>
   <th:block layout:fragment="script">
     <script>
+      const allLi = document.querySelectorAll(".nav-item");
+      console.log(allLi[0]);
+      allLi[0].classList.add("active");
+
       const msg = "[[${msg}]]";
       if (msg) {
         Swal.fire({
@@ -85,5 +89,6 @@
         });
       }
     </script>
+    <!-- <script th:src="@{/js/navbar.js}"></script> -->
   </th:block>
 </html>

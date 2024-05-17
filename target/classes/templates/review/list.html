@@ -75,5 +75,10 @@
       </section>
     </body>
   </div>
-  
+  <th:block layout:fragment="script">
+    <script>
+      const allLi = document.querySelectorAll(".nav-item");
+      allLi[4].classList.add("active");
+    </script>
+  </th:block>
 </html>

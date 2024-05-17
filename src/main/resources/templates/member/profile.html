@@ -47,6 +47,9 @@
   </div>
   <th:block layout:fragment="script">
     <script>
+      const allLi = document.querySelectorAll(".nav-item");
+      allLi[5].classList.add("active");
+
       const msg = "[[${msg}]]";
       if (msg) {
         Swal.fire({

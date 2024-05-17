@@ -42,5 +42,10 @@
       </div>
     </div>
   </div>
-  <th:block layout:fragment="script"> </th:block>
+  <th:block layout:fragment="script">
+    <script>
+      const allLi = document.querySelectorAll(".nav-item");
+      allLi[1].classList.add("active");
+    </script>
+  </th:block>
 </html>
