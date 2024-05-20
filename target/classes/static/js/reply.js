@@ -18,7 +18,8 @@ const reviewsLoaded = () => {
 
       let result = "";
       data.forEach((reply) => {
-        result += `<li class="comment">
+        console.log(reply.replyNo);
+        result += `<li class="comment" data-replyNo="${reply.replyNo}">
                         <div class="vcard bio">
                             <img src="images/person_1.jpg" alt="Image placeholder" />
                         </div>
@@ -86,7 +87,7 @@ reviewForm.addEventListener("submit", (e) => {
   } else {
     fetch(`/reply/${rno}/${replyNo.value}`, {
       method: "put",
-      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
+      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
       body: JSON.stringify(body),
     })
       .then((response) => response.text())
@@ -109,9 +110,9 @@ reviewForm.addEventListener("submit", (e) => {
 replyList.addEventListener("click", (e) => {
   // 부모 요소가 이벤트를 감지하는 형태로 작성 => 실제 이벤트 대상 요소가 무엇인지 확인필요
   console.log("이벤트 대상", e.target);
-
+  console.log(e.target.closest(".comment"));
   // 리뷰 댓글 번호 가져오기
-  const replyNo = e.target.closest(".comment").dataset.replyNo;
+  const replyNo = e.target.closest(".comment").dataset.replyno;
   // 컨트롤러에서 작성자와 로그인 유저가 같은지 다시 한번 비교하기 위함
   const email = reviewForm.querySelector("#email");
 
@@ -121,7 +122,7 @@ replyList.addEventListener("click", (e) => {
     const form = new FormData();
     form.append("email", email.value);
 
-    fetch(`/reply/${mno}/${replyNo}`, {
+    fetch(`/reply/${rno}/${replyNo}`, {
       method: "delete",
       // headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
       body: form,

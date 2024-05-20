@@ -35,6 +35,8 @@ public class ReviewReplyController {
     @GetMapping("/{rno}/all")
     public ResponseEntity<List<ReviewReplyDto>> getList(@PathVariable("rno") Long rno) {
         log.info("reply controller 요청 {}", rno);
+        log.info("List<ReviewReplyDto> {}", replyService.getListOfReview(rno));
+
         return new ResponseEntity<>(replyService.getListOfReview(rno), HttpStatus.OK);
     }
 
