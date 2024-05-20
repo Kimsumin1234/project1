@@ -20,7 +20,11 @@ public interface ReviewService {
 
     ReviewDto getRow(Long rno);
 
+    Long reviewUpdate(ReviewDto reviewDto);
+
     Long reviewInsert(ReviewDto reviewDto);
+
+    void reviewRemove(Long rno);
 
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, List<ReviewImage> reviewImages, Long mid, String email,

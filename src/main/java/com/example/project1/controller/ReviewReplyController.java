@@ -2,6 +2,7 @@ package com.example.project1.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.project1.dto.ReviewDto;
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.service.ReviewReplyService;
 
@@ -16,9 +17,11 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Log4j2
@@ -42,4 +45,25 @@ public class ReviewReplyController {
         return new ResponseEntity<>(replyService.addReply(replyDto), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{rno}/{replyNo}")
+    public ResponseEntity<Long> deleteReview(@PathVariable("replyNo") Long replyNo, String email) {
+        // RequestBody 변수명 => review.js의 fetch함수 body의 변수명과 같음
+        log.info("reply 삭제 {}", replyNo);
+        replyService.removeReply(replyNo);
+        return new ResponseEntity<>(replyNo, HttpStatus.OK);
+    }
+
+    @GetMapping("/{rno}/{replyNo}")
+    public ResponseEntity<ReviewReplyDto> getReview(@PathVariable("replyNo") Long replyNo) {
+        log.info("reply 한개 읽어오기{}", replyNo);
+
+        return new ResponseEntity<>(replyService.getReply(replyNo), HttpStatus.OK);
+    }
+
+    @PutMapping("/{rno}/{replyNo}")
+    public ResponseEntity<Long> putReview(@PathVariable("replyNo") Long replyNo, @RequestBody ReviewReplyDto replyDto) {
+        log.info("put controller reply 수정 {}", replyDto);
+
+        return new ResponseEntity<>(replyService.updateReply(replyDto), HttpStatus.OK);
+    }
 }

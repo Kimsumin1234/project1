@@ -3,6 +3,8 @@ package com.example.project1.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewReply;
@@ -11,4 +13,7 @@ public interface ReviewReplyRepository extends JpaRepository<ReviewReply, Long> 
 
     List<ReviewReply> getReviewRepliesByReviewOrderByReplyNo(Review review);
 
+    @Modifying
+    @Query("delete from ReviewReply rr where rr.review = :review")
+    void deleteByReview(Review review);
 }

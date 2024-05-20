@@ -13,6 +13,12 @@ public interface ReviewReplyService {
 
     Long addReply(ReviewReplyDto replyDto);
 
+    void removeReply(Long replyNo);
+
+    ReviewReplyDto getReply(Long replyNo);
+
+    Long updateReply(ReviewReplyDto replyDto);
+
     public default ReviewReplyDto entityToDto(ReviewReply reviewReply) {
         return ReviewReplyDto.builder()
                 .replyNo(reviewReply.getReplyNo())

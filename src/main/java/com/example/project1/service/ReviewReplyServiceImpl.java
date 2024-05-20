@@ -34,4 +34,20 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
         return replyRepository.save(dtoToEntity(replyDto)).getReplyNo();
     }
 
+    @Override
+    public void removeReply(Long replyNo) {
+        replyRepository.deleteById(replyNo);
+    }
+
+    @Override
+    public ReviewReplyDto getReply(Long replyNo) {
+        ReviewReply reviewReply = replyRepository.findById(replyNo).get();
+        return entityToDto(reviewReply);
+    }
+
+    @Override
+    public Long updateReply(ReviewReplyDto replyDto) {
+        return replyRepository.save(dtoToEntity(replyDto)).getReplyNo();
+    }
+
 }

@@ -77,4 +77,30 @@ public class ReviewServiceImpl implements ReviewService {
         return review.getRno();
     }
 
+    @Transactional
+    @Override
+    public Long reviewUpdate(ReviewDto reviewDto) {
+        Map<String, Object> entityMap = dtoToEntity(reviewDto);
+
+        // review 기존 image 제거
+        Review review = (Review) entityMap.get("review");
+        reviewImageRepository.deleteByReview(review);
+        // reviewimage 삽입
+        List<ReviewImage> reviewImages = (List<ReviewImage>) entityMap.get("imgList");
+        reviewImages.forEach(img -> reviewImageRepository.save(img));
+
+        reviewRepository.save((Review) entityMap.get("review"));
+
+        return review.getRno();
+    }
+
+    @Override
+    public void reviewRemove(Long rno) {
+        Review review = reviewRepository.findById(rno).get();
+
+        reviewImageRepository.deleteByReview(review);
+        replyRepository.deleteByReview(review);
+        reviewRepository.deleteById(rno);
+    }
+
 }

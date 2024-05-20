@@ -42,7 +42,21 @@ public class ReviewController {
         ReviewDto result = service.getRow(rno);
         log.info(result);
         model.addAttribute("dto", result);
+    }
 
+    @PostMapping("/modify")
+    public String postModify(ReviewDto reviewDto, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("modify post controller 요청 {}", reviewDto);
+        Long rno = service.reviewUpdate(reviewDto);
+        rttr.addFlashAttribute("msg", rno);
+
+        rttr.addAttribute("rno", reviewDto.getRno());
+        rttr.addAttribute("page", requestDto.getPage());
+        rttr.addAttribute("size", requestDto.getSize());
+        rttr.addAttribute("type", requestDto.getType());
+        rttr.addAttribute("keyword", requestDto.getKeyword());
+        return "redirect:/review/read";
     }
 
     @GetMapping("/register")
