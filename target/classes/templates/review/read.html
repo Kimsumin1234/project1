@@ -44,9 +44,17 @@
             <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
               <div class="">
                 <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
+                <a href="" class="btn btn-danger">삭제</a>
+                <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록</a>
               </div>
+                <form method="post" id="actionForm" th:action="@{/review/remove}">
+                  <input type="hidden" name="rno" th:value="${dto.rno}" />
+                  <input type="hidden" name="page" th:value="${requestDto.page}" />
+                  <input type="hidden" name="type" th:value="${requestDto.type}"/>
+                  <input type="hidden" name="keyword" th:value="${requestDto.keyword}" />
+                </form>
             </div>
-
+            
             <div class="about-author d-flex p-4 bg-light">
               <div class="bio mr-5">
                 <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4" />

@@ -94,6 +94,7 @@ public class ReviewServiceImpl implements ReviewService {
         return review.getRno();
     }
 
+    @Transactional
     @Override
     public void reviewRemove(Long rno) {
         Review review = reviewRepository.findById(rno).get();

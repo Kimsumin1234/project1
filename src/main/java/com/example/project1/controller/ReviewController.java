@@ -59,6 +59,19 @@ public class ReviewController {
         return "redirect:/review/read";
     }
 
+    @PostMapping("/remove")
+    public String postRemove(@RequestParam Long rno, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto requestDto) {
+
+        log.info("remove 요청 {}", rno);
+        service.reviewRemove(rno);
+        rttr.addAttribute("page", requestDto.getPage());
+        rttr.addAttribute("size", requestDto.getSize());
+        rttr.addAttribute("type", requestDto.getType());
+        rttr.addAttribute("keyword", requestDto.getKeyword());
+        return "redirect:/review/list";
+    }
+
     @GetMapping("/register")
     public void getCreate(@ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review create 요청");

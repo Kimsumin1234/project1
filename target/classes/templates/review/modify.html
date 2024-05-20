@@ -92,6 +92,11 @@
                 <div class="form-group">
                   <button type="submit" class="btn py-3 px-4 btn-warning">수정</button>
                   <button type="" class="btn py-3 px-4 btn-danger">삭제</button>
+                  <a
+                    th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"
+                    class="btn py-3 px-4 btn-primary"
+                    >목록</a
+                  >
                 </div>
                 <div class="about-author d-flex p-4 bg-light">
                   <div class="bio mr-5">
