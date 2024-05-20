@@ -56,4 +56,6 @@ public class AnimalDto {
     private String orgNmc; // 관할기관(시,군,구)
 
     private String officetel; // 관할기관연락처
+
+    private Long reviewCnt; // 리뷰 개수
 }
