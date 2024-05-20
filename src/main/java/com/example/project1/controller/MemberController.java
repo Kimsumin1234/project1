@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project1.dto.AuthMemberDto;
+import com.example.project1.dto.CertificationDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
@@ -149,8 +150,8 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/sms")
-    public void getSms() {
-        log.info("문자인증 페이지 요청");
+    public void getSms(CertificationDto cDto) {
+        log.info("문자인증 페이지 요청 {}", cDto);
     }
 
     @PostMapping("/register")

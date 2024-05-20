@@ -2,9 +2,40 @@ const addon1 = document.querySelector("#button-addon1");
 const certification = document.querySelector("#certification");
 const timeMin = document.querySelector("#timeMin");
 const timeSec = document.querySelector("#timeSec");
+const phone = document.querySelector("#phone");
+const danger = document.querySelector(".text-danger");
+console.log(phone);
+
+function checkPhone(pNum) {
+  const regex = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$"/;
+  console.log(regex.test(pNum));
+  return regex.test(pNum);
+}
 
 addon1.addEventListener("click", () => {
-  certification.style.visibility = "visible";
+  const formData = new FormData();
+  formData.append("phone", phone.value);
+  //   console.log(phone.value);
+  //   for (const key of formData.keys()) {
+  //     console.log(key);
+  //   }
+  //   for (const value of formData.values()) {
+  //     console.log(value);
+  //   }
+  fetch(`/send-one`, {
+    method: "post",
+    body: formData,
+  })
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      console.log(data);
+      if (data.phone) {
+        danger.innerHTML = data.phone;
+      } else {
+        danger.innerHTML = "";
+        certification.style.visibility = "visible";
+      }
+    });
 
   let time = 180;
 
