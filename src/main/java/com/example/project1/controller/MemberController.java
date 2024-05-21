@@ -150,7 +150,7 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/sms")
-    public void getSms(CertificationDto cDto) {
+    public void getSms(CertificationDto cDto, MemberDto memberDto) {
         log.info("문자인증 페이지 요청 {}", cDto);
     }
 

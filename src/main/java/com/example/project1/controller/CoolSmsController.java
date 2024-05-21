@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project1.dto.CertificationDto;
+import com.example.project1.dto.MemberDto;
 import com.example.project1.service.UtilService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -45,19 +48,35 @@ public class CoolSmsController {
      * 단일 메시지 발송 예제
      */
     @PostMapping("/send-one")
-    public SingleMessageSentResponse sendOne(@Valid CertificationDto cDto) {
-        log.info("문자메세지 호출 {}", cDto);
+    public SingleMessageSentResponse sendOne(@Valid CertificationDto cDto, MemberDto memberDto, HttpSession session) {
+        log.info("문자메세지 호출 {} {}", cDto, memberDto);
+
+        String rNum = randomNumbers(6);
 
         Message message = new Message();
         // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01063323055"); // 발신번호 입력
         message.setTo(cDto.getPhone()); // 수신번호 입력
-        message.setText("[2팀] 본인확인\n" + "인증번호[" + randomNumbers(6) + "]를\n" + "화면에 입력해주세요.");
+        message.setText("[2팀] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
+
+        session.setAttribute("rNum", rNum);
 
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
         System.out.println(response);
+        System.out.println(response.getTo());
+        // memberDto.setPhone(response.getTo());
+        log.info("session {}", session.getAttribute("rNum"));
 
         return response;
+    }
+
+    @PostMapping("/certif")
+    public ResponseEntity<String> postMethodName(CertificationDto cDto, HttpSession session) {
+        log.info("인증번호 확인 요청 {} {}", cDto, session.getAttribute("rNum"));
+        if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
+            return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     // @@ExceptionHandler(Exception) : 해당 Exception 이 나면 메소드가 실행되는 어노테이션
