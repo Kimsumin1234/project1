@@ -73,7 +73,7 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
             conditionBuilder.or(review.text.contains(keyword));
         }
         if (type.contains("w")) {
-            conditionBuilder.or(member.nickname.contains(keyword));
+            conditionBuilder.or(review.writer.nickname.contains(keyword));
         }
         builder.and(conditionBuilder);
         tuple.where(builder);
