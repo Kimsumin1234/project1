@@ -176,7 +176,7 @@ public class MemberController {
         String newEmail = "";
         // 중복 이메일 검사
         try {
-            // newEmail = movieUserService.register(insertDto);
+            newEmail = adoptUserService.register(insertDto);
         } catch (Exception e) {
             // 이방식은 MemberDto insertDto 이거를 살릴수없음
             // rttr.addFlashAttribute("Exception", e.getMessage());

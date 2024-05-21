@@ -6,6 +6,9 @@ import com.example.project1.entity.Member;
 
 public interface AdoptUserService {
 
+    // 회원가입
+    String register(MemberDto insertDto) throws IllegalStateException;
+
     // 닉네임 수정
     String nickNameUpdate(MemberDto upMemberDto) throws IllegalStateException;
 

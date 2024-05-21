@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.project1.constant.MemberRole;
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.PasswordChangeDto;
@@ -70,6 +71,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
 
     // 닉네임 중복 확인
     private void validateDuplicationMemberNickName(String nickname) throws IllegalStateException {
+        log.info("닉네임 중복확인 {}", nickname);
         Optional<Member> member = memberRepository.findByNickname(nickname);
 
         if (member.isPresent()) {
@@ -93,5 +95,35 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         }
 
         return "회원탈퇴 완료";
+    }
+
+    @Override
+    public String register(MemberDto insertDto) throws IllegalStateException {
+        log.info("회원가입 srvice {}", insertDto);
+
+        // 중복 검사
+        validateDuplicationMemberEmail(insertDto.getEmail());
+        validateDuplicationMemberNickName(insertDto.getNickname());
+
+        Member member = Member.builder()
+                .email(insertDto.getEmail())
+                .nickname(insertDto.getNickname())
+                .phone(insertDto.getPhone())
+                .password(passwordEncoder.encode(insertDto.getPassword()))
+                .role(MemberRole.MEMBER)
+                .build();
+        memberRepository.save(member);
+
+        return "회원가입 완료";
+    }
+
+    // 이메일 중복 확인
+    private void validateDuplicationMemberEmail(String email) throws IllegalStateException {
+        log.info("이메일 중복확인 {}", email);
+        Optional<Member> member = memberRepository.findByEmail(email);
+
+        if (member.isPresent()) {
+            throw new IllegalStateException("중복된 이메일 입니다.");
+        }
     }
 }
