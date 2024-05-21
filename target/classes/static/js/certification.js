@@ -34,6 +34,8 @@ clearInterval(timer);
 
 addon1.addEventListener("click", () => {
   clearInterval(timer);
+  certifCheck.innerText = "";
+
   const formData = new FormData();
   formData.append("phone", phone.value);
   //   console.log(phone.value);
@@ -65,6 +67,8 @@ addon1.addEventListener("click", () => {
             timeSec.innerText = sec;
             // time = time - 1
           } else {
+            certifCheck.innerText = "";
+            btn.style.visibility = "hidden";
             certification.style.visibility = "hidden";
           }
         }, 1000);
@@ -86,6 +90,7 @@ addon2.addEventListener("click", () => {
       console.log(data);
       if (data == "fail") {
         certifCheck.innerText = "인증번호를 다시 확인해주세요.";
+        btn.style.visibility = "hidden";
       } else if (data == "success") {
         certifCheck.innerText = "";
         btn.style.visibility = "visible";

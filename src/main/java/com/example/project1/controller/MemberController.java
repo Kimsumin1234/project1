@@ -154,6 +154,17 @@ public class MemberController {
         log.info("문자인증 페이지 요청 {}", cDto);
     }
 
+    @PostMapping("/registerPage")
+    public String postRegisterPage(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto) {
+        log.info("회원가입 페이지 요청 {}", memberDto);
+        // 유효성 검사
+        if (result.hasErrors()) {
+            return "/member/sms";
+        }
+
+        return "/member/register";
+    }
+
     @PostMapping("/register")
     public String postRegister(@Valid MemberDto insertDto, BindingResult result, RedirectAttributes rttr, Model model) {
         log.info("회원가입 요청 {}", insertDto);

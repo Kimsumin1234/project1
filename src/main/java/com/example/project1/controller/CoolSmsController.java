@@ -73,10 +73,12 @@ public class CoolSmsController {
     @PostMapping("/certif")
     public ResponseEntity<String> postMethodName(CertificationDto cDto, HttpSession session) {
         log.info("인증번호 확인 요청 {} {}", cDto, session.getAttribute("rNum"));
+
         if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
             return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>("success", HttpStatus.OK);
         }
-        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     // @@ExceptionHandler(Exception) : 해당 Exception 이 나면 메소드가 실행되는 어노테이션

@@ -7,27 +7,27 @@
           <div class="comment-form-wrap pt-5">
             <hr class="my-8" />
 
-            <form th:action="@{#}" id="changeForm" method="post" class="p-5 bg-light">
-              <input type="hidden" name="email" th:value="${#authentication.name}" />
+            <form th:action="@{register}" id="changeForm" method="post" th:object="${memberDto}" novalidate class="p-5 bg-light">
               <div class="form-group">
-                <label for="nickname">이메일 *</label>
-                <input type="text" class="form-control" id="nickname" name="nickname" />
+                <label for="email">이메일 *</label>
+                <input type="text" class="form-control" id="email" name="email" />
                 <!-- <div class="text-danger email" th:if="${error3}" th:text="${error3}"></div> -->
-                <!-- <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="text-danger"></div> -->
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label for="currentPassword">닉네임 *</label>
-                <input type="password" class="form-control" id="currentPassword" name="currentPassword" />
+                <label for="nickname">닉네임 *</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" />
                 <!-- <div class="text-danger email" th:if="${error}" th:text="${error}"></div> -->
+                <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label for="newPassword">비밀번호 *</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword" />
-                <!-- <div th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}" class="text-danger"></div> -->
+                <label for="password">비밀번호 *</label>
+                <input type="password" class="form-control" id="password" name="password" />
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label for="checkNewPassword">비밀번호 확인 *</label>
-                <input type="password" class="form-control" id="checkNewPassword" name="checkNewPassword" />
+                <label for="checkPassword">비밀번호 확인 *</label>
+                <input type="password" class="form-control" id="checkPassword" name="checkPassword" />
                 <!-- <div class="text-danger email" th:if="${error2}" th:text="${error2}"></div> -->
               </div>
               <div class="form-group">
