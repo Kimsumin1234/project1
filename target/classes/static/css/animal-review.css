@@ -1,0 +1,57 @@
+/* read 보호소이름 */
+.carename {
+  width: 120%;
+  font-size: 18px;
+}
+
+/* read 보호소 이미지 */
+.carename img {
+  width: 400px;
+  height: 300px;
+  border-radius: 10%;
+}
+
+/* 검색창 */
+.searchdes {
+  padding: 40px;
+  padding-left: 35%;
+  padding-right: 35%;
+  align-items: center;
+}
+
+/* list 제목 */
+.listname {
+  margin-top: 0px;
+}
+/* list 제목 */
+.listname .faded {
+  margin-bottom: 0px;
+  line-height: 1.2;
+}
+
+.searchdes .form-control {
+  width: 50%;
+  height: 50%;
+  max-width: 500px;
+  min-width: 120px;
+  position: relative;
+  height: 52px;
+  background: #fff !important;
+  color: #000000 !important;
+  font-size: 14px;
+  border-radius: 5px;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* 입양read부분 */
+.animaltext {
+  width: 100%;
+  height: 100%;
+}
+
+/* 댓글 삭제/수정칸 */
+.delete {
+  float: left;
+  margin-right: 1px;
+}

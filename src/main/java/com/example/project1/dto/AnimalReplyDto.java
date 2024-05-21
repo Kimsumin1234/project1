@@ -28,8 +28,8 @@ public class AnimalReplyDto {
     private String email;
     private String nickname;
 
-    // 부모 글 번호
-    private Long sId;
+    // Animal 글 번호
+    private Long sid;
 
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;

@@ -23,8 +23,9 @@ public interface AnimalReplyService {
     public default AnimalReplyDto entityToDto(AnimalReply reply) {
         return AnimalReplyDto.builder()
                 .rno(reply.getRno())
-                .sId(reply.getAnimal().getSId())
+                .sid(reply.getAnimal().getSId())
                 .email(reply.getMember().getEmail())
+                .mid(reply.getMember().getMid())
                 .nickname(reply.getMember().getNickname())
                 .text(reply.getText())
                 .createdDate(reply.getCreatedDate())
@@ -34,16 +35,13 @@ public interface AnimalReplyService {
 
     // dto → entity
     public default AnimalReply dtoToEntity(AnimalReplyDto dto) {
-        // 부모 가져오기
-        Animal animal = Animal.builder().sId(dto.getSId()).build();
-        Member member = Member.builder().email(dto.getEmail()).build();
-
-        return AnimalReply.builder()
-                .rno(dto.getRno())
-                .animal(animal)
-                .member(member)
-                .text(dto.getText())
-                .build();
+        AnimalReply reply = new AnimalReply();
+        reply.setRno(dto.getRno());
+        reply.setText(dto.getText());
+        reply.setMember(Member.builder().mid(dto.getMid()).build());
+        reply.setCreatedDate(dto.getCreatedDate());
+        reply.setAnimal(Animal.builder().sId(dto.getSid()).build());
+        return reply;
     }
 
 }

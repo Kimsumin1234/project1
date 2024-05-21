@@ -62,13 +62,13 @@ public class AnimalReviewController {
     }
 
     // /animalReviews/{rno} + PUT
-    @PutMapping("/{id}")
-    public ResponseEntity<String> putReply(@PathVariable("id") String id, @RequestBody AnimalReplyDto replyDto) {
-        log.info("댓글 수정 요청 {}, {}", id, replyDto);
+    @PutMapping("/{rno}")
+    public ResponseEntity<String> putReply(@PathVariable("rno") String rno, @RequestBody AnimalReplyDto replyDto) {
+        log.info("댓글 수정 요청 {}, {}", rno, replyDto);
 
-        Long rno = animalReplyService.update(replyDto);
+        animalReplyService.update(replyDto);
 
-        return new ResponseEntity<String>(String.valueOf(rno), HttpStatus.OK);
+        return new ResponseEntity<String>(rno, HttpStatus.OK);
     }
 
 }

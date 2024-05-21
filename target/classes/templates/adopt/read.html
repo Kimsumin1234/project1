@@ -3,11 +3,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/animal-review.css}">
+  </th:block>
   <div layout:fragment="content">
     <body>
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar"></nav>
       <!-- END nav -->
-      <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
+      <section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-end">
@@ -26,12 +29,13 @@
         </div>
       </section>
 
-      <section class="ftco-section ftco-degree-bg">
+      <section class="ftco-section ftco-degree-bg animaltext">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-8 ftco-animate">
               <p><img th:src="${dto.popfile}" alt="" class="img-fluid" /></p>
               <h2 class="mb-3"></h2>
+              
               <p>발견 날짜 : [[${dto.happenDt}]]</p>
               <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p>
               <p>품종 : [[${dto.kindCd}]]</p>
@@ -41,23 +45,49 @@
               <p>보호 장소 : [[${dto.careAddr}]]</p>
               <p>중성화 여부 : [[${dto.neuterYn}]]</p>
 
-              <div class="about-author d-flex p-4 bg-light">
-                <div class="bio mr-5">
-                  <img th:src="@{/assets/images/animal.jpg}" alt="Image placeholder" class="img-fluid mb-4" />
-                </div>
-                <div class="desc">
-                  <h3>[[${dto.careNm}]]</h3>
-                  <p>보호소 전화번호 : [[${dto.careTel}]]</p>
+              <div class="carename">
+                <div class="about-author d-flex p-4 bg-light">
+                  <div class="bio mr-5">
+                    <img th:src="@{/assets/images/animal.jpg}" alt="Image placeholder" class="img-fluid mb-4" />
+                  </div>
+                  <div class="desc">
+                      <h3>[[${dto.careNm}]]</h3>
+                      <p>전화번호 : [[${dto.careTel}]]</p>
+                  </div>
                 </div>
               </div>
 
+              <!-- 댓글 생성 -->
+              <div class="animalReview">
+                <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
+                  <h4 class="mb-5 review-cnt" th:text="${dto.reviewCnt}">댓글</h4>
+                  <form th:action="@{/animalReviews/new}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light">
+                    <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                    <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
+                    <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                    <input type="hidden" name="rno" id="rno" />
+                    <div class="form-group">
+                      <label for="email">이메일</label>
+                      <input type="email" class="form-control" name="email" id="email"th:value="${#authentication.principal.memberDto.email}" />
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="text">내용</label>
+                      <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" value="등록" class="btn py-3 px-4 btn-primary" />
+                    </div>
+                  </form>
+                </div>
+              </div>
               <!-- 댓글 영역 -->
               <div class="pt-5 mt-5 reviewList">
-                <h3 class="mb-5 review-cnt" th:text="${dto.reviewCnt}"></h3>
+                <div class="mb-5"></div>
                 <!-- <ul class="comment-list">
                   <li class="comment">
                     <div class="vcard bio">
-                      <img th:src="@{/assets/images/person_01.png}" alt="Image placeholder" />
+                      <img th:src="@{/assets/images/person_1.jpg}" alt="Image placeholder" />
                     </div>
                     <div class="comment-body">
                       <h3>John Doe</h3>
@@ -70,33 +100,9 @@
                     </div>
                   </li>
                 </ul> -->
-                <!-- END comment-list -->
-
-                <!-- 댓글 생성 -->
-                <div class="comment-form-wrap pt-5">
-                  <h3 class="mb-5">Leave a comment</h3>
-                  <form action="#" class="p-5 bg-light">
-                    <div class="form-group">
-                      <label for="name">Name *</label>
-                      <input type="text" class="form-control" id="name" />
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email *</label>
-                      <input type="email" class="form-control" id="email" />
-                    </div>
-
-                    <div class="form-group">
-                      <label for="message">Message</label>
-                      <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" value="등록" class="btn py-3 px-4 btn-primary" />
-                    </div>
-                  </form>
-                </div>
               </div>
             </div>
-            <!-- .col-md-8 -->
+            <!-- END comment-list -->
           </div>
         </div>
       </section>
@@ -113,10 +119,18 @@
   </div>
   <th:block layout:fragment="script">
     <script>
-      // 영화 번호 변수에 담기
+      // 입양등록 번호 변수에 담기
       const sId = "[[${dto.sId}]]";
+
       // 리뷰 영역 찾기
       const reviewList = document.querySelector(".reviewList");
+
+      // 로그인 유저
+      const user = "[[${#authentication.name}]]";
+
+      // 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
+      const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
+      if (reviewCnt > 0) reviewList.classList.remove("hidden");
     </script>
     <script th:src="@{/js/animalReview.js}"></script>
   </th:block>

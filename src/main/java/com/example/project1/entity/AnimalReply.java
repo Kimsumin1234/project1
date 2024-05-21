@@ -19,7 +19,7 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "animal")
+@ToString(exclude = { "animal", "member" })
 @Builder
 @Getter
 @Setter
