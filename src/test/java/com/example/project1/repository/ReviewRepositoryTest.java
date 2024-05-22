@@ -17,6 +17,7 @@ import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
+import com.example.project1.entity.ReviewReplyComment;
 
 @SpringBootTest
 public class ReviewRepositoryTest {
@@ -26,6 +27,8 @@ public class ReviewRepositoryTest {
     private ReviewImageRepository reviewImageRepository;
     @Autowired
     private ReviewReplyRepository replyRepository;
+    @Autowired
+    private ReviewReplyCommentRepository commentRepository;
 
     @Test
     public void testInsert() {
@@ -60,6 +63,18 @@ public class ReviewRepositoryTest {
                     .build();
             replyRepository.save(reviewReply);
         });
+    }
+
+    @Test
+    public void testInsertComment() {
+        Member member = Member.builder().mid(1L).build();
+        ReviewReply reply = ReviewReply.builder().replyNo(12L).build();
+        ReviewReplyComment comment = ReviewReplyComment.builder()
+                .replyer(member)
+                .reply(reply)
+                .text("대댓글 테스트")
+                .build();
+        commentRepository.save(comment);
     }
 
     @Test

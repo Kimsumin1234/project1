@@ -4,43 +4,80 @@ const formatDate = (data) => {
 };
 // 화면이 로드되면 바로 리뷰 보여주기
 // /review/{}/all
+let result = "";
 const reviewsLoaded = () => {
   fetch(`/reply/${rno}/all`, { method: "get" })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
 
-      if (data.length > 0) {
-        replyList.classList.remove("hidden");
-      }
+      // if (data.length > 0) {
+      //   replyList.classList.remove("hidden");
+      // }
+
       // 리뷰 총 개수 변경
       document.querySelector(".review-cnt").innerHTML = data.length;
 
-      let result = "";
       data.forEach((reply) => {
         console.log(reply.replyNo);
+        let replyNo = reply.replyNo;
         result += `<li class="comment" data-replyNo="${reply.replyNo}">
-                        <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Image placeholder" />
-                        </div>
-                        <div class="comment-body">
-                            <h3>${reply.nickname}</h3>
-                            <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
-                            <p>${reply.text}
-                            </p>
-                            <p><a href="#" class="reply">Reply</a></p>`;
+                              <div class="vcard bio">
+                                  <img src="images/person_1.jpg" alt="Image placeholder" />
+                              </div>
+                              <div class="comment-body">
+                                  <h3>${reply.nickname}</h3>
+                                  <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
+                                  <p>${reply.text}
+                                  </p>
+                                  <p><a href="#" class="reply">Reply</a></p>`;
         if (`${reply.email}` == user) {
           result += '<div class="mb-2"><button class="btn btn-outline-danger btn-sm">삭제</button></div>';
           result += '<div><button class="btn btn-outline-success btn-sm">수정</button></div>';
         }
-        result += `</div>
-                  </li>`;
+        result += `</div>`;
+        // 여기에서 패치함수를 한번 더 받아서 대댓글을 받아와보자
+
+        result += `</li>`;
+        reReList(replyNo);
       });
-      replyList.innerHTML = result;
     });
 };
 
 reviewsLoaded(); // 나중에 댓글을 수정했을때 바로바로 업데이트해주기위해 함수로 만들어둠
+
+function reReList(replyNo) {
+  fetch(`/comment/${replyNo}/all`, { method: "get" })
+    .then((response) => response.json())
+    .then((d) => {
+      console.log(d);
+
+      if (d.length > 0) {
+        d.forEach((comment) => {
+          console.log(comment);
+
+          result += `<ul class="children">
+          <li class="comment" data-commentNo="${comment.commentNo}">
+          <div class="vcard bio">
+          <img src="images/person_1.jpg" alt="Image placeholder"/>
+          </div>
+          <div class="comment-body">
+          <h3>${comment.nickname}</h3>
+          <div class="meta">${formatDate(comment.lastModifiedDate)}</div>
+          <p>${comment.text}
+          </p>
+          <p><a href="#" class="reply">Reply</a></p>`;
+          if (`${comment.email}` == user) {
+            result += '<div class="mb-2"><button class="btn btn-outline-danger btn-sm">삭제</button></div>';
+            result += '<div><button class="btn btn-outline-success btn-sm">수정</button></div>';
+          }
+          result += `</li>
+          </ul>`;
+        });
+      }
+      document.querySelector("#replyList").innerHTML = result;
+    });
+}
 
 // 리뷰 등록 or 수정
 const reviewForm = document.querySelector(".review-form");
@@ -98,7 +135,7 @@ reviewForm.addEventListener("submit", (e) => {
           // nickname.value = "";
           replyNo.value = "";
           alert(data + "번 리뷰 수정 성공");
-
+          reviewForm.querySelector("button").innerHTML = "댓글 등록";
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
       });

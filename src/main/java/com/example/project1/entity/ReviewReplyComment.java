@@ -20,15 +20,15 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = { "replyer", "review" })
+@ToString(exclude = { "replyer", "reply" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewReply extends BaseEntity {
-    @SequenceGenerator(name = "animal_reviewReply_seq_gen", sequenceName = "animal_reviewReply_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_reviewReply_seq_gen")
+public class ReviewReplyComment extends BaseEntity {
+    @SequenceGenerator(name = "animal_ReviewReplyComment_seq_gen", sequenceName = "animal_ReviewReplyComment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_ReviewReplyComment_seq_gen")
     @Id
-    private Long replyNo;
+    private Long commentNo;
 
     @Column
     private String text;
@@ -37,5 +37,5 @@ public class ReviewReply extends BaseEntity {
     private Member replyer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Review review;
+    private ReviewReply reply;
 }

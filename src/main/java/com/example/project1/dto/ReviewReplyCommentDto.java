@@ -2,8 +2,6 @@ package com.example.project1.dto;
 
 import java.time.LocalDateTime;
 
-import com.example.project1.entity.ReviewReply;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,12 +11,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @ToString
-public class ReviewReplyDto {
-    private Long replyNo;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReviewReplyCommentDto {
+    private Long commentNo;
 
     private String text;
 
@@ -27,8 +25,8 @@ public class ReviewReplyDto {
     private String email;
     private String nickname;
 
-    // Review
-    private Long rno;
+    // Reply
+    private Long replyNo;
 
     private LocalDateTime createdDate;
 
