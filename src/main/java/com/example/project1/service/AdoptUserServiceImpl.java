@@ -126,4 +126,14 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("중복된 이메일 입니다.");
         }
     }
+
+    @Override
+    public void validateDuplicationMemberPhone(String phone) throws IllegalStateException {
+        log.info("휴대폰번호 중복확인 {}", phone);
+        Optional<Member> member = memberRepository.findByPhone(phone);
+
+        if (member.isPresent()) {
+            throw new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
 }

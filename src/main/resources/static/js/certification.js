@@ -55,6 +55,10 @@ addon1.addEventListener("click", () => {
       console.log(data);
       if (data.phone == "- 를 제외한 휴대폰 번호를 입력해주세요.") {
         phoneCheck.innerHTML = data.phone;
+        addon2.disabled = true;
+      } else if (data.duplierror) {
+        phoneCheck.innerHTML = data.duplierror;
+        addon2.disabled = true;
       } else {
         phoneCheck.innerHTML = "";
         time = 180;

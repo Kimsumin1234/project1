@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project1.dto.CertificationDto;
 import com.example.project1.dto.MemberDto;
+import com.example.project1.repository.MemberRepository;
+import com.example.project1.service.AdoptUserService;
 import com.example.project1.service.UtilService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,12 +36,14 @@ import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Log4j2
-@RequiredArgsConstructor
 @ControllerAdvice
 @RestController
 public class CoolSmsController {
 
-    private final DefaultMessageService messageService;
+    final DefaultMessageService messageService;
+
+    @Autowired
+    private AdoptUserService adoptUserService;
 
     public CoolSmsController() {
         this.messageService = NurigoApp.INSTANCE.initialize("NCSNJJ9FSXV2CGUH", "HUZV8WFKIJDXSCIZFQWPAN94LQQFG9TC",
@@ -48,8 +54,19 @@ public class CoolSmsController {
      * 단일 메시지 발송 예제
      */
     @PostMapping("/send-one")
-    public SingleMessageSentResponse sendOne(@Valid CertificationDto cDto, MemberDto memberDto, HttpSession session) {
+    public ResponseEntity<SingleMessageSentResponse> sendOne(@Valid CertificationDto cDto, MemberDto memberDto,
+            HttpSession session, Model model) {
         log.info("문자메세지 호출 {} {}", cDto, memberDto);
+
+        // try {
+        // adoptUserService.validateDuplicationMemberPhone(cDto.getPhone());
+        // } catch (IllegalStateException e) {
+        // session.setAttribute("DupliPhone", e.getMessage());
+        // // session.invalidate();
+        // return new ResponseEntity<SingleMessageSentResponse>(HttpStatus.BAD_REQUEST);
+        // }
+
+        adoptUserService.validateDuplicationMemberPhone(cDto.getPhone());
 
         String rNum = randomNumbers(6);
 
@@ -67,7 +84,7 @@ public class CoolSmsController {
         // memberDto.setPhone(response.getTo());
         log.info("session {}", session.getAttribute("rNum"));
 
-        return response;
+        return new ResponseEntity<SingleMessageSentResponse>(HttpStatus.OK);
     }
 
     @PostMapping("/certif")
@@ -93,6 +110,15 @@ public class CoolSmsController {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(IllegalStateException ex) {
+        Map<String, String> errors = new HashMap<>();
+        String fieldName = "duplierror";
+        String errorMessage = ex.getMessage();
+        errors.put(fieldName, errorMessage);
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
