@@ -164,6 +164,13 @@ public class MemberController {
             return "/member/sms";
         }
 
+        try {
+            adoptUserService.validateDuplicationMemberPhone(cDto.getPhone());
+        } catch (IllegalStateException e) {
+            model.addAttribute("dupliError", e.getMessage());
+            return "/member/sms";
+        }
+
         if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
             model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
             return "/member/sms";

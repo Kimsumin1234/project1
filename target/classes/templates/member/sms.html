@@ -24,9 +24,9 @@
                 />
                 <button class="btn btn-outline-secondary" type="button" id="button-addon1">인증번호 전송</button>
                 <div id="phoneCheck" class="text-danger input-group col-md-10 mb-3"></div>
+                <div class="text-danger col-md-10 mb-3" th:if="${dupliError}" th:text="${dupliError}"></div>
                 <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger input-group col-md-10 mb-3"></div>
               </div>
-              <!-- <div class="text-danger col-md-10 mb-3">[[${session.DupliPhone}]]</div> -->
               <div class="input-group col-md-10 mb-3">
                 <input type="text" name="certNum" id="certNum" th:value="${certificationDto.certNum}" class="form-control" placeholder="인증번호" />
                 <div id="certification" class="align-self-center mr-3" style="visibility: hidden">
