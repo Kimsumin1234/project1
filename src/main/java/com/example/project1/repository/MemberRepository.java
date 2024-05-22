@@ -14,6 +14,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByNickname(String nickname);
 
+    Optional<Member> findByPhone(String phone);
+
     @Modifying
     @Query("update Member m set m.nickname=?1 where m.email=?2")
     void updateNickName(String nickname, String email);

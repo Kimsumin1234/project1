@@ -46,6 +46,17 @@
     <script>
       const allLi = document.querySelectorAll(".nav-item");
       allLi[1].classList.add("active");
+
+      const msg = "[[${newEmail}]]";
+      if (msg) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: msg,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     </script>
   </th:block>
 </html>

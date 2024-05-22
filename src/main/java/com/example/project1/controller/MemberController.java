@@ -154,15 +154,24 @@ public class MemberController {
         log.info("문자인증 페이지 요청 {}", cDto);
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping("/registerPage")
-    public String postRegisterPage(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto) {
+    public String postRegisterPage(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto,
+            HttpSession session, Model model) {
         log.info("회원가입 페이지 요청 {}", memberDto);
         // 유효성 검사
         if (result.hasErrors()) {
             return "/member/sms";
         }
 
-        return "/member/register";
+        if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
+            model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
+            return "/member/sms";
+        } else {
+            session.invalidate();
+            return "/member/register";
+        }
+
     }
 
     @PostMapping("/register")
@@ -170,6 +179,11 @@ public class MemberController {
         log.info("회원가입 요청 {}", insertDto);
         // 유효성 검사
         if (result.hasErrors()) {
+            return "/member/register";
+        }
+
+        if (!insertDto.getPassword().equals(insertDto.getCheckPassword())) {
+            model.addAttribute("error2", "비밀번호 확인을 다시 해주세요.");
             return "/member/register";
         }
 

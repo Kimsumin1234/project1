@@ -18,6 +18,9 @@ public interface AdoptUserService {
     // 회원탈퇴
     String leave(MemberDto leaveMemberDto) throws IllegalStateException;
 
+    // 휴대폰번호 중복
+    void validateDuplicationMemberPhone(String phone) throws IllegalStateException;
+
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {
         return Member.builder()
