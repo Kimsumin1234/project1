@@ -1,7 +1,10 @@
 package com.example.project1.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.example.project1.dto.ReviewImageDto;
+import com.example.project1.dto.ReviewReplyCommentDto;
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
@@ -20,7 +23,8 @@ public interface ReviewReplyService {
     Long updateReply(ReviewReplyDto replyDto);
 
     public default ReviewReplyDto entityToDto(ReviewReply reviewReply) {
-        return ReviewReplyDto.builder()
+
+        ReviewReplyDto reviewReplyDto = ReviewReplyDto.builder()
                 .replyNo(reviewReply.getReplyNo())
                 .text(reviewReply.getText())
                 .rno(reviewReply.getReview().getRno())
@@ -31,6 +35,21 @@ public interface ReviewReplyService {
                 .lastModifiedDate(reviewReply.getLastModifiedDate())
                 .build();
 
+        List<ReviewReplyCommentDto> commentDtos = reviewReply.getReplyComment().stream().map(comment -> {
+            return ReviewReplyCommentDto.builder()
+                    .commentNo(comment.getCommentNo())
+                    .text(comment.getText())
+                    .mid(comment.getReplyer().getMid())
+                    .email(comment.getReplyer().getEmail())
+                    .nickname(comment.getReplyer().getNickname())
+                    .replyNo(comment.getReply().getReplyNo())
+                    .createdDate(comment.getCreatedDate())
+                    .lastModifiedDate(comment.getLastModifiedDate())
+                    .build();
+        }).collect(Collectors.toList());
+        reviewReplyDto.setComments(commentDtos);
+
+        return reviewReplyDto;
     }
 
     public default ReviewReply dtoToEntity(ReviewReplyDto reviewReplyDto) {

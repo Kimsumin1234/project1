@@ -30,7 +30,7 @@
         <div class="row">
           <div class="col-lg-8 ftco-animate">
             <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
-              <h3 class="mb-5">글작성</h3>
+              <h3 class="mb-5">글 수정</h3>
               <form class="register-form p-5 bg-light" id="register-form" method="post" action="/review/modify">
                 <input type="hidden" name="rno" id="rno" th:value="${dto.rno}" />
                 <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />

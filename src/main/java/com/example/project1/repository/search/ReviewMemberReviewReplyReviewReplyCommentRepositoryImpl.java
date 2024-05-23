@@ -13,6 +13,7 @@ import com.example.project1.entity.QMember;
 import com.example.project1.entity.QReview;
 import com.example.project1.entity.QReviewImage;
 import com.example.project1.entity.QReviewReply;
+import com.example.project1.entity.QReviewReplyComment;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.querydsl.core.BooleanBuilder;
@@ -26,10 +27,10 @@ import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySupport
-        implements ReviewMemberReviewReplyRepository {
+public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends QuerydslRepositorySupport
+        implements ReviewMemberReviewReplyReviewReplyCommentRepository {
 
-    public ReviewMemberReviewReplyRepositoryImpl() {
+    public ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl() {
         super(Review.class);
     }
 
@@ -109,16 +110,19 @@ public class ReviewMemberReviewReplyRepositoryImpl extends QuerydslRepositorySup
         QMember member = QMember.member;
         QReviewReply reply = QReviewReply.reviewReply;
         QReviewImage reviewImage = QReviewImage.reviewImage;
+        QReviewReplyComment replyComment = QReviewReplyComment.reviewReplyComment;
 
         // @Query("select b, m from board b left join b.writer m") // findby*
         JPQLQuery<ReviewImage> query = from(reviewImage);
         query.leftJoin(reviewImage.review, review);
+        // query.leftJoin(reviewImage.review, replyComment.reply.review);
         // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
         JPQLQuery<Long> replyCount = JPAExpressions.select(reply.replyNo.count().as("replycnt"))
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
-
+        // JPAExpressions.select(replyComment.text).from(replyComment)
+        // .where(reply.replyNo.eq(replyComment.reply.replyNo)
         JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
                 JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),

@@ -327,6 +327,8 @@
         const rno = "[[${dto.rno}]]";
         const title = "[[${dto.title}]]";
         const user = "[[${#authentication.name}]]";
+        const mid = "[[${#authentication.principal.memberDto.mid}]]"
+        const nickname = "[[${#authentication.principal.memberDto.nickname}]]"
       </script>
       <script th:src="@{/js/reply.js}"></script>
     </th:block>

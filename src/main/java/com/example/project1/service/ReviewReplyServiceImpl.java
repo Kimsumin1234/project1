@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.repository.ReviewReplyRepository;
+import com.example.project1.repository.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,11 +21,15 @@ import lombok.extern.log4j.Log4j2;
 public class ReviewReplyServiceImpl implements ReviewReplyService {
 
     private final ReviewReplyRepository replyRepository;
+    private final ReviewRepository reviewRepository;
 
+    @Transactional
     @Override
     public List<ReviewReplyDto> getListOfReview(Long rno) {
-        Review review = Review.builder().rno(rno).build();
-        List<ReviewReply> reviewReplys = replyRepository.getReviewRepliesByReviewOrderByReplyNo(review);
+        // Review review = Review.builder().rno(rno).build();
+        // List<ReviewReply> reviewReplys =
+        // replyRepository.getReviewRepliesByReviewOrderByReplyNo(review);
+        List<ReviewReply> reviewReplys = reviewRepository.getReviewReplies(rno);
 
         return reviewReplys.stream().map(reviewReply -> entityToDto(reviewReply)).collect(Collectors.toList());
     }

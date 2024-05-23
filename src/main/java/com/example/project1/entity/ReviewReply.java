@@ -1,5 +1,6 @@
 package com.example.project1.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +40,8 @@ public class ReviewReply extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
+
+    @Builder.Default
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
+    private List<ReviewReplyComment> replyComment = new ArrayList<>();
 }

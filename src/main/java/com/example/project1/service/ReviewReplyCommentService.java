@@ -15,7 +15,7 @@ public interface ReviewReplyCommentService {
 
     // void removeReply(Long replyNo);
 
-    // ReviewReplyDto getReply(Long replyNo);
+    ReviewReplyCommentDto getComment(Long commentNo);
 
     // Long updateReply(ReviewReplyDto replyDto);
 

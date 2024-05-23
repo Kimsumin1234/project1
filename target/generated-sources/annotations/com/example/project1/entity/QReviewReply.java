@@ -30,6 +30,8 @@ public class QReviewReply extends EntityPathBase<ReviewReply> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
+    public final ListPath<ReviewReplyComment, QReviewReplyComment> replyComment = this.<ReviewReplyComment, QReviewReplyComment>createList("replyComment", ReviewReplyComment.class, QReviewReplyComment.class, PathInits.DIRECT2);
+
     public final QMember replyer;
 
     public final NumberPath<Long> replyNo = createNumber("replyNo", Long.class);

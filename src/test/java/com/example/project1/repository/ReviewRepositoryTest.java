@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
@@ -68,11 +69,11 @@ public class ReviewRepositoryTest {
     @Test
     public void testInsertComment() {
         Member member = Member.builder().mid(1L).build();
-        ReviewReply reply = ReviewReply.builder().replyNo(12L).build();
+        ReviewReply reply = ReviewReply.builder().replyNo(1L).build();
         ReviewReplyComment comment = ReviewReplyComment.builder()
                 .replyer(member)
                 .reply(reply)
-                .text("대댓글 테스트")
+                .text("대댓글 테스트22")
                 .build();
         commentRepository.save(comment);
     }
@@ -94,5 +95,17 @@ public class ReviewRepositoryTest {
         for (Object[] objects : result) {
             System.out.println(Arrays.toString(objects));
         }
+    }
+
+    @Transactional
+    @Test
+    public void testReplyComment() {
+        List<ReviewReply> list = reviewRepository.getReviewReplies(1L);
+
+        list.forEach(r -> {
+            System.out.println(r);
+            System.out.println();
+            System.out.println(r.getReplyComment());
+        });
     }
 }

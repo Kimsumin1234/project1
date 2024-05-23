@@ -31,8 +31,15 @@ public class ReviewReplyCommentServiceImpl implements ReviewReplyCommentService 
 
     @Override
     public Long addComment(ReviewReplyCommentDto commentDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addComment'");
+        log.info("comment add {}", commentDto);
+        return commentRepository.save(dtoToEntity(commentDto)).getCommentNo();
+    }
+
+    @Override
+    public ReviewReplyCommentDto getComment(Long commentNo) {
+        log.info("comment getRow {}", commentNo);
+        ReviewReplyComment reviewReplyComment = commentRepository.findById(commentNo).get();
+        return entityToDto(reviewReplyComment);
     }
 
 }
