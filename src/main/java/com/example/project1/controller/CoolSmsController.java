@@ -54,8 +54,8 @@ public class CoolSmsController {
      * 단일 메시지 발송 예제
      */
     @PostMapping("/send-one")
-    public ResponseEntity<SingleMessageSentResponse> sendOne(@Valid CertificationDto cDto, MemberDto memberDto,
-            HttpSession session, Model model) {
+    public SingleMessageSentResponse sendOne(@Valid CertificationDto cDto, MemberDto memberDto,
+            HttpSession session) {
         log.info("문자메세지 호출 {} {}", cDto, memberDto);
 
         // try {
@@ -84,7 +84,7 @@ public class CoolSmsController {
         // memberDto.setPhone(response.getTo());
         log.info("session {}", session.getAttribute("rNum"));
 
-        return new ResponseEntity<SingleMessageSentResponse>(HttpStatus.OK);
+        return response;
     }
 
     @PostMapping("/certif")

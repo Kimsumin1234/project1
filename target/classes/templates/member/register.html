@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <label for="checkPassword">비밀번호 확인 *</label>
-                <input type="password" class="form-control" id="checkPassword" name="checkPassword" />
+                <input type="password" class="form-control" id="checkPassword" name="checkPassword" th:value="${memberDto.checkPassword}" />
                 <div class="text-danger" th:if="${error2}" th:text="${error2}"></div>
               </div>
               <div class="form-group">

@@ -56,29 +56,33 @@ addon1.addEventListener("click", () => {
       if (data.phone == "- 를 제외한 휴대폰 번호를 입력해주세요.") {
         phoneCheck.innerHTML = data.phone;
         addon2.disabled = true;
-      } else if (data.duplierror) {
+        return;
+      }
+      if (data.duplierror) {
         phoneCheck.innerHTML = data.duplierror;
         addon2.disabled = true;
-      } else {
-        phoneCheck.innerHTML = "";
-        time = 180;
-        timer = setInterval(function () {
-          if (time > 0) {
-            // >= 0 으로하면 -1까지 출력된다.
-            time = time - 1; // 여기서 빼줘야 3분에서 3분 또 출력되지 않고, 바로 2분 59초로 넘어간다.
-            let min = Math.floor(time / 60);
-            let sec = String(time % 60).padStart(2, "0");
-            timeMin.innerText = min;
-            timeSec.innerText = sec;
-            // time = time - 1
-          } else {
-            certifCheck.innerText = "";
-            btn.disabled = true;
-            certification.style.visibility = "hidden";
-          }
-        }, 1000);
-        certification.style.visibility = "visible";
+        return;
       }
+      certification.style.visibility = "visible";
+      phoneCheck.innerHTML = "인증 완료";
+      time = 180;
+      timer = setInterval(function () {
+        if (time > 0) {
+          // >= 0 으로하면 -1까지 출력된다.
+          time = time - 1; // 여기서 빼줘야 3분에서 3분 또 출력되지 않고, 바로 2분 59초로 넘어간다.
+          let min = Math.floor(time / 60);
+          let sec = String(time % 60).padStart(2, "0");
+          timeMin.innerText = min;
+          timeSec.innerText = sec;
+          // time = time - 1
+        } else {
+          certNum.value = null;
+          certifCheck.innerText = "";
+          btn.disabled = true;
+          addon2.disabled = true;
+          certification.style.visibility = "hidden";
+        }
+      }, 1000);
     });
 });
 
@@ -97,7 +101,7 @@ addon2.addEventListener("click", () => {
         certifCheck.innerText = "인증번호를 다시 확인해주세요.";
         btn.disabled = true;
       } else if (data == "success") {
-        certifCheck.innerText = "";
+        certifCheck.innerText = "인증 완료";
         btn.disabled = false;
       }
     });

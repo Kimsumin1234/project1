@@ -34,9 +34,9 @@
                   <span id="timeSec" th:style="'font-size: 24px;'">00</span>
                 </div>
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" disabled>인증요청</button>
+                <div class="text-danger col-md-10 mb-3" th:if="${smsError}" th:text="${smsError}"></div>
+                <div id="certifCheck" class="text-danger input-group col-md-10 mb-3"></div>
               </div>
-              <div class="text-danger col-md-10 mb-3" th:if="${smsError}" th:text="${smsError}"></div>
-              <div id="certifCheck" class="text-danger input-group col-md-10 mb-3"></div>
               <div class="col-md-10">
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary py-2" th:style="'font-size: 18px;'" disabled>인증완료</button>
