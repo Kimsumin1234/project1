@@ -257,22 +257,6 @@ replyList.addEventListener("click", (e) => {
         `;
         commentBody.innerHTML = replyFormHTML;
       });
-
-    // fetch(`/comment/${rno}/${replyNo}`, {
-    //   method: "get",
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     const form = e.target.closest("form");
-
-    //     reviewForm.querySelector("#replyNo").value = data.replyNo;
-    //     reviewForm.querySelector("#nickname").value = data.nickname;
-    //     reviewForm.querySelector("#text").value = data.text;
-    //     reviewForm.querySelector("#mid").value = data.mid;
-    //     reviewForm.querySelector("#email").value = data.email;
-    //     reviewForm.querySelector("button").innerHTML = "리뷰 수정";
-    //   });
   }
 });
 
@@ -282,6 +266,7 @@ replyList.addEventListener("submit", (e) => {
   console.log("대댓글 submit 일시중지");
   const form = e.target.closest("form");
 
+  const commentNo = form.querySelector('input[name="commentNo"]');
   const text = form.querySelector('input[name="text"]');
   const mid = form.querySelector('input[name="mid"]');
   const nickname = form.querySelector('input[name="nickname"]');
@@ -304,25 +289,43 @@ replyList.addEventListener("submit", (e) => {
     mid: mid.value,
     nickname: nickname.value,
     replyNo: replyNo.value,
+    commentNo: commentNo.value,
   };
+  if (!commentNo.value) {
+    fetch(`/comment/add`, {
+      method: "post",
+      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          text.value = "";
 
-  fetch(`/comment/add`, {
-    method: "post",
-    headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
-    body: JSON.stringify(body),
-  })
-    .then((response) => response.text())
-    .then((data) => {
-      console.log(data);
-      if (data) {
-        text.value = "";
+          alert(data + "번 리뷰 작성 성공");
 
-        alert(data + "번 리뷰 작성 성공");
+          reviewsLoaded(); // 리뷰 리스트 다시 가져오기
+        }
+      });
+  } else {
+    fetch(`/comment/${replyNo.value}/${commentNo.value}`, {
+      method: "put",
+      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          text.value = "";
 
-        reviewsLoaded(); // 리뷰 리스트 다시 가져오기
-      }
-    });
+          alert(data + "번 리뷰 수정 성공");
 
+          reviewsLoaded(); // 리뷰 리스트 다시 가져오기
+        }
+      });
+  }
   // e.target.submit();
 });
 

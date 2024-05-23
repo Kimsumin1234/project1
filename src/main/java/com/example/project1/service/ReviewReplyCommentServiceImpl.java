@@ -42,4 +42,10 @@ public class ReviewReplyCommentServiceImpl implements ReviewReplyCommentService 
         return entityToDto(reviewReplyComment);
     }
 
+    @Override
+    public Long updateComment(ReviewReplyCommentDto commentDto) {
+        log.info("comment update {}", commentDto);
+        return commentRepository.save(dtoToEntity(commentDto)).getCommentNo();
+    }
+
 }

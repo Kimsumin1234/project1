@@ -3,6 +3,7 @@ package com.example.project1.service;
 import java.util.List;
 
 import com.example.project1.dto.ReviewReplyCommentDto;
+import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.entity.ReviewReplyComment;
@@ -17,7 +18,7 @@ public interface ReviewReplyCommentService {
 
     ReviewReplyCommentDto getComment(Long commentNo);
 
-    // Long updateReply(ReviewReplyDto replyDto);
+    Long updateComment(ReviewReplyCommentDto commentNo);
 
     public default ReviewReplyCommentDto entityToDto(ReviewReplyComment comment) {
         return ReviewReplyCommentDto.builder()
