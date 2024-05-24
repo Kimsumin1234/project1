@@ -22,7 +22,7 @@ public interface AdoptUserService {
     void validateDuplicationMemberPhone(String phone) throws IllegalStateException;
 
     // 아이디 찾기
-    void findId(String phone) throws IllegalStateException;
+    MemberDto findId(String phone) throws IllegalStateException;
 
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {

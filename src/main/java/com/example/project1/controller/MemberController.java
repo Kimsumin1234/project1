@@ -219,4 +219,14 @@ public class MemberController {
         log.info("아이디찾기 페이지 요청 {}", cDto);
     }
 
+    @PreAuthorize("permitAll()")
+    @PostMapping("/resultfindid")
+    public String postFindId(HttpSession session, Model model) {
+        log.info("찾는 아이디 session:{}", session);
+
+        model.addAttribute("email", session.getAttribute("findId"));
+        session.invalidate();
+        return "/member/resultfindid";
+    }
+
 }

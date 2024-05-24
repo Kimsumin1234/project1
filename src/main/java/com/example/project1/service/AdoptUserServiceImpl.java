@@ -138,12 +138,17 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     }
 
     @Override
-    public void findId(String phone) throws IllegalStateException {
+    public MemberDto findId(String phone) throws IllegalStateException {
         log.info("아이디 찾기 service {}", phone);
         Optional<Member> member = memberRepository.findByPhone(phone);
 
         if (!member.isPresent()) {
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
+        } else {
+            MemberDto memberDto = new MemberDto();
+            memberDto.setEmail(member.get().getEmail());
+            log.info("아이디찾기 {}", memberDto);
+            return memberDto;
         }
     }
 }
