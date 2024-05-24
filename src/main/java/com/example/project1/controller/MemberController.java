@@ -181,6 +181,7 @@ public class MemberController {
 
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping("/register")
     public String postRegister(@Valid MemberDto insertDto, BindingResult result, RedirectAttributes rttr, Model model) {
         log.info("회원가입 요청 {}", insertDto);
@@ -210,6 +211,12 @@ public class MemberController {
 
         rttr.addFlashAttribute("newEmail", newEmail);
         return "redirect:/member/login";
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping("/findid")
+    public void getFindId(CertificationDto cDto, MemberDto memberDto) {
+        log.info("아이디찾기 페이지 요청 {}", cDto);
     }
 
 }
