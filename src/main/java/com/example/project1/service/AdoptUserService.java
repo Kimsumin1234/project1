@@ -21,6 +21,9 @@ public interface AdoptUserService {
     // 휴대폰번호 중복
     void validateDuplicationMemberPhone(String phone) throws IllegalStateException;
 
+    // 아이디 찾기
+    MemberDto findId(String phone) throws IllegalStateException;
+
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {
         return Member.builder()
