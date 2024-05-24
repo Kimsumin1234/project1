@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewReply;
+import com.example.project1.repository.ReviewReplyCommentRepository;
 import com.example.project1.repository.ReviewReplyRepository;
 import com.example.project1.repository.ReviewRepository;
 
@@ -22,6 +23,7 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
     private final ReviewReplyRepository replyRepository;
     private final ReviewRepository reviewRepository;
+    private final ReviewReplyCommentRepository commentRepository;
 
     @Transactional
     @Override
@@ -39,9 +41,10 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
         return replyRepository.save(dtoToEntity(replyDto)).getReplyNo();
     }
-
+    @Transactional
     @Override
     public void removeReply(Long replyNo) {
+        commentRepository.deleteByReply(ReviewReply.builder().replyNo(replyNo).build());
         replyRepository.deleteById(replyNo);
     }
 

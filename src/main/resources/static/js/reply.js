@@ -30,7 +30,7 @@ const reviewsLoaded = () => {
                                   <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
                                   <p>${reply.text}
                                   </p>
-                                  <p><a class="reply">Reply</a>`;
+                                  <p>`;
         if (`${reply.email}` == user) {
           result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
           result += '<button class="btn btn-outline-success btn-sm">수정</button>';
@@ -57,17 +57,18 @@ const reviewsLoaded = () => {
             <div class="meta">${formatDate(comment.lastModifiedDate)}</div>
             <p>${comment.text}
             </p>
-            <p><a class="reply">Reply</a>`;
+            <p>`;
             if (`${comment.email}` == user) {
-              result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
-              result += '<button class="btn btn-outline-success btn-sm">수정</button>';
+              result += '<button class="btn btn-danger btn-sm">삭제</button>';
+              result += '<a class="reply btn btn-success btn-sm">수정</a>';
             }
             result += `</p></li>`;
             if (idx == reply.comments.length - 1) {
               result += `<form action="/comment/add" class="comment-form" method="post">
               
+              <input type="hidden" name="commentNo"/>
               <input type="hidden" name="replyNo" value="${replyNo}"/>
-              <input type="hidden" name="mid"  value="${mid}"/>
+              <input type="hidden" name="mid" value="${mid}"/>
               <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
               <input type="hidden" class="form-control" name="email" value="${user}"/>
               
@@ -84,6 +85,7 @@ const reviewsLoaded = () => {
         } else if (reply.comments.length == 0) {
           result += `<form action="/comment/add" class="comment-form" method="post">
             
+            <input type="hidden" name="commentNo"/>
             <input type="hidden" name="replyNo" value="${replyNo}"/>
             <input type="hidden" name="mid" value="${mid}"/>
             <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
@@ -103,9 +105,7 @@ const reviewsLoaded = () => {
       document.querySelector("#replyList").innerHTML = result;
     });
 };
-/* <input type="hidden" name="mid" id="mid" th:value="${mid}" />
-<input type="hidden" class="form-control" name="nickname" id="nickname" th:value="${nickname}"/>
-<input type="hidden" class="form-control" name="email" id="email" th:value="${user}"/>  */
+
 reviewsLoaded(); // 나중에 댓글을 수정했을때 바로바로 업데이트해주기위해 함수로 만들어둠
 
 // 리뷰 등록 or 수정
@@ -257,6 +257,29 @@ replyList.addEventListener("click", (e) => {
         `;
         commentBody.innerHTML = replyFormHTML;
       });
+  } else if (e.target.classList.contains("btn-danger")) {
+    const commentNo = e.target.closest(".replyComment").dataset.commentno;
+    const replyNo = e.target.closest(".replyComment").querySelector(".comment").value;
+    console.log(commentNo);
+    if (!confirm("리뷰를 삭제하시겠습니까?")) return;
+
+    const form = new FormData();
+    form.append("email", email.value);
+
+    fetch(`/comment/${replyNo}/${commentNo}`, {
+      method: "delete",
+      // headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
+      body: form,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          alert(data + "번 리뷰 삭제 성공");
+
+          reviewsLoaded(); // 리뷰 리스트 다시 가져오기
+        }
+      });
   }
 });
 
@@ -272,7 +295,7 @@ replyList.addEventListener("submit", (e) => {
   const nickname = form.querySelector('input[name="nickname"]');
   const email = form.querySelector('input[name="email"]');
   const replyNo = form.querySelector('input[name="replyNo"]');
-  // const commentNo = form.querySelector("#commentNo");
+
   if (text == "") {
     alert("내용 확인");
     return;

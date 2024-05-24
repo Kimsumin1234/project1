@@ -19,17 +19,21 @@ import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.repository.ReviewImageRepository;
+import com.example.project1.repository.ReviewReplyCommentRepository;
 import com.example.project1.repository.ReviewReplyRepository;
 import com.example.project1.repository.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final ReviewReplyRepository replyRepository;
     private final ReviewImageRepository reviewImageRepository;
+    private final ReviewReplyCommentRepository commentRepository;
 
     @Transactional
     @Override
@@ -97,10 +101,17 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     @Override
     public void reviewRemove(Long rno) {
-        Review review = reviewRepository.findById(rno).get();
+        // 여기 모든 대댓글 지우고, 모든 댓글 지우고, 글 삭제
 
+        Review review = reviewRepository.findById(rno).get();
+        List<ReviewReply> replies = replyRepository.findByReview(review);
+        for (ReviewReply reviewReply : replies) {
+            commentRepository.deleteAllByReply(reviewReply);
+        }
+        log.info("review remove {}", review);
+        // commentRepository.deleteByReply(ReviewReply.builder().replyNo(review.getRno()).build());
+        replyRepository.deleteAllByReview(review);
         reviewImageRepository.deleteByReview(review);
-        replyRepository.deleteByReview(review);
         reviewRepository.deleteById(rno);
     }
 

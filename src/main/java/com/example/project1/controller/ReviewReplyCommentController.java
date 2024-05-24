@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,14 @@ public class ReviewReplyCommentController {
         log.info("put controller reply 수정 {}", commentDto);
 
         return new ResponseEntity<>(commentService.updateComment(commentDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{replyNo}/{commentNo}")
+    public ResponseEntity<Long> deleteReview(@PathVariable("commentNo") Long commentNo, String email) {
+        // RequestBody 변수명 => review.js의 fetch함수 body의 변수명과 같음
+        log.info("comment 삭제 {}", commentNo);
+        commentService.removeComment(commentNo);
+        return new ResponseEntity<>(commentNo, HttpStatus.OK);
     }
 
 }

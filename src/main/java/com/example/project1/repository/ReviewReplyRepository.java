@@ -16,7 +16,9 @@ public interface ReviewReplyRepository extends JpaRepository<ReviewReply, Long> 
 
     @Modifying
     @Query("delete from ReviewReply rr where rr.review = :review")
-    void deleteByReview(Review review);
+    void deleteAllByReview(Review review);
 
     List<ReviewReply> findByReplyComment(List<ReviewReplyComment> replyComment);
+
+    List<ReviewReply> findByReview(Review review);
 }

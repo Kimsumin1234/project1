@@ -48,4 +48,10 @@ public class ReviewReplyCommentServiceImpl implements ReviewReplyCommentService 
         return commentRepository.save(dtoToEntity(commentDto)).getCommentNo();
     }
 
+    @Override
+    public void removeComment(Long commentNo) {
+        log.info("comment remove {}", commentNo);
+        commentRepository.deleteById(commentNo);
+    }
+
 }
