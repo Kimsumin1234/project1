@@ -229,4 +229,10 @@ public class MemberController {
         return "/member/resultfindid";
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/findpwd1")
+    public void getFindPwd(CertificationDto cDto, MemberDto memberDto) {
+        log.info("비밀번호찾기 페이지 요청 {}", cDto);
+    }
+
 }
