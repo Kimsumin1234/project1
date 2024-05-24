@@ -151,4 +151,14 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             return memberDto;
         }
     }
+
+    @Override
+    public void findIdEmail(String email) throws IllegalStateException {
+        log.info("아이디 찾기 service {}", email);
+        Optional<Member> member = memberRepository.findByEmail(email);
+
+        if (!member.isPresent()) {
+            throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
+        }
+    }
 }

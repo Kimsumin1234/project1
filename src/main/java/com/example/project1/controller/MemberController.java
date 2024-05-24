@@ -232,7 +232,22 @@ public class MemberController {
     @PreAuthorize("permitAll()")
     @GetMapping("/findpwd1")
     public void getFindPwd(CertificationDto cDto, MemberDto memberDto) {
-        log.info("비밀번호찾기 페이지 요청 {}", cDto);
+        log.info("비밀번호찾기 페이지1 요청 {}", memberDto);
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping("/findpwd1")
+    public String postFindPwd2(CertificationDto cDto, MemberDto mDto, RedirectAttributes rttr, Model model) {
+        log.info("비밀번호찾기 페이지2 요청 {}", mDto);
+
+        try {
+            adoptUserService.findIdEmail(mDto.getEmail());
+        } catch (IllegalStateException e) {
+            model.addAttribute("dupliError", e.getMessage());
+            return "/member/findpwd1";
+        }
+
+        return "/member/findpwd2";
     }
 
 }
