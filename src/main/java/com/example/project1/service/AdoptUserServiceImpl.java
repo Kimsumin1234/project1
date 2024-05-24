@@ -161,4 +161,13 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
         }
     }
+
+    @Override
+    public void equalPhoneEmail(String phone, String email) throws IllegalStateException {
+        log.info("휴대폰번호랑 이메일 일치검사 {} {}", phone, email);
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if (!member.get().getPhone().equals(phone)) {
+            throw new IllegalStateException("휴대폰 번호가 일치하지 않습니다.");
+        }
+    }
 }

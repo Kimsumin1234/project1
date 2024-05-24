@@ -113,6 +113,33 @@ public class CoolSmsController {
         return response;
     }
 
+    @PostMapping("/send-one3")
+    public SingleMessageSentResponse sendOne3(@Valid CertificationDto cDto, MemberDto memberDto,
+            HttpSession session) {
+        log.info("문자메세지 호출 {} {}", cDto, memberDto);
+
+        adoptUserService.equalPhoneEmail(cDto.getPhone(), memberDto.getEmail());
+
+        String rNum = randomNumbers(6);
+
+        Message message = new Message();
+        message.setFrom("01063323055");
+        message.setTo(cDto.getPhone());
+        message.setText("[2팀] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
+
+        session.setAttribute("rNum", rNum);
+        // session.setAttribute("findId", finDto.getEmail());
+
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println(response);
+        System.out.println(response.getTo());
+
+        log.info("session rNum : {}", session.getAttribute("rNum"));
+        log.info("session findId : {}", session.getAttribute("findId"));
+
+        return response;
+    }
+
     @PostMapping("/certif")
     public ResponseEntity<String> postMethodName(CertificationDto cDto, HttpSession session) {
         log.info("인증번호 확인 요청 {} {}", cDto, session.getAttribute("rNum"));

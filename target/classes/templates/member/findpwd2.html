@@ -13,6 +13,7 @@
             th:object="${certificationDto}"
             novalidate
           >
+            <input type="hidden" id="email" name="email" th:value="${memberDto.email}" />
             <div class="row">
               <div class="input-group col-md-10 mb-3">
                 <input
@@ -59,7 +60,7 @@
           sessionStorage.removeItem("DupliPhone");
         }
       </script> -->
-      <script th:src="@{/js/certification.js}"></script>
+      <script th:src="@{/js/findpwd2.js}"></script>
     </th:block>
   </div>
 </html>
