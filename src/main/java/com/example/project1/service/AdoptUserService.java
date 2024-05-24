@@ -27,8 +27,11 @@ public interface AdoptUserService {
     // 아이디 찾기
     void findIdEmail(String email) throws IllegalStateException;
 
-    // 휴대폰 번호랑 이메일 일치
+    // 비밀번호 찾기 휴대폰 번호랑 이메일 일치
     void equalPhoneEmail(String phone, String email) throws IllegalStateException;
+
+    // 비밀번호 찾기 비밀번호 변경
+    void findPasswordUpdate(PasswordChangeDto pDto);
 
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {

@@ -11,7 +11,14 @@
             <form th:action="@{findpwd1}" class="p-5 bg-light" method="post">
               <div class="form-group">
                 <label for="email">이메일 *</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요." th:value="${memberDto.email}" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="이메일을 입력해주세요."
+                  th:value="${passwordChangeDto.email}"
+                />
                 <div class="text-danger col-md-10 mb-3" th:if="${dupliError}" th:text="${dupliError}"></div>
               </div>
               <!-- <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div> -->

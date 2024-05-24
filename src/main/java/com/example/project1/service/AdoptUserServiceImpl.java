@@ -170,4 +170,15 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("휴대폰 번호가 일치하지 않습니다.");
         }
     }
+
+    @Override
+    public void findPasswordUpdate(PasswordChangeDto pDto) {
+        log.info("비밀번호 수정 service {}", pDto);
+
+        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+
+        member.setPassword(passwordEncoder.encode(pDto.getNewPassword()));
+        memberRepository.save(member);
+
+    }
 }

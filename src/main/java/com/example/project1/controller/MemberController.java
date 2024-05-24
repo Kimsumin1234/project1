@@ -231,23 +231,71 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/findpwd1")
-    public void getFindPwd(CertificationDto cDto, MemberDto memberDto) {
-        log.info("비밀번호찾기 페이지1 요청 {}", memberDto);
+    public void getFindPwd(CertificationDto cDto, PasswordChangeDto pDto) {
+        log.info("비밀번호찾기 페이지1 요청 {}", pDto);
     }
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd1")
-    public String postFindPwd2(CertificationDto cDto, MemberDto mDto, RedirectAttributes rttr, Model model) {
-        log.info("비밀번호찾기 페이지2 요청 {}", mDto);
+    public String postFindPwd2(CertificationDto cDto, PasswordChangeDto pDto, RedirectAttributes rttr, Model model) {
+        log.info("비밀번호찾기 페이지2 요청 {}", pDto);
 
         try {
-            adoptUserService.findIdEmail(mDto.getEmail());
+            adoptUserService.findIdEmail(pDto.getEmail());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
             return "/member/findpwd1";
         }
 
         return "/member/findpwd2";
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping("/findpwd2")
+    public String postMethodName(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto,
+            PasswordChangeDto pDto, HttpSession session, Model model) {
+        log.info("비밀번호찾기 페이지3 요청 {}", pDto);
+
+        // 유효성 검사
+        if (result.hasErrors()) {
+            return "/member/findpwd2";
+        }
+
+        try {
+            adoptUserService.equalPhoneEmail(cDto.getPhone(), pDto.getEmail());
+        } catch (IllegalStateException e) {
+            model.addAttribute("dupliError", e.getMessage());
+            return "/member/findpwd2";
+        }
+
+        if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
+            model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
+            return "/member/findpwd2";
+        } else {
+            session.invalidate();
+            return "/member/findpwd3";
+        }
+
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping("/findpwd3")
+    public String postFindPassword(@Valid PasswordChangeDto pDto, BindingResult result, MemberDto upMemberDto,
+            Model model, RedirectAttributes rttr) {
+        log.info("비밀번호 수정 요청 {}", pDto);
+
+        if (result.hasErrors()) {
+            return "/member/findpwd3";
+        }
+
+        if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
+            model.addAttribute("error2", "변경할 비밀번호와 다릅니다");
+            return "/member/findpwd3";
+        }
+
+        adoptUserService.findPasswordUpdate(pDto);
+
+        return "redirect:/member/login";
     }
 
 }

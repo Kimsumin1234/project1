@@ -135,7 +135,7 @@ public class CoolSmsController {
         System.out.println(response.getTo());
 
         log.info("session rNum : {}", session.getAttribute("rNum"));
-        log.info("session findId : {}", session.getAttribute("findId"));
+        // log.info("session findId : {}", session.getAttribute("findId"));
 
         return response;
     }
