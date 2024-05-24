@@ -91,7 +91,7 @@
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="/review/add" class="review-form p-5 bg-light " method="post">
                   <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
-                  <input type="hidden" name="replyNo" id="replyNo" />
+                  <input type="hidden" name="replyNo" id="replyNo"/>
                   <div class="form-group">
                     <label for="name">닉네임 *</label>
                     <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly/>
@@ -326,9 +326,11 @@
         const replyList = document.querySelector(".replyList");
         const rno = "[[${dto.rno}]]";
         const title = "[[${dto.title}]]";
+
         const user = "[[${#authentication.name}]]";
-        const mid = "[[${#authentication.principal.memberDto.mid}]]"
-        const nickname = "[[${#authentication.principal.memberDto.nickname}]]"
+        const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+        const nickname = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.nickname}]]"
+
       </script>
       <script th:src="@{/js/reply.js}"></script>
     </th:block>

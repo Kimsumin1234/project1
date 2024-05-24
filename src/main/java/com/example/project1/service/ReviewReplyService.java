@@ -1,7 +1,10 @@
 package com.example.project1.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Sort;
 
 import com.example.project1.dto.ReviewImageDto;
 import com.example.project1.dto.ReviewReplyCommentDto;
@@ -35,18 +38,19 @@ public interface ReviewReplyService {
                 .lastModifiedDate(reviewReply.getLastModifiedDate())
                 .build();
 
-        List<ReviewReplyCommentDto> commentDtos = reviewReply.getReplyComment().stream().map(comment -> {
-            return ReviewReplyCommentDto.builder()
-                    .commentNo(comment.getCommentNo())
-                    .text(comment.getText())
-                    .mid(comment.getReplyer().getMid())
-                    .email(comment.getReplyer().getEmail())
-                    .nickname(comment.getReplyer().getNickname())
-                    .replyNo(comment.getReply().getReplyNo())
-                    .createdDate(comment.getCreatedDate())
-                    .lastModifiedDate(comment.getLastModifiedDate())
-                    .build();
-        }).collect(Collectors.toList());
+        List<ReviewReplyCommentDto> commentDtos = reviewReply.getReplyComment().stream()
+                .map(comment -> {
+                    return ReviewReplyCommentDto.builder()
+                            .commentNo(comment.getCommentNo())
+                            .text(comment.getText())
+                            .mid(comment.getReplyer().getMid())
+                            .email(comment.getReplyer().getEmail())
+                            .nickname(comment.getReplyer().getNickname())
+                            .replyNo(comment.getReply().getReplyNo())
+                            .createdDate(comment.getCreatedDate())
+                            .lastModifiedDate(comment.getLastModifiedDate())
+                            .build();
+                }).sorted(Comparator.comparingLong(ReviewReplyCommentDto::getCommentNo)).collect(Collectors.toList());
         reviewReplyDto.setComments(commentDtos);
 
         return reviewReplyDto;

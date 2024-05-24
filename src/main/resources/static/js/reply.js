@@ -63,7 +63,7 @@ const reviewsLoaded = () => {
               result += '<a class="reply btn btn-success btn-sm">수정</a>';
             }
             result += `</p></li>`;
-            if (idx == reply.comments.length - 1) {
+            if (idx == reply.comments.length - 1 && user != "anonymousUser") {
               result += `<form action="/comment/add" class="comment-form" method="post">
               
               <input type="hidden" name="commentNo"/>
@@ -82,8 +82,8 @@ const reviewsLoaded = () => {
             }
             result += `</ul>`;
           });
-        } else if (reply.comments.length == 0) {
-          result += `<form action="/comment/add" class="comment-form" method="post">
+        } else if (reply.comments.length == 0 && user != "anonymousUser") {
+          result += `<form action="/comment/add" class="comment-form" method="post" >
             
             <input type="hidden" name="commentNo"/>
             <input type="hidden" name="replyNo" value="${replyNo}"/>

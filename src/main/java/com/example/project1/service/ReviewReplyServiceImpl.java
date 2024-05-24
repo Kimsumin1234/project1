@@ -41,6 +41,7 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
         return replyRepository.save(dtoToEntity(replyDto)).getReplyNo();
     }
+
     @Transactional
     @Override
     public void removeReply(Long replyNo) {

@@ -12,6 +12,8 @@ import com.example.project1.repository.search.ReviewMemberReviewReplyReviewReply
 public interface ReviewRepository
         extends JpaRepository<Review, Long>, ReviewMemberReviewReplyReviewReplyCommentRepository {
 
-    @Query("select r from ReviewReply r where r.review.rno=:rno")
+    // @Query("select r from ReviewReply r join fetch r.replyComment c where
+    // r.review.rno=:rno order by c.commentNo")
+    @Query("select r from ReviewReply r where r.review.rno=:rno Order By r.replyNo")
     List<ReviewReply> getReviewReplies(Long rno);
 }
