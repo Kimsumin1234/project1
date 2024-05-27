@@ -32,15 +32,23 @@
             <!-- 여기 div가 반복될 예정 -->
             <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate">
               <div class="staff">
-                <div class="img-wrap d-flex align-items-stretch">z
+                <div class="img-wrap d-flex align-items-stretch">
                   <!-- style="background-image: url(images/staff-1.jpg)" -->
-                  <img class="img align-self-stretch" 
+                  <a th:href="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|" class="icon image-popup d-flex justify-content-center align-items-center" th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}">
+                    <span class="fa fa-expand">
+                      <img class="img align-self-stretch" 
                       th:src="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|"
-                      loading="lazy"
-                      th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}"
-                      data-bs-toggle="modal" data-bs-target="#imgModal"/>
+                      loading="lazy"/>
+                    </span>
+                  </a>
+          
                   <!-- 기본이미지 -->
-                  <img th:if="${dto.reviewImageDtos[0].path == null}" th:src="@{/assets/images/animal.jpg}" loading="lazy"/>
+                  <a th:href="@{/assets/images/animal.jpg}" class="icon image-popup d-flex justify-content-center align-items-center"  th:if="${dto.reviewImageDtos[0].path == null}">
+                    <span class="fa fa-expand">
+                      <img class="img align-self-stretch"  th:src="@{/assets/images/animal.jpg}" loading="lazy"/>
+                    </span>
+                  </a>
+
                 </div>
                 <div class="text pt-3 px-3 pb-4 text-center">
                   <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"><h3 th:text="${dto.title}"></h3></a>
@@ -151,7 +159,7 @@
       </section>
        <!--원본 이미지 보기 모달 창-->
       <!-- data-bs-toggle="modal" data-bs-target="#imgModal" , id="imgModal" 맞춰주기 -->
-      <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
+      <!-- <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -169,14 +177,18 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </body>
   </div>
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
   <th:block layout:fragment="script">
+    <!-- <script th:src="@{/assets/js/popper.min.js}"></script> -->
     <script>
       const allLi = document.querySelectorAll(".nav-item");
       allLi[4].classList.add("active");
     </script>
-    <script th:src="@{/js/reviewList.js}"></script>
+    <!-- <script th:src="@{/js/reviewList.js}"></script> -->
   </th:block>
 </html>
