@@ -108,16 +108,16 @@
             <div class="col text-center">
               <div class="block-27">
                 <ul class="pagination justify-content-center">
-                  <li th:if="${result.prev}" class="page-item">
-                    <a class="page-link" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+                  <li th:if="${result.prev}" class="">
+                    <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
                   </li>
 
-                  <li th:each="page : ${result.pageList}" class="'page-item'" th:class="${result.page == page ? 'active' : ''}">
-                    <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="page-link text-center"></a>
+                  <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
+                    <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
                   </li>
 
-                  <li th:if="${result.next}" class="page-item">
-                    <a class="page-link" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+                  <li th:if="${result.next}" class="">
+                    <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
                   </li>
                 </ul>
               </div>
