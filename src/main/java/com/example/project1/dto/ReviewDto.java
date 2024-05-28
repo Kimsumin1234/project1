@@ -27,6 +27,8 @@ public class ReviewDto {
 
     private Long replyCount;
 
+    private Long viewCount;
+
     // member
     private Long mid;
     private String email;

@@ -54,7 +54,7 @@
                   <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"><h3 th:text="${dto.title}"></h3></a>
                   <span class="position mb-2" th:text="${dto.nickname}"></span>
                   <div class="faded">
-                    <p >댓글 : <span th:text="${dto.replyCount}"></span></p>
+                    <p >댓글 : <span th:text="${dto.replyCount}"></span> 조회수 : <span th:text="${dto.viewCount}"></span></p>
                     <ul class="ftco-social text-center">
                       <li class="ftco-animate">
                         <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>

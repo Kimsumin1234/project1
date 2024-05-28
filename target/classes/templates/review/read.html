@@ -29,6 +29,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 ftco-animate">
+            <div>조회수 [<span th:text="${dto.viewCount}"></span>]</div>
             <div class="uploadResult mb-4">
               <ul>
                 <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
