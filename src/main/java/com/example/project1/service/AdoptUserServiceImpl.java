@@ -33,14 +33,15 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         // 로그인 메소드
         log.info("로그인 요청 {}", username);
 
-        Optional<Member> result = memberRepository.findByEmail(username);
+        // Optional<Member> result = memberRepository.findByEmail(username);
+        Optional<Member> result = memberRepository.findByEmailAndFromSocial(username, false);
 
         if (!result.isPresent()) {
             throw new UsernameNotFoundException("Check Email");
         }
         Member member = result.get();
 
-        return new AuthMemberDto(entityToDto(member));
+        return new AuthMemberDto(entityToDto(member), false);
     }
 
     @Transactional
@@ -110,6 +111,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
                 .nickname(insertDto.getNickname())
                 .phone(insertDto.getPhone())
                 .password(passwordEncoder.encode(insertDto.getPassword()))
+                .fromSocial(insertDto.isFromSocial())
                 .role(MemberRole.MEMBER)
                 .build();
         memberRepository.save(member);

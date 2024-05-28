@@ -41,6 +41,7 @@ public interface AdoptUserService {
                 .nickname(memberDto.getNickname())
                 .password(memberDto.getPassword())
                 .role(memberDto.getRole())
+                .fromSocial(memberDto.isFromSocial())
                 .build();
     }
 
@@ -52,6 +53,7 @@ public interface AdoptUserService {
                 .phone(member.getPhone())
                 .nickname(member.getNickname())
                 .password(member.getPassword())
+                .fromSocial(member.isFromSocial())
                 .role(member.getRole())
                 .createdDate(member.getCreatedDate())
                 .lastModifiedDate(member.getLastModifiedDate())

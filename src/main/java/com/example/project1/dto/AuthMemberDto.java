@@ -29,10 +29,11 @@ public class AuthMemberDto extends User implements OAuth2User {
         this.fromSocial = fromSocial;
     }
 
-    public AuthMemberDto(MemberDto memberDto) {
+    public AuthMemberDto(MemberDto memberDto, boolean fromSocial) {
         super(memberDto.getEmail(), memberDto.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_" + memberDto.getRole())));
         this.memberDto = memberDto;
+        this.fromSocial = fromSocial;
     }
 
     @Override
