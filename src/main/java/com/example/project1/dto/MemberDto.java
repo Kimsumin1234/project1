@@ -40,6 +40,8 @@ public class MemberDto {
 
     private String checkPassword;
 
+    private boolean fromSocial;
+
     private MemberRole role;
 
     private LocalDateTime createdDate;

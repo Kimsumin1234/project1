@@ -1,5 +1,7 @@
 package com.example.project1.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import com.example.project1.constant.MemberRole;
 
 import jakarta.persistence.Column;
@@ -42,6 +44,8 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    private boolean fromSocial; // 소셜가입
 
     @Enumerated(EnumType.STRING)
     private MemberRole role;
