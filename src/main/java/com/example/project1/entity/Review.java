@@ -35,6 +35,9 @@ public class Review extends BaseEntity {
     @Column
     private String title;
 
+    @Column(nullable = false, columnDefinition = "bigint default 0")
+    private Long viewCount = 0L;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Member writer;
 

@@ -74,12 +74,18 @@ document.querySelector("#register-form").addEventListener("submit", (e) => {
 
   // 수집된 정보를 폼 태그 자식으로 붙여넣기
   let result = "";
-  attachInfos.forEach((obj, idx) => {
-    // hidden 3개 => MovieImageDto 객체 하나로 변경(spring에서 대입해줌 알려주기만 하면 됨) list이기 때문에 []까지 입력
-    result += `<input type='hidden' value='${obj.dataset.path}' name='reviewImageDtos[${idx}].path' >`;
-    result += `<input type='hidden' value='${obj.dataset.uuid}' name='reviewImageDtos[${idx}].uuid' >`;
-    result += `<input type='hidden' value='${obj.dataset.name}' name='reviewImageDtos[${idx}].imagename' >`;
-  });
+  if (attachInfos.length == 0) {
+    result += `<input type='hidden' value='' name='reviewImageDtos[0].path' >`;
+    result += `<input type='hidden' value='' name='reviewImageDtos[0].uuid' >`;
+    result += `<input type='hidden' value='' name='reviewImageDtos[0].imagename' >`;
+  } else {
+    attachInfos.forEach((obj, idx) => {
+      // hidden 3개 => MovieImageDto 객체 하나로 변경(spring에서 대입해줌 알려주기만 하면 됨) list이기 때문에 []까지 입력
+      result += `<input type='hidden' value='${obj.dataset.path}' name='reviewImageDtos[${idx}].path' >`;
+      result += `<input type='hidden' value='${obj.dataset.uuid}' name='reviewImageDtos[${idx}].uuid' >`;
+      result += `<input type='hidden' value='${obj.dataset.name}' name='reviewImageDtos[${idx}].imagename' >`;
+    });
+  }
   form.insertAdjacentHTML("beforeend", result);
 
   console.log(form);

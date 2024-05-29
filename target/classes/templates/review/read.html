@@ -29,10 +29,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 ftco-animate">
+            <div>조회수 [<span th:text="${dto.viewCount}"></span>]</div>
             <div class="uploadResult mb-4">
               <ul>
-                <!-- data-bs-toggle="modal" data-bs-target="#imgModal" 하단의 id="imgModal" 맞춰주기 / th:attr="data-file -->
-                <li th:each="image : ${dto.reviewImageDtos}" data-bs-toggle="modal" data-bs-target="#imgModal" th:attr="data-file=${image.getImageURL()}">
+                <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
                   <img class="block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
                 </li>
               </ul>

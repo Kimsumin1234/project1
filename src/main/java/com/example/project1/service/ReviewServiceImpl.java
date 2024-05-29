@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.data.domain.Page;
@@ -113,6 +114,20 @@ public class ReviewServiceImpl implements ReviewService {
         replyRepository.deleteAllByReview(review);
         reviewImageRepository.deleteByReview(review);
         reviewRepository.deleteById(rno);
+    }
+
+    public void incrementViewCount(Long rno) {
+        Optional<Review> optionReview = reviewRepository.findById(rno);
+        if (optionReview.isPresent()) {
+            Review review = optionReview.get();
+            review.setViewCount(review.getViewCount() + 1);
+            reviewRepository.save(review);
+        }
+    }
+
+    public Long getViewCount(Long rno) {
+        Review review = reviewRepository.findById(rno).get();
+        return review.getViewCount();
     }
 
 }

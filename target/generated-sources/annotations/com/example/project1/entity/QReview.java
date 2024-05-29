@@ -36,6 +36,8 @@ public class QReview extends EntityPathBase<Review> {
 
     public final StringPath title = createString("title");
 
+    public final NumberPath<Long> viewCount = createNumber("viewCount", Long.class);
+
     public final QMember writer;
 
     public QReview(String variable) {
