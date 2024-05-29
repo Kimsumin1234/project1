@@ -13,9 +13,6 @@ import com.querydsl.core.types.Predicate;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long>, QuerydslPredicateExecutor<Animal> {
 
-    // @Query(value = "SELECT * FROM ANIMAL a", nativeQuery = true)
-    // Page<Object[]> getListPage(Pageable pageable);
-
     public default Predicate makePredicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
 

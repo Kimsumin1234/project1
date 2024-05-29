@@ -16,9 +16,13 @@ import lombok.ToString;
 @Getter
 public class AuthMemberDto extends User {
 
+    private Long mid;
+    // private String email
+
     private MemberDto memberDto;
 
-    public AuthMemberDto(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthMemberDto(String username, String password, Long mid,
+            Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 

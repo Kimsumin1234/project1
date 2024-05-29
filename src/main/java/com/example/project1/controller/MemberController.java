@@ -36,6 +36,12 @@ public class MemberController {
 
     private final AdoptUserService adoptUserService;
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/animalCarts")
+    public void animalCart() {
+        log.info("입양내역조회");
+    }
+
     @GetMapping("/login")
     public void getLogin() {
         log.info("로그인 페이지 요청");
