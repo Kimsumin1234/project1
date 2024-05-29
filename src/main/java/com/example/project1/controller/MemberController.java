@@ -22,6 +22,7 @@ import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 

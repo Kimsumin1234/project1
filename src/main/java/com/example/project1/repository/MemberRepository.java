@@ -14,7 +14,6 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 
-    @EntityGraph(attributePaths = { "roleSet" }, type = EntityGraphType.LOAD)
     @Query("select m from Member m where m.email = ?1 and m.fromSocial = ?2")
     Optional<Member> findByEmailAndFromSocial(String email, boolean social);
 
