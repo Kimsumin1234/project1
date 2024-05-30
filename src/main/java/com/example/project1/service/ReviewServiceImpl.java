@@ -15,10 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.project1.dto.PageRequestDto;
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.dto.ReviewDto;
+import com.example.project1.entity.Heart;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
+import com.example.project1.repository.HeartRepository;
 import com.example.project1.repository.ReviewImageRepository;
 import com.example.project1.repository.ReviewReplyCommentRepository;
 import com.example.project1.repository.ReviewReplyRepository;
@@ -35,6 +37,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewReplyRepository replyRepository;
     private final ReviewImageRepository reviewImageRepository;
     private final ReviewReplyCommentRepository commentRepository;
+    private final HeartRepository heartRepository;
 
     @Transactional
     @Override
@@ -46,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
                 (List<ReviewImage>) Arrays.asList((ReviewImage) entity[1]), (Long) entity[2], (String) entity[3],
-                (String) entity[4], (Long) entity[5]));
+                (String) entity[4], (Long) entity[5], (Long) entity[6]));
         return new PageResultDto<>(result, fn);
     }
 
@@ -60,6 +63,7 @@ public class ReviewServiceImpl implements ReviewService {
         String email = (String) result.get(0)[3];
         String nickname = (String) result.get(0)[4];
         Long reviewCnt = (Long) result.get(0)[5];
+        Long heartCount = (Long) result.get(0)[6];
 
         List<ReviewImage> reviewImages = new ArrayList<>();
         result.forEach(arr -> {
@@ -67,7 +71,7 @@ public class ReviewServiceImpl implements ReviewService {
             reviewImages.add(reviewImage);
         });
 
-        return entityToDto(review, reviewImages, mid, email, nickname, reviewCnt);
+        return entityToDto(review, reviewImages, mid, email, nickname, reviewCnt, heartCount);
     }
 
     @Override
@@ -105,6 +109,10 @@ public class ReviewServiceImpl implements ReviewService {
         // 여기 모든 대댓글 지우고, 모든 댓글 지우고, 글 삭제
 
         Review review = reviewRepository.findById(rno).get();
+        List<Heart> hearts = heartRepository.findByReview(review);
+        for (Heart heart : hearts) {
+            heartRepository.deleteById(heart.getHno());
+        }
         List<ReviewReply> replies = replyRepository.findByReview(review);
         for (ReviewReply reviewReply : replies) {
             commentRepository.deleteAllByReply(reviewReply);

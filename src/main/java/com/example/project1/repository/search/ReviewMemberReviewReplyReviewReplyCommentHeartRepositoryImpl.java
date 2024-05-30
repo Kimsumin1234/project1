@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import com.example.project1.entity.QHeart;
 import com.example.project1.entity.QMember;
 import com.example.project1.entity.QReview;
 import com.example.project1.entity.QReviewImage;
@@ -27,10 +28,10 @@ import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends QuerydslRepositorySupport
-        implements ReviewMemberReviewReplyReviewReplyCommentRepository {
+public class ReviewMemberReviewReplyReviewReplyCommentHeartRepositoryImpl extends QuerydslRepositorySupport
+        implements ReviewMemberReviewReplyReviewReplyCommentHeartRepository {
 
-    public ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl() {
+    public ReviewMemberReviewReplyReviewReplyCommentHeartRepositoryImpl() {
         super(Review.class);
     }
 
@@ -44,6 +45,7 @@ public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends Que
         QMember member = QMember.member;
         QReviewReply reply = QReviewReply.reviewReply;
         QReviewImage reviewImage = QReviewImage.reviewImage;
+        QHeart heart = QHeart.heart;
 
         // @Query("select r, m from review r left join r.writer m") // findby*
         JPQLQuery<ReviewImage> query = from(reviewImage);
@@ -53,12 +55,15 @@ public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends Que
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
-
+        JPQLQuery<Long> heartCount = JPAExpressions.select(heart.hno.count().as("heartCount"))
+                .from(heart)
+                .where(heart.review.eq(review))
+                .groupBy(heart.review);
         JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
                 JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
-                replyCount)
+                replyCount, heartCount)
                 .where(reviewImage.inum.in(
                         JPAExpressions.select(reviewImage.inum.min()).from(reviewImage).groupBy(reviewImage.review)));
 
@@ -111,6 +116,7 @@ public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends Que
         QReviewReply reply = QReviewReply.reviewReply;
         QReviewImage reviewImage = QReviewImage.reviewImage;
         QReviewReplyComment replyComment = QReviewReplyComment.reviewReplyComment;
+        QHeart heart = QHeart.heart;
 
         // @Query("select b, m from board b left join b.writer m") // findby*
         JPQLQuery<ReviewImage> query = from(reviewImage);
@@ -121,13 +127,17 @@ public class ReviewMemberReviewReplyReviewReplyCommentRepositoryImpl extends Que
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
+        JPQLQuery<Long> heartCount = JPAExpressions.select(heart.hno.count().as("heartCount"))
+                .from(heart)
+                .where(heart.review.eq(review))
+                .groupBy(heart.review);
         // JPAExpressions.select(replyComment.text).from(replyComment)
         // .where(reply.replyNo.eq(replyComment.reply.replyNo)
         JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
                 JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
-                replyCount)
+                replyCount, heartCount)
                 .where(reviewImage.review.rno.eq(rno))
                 .orderBy(reviewImage.inum.desc());
 

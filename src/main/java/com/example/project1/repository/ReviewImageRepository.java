@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
-import com.example.project1.repository.search.ReviewMemberReviewReplyReviewReplyCommentRepository;
+import com.example.project1.repository.search.ReviewMemberReviewReplyReviewReplyCommentHeartRepository;
 
 public interface ReviewImageRepository
-        extends JpaRepository<ReviewImage, Long>, ReviewMemberReviewReplyReviewReplyCommentRepository {
+        extends JpaRepository<ReviewImage, Long>, ReviewMemberReviewReplyReviewReplyCommentHeartRepository {
 
     @Modifying
     @Query("delete from ReviewImage ri where ri.review = :review")

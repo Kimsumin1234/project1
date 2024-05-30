@@ -29,6 +29,8 @@ public class ReviewDto {
 
     private Long viewCount;
 
+    private Long heartCount;
+
     // member
     private Long mid;
     private String email;

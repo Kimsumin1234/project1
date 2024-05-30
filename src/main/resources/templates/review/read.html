@@ -3,6 +3,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/heart.css}">
+  </th:block>
   <div layout:fragment="content">
     <!-- END nav -->
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
@@ -69,6 +72,7 @@
 
             <!-- reply 들어갈 자리 -->
             <div class="pt-5 mt-5">
+              <h3 class="mb-5" sec:authorize="hasRole('ROLE_MEMBER')"><span><div class="" id="heart" ></div> <span class="heartCount" th:text="${dto.heartCount}"></span></h3>
               <h3 class="mb-5"><span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
               <!-- <div
                 class="flex items-center justify-between p-3 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
@@ -87,7 +91,7 @@
                 </span>
               </div> -->
               <!-- js 에서 처리할꺼임 -->
-              <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
+              <div class="comment-form-wrap p-5" sec:authorize="hasRole('ROLE_MEMBER')">
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="/review/add" class="review-form p-5 bg-light " method="post">
                   <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
@@ -333,5 +337,6 @@
 
       </script>
       <script th:src="@{/js/reply.js}"></script>
+      <script th:src="@{/js/heart.js}"></script>
     </th:block>
 </html>

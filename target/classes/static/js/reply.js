@@ -17,6 +17,7 @@ const reviewsLoaded = () => {
 
       // 리뷰 총 개수 변경
       document.querySelector(".review-cnt").innerHTML = data.length;
+
       result = "";
       data.forEach((reply) => {
         console.log(reply.replyNo);

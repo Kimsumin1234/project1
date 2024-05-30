@@ -32,7 +32,7 @@ public interface ReviewService {
 
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, List<ReviewImage> reviewImages, Long mid, String email,
-            String nickname, Long replyCount) {
+            String nickname, Long replyCount, Long heartCount) {
         ReviewDto reviewDto = ReviewDto.builder()
                 .rno(review.getRno())
                 .title(review.getTitle())
@@ -42,6 +42,7 @@ public interface ReviewService {
                 .nickname(nickname)
                 .replyCount(replyCount != null ? replyCount : 0)
                 .viewCount(review.getViewCount() != null ? review.getViewCount() : 0)
+                .heartCount(heartCount != null ? heartCount : 0)
                 .createdDate(review.getCreatedDate())
                 .lastModifiedDate(review.getLastModifiedDate())
                 .build();
