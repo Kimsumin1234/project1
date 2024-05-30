@@ -42,6 +42,9 @@ public class MemberDto {
 
     private boolean fromSocial;
 
+    private String provider;
+    private String providerId;
+
     private MemberRole role;
 
     private LocalDateTime createdDate;

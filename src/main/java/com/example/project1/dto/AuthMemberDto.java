@@ -23,10 +23,16 @@ public class AuthMemberDto extends User implements OAuth2User {
 
     private Map<String, Object> attr;
 
-    public AuthMemberDto(String username, String password, boolean fromSocial,
+    private String name;
+    private String provider;
+    private String providerId;
+
+    public AuthMemberDto(String username, String password, boolean fromSocial, String provider, String providerId,
             Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.fromSocial = fromSocial;
+        this.provider = provider;
+        this.providerId = providerId;
     }
 
     public AuthMemberDto(MemberDto memberDto, boolean fromSocial) {
@@ -36,14 +42,17 @@ public class AuthMemberDto extends User implements OAuth2User {
         this.fromSocial = fromSocial;
     }
 
+    public AuthMemberDto(MemberDto memberDto, boolean fromSocial, String provider, String providerId) {
+        super(memberDto.getEmail(), memberDto.getPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_" + memberDto.getRole())));
+        this.memberDto = memberDto;
+        this.fromSocial = fromSocial;
+        this.provider = provider;
+        this.providerId = providerId;
+    }
+
     @Override
     public Map<String, Object> getAttributes() {
         return this.attr;
     }
-
-    @Override
-    public String getName() {
-        return this.memberDto.getNickname();
-    }
-
 }

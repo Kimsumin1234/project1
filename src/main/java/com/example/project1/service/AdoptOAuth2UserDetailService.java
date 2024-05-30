@@ -1,5 +1,8 @@
 package com.example.project1.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,8 @@ import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -32,26 +37,45 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
     // load 만 치면 자동완성
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        // 구글로 공통인증 방식으로 로그인하면 뜨는 정보들
+        // 소셜로그인 공통인증 방식으로 로그인하면 뜨는 정보들
         log.info("========================================");
         log.info("userRequest : {}", userRequest);
         String clientName = userRequest.getClientRegistration().getClientName();
         log.info("clientName : {}", clientName);
-        log.info(userRequest.getAdditionalParameters());
+        log.info("Token : {}", userRequest.getAccessToken());
+        log.info("Client : {}", userRequest.getClientRegistration());
         log.info("========================================");
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        oAuth2User.getAttributes().forEach((k, v) -> {
-            log.info("{} : {}", k, v);
-        });
-        log.info("========================================");
+        try {
+            String getAttr = new ObjectMapper().writeValueAsString(oAuth2User.getAttributes());
+            log.info("getAttr : {}", getAttr);
+            log.info("========================================");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        // 네이버 로그인
+        if (clientName.equals("naver")) {
+            log.info("response {}", oAuth2User.getAttributes().get("response"));
+            log.info("========================================");
+            try {
+                String nAttr = new ObjectMapper().writeValueAsString(oAuth2User.getAttributes().get("response"));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            // Member member = saveSocialMember();
+            // return new AuthMemberDto(entityToDto(member), true);
+            return oAuth2User;
+        }
+
+        // 구글 로그인
         // 소셜로그인 을 하면 DB테이블에 저장하는 작업 (회원가입?)
-        Member member = saveSocialMember(oAuth2User.getAttribute("email"));
-        // entity => dto
+        Member member = saveSocialMember(oAuth2User.getAttribute("email"), oAuth2User.getAttribute("name"));
         return new AuthMemberDto(entityToDto(member), true);
     }
 
-    private Member saveSocialMember(String email) {
+    private Member saveSocialMember(String email, String name) {
         Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
 
         if (result.isPresent()) {
@@ -61,7 +85,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = Member.builder()
                 .email(email)
-                .nickname(email)
+                .nickname(name)
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .fromSocial(true) // 소셜로그인
                 .role(MemberRole.MEMBER)
