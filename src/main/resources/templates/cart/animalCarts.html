@@ -18,7 +18,7 @@
           <td><a th:href="@{/adopt/read(sId=${item.animal.sId})}"><img th:src="${item.animal.popfile}" class="rounded mx-auto d-block w-25" /></a></td>
           <div>
             <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm">
-            <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
+              <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
               <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
             </form>
           </div>
@@ -33,13 +33,12 @@
         </a>
         <p th:text="${item.animal.kindCd}" class="text-center"></p>
       <div>
-        <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm">
-        <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
-          <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
-        </form>
       </div>
-      
     </div>
+    <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm">
+    <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
+      <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
+    </form>
   </div>
 
   <th:block layout:fragment="script">
