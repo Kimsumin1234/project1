@@ -32,15 +32,44 @@
             <div class="col-lg-8 ftco-animate">
               <p><img th:src="${dto.popfile}" alt="" class="img-fluid" /></p>
               <h2 class="mb-3"></h2>
+
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">품종 : [[${dto.kindCd}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">나이(추정) : [[${dto.age}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">성별 : [[${dto.sexCd}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">체중 : [[${dto.weight}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">보호 장소 : [[${dto.careAddr}]]</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">체중 : [[${dto.weight}]]</th>
+                  </tr>
+                </tbody>
+              </table>
     
-              <p>발견 날짜 : [[${dto.happenDt}]]</p>
+              <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p>
               <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p>
               <p>품종 : [[${dto.kindCd}]]</p>
               <p>나이(추정) : [[${dto.age}]]</p>
               <p>성별 : [[${dto.sexCd}]]</p>
               <p>체중 : [[${dto.weight}]]</p>
               <p>보호 장소 : [[${dto.careAddr}]]</p>
-              <p>중성화 여부 : [[${dto.neuterYn}]]</p>
+              <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
 
 
               <!-- 입양문의 -->
@@ -66,9 +95,9 @@
 
               <!-- 댓글 생성 -->
               <div class="animalReview">
-                <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
+                <div class="comment-form-wrap pt-5">
                   <h4 class="mb-5 review-cnt" th:text="${dto.reviewCnt}">댓글</h4>
-                  <form th:action="@{/animalReviews/new}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light">
+                  <form th:action="@{/animalReviews/new}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
                     <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                     <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
                     <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
