@@ -58,15 +58,15 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
         if (clientName.equals("naver")) {
             log.info("response {}", oAuth2User.getAttributes().get("response"));
             log.info("========================================");
-            try {
-                String nAttr = new ObjectMapper().writeValueAsString(oAuth2User.getAttributes().get("response"));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            Map<String, String> map = (Map<String, String>) oAuth2User.getAttributes().get("response");
+            String nEmail = map.get("email");
+            String nName = map.get("name");
+            String nPhone = map.get("mobile");
+            log.info("info {} {} {}", nEmail, nName, nPhone);
+            log.info("========================================");
 
-            // Member member = saveSocialMember();
-            // return new AuthMemberDto(entityToDto(member), true);
-            return oAuth2User;
+            Member member = saveSocialMember(nEmail, nName, nPhone);
+            return new AuthMemberDto(entityToDto(member), true);
         }
 
         // 구글 로그인
@@ -87,6 +87,27 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                 .email(email)
                 .nickname(name)
                 .password(passwordEncoder.encode("1111")) // 임의 지정
+                .fromSocial(true) // 소셜로그인
+                .role(MemberRole.MEMBER)
+                .build();
+        memberRepository.save(member);
+        return member;
+    }
+
+    private Member saveSocialMember(String email, String name, String phone) {
+        Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
+
+        if (result.isPresent()) {
+            // 찾은 이메일이 회원이 되있으면 여기서 끝
+            return result.get();
+        }
+
+        String rePhone = phone.replace("-", "");
+        Member member = Member.builder()
+                .email(email)
+                .nickname(name)
+                .password(passwordEncoder.encode("1111")) // 임의 지정
+                .phone(rePhone)
                 .fromSocial(true) // 소셜로그인
                 .role(MemberRole.MEMBER)
                 .build();
