@@ -69,9 +69,29 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             return new AuthMemberDto(entityToDto(member), true);
         }
 
+        // 카카오 로그인
+        if (clientName.equals("kakao")) {
+            String kUserId = oAuth2User.getAttributes().get("id").toString();
+            Map<String, String> kMap = (Map<String, String>) oAuth2User.getAttributes().get("properties");
+            String kNickname = kMap.get("nickname");
+            log.info("info : {} , {}", kUserId, kNickname);
+            log.info("========================================");
+
+            Member member = Member.builder()
+                    .email("kakao" + kUserId + "@kakao.com")
+                    .nickname(kNickname + " for kakao")
+                    .password(passwordEncoder.encode("1111")) // 임의 지정
+                    .fromSocial(true) // 소셜로그인
+                    .role(MemberRole.MEMBER)
+                    .build();
+            memberRepository.save(member);
+            return new AuthMemberDto(entityToDto(member), true);
+        }
+
         // 구글 로그인
         // 소셜로그인 을 하면 DB테이블에 저장하는 작업 (회원가입?)
-        Member member = saveSocialMember(oAuth2User.getAttribute("email"), oAuth2User.getAttribute("name"));
+        Member member = saveSocialMember(oAuth2User.getAttribute("email"),
+                oAuth2User.getAttribute("name"));
         return new AuthMemberDto(entityToDto(member), true);
     }
 
