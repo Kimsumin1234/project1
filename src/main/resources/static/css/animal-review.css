@@ -57,3 +57,22 @@
 }
 
 /* cart.html table, rowItems*/
+.deleteCartForm {
+  text-align: center;
+}
+
+/* cart 부분 */
+.cart-class {
+  margin-bottom: 30px;
+}
+
+.cartname {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 검색부분 */
+.search option {
+  text-align: center;
+}
