@@ -14,6 +14,6 @@ public interface AnimalCartService {
         AnimalCart findByMember(Long mid);
 
         // 장바구니 item 삭제
-        public void cartItemDelete(Long itemId);
+        void cartItemDelete(Long itemId);
 
 }
