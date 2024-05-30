@@ -24,6 +24,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/member/profile").hasAnyRole("MEMBER")
                 .requestMatchers("/member/register").permitAll()
+                .requestMatchers("/adopt/list").permitAll()
                 .anyRequest().permitAll());
         http.formLogin(login -> login
                 .loginPage("/member/login").permitAll());
