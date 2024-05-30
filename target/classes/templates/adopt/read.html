@@ -12,30 +12,30 @@
       <!-- END nav -->
       <section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
-        <div class="container">
+        <div class="container" > 
           <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
               <p class="breadcrumbs mb-2">
                 <span class="mr-2"
-                  ><a href="index.html">Home<i class="ion-ios-arrow-forward"></i></a
-                ></span>
-                <span class="mr-2"
+                ><a th:href="@{/}">Home<i class="ion-ios-arrow-forward"></i></a
+                  ></span>
+                  <span class="mr-2"
                   ><a th:href="@{list}">입양목록<i class="ion-ios-arrow-forward"></i></a
-                ></span>
-              </p>
-              <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
+                    ></span>
+                  </p>
+                  <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="ftco-section ftco-degree-bg animaltext">
-        <div class="container">
-          <div class="row justify-content-center">
+          </section>
+          
+          <section class="ftco-section ftco-degree-bg animaltext">
+            <div class="container">
+              <div class="row justify-content-center">
             <div class="col-lg-8 ftco-animate">
               <p><img th:src="${dto.popfile}" alt="" class="img-fluid" /></p>
               <h2 class="mb-3"></h2>
-              
+    
               <p>발견 날짜 : [[${dto.happenDt}]]</p>
               <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p>
               <p>품종 : [[${dto.kindCd}]]</p>
@@ -44,6 +44,16 @@
               <p>체중 : [[${dto.weight}]]</p>
               <p>보호 장소 : [[${dto.careAddr}]]</p>
               <p>중성화 여부 : [[${dto.neuterYn}]]</p>
+
+
+              <!-- 입양문의 -->
+              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="p-5 bg-light">
+                <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                <div class="form-group">
+                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
+                </div>
+              </form>
+
 
               <div class="carename">
                 <div class="about-author d-flex p-4 bg-light">
@@ -115,6 +125,9 @@
           <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg>
       </div> -->
+
+
+
     </body>
   </div>
   <th:block layout:fragment="script">

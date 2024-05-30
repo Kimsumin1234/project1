@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content" class="container">
+    <h3 class="">입양문의 신청내역</h3>
+    <h3>[[${#lists.size(cartItems)}]] 마리</h3>
+    <table class="table" th:if="${#lists.size(cartItems) <= 1}">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" class="text-center">품종</th>
+          <th scope="col" class="text-center">사진</th>
+        </tr>
+      </thead>
+      <tbody class="animalCartList">
+        <tr th:each="item : ${cartItems}">      
+          <td class="row"></td>
+          <td th:text="${item.animal.kindCd}" style="width: 300px" class="text-center"></td>
+          <td><a th:href="@{/adopt/read(sId=${item.animal.sId})}"><img th:src="${item.animal.popfile}" class="rounded mx-auto d-block w-25" /></a></td>
+          <div>
+            <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm">
+            <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
+              <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
+            </form>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row" th:if="${#lists.size(cartItems) > 1}">
+      <div class="col-4" th:each="item : ${cartItems}">
+        <a th:href="@{/adopt/read(sId=${item.animal.sId})}">
+          <img th:src="${item.animal.popfile}" class="rounded mx-auto d-block w-75 h-75" />
+        </a>
+        <p th:text="${item.animal.kindCd}" class="text-center"></p>
+      <div>
+        <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm">
+        <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
+          <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+  <th:block layout:fragment="script">
+    <script>
+      const mid = "[[${#authentication.principal.memberDto.mid}]]";
+    </script>
+  </th:block>
+</html>

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/animal-review.css}">
+  </th:block>
   <div layout:fragment="content">
     <section class="ftco-section bg-light ftco-no-pt ftco-no-pb">
       <div class="container">
@@ -8,15 +11,21 @@
             <div class="heading-section pt-md-5">
               <h2 class="mb-1" th:text="${#authentication.principal.memberDto.nickname}+님"></h2>
               <h5 class="mb-1">안녕하세요</h5>
-              <p class="mb-1" th:text="${#authentication.name}"></p>
-              <p class="mb-5" th:text="${#authentication.principal.memberDto.phone}"></p>
+              <p class="mb-5" th:text="${#authentication.name}"></p>
             </div>
             <div class="row">
-              <div class="col-md-6 services-2 w-100 d-flex">
+              <div class="col-md-6 services-2 w-100 d-flex cartList">
                 <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
                 <div class="blog-entry align-self-stretch text pl-3">
-                  <h4>입양신청 내역</h4>
-                  <p>Far far away, behind the word mountains, far from the countries.</p>
+
+                  
+                  <form action="" method="post" class="animalCartList">
+                    <div class="text p-4">
+                      <h3 class="heading"><a th:href="@{/cart/animalCarts}">입양문의 내역</a></h3>
+                    </div>
+                </form>
+
+
                 </div>
               </div>
               <div class="col-md-6 d-flex ftco-animate">
@@ -48,6 +57,7 @@
   </div>
   <th:block layout:fragment="script">
     <script>
+      const mid = "[[${#authentication.principal.memberDto.mid}]]"
       const allLi = document.querySelectorAll(".nav-item");
       allLi[5].classList.add("active");
 
@@ -62,5 +72,6 @@
         });
       }
     </script>
+    <script th:src="@{/js/animalCart.js}"></script>
   </th:block>
 </html>

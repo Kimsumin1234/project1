@@ -19,4 +19,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Modifying
     @Query("update Member m set m.nickname=?1 where m.email=?2")
     void updateNickName(String nickname, String email);
+
+    // 장바구니 추가
+    Optional<Member> findByMid(Long mid);
 }
