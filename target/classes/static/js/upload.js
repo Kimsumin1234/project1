@@ -19,10 +19,10 @@ function showUploadImages(arr) {
   let tags = "";
 
   arr.forEach((obj, idx) => {
-    tags += `<li data-name="${obj.fileName}" data-path="${obj.folderPath}" data-uuid="${obj.uuid}"><div>`;
-    tags += `<a href=""><img src="/upload/display?fileName=${obj.thumbImageURL}" class="block"></a>`;
+    tags += `<li data-name="${obj.fileName}" data-path="${obj.folderPath}" data-uuid="${obj.uuid}" ><div>`;
+    tags += `<a href="" ><img src="/upload/display?fileName=${obj.thumbImageURL}" class=""></a>`;
     tags += `<span class="text-sm d-inline-block mx-1"></span>`;
-    tags += `<a href="#" data-file="${obj.imageURL}"><i class="fa-solid fa-xmark" data-file=""></i></a>`;
+    tags += `<a href="#" data-file="${obj.imageURL}"><i class="fa fa-times" data-file=""></i></a>`;
     tags += `</div></li>`;
   });
   uploadResult.insertAdjacentHTML("beforeend", tags);

@@ -3,7 +3,6 @@ package com.example.project1.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project1.dto.HeartDto;
-import com.example.project1.entity.Heart;
 import com.example.project1.service.HeartService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Log4j2
 @RestController

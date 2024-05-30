@@ -3,6 +3,8 @@ package com.example.project1.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.Builder.Default;
 
 @Entity
 @Getter
@@ -40,8 +43,9 @@ public class Review extends BaseEntity {
     @Column
     private String title;
 
-    @Column
-    private Long viewCount;
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private Long viewCount = 0L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member writer;
