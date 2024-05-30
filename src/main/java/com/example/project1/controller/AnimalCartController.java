@@ -81,7 +81,6 @@ public class AnimalCartController {
         return "redirect:/cart/animalCarts";
     }
 
-    // 장바구니 아이템 삭제
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete")
     public String postDelete(@RequestParam Long itemId) {
