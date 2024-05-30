@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.project1.dto.AnimalCartDto;
 import com.example.project1.dto.AnimalDto;
+import com.example.project1.dto.AnimalItemDto;
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.entity.AnimalCart;
@@ -76,6 +78,15 @@ public class AnimalCartController {
         MemberDto member = getMemberFromSession();
         animalCartService.createCart(member.getMid(), dto.getSId(), 1);
         // log.info("count {}", count);
+        return "redirect:/cart/animalCarts";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/delete")
+    public String postDelete(@RequestParam Long itemId) {
+
+        animalCartService.cartItemDelete(itemId);
+        log.info("itemId {}", itemId);
         return "redirect:/cart/animalCarts";
     }
 
