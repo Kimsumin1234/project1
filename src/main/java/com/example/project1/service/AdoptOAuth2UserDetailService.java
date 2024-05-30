@@ -1,12 +1,8 @@
 package com.example.project1.service;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -19,7 +15,6 @@ import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -77,15 +72,21 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             log.info("info : {} , {}", kUserId, kNickname);
             log.info("========================================");
 
-            Member member = Member.builder()
-                    .email("kakao" + kUserId + "@kakao.com")
-                    .nickname(kNickname + " for kakao")
-                    .password(passwordEncoder.encode("1111")) // 임의 지정
-                    .fromSocial(true) // 소셜로그인
-                    .role(MemberRole.MEMBER)
-                    .build();
-            memberRepository.save(member);
-            return new AuthMemberDto(entityToDto(member), true);
+            String kEmail = "kakao" + kUserId + "@kakao.com";
+            Optional<Member> result = memberRepository.findByEmailAndFromSocial(kEmail, true);
+            if (result.isPresent()) {
+                return new AuthMemberDto(entityToDto(result.get()), true);
+            } else {
+                Member member = Member.builder()
+                        .email("kakao" + kUserId + "@kakao.com")
+                        .nickname(kNickname + " for kakao")
+                        .password(passwordEncoder.encode("1111")) // 임의 지정
+                        .fromSocial(true) // 소셜로그인
+                        .role(MemberRole.MEMBER)
+                        .build();
+                memberRepository.save(member);
+                return new AuthMemberDto(entityToDto(member), true);
+            }
         }
 
         // 구글 로그인
