@@ -135,7 +135,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Optional<Member> member = memberRepository.findByPhone(phone);
 
         if (member.isPresent()) {
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+            throw new IllegalStateException("이미 가입된 회원이거나 소셜 로그인을 확인해주세요.");
         }
     }
 
@@ -143,7 +143,11 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public MemberDto findId(String phone) throws IllegalStateException {
         log.info("아이디 찾기 service {}", phone);
         Optional<Member> member = memberRepository.findByPhone(phone);
+        Optional<Member> member2 = memberRepository.findByPhoneAndFromSocial(phone, true);
 
+        if (member2.isPresent()) {
+            throw new IllegalStateException("소셜로그인 으로 가입된 회원입니다.");
+        }
         if (!member.isPresent()) {
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
         } else {
