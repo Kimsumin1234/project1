@@ -161,6 +161,11 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public void findIdEmail(String email) throws IllegalStateException {
         log.info("아이디 찾기 service {}", email);
         Optional<Member> member = memberRepository.findByEmail(email);
+        Optional<Member> member2 = memberRepository.findByEmailAndFromSocial(email, true);
+
+        if (member2.isPresent()) {
+            throw new IllegalStateException("소셜로그인으로 등록된 회원입니다. 소셜로그인을 확인해 주세요.");
+        }
 
         if (!member.isPresent()) {
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");

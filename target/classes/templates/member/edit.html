@@ -20,7 +20,15 @@
 
             <hr class="my-8" />
 
-            <form th:action="@{/member/edit/password}" id="changeForm" method="post" class="p-5 bg-light" th:object="${passwordChangeDto}" novalidate>
+            <form
+              sec:authorize="!principal.isFromSocial()"
+              th:action="@{/member/edit/password}"
+              id="changeForm"
+              method="post"
+              class="p-5 bg-light"
+              th:object="${passwordChangeDto}"
+              novalidate
+            >
               <input type="hidden" name="email" th:value="${#authentication.name}" />
               <div class="form-group">
                 <label for="currentPassword">현재 비밀번호 *</label>
