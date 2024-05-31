@@ -33,7 +33,6 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         // 로그인 메소드
         log.info("로그인 요청 {}", username);
 
-        // Optional<Member> result = memberRepository.findByEmail(username);
         Optional<Member> result = memberRepository.findByEmailAndFromSocial(username, false);
 
         if (!result.isPresent()) {
@@ -60,7 +59,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException {
         log.info("비밀번호 수정 service {}", pDto);
 
-        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+        Member member = memberRepository.findByEmailAndFromSocial(pDto.getEmail(), false).get();
 
         if (!passwordEncoder.matches(pDto.getCurrentPassword(), member.getPassword())) {
             throw new IllegalStateException("현재 비밀번호가 다릅니다.");
@@ -125,7 +124,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent()) {
-            throw new IllegalStateException("중복된 이메일 입니다.");
+            throw new IllegalStateException("이미 가입된 이메일 이거나 소셜로그인을 확인해 주세요.");
         }
     }
 

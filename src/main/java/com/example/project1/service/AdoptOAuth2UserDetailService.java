@@ -60,7 +60,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             log.info("info {} {} {}", nEmail, nName, nPhone);
             log.info("========================================");
 
-            Member member = saveSocialMember(nEmail, nName, nPhone);
+            Member member = saveSocialMember(nEmail, nName + " for naver", nPhone);
             return new AuthMemberDto(entityToDto(member), true);
         }
 
@@ -106,7 +106,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = Member.builder()
                 .email(email)
-                .nickname(name)
+                .nickname(name + " for google")
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .fromSocial(true) // 소셜로그인
                 .role(MemberRole.MEMBER)
