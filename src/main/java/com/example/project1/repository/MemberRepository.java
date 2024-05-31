@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.project1.entity.Member;
 import java.util.List;
+import com.example.project1.entity.Heart;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
@@ -22,4 +23,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     // 장바구니 추가
     Optional<Member> findByMid(Long mid);
+
 }

@@ -50,4 +50,7 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member writer;
 
+    @Builder.Default
+    @OneToMany
+    private List<Heart> heart = new ArrayList<>();
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import com.example.project1.entity.Heart;
 import com.example.project1.entity.QHeart;
 import com.example.project1.entity.QMember;
 import com.example.project1.entity.QReview;
@@ -145,5 +146,4 @@ public class ReviewMemberReviewReplyReviewReplyCommentHeartRepositoryImpl extend
 
         return result.stream().map(t -> t.toArray()).collect(Collectors.toList()); // Tuple -> Array
     }
-
 }

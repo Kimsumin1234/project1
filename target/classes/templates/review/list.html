@@ -29,6 +29,12 @@
           </form>
         </div>
           <div><a th:href="@{/review/register}" class="btn btn-primary" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a></div>
+          <!-- 이것도 패치써서 그냥 제목만 쭉 보여주는식으로 ㄱ -->
+          <div><button class="btn btn-warning" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
+            <ul class="list-group">
+              <!-- <li class="list-group-item">An item</li> -->
+            </ul>
+          </div>
           <div class="row mt-3">
             <!-- 여기 div가 반복될 예정 -->
             <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate">
@@ -127,38 +133,17 @@
 
         </div>
       </section>
-       <!--원본 이미지 보기 모달 창-->
-      <!-- data-bs-toggle="modal" data-bs-target="#imgModal" , id="imgModal" 맞춰주기 -->
-      <!-- <div class="modal fade" id="imgModal" tabindex="-1" aria-labelledby="imgModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="imgModalLabel" th:value="${dto.title}"></h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <img
-                src="https://search.pstatic.net/common?type=f&size=518x522&quality=95&direct=true&src=http%3A%2F%2Fshop1.phinf.naver.net%2F20200724_215%2F1595581349044jAHJA_JPEG%2F31716943718608376_1431937637.jpeg"
-                alt=""
-              />
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </body>
   </div>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <th:block layout:fragment="script">
-    <!-- <script th:src="@{/assets/js/popper.min.js}"></script> -->
     <script>
       const allLi = document.querySelectorAll(".nav-item");
       allLi[4].classList.add("active");
+      const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
     </script>
-    <!--  -->
+    <script th:src="@{/js/reviewList.js}"></script>
   </th:block>
 </html>

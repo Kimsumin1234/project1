@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,7 @@ import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.repository.HeartRepository;
+import com.example.project1.repository.MemberRepository;
 import com.example.project1.repository.ReviewImageRepository;
 import com.example.project1.repository.ReviewReplyCommentRepository;
 import com.example.project1.repository.ReviewReplyRepository;
@@ -124,6 +127,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.deleteById(rno);
     }
 
+    @Override
     public void incrementViewCount(Long rno) {
         Optional<Review> optionReview = reviewRepository.findById(rno);
         if (optionReview.isPresent()) {
@@ -133,9 +137,23 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    @Override
     public Long getViewCount(Long rno) {
         Review review = reviewRepository.findById(rno).get();
         return review.getViewCount();
+    }
+
+    @Transactional
+    @Override
+    public List<ReviewDto> getHeartList(Long mid) {
+        List<Heart> hearts = heartRepository.findByMember(Member.builder().mid(mid).build());
+        List<Review> reviews = new ArrayList<>();
+        for (Heart heart : hearts) {
+            Review review = reviewRepository.findByHeart(heart.getHno());
+            reviews.add(review);
+        }
+        return reviews.stream().map(review -> reviewEntityToDto(review))
+                .collect(Collectors.toList());
     }
 
 }

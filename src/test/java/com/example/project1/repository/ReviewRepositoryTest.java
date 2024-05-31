@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.project1.entity.Heart;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
@@ -30,6 +31,8 @@ public class ReviewRepositoryTest {
     private ReviewReplyRepository replyRepository;
     @Autowired
     private ReviewReplyCommentRepository commentRepository;
+    @Autowired
+    private HeartRepository heartRepository;
 
     @Test
     public void testInsert() {
@@ -107,5 +110,15 @@ public class ReviewRepositoryTest {
             System.out.println();
             System.out.println(r.getReplyComment());
         });
+    }
+
+    @Test
+    public void testS() {
+        Member member = Member.builder().mid(1L).build();
+        List<Heart> hearts = heartRepository.findByMember(member);
+        for (Heart heart : hearts) {
+            reviewRepository.findByHeart(heart.getHno());
+        }
+
     }
 }

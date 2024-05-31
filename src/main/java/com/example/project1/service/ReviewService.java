@@ -30,6 +30,19 @@ public interface ReviewService {
 
     Long getViewCount(Long rno);
 
+    List<ReviewDto> getHeartList(Long mid);
+
+    public default ReviewDto reviewEntityToDto(Review review) {
+        return ReviewDto.builder()
+                .rno(review.getRno())
+                .title(review.getTitle())
+                .text(review.getText())
+                .viewCount(review.getViewCount() != null ? review.getViewCount() : 0)
+                .createdDate(review.getCreatedDate())
+                .lastModifiedDate(review.getLastModifiedDate())
+                .build();
+    }
+
     // entity, dto 형변환
     public default ReviewDto entityToDto(Review review, List<ReviewImage> reviewImages, Long mid, String email,
             String nickname, Long replyCount, Long heartCount) {
@@ -91,4 +104,5 @@ public interface ReviewService {
 
         return entityMap;
     }
+
 }
