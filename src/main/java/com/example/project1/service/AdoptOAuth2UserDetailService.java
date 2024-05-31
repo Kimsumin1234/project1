@@ -80,8 +80,8 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                 Member member = Member.builder()
                         .email("kakao" + kUserId + "@kakao.com")
                         .nickname(kNickname + " for kakao")
-                        .password(passwordEncoder.encode("1111")) // 임의 지정
-                        .fromSocial(true) // 소셜로그인
+                        .password(passwordEncoder.encode("1111"))
+                        .fromSocial(true)
                         .role(MemberRole.MEMBER)
                         .build();
                 memberRepository.save(member);

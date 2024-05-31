@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
-  <div layout:fragment="content">
-    <div class="hero-wrap js-fullheight" th:style="'background-image:url('+ @{/assets/images/bg_2.jpg} +');'" data-stellar-background-ratio="0.5">
+  <div layout:fragment="content" style="background-color: rgb(238, 211, 204)">
+    <div class="hero-wrap" th:style="'background-image:url('+ @{/assets/images/bg_2.jpg} +'); background-size: 70rem 100%;'">
       <div class="container">
         <div class="row d-md-flex justify-content-center">
           <div class="mt-5 col-md-12 col-lg-6 half p-3 py-5 ftco-animate">
@@ -43,20 +43,25 @@
                     <button type="submit" class="btn btn-primary py-2" th:style="'font-size: 18px;'">로그인</button>
                   </div>
                 </div>
-                <div class="col-sm-6 col-md-4" style="float: none; margin: 0 auto">
-                  <a class="" href="/oauth2/authorization/google">
-                    <img class="img-fluid" th:src="@{/images/web_dark_sq_SI.svg}" />
-                  </a>
-                  <a class="" href="/oauth2/authorization/naver">
-                    <img class="img-fluid" th:src="@{/images/btnW.png}" />
-                  </a>
-                  <a class="" href="/oauth2/authorization/kakao">
-                    <img class="img-fluid" th:src="@{/images/kakao_login_large.png}" />
-                  </a>
-                </div>
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row d-md-flex justify-content-center">
+        <div class="col-sm-6 col-md-4 m-2">
+          <h4 class="text-center" style="border-bottom: 3px whitesmoke solid; color: whitesmoke"><strong>소셜 로그인</strong></h4>
+          <a class="ml-2" href="/oauth2/authorization/google">
+            <img class="img-fluid" th:src="@{/images/google4.png}" />
+          </a>
+          <a class="" href="/oauth2/authorization/naver">
+            <img class="img-fluid" th:src="@{/images/btnG.png}" style="height: 80px" />
+          </a>
+          <a class="" href="/oauth2/authorization/kakao">
+            <img class="img-fluid" th:src="@{/images/kakao_login_large.png}" style="height: 80px" />
+          </a>
         </div>
       </div>
     </div>
