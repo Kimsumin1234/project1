@@ -7,7 +7,6 @@ import com.example.project1.constant.MemberRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,7 +40,6 @@ public class MemberDto {
     private String checkPassword;
 
     private boolean fromSocial;
-
     private String provider;
     private String providerId;
 
