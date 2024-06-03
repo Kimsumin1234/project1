@@ -24,10 +24,10 @@ const reviewsLoaded = () => {
         result += `<div class="meta">${formatDate(review.createdDate)}</div>`;
         result += `<p>${review.text}</p>`;
         if (`${review.email}` == user) {
-          result += `<div class="mb-2 delete"><button class="btn btn-outline-danger btn-sm">삭제</button></div>`;
-          result += `<div><button class="btn btn-outline-success btn-sm">수정</button></div>`;
+          result += `<div class ="delMod"><div class="mb-2 delete"><button class="btn btn-outline-danger btn-sm animalReviewdel">삭제</button></div>`;
+          result += `<div><button class="btn btn-outline-success btn-sm animalReviewMod">수정</button></div>`;
         }
-        result += `</div></li></ul>`;
+        result += `</div></div></li></ul>`;
       });
       reviewList.innerHTML = result;
     });

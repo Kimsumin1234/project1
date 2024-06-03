@@ -76,3 +76,43 @@
 .search option {
   text-align: center;
 }
+
+/* 하트색깔 */
+.full {
+  color: indianred;
+}
+
+.animalHeartCount {
+  float: left;
+}
+
+/* 하트 거리 */
+#animalHeart {
+  margin-left: 6px;
+  padding-left: 9px;
+}
+
+/* 하트 영역 */
+.good {
+  margin-left: 5px;
+  margin-top: 50px;
+}
+
+/* 댓글 삭제 영역 */
+.animalReviewdel {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.animalReviewMod {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* 댓글 영역 */
+.animalReviewMod {
+  margin-left: 6px;
+  padding-left: 9px;
+}

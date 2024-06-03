@@ -10,7 +10,7 @@ document.querySelector("#heart").addEventListener("click", (e) => {
 });
 const body = {
   memberId: mid,
-  reviewRno: rno,
+  reviewId: rno,
 };
 
 const getHeart = () => {
