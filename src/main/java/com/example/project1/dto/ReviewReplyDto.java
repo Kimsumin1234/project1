@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.entity.ReviewReplyComment;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -3,6 +3,7 @@ package com.example.project1.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import groovyjarjarantlr4.v4.parse.ANTLRParser.ruleEntry_return;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,8 +97,12 @@ public class ReviewController {
     }
 
     @PostMapping("/modify")
-    public String postModify(ReviewDto reviewDto, RedirectAttributes rttr,
+    public String postModify(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        if (result.hasErrors()) {
+            return "/review/modify";
+        }
+
         log.info("modify post controller 요청 {}", reviewDto);
         Long rno = service.reviewUpdate(reviewDto);
         rttr.addFlashAttribute("msg", rno);
@@ -123,14 +129,18 @@ public class ReviewController {
     }
 
     @GetMapping("/register")
-    public void getCreate(@ModelAttribute("requestDto") PageRequestDto requestDto) {
+    public void getCreate(ReviewDto reviewDto, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review create 요청");
 
     }
 
     @PostMapping("/register")
-    public String postRegister(ReviewDto reviewDto, RedirectAttributes rttr,
+    public String postRegister(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        if (result.hasErrors()) {
+            return "/review/register";
+        }
+
         if (reviewDto.getViewCount() == null) {
             reviewDto.setViewCount(0L);
         }

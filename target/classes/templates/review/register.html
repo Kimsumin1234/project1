@@ -31,7 +31,7 @@
           <!--  나중에 이걸로 register form 바꾼다 -->
           <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
             <h3 class="mb-5">글작성</h3>
-            <form class="register-form p-5 bg-light" id="register-form" method="post">
+            <form class="register-form p-5 bg-light" id="register-form" method="post" th:object="${reviewDto}" novalidate>
               <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
               <input type="hidden" name="replyNo" id="replyNo" />
               <div class="form-group">
@@ -63,11 +63,13 @@
               </div>
               <div class="form-group">
                 <label for="title">제목 *</label>
-                <input type="title" class="form-control" name="title" id="title" />
+                <input type="text" class="form-control" name="title" id="title" />
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label for="text">text</label>
+                <label for="text">내용 *</label>
                 <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="text-danger"></div>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn py-3 px-4 btn-primary">댓글 등록</button>

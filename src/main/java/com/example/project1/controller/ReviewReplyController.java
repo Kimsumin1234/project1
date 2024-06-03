@@ -6,6 +6,7 @@ import com.example.project1.dto.ReviewDto;
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.service.ReviewReplyService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -41,7 +42,8 @@ public class ReviewReplyController {
     }
 
     @PostMapping("/{rno}")
-    public ResponseEntity<Long> postAddReply(@PathVariable("rno") Long rno, @RequestBody ReviewReplyDto replyDto) {
+    public ResponseEntity<Long> postAddReply(@PathVariable("rno") Long rno,
+            @RequestBody ReviewReplyDto replyDto) {
         log.info("댓글 추가 요청 {}", rno);
 
         return new ResponseEntity<>(replyService.addReply(replyDto), HttpStatus.OK);
@@ -63,7 +65,8 @@ public class ReviewReplyController {
     }
 
     @PutMapping("/{rno}/{replyNo}")
-    public ResponseEntity<Long> putReview(@PathVariable("replyNo") Long replyNo, @RequestBody ReviewReplyDto replyDto) {
+    public ResponseEntity<Long> putReview(@PathVariable("replyNo") Long replyNo,
+            @RequestBody ReviewReplyDto replyDto) {
         log.info("put controller reply 수정 {}", replyDto);
 
         return new ResponseEntity<>(replyService.updateReply(replyDto), HttpStatus.OK);
