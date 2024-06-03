@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +46,7 @@ public class AnimalHeartController {
         return new ResponseEntity<>(heartDto, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/add")
     public ResponseEntity<Long> postAddHeart(@RequestBody AnimalHeartDto heartDto) {
         log.info("하트추가 {} ", heartDto);
@@ -52,6 +54,7 @@ public class AnimalHeartController {
         return new ResponseEntity<>(animalHeartService.dtoToEntity(heartDto).getHid(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @DeleteMapping("/delete")
     public ResponseEntity<Long> deleteHeart(@RequestBody AnimalHeartDto heartDto) {
         log.info(heartDto);

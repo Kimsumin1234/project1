@@ -68,7 +68,7 @@ replyForm.addEventListener("submit", (e) => {
       headers: {
         "content-type": "application/json",
         // csrf 값을 담아주기
-        // "X-CSRF-TOKEN": csrfValue,
+        "X-CSRF-TOKEN": csrfValue,
       },
       body: JSON.stringify(reply),
     })
@@ -89,7 +89,7 @@ replyForm.addEventListener("submit", (e) => {
       method: "put",
       headers: {
         "content-type": " application/json",
-        // "X-CSRF-TOKEN": csrfValue,
+        "X-CSRF-TOKEN": csrfValue,
       },
       body: JSON.stringify(reply),
     })
@@ -120,14 +120,20 @@ reviewList.addEventListener("click", (e) => {
   const rno = btn.closest(".comment").dataset.rno;
   console.log("rno", rno);
 
+  const email = replyForm.querySelector("#email");
+
+  const form = new FormData();
+  form.append("email", email.value);
+
   // 삭제 or 수정 버튼이 눌러졌을 때만 동작 (댓글 전체 선택해도 동작 - 제한 필요)
   // 삭제 or 수정 버튼이 클릭이 되었는지 구분하기
   if (btn.classList.contains("btn-outline-danger")) {
     fetch(`/animalReviews/${rno}`, {
       method: "delete",
       headers: {
-        // "X-CSRF-TOKEN": csrfValue,
+        "X-CSRF-TOKEN": csrfValue,
       },
+      body: form,
     })
       .then((response) => response.text())
       .then((data) => {
