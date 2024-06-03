@@ -13,7 +13,7 @@
         <input type="hidden" name="page" value="1" />
         <select name="type" id="type" class="form-select me-2 search">
           <option value="" th:selected="${requestDto.type == null}">조건 선택</option>
-          <option value="oNm" th:selected="${requestDto.type == 'oNm'}">관할기관(시,도)</option>
+          <option value="oNm" th:selected="${requestDto.type == 'oNm'}">관할기관(도/특별시/광역시)</option>
           <option value="oNmc" th:selected="${requestDto.type == 'oNmc'}">관할기관(시,군,구)</option>
         </select>
         <input

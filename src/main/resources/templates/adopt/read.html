@@ -26,7 +26,7 @@
             </div>
           </section>
           
-          <section class="ftco-section ftco-degree-bg animaltext">
+          <div class="ftco-section ftco-degree-bg animaltext">
             <div class="container">
               <div class="row justify-content-center">
             <div class="col-lg-8 ftco-animate">
@@ -118,10 +118,11 @@
                 </div>
               </div>
               <!-- 댓글 영역 / 좋아요 -->
-              <h5 class="good"><div class="animalHeart" id="animalHeart"></div>
+              <h5 class="good"><div class="animalHeart" id="animalHeart" sec:authorize="hasRole('ROLE_MEMBER')"></div>
               <div class="animalHeartCount"></div></h5>
               <div class="pt-5 mt-5 reviewList">
                 <div class="mb-5">
+
                 <!-- <ul class="comment-list">
                   <li class="comment">
                     <div class="vcard bio">
@@ -144,7 +145,9 @@
             <!-- END comment-list -->
           </div>
         </div>
+      </div>
       </section>
+      
       <!-- .section -->
 
       <!-- loader -->
@@ -166,7 +169,7 @@
       // 리뷰 영역 찾기
       const reviewList = document.querySelector(".reviewList");
 
-      const mid = "[[${#authentication.principal.memberDto.mid}]]"
+      const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
 
       // 로그인 유저
       const user = "[[${#authentication.name}]]";
