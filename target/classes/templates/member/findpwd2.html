@@ -6,7 +6,7 @@
         <div class="mt-5 col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
           <h1>비밀번호 찾기(2)</h1>
           <form th:action="@{/member/findpwd2}" method="post" id="certiForm" class="bg-light appointment" th:object="${certificationDto}" novalidate>
-            <input type="hidden" id="email" name="email" th:value="${passwordChangeDto.email}" />
+            <input type="hidden" id="email" name="email" th:value="${findPasswordDto.email}" />
             <div class="row">
               <div class="input-group col-md-10 mb-3">
                 <input

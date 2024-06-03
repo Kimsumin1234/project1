@@ -1,5 +1,6 @@
 package com.example.project1.service;
 
+import com.example.project1.dto.FindPasswordDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
@@ -32,7 +33,7 @@ public interface AdoptUserService {
     void equalPhoneEmail(String phone, String email) throws IllegalStateException;
 
     // 비밀번호 찾기 비밀번호 변경
-    void findPasswordUpdate(PasswordChangeDto pDto);
+    void findPasswordUpdate(FindPasswordDto fDto);
 
     // dto => entity
     public default Member dtoToEntity(MemberDto memberDto) {

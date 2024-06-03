@@ -17,7 +17,7 @@
                   id="email"
                   name="email"
                   placeholder="이메일을 입력해주세요."
-                  th:value="${passwordChangeDto.email}"
+                  th:value="${findPasswordDto.email}"
                 />
                 <div class="text-danger col-md-10 mb-3" th:if="${dupliError}" th:text="${dupliError}"></div>
               </div>

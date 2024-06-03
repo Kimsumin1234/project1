@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.CertificationDto;
+import com.example.project1.dto.FindPasswordDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
@@ -239,17 +240,17 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/findpwd1")
-    public void getFindPwd(CertificationDto cDto, PasswordChangeDto pDto) {
-        log.info("비밀번호찾기 페이지1 요청 {}", pDto);
+    public void getFindPwd(CertificationDto cDto, FindPasswordDto fDto) {
+        log.info("비밀번호찾기 페이지1 요청 {}", fDto);
     }
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd1")
-    public String postFindPwd2(CertificationDto cDto, PasswordChangeDto pDto, RedirectAttributes rttr, Model model) {
-        log.info("비밀번호찾기 페이지2 요청 {}", pDto);
+    public String postFindPwd2(CertificationDto cDto, FindPasswordDto fDto, RedirectAttributes rttr, Model model) {
+        log.info("비밀번호찾기 페이지2 요청 {}", fDto);
 
         try {
-            adoptUserService.findIdEmail(pDto.getEmail());
+            adoptUserService.findIdEmail(fDto.getEmail());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
             return "/member/findpwd1";
@@ -260,9 +261,9 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd2")
-    public String postMethodName(@Valid CertificationDto cDto, BindingResult result, PasswordChangeDto pDto,
+    public String postMethodName(@Valid CertificationDto cDto, BindingResult result, FindPasswordDto fDto,
             HttpSession session, Model model) {
-        log.info("비밀번호찾기 페이지3 요청 {}", pDto);
+        log.info("비밀번호찾기 페이지3 요청 {}", fDto);
 
         // 유효성 검사
         if (result.hasErrors()) {
@@ -270,7 +271,7 @@ public class MemberController {
         }
 
         try {
-            adoptUserService.equalPhoneEmail(cDto.getPhone(), pDto.getEmail());
+            adoptUserService.equalPhoneEmail(cDto.getPhone(), fDto.getEmail());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
             return "/member/findpwd2";
@@ -288,20 +289,20 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd3")
-    public String postFindPassword(@Valid PasswordChangeDto pDto, BindingResult result, CertificationDto cDto,
+    public String postFindPassword(@Valid FindPasswordDto fDto, BindingResult result, CertificationDto cDto,
             Model model, RedirectAttributes rttr) {
-        log.info("비밀번호 수정 요청 {}", pDto);
+        log.info("비밀번호 수정 요청 {}", fDto);
 
         if (result.hasErrors()) {
             return "/member/findpwd3";
         }
 
-        if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
+        if (!fDto.getNewPassword().equals(fDto.getCheckNewPassword())) {
             model.addAttribute("findPwdError", "변경할 비밀번호와 다릅니다");
             return "/member/findpwd3";
         }
 
-        adoptUserService.findPasswordUpdate(pDto);
+        adoptUserService.findPasswordUpdate(fDto);
 
         return "redirect:/member/login";
     }

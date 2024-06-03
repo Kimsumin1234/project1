@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.constant.MemberRole;
 import com.example.project1.dto.AuthMemberDto;
+import com.example.project1.dto.FindPasswordDto;
 import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
@@ -184,12 +185,12 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     }
 
     @Override
-    public void findPasswordUpdate(PasswordChangeDto pDto) {
-        log.info("비밀번호 수정 service {}", pDto);
+    public void findPasswordUpdate(FindPasswordDto fDto) {
+        log.info("비밀번호 수정 service {}", fDto);
 
-        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+        Member member = memberRepository.findByEmail(fDto.getEmail()).get();
 
-        member.setPassword(passwordEncoder.encode(pDto.getNewPassword()));
+        member.setPassword(passwordEncoder.encode(fDto.getNewPassword()));
         memberRepository.save(member);
 
     }
