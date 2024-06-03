@@ -1,6 +1,7 @@
 package com.example.project1.service;
 
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.entity.Member;
 
@@ -10,7 +11,7 @@ public interface AdoptUserService {
     String register(MemberDto insertDto) throws IllegalStateException;
 
     // 닉네임 수정
-    String nickNameUpdate(MemberDto upMemberDto) throws IllegalStateException;
+    String nickNameUpdate(NicknameChangeDto nicknameChangeDto) throws IllegalStateException;
 
     // 비밀번호 수정
     void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException;

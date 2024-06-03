@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.project1.constant.MemberRole;
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
@@ -45,13 +46,13 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
 
     @Transactional
     @Override
-    public String nickNameUpdate(MemberDto upMemberDto) throws IllegalStateException {
-        log.info("닉네임 수정 ServiceImpl {}", upMemberDto);
+    public String nickNameUpdate(NicknameChangeDto nicknameChangeDto) throws IllegalStateException {
+        log.info("닉네임 수정 ServiceImpl {}", nicknameChangeDto);
 
         // 중복 검사
-        validateDuplicationMemberNickName(upMemberDto.getNickname());
+        validateDuplicationMemberNickName(nicknameChangeDto.getNickname());
 
-        memberRepository.updateNickName(upMemberDto.getNickname(), upMemberDto.getEmail());
+        memberRepository.updateNickName(nicknameChangeDto.getNickname(), nicknameChangeDto.getEmail());
         return "닉네임 수정 완료";
     }
 

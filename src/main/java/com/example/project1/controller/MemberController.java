@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.project1.dto.AuthMemberDto;
 import com.example.project1.dto.CertificationDto;
 import com.example.project1.dto.MemberDto;
+import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
 
@@ -57,15 +58,16 @@ public class MemberController {
 
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/edit")
-    public void getEditProfile(PasswordChangeDto pDto, MemberDto memberDto) {
+    public void getEditProfile(PasswordChangeDto pDto, NicknameChangeDto nicknameChangeDto) {
         log.info("회원정보수정 페이지 요청");
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/nickname")
-    public String postEditNickname(@Valid MemberDto upMemberDto, BindingResult result, PasswordChangeDto pDto,
+    public String postEditNickname(@Valid NicknameChangeDto nicknameChangeDto, BindingResult result,
+            PasswordChangeDto pDto,
             RedirectAttributes rttr, Model model) {
-        log.info("닉네임 수정 요청 {}", upMemberDto);
+        log.info("닉네임 수정 요청 {}", nicknameChangeDto);
 
         if (result.hasErrors()) {
             return "/member/edit";
@@ -74,7 +76,7 @@ public class MemberController {
         String msg = "";
 
         try {
-            msg = adoptUserService.nickNameUpdate(upMemberDto);
+            msg = adoptUserService.nickNameUpdate(nicknameChangeDto);
         } catch (Exception e) {
             model.addAttribute("error3", e.getMessage());
             return "/member/edit";
@@ -86,7 +88,7 @@ public class MemberController {
 
         AuthMemberDto authMemberDto = (AuthMemberDto) authentication.getPrincipal();
 
-        authMemberDto.getMemberDto().setNickname(upMemberDto.getNickname());
+        authMemberDto.getMemberDto().setNickname(nicknameChangeDto.getNickname());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
