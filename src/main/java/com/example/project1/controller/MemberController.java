@@ -42,7 +42,7 @@ public class MemberController {
         log.info("로그인 페이지 요청");
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public void getProfile() {
         log.info("마이 페이지 요청");

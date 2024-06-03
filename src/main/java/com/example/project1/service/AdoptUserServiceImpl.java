@@ -111,6 +111,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
                 .phone(insertDto.getPhone())
                 .password(passwordEncoder.encode(insertDto.getPassword()))
                 .fromSocial(insertDto.isFromSocial())
+                .checkPhone(true)
                 .role(MemberRole.MEMBER)
                 .build();
         memberRepository.save(member);

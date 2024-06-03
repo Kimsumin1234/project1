@@ -82,7 +82,8 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                         .nickname(kNickname + " for kakao")
                         .password(passwordEncoder.encode("1111"))
                         .fromSocial(true)
-                        .role(MemberRole.MEMBER)
+                        .checkPhone(false)
+                        .role(MemberRole.COMMON)
                         .build();
                 memberRepository.save(member);
                 return new AuthMemberDto(entityToDto(member), true);
@@ -109,6 +110,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                 .nickname(name + " for google")
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .fromSocial(true) // 소셜로그인
+                .checkPhone(false)
                 .role(MemberRole.MEMBER)
                 .build();
         memberRepository.save(member);
@@ -129,6 +131,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                 .nickname(name)
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .phone(rePhone)
+                .checkPhone(true)
                 .fromSocial(true) // 소셜로그인
                 .role(MemberRole.MEMBER)
                 .build();
@@ -144,6 +147,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                 .nickname(member.getNickname())
                 .password(member.getPassword())
                 .fromSocial(member.isFromSocial())
+                .checkPhone(member.isCheckPhone())
                 .role(member.getRole())
                 .createdDate(member.getCreatedDate())
                 .lastModifiedDate(member.getLastModifiedDate())

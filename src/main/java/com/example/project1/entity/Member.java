@@ -37,6 +37,8 @@ public class Member extends BaseEntity {
     @Column(unique = true) // 중복불가 유니크 제약조건
     private String phone;
 
+    private boolean checkPhone;
+
     @Column(unique = true) // 중복불가 유니크 제약조건
     private String nickname;
 
@@ -44,7 +46,9 @@ public class Member extends BaseEntity {
     private String password;
 
     private boolean fromSocial; // 소셜가입
+
     private String provider;
+
     private String providerId;
 
     @Enumerated(EnumType.STRING)
