@@ -77,7 +77,7 @@ const reviewsLoaded = () => {
                 <input name="text" id="commentText" class="form-control"></input>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">댓글 등록</button>
+                <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">답글 등록</button>
               </div>
             </form>`;
             }
@@ -96,7 +96,7 @@ const reviewsLoaded = () => {
               <input name="text" id="commentText" class="form-control"></input>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">댓글 등록</button>
+              <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">답글 등록</button>
             </div>
           </form>`;
         }
@@ -166,7 +166,7 @@ reviewForm.addEventListener("submit", (e) => {
           // nickname.value = "";
           replyNo.value = "";
           alert(data + "번 리뷰 수정 성공");
-          reviewForm.querySelector("button").innerHTML = "댓글 등록";
+          reviewForm.querySelector("button").innerHTML = "답글 등록";
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
       });

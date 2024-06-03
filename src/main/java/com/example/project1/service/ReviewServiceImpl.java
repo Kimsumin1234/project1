@@ -92,6 +92,9 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     @Override
     public Long reviewUpdate(ReviewDto reviewDto) {
+
+        reviewDto.setViewCount(reviewDto.getViewCount() != null ? reviewDto.getViewCount() : 0); // NULL 체크
+
         Map<String, Object> entityMap = dtoToEntity(reviewDto);
 
         // review 기존 image 제거

@@ -30,6 +30,7 @@
         </div>
           <div><a th:href="@{/review/register}" class="btn btn-primary" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a></div>
           <!-- 이것도 패치써서 그냥 제목만 쭉 보여주는식으로 ㄱ -->
+          
           <div><button class="btn btn-warning" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
             <ul class="list-group">
               <!-- <li class="list-group-item">An item</li> -->

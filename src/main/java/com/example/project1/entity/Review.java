@@ -51,6 +51,6 @@ public class Review extends BaseEntity {
     private Member writer;
 
     @Builder.Default
-    @OneToMany
+    @OneToMany(mappedBy = "review")
     private List<Heart> heart = new ArrayList<>();
 }
