@@ -61,7 +61,7 @@ const reviewsLoaded = () => {
             <p>`;
             if (`${comment.email}` == user) {
               result += '<button class="btn btn-danger btn-sm">삭제</button>';
-              result += '<a class="reply btn btn-success btn-sm">수정</a>';
+              result += '<a class="btn btn-success btn-sm reply">수정</a>';
             }
             result += `</p></li>`;
             if (idx == reply.comments.length - 1 && user != "anonymousUser") {
@@ -104,6 +104,13 @@ const reviewsLoaded = () => {
       console.log("댓글");
       console.log(result);
       document.querySelector("#replyList").innerHTML = result;
+
+      document.querySelectorAll(".btn-outline-success").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          document.querySelector(".review-form").scrollIntoView({ behavior: "smooth" });
+        });
+      });
     });
 };
 
