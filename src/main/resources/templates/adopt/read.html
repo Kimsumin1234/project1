@@ -73,7 +73,7 @@
 
 
               <!-- 입양문의 -->
-              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="bg-light">
+              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
                 <div class="form-group">
                   <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
@@ -96,7 +96,7 @@
               <!-- 댓글 생성 -->
               <div class="animalReview">
                 <div class="comment-form-wrap pt-5">
-                  <h4 class="mb-5 review-cnt" th:text="${dto.reviewCnt}">댓글</h4>
+                  <h4 class="mb-5 review-cnt"></h4>
                   <form th:action="@{/animalReviews/new}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
                     <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                     <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
@@ -106,7 +106,7 @@
                       <label for="email">이메일</label>
                       <input type="email" class="form-control" name="email" id="email"th:value="${#authentication.principal.memberDto.email}" />
                     </div>
-                    
+            
                     <div class="form-group">
                       <label for="text">내용</label>
                       <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
@@ -117,7 +117,9 @@
                   </form>
                 </div>
               </div>
-              <!-- 댓글 영역 -->
+              <!-- 댓글 영역 / 좋아요 -->
+              <h5 class="good"><div class="animalHeart" id="animalHeart"></div>
+              <div class="animalHeartCount"></div></h5>
               <div class="pt-5 mt-5 reviewList">
                 <div class="mb-5">
                 <!-- <ul class="comment-list">
@@ -154,7 +156,6 @@
       </div> -->
 
 
-
     </body>
   </div>
   <th:block layout:fragment="script">
@@ -165,13 +166,17 @@
       // 리뷰 영역 찾기
       const reviewList = document.querySelector(".reviewList");
 
+      const mid = "[[${#authentication.principal.memberDto.mid}]]"
+
       // 로그인 유저
       const user = "[[${#authentication.name}]]";
 
       // 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
       const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
       if (reviewCnt > 0) reviewList.classList.remove("hidden");
+
     </script>
     <script th:src="@{/js/animalReview.js}"></script>
+    <script th:src="@{/js/animalHeart.js}"></script>
   </th:block>
 </html>

@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.entity.Animal;
 import com.example.project1.entity.AnimalCart;
+import com.example.project1.entity.AnimalHeart;
 import com.example.project1.entity.AnimalItem;
 import com.example.project1.entity.AnimalReply;
 import com.example.project1.entity.Member;
 import com.example.project1.service.AnimalCartServiceImpl;
+import com.example.project1.service.AnimalHeartServiceImpl;
 
 @SpringBootTest
 public class AnimalCartRepositoryTest {
@@ -32,6 +34,9 @@ public class AnimalCartRepositoryTest {
 
     @Autowired
     private AnimalCartServiceImpl animalCartService;
+
+    @Autowired
+    private AnimalHeartRepository heartRepository;
 
     @Test
     public void createCarttTest() {
@@ -77,6 +82,16 @@ public class AnimalCartRepositoryTest {
             System.out.println(item.getAnimal().getKindCd());
             System.out.println(item.getAnimal().getFilename());
         });
+    }
+
+    // 하트
+
+    @Test
+    public void addHeart() {
+        Member member = Member.builder().mid(40L).build();
+        Animal animal = Animal.builder().sId(1000L).build();
+
+        heartRepository.save(AnimalHeart.builder().member(member).animal(animal).build());
     }
 
 }

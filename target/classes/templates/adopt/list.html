@@ -38,18 +38,21 @@
             <div class="col-md-6 col-lg-3 ftco-animate" th:each="dto : ${result.dtoList}">
               <div class="staff" >
                 <a th:href="@{read(sId=${dto.sId}, page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
-
                   <div class="img-wrap d-flex align-items-stretch">
                     <img class="img align-self-stretch" th:src="${dto.popfile}"></img>
                   </div>
                     <div class="text pt-3 px-3 pb-4 text-center listname" >
                     <div class="faded">
                       <tr>
-                        <br scope="col" th:text="${dto.noticeNo}"></br>
-                        <th scope="col" th:text="${dto.careNm}"></th>
-                        <br scope="col" th:text="${dto.kindCd}"></br>
-                        <th scope="col" th:text="${dto.orgNm}"></th>
-                        <th scope="col" th:text="${dto.orgNmc}"></th>
+                        <span scope="col" th:text="${dto.noticeNo}"></span>
+                        <div>
+                          <span scope="col" th:text="${dto.careNm}"></span>
+                        </div>
+                        <span scope="col" th:text="${dto.kindCd}"></span>
+                        <div>
+                          <span scope="col" th:text="${dto.orgNm}"></span>
+                          <span scope="col" th:text="${dto.orgNmc}"></span>
+                        </div>
                       </tr>
                     </div>
                 </div>

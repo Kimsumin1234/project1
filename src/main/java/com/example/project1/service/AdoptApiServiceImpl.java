@@ -13,7 +13,6 @@ import com.example.project1.dto.PageRequestDto;
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
 import com.example.project1.repository.AnimalRepository;
-import com.querydsl.core.BooleanBuilder;
 
 import lombok.RequiredArgsConstructor;
 
