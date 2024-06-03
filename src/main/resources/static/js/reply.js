@@ -29,7 +29,7 @@ const reviewsLoaded = () => {
                               <div class="comment-body">
                                   <h3>${reply.nickname}</h3>
                                   <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
-                                  <p>${reply.text}
+                                  <p class="text-break">${reply.text}
                                   </p>
                                   <p>`;
         if (`${reply.email}` == user) {
@@ -127,7 +127,8 @@ reviewForm.addEventListener("submit", (e) => {
   const email = reviewForm.querySelector("#email");
   const replyNo = reviewForm.querySelector("#replyNo");
   const commentNo = reviewForm.querySelector("#replyComment");
-  if (text == "") {
+  console.log(text.value.length);
+  if (text == "" || text.value.length > 501) {
     alert("내용 확인");
     return;
   }

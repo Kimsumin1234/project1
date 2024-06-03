@@ -8,8 +8,8 @@
   </th:block>
   <div layout:fragment="content">
     <!-- END nav -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
+    <div class="overlay">
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
@@ -26,22 +26,24 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <section class="ftco-section ftco-degree-bg">
-      <div class="container">
+      <div class="container justify-content-center">
         <div class="row">
-          <div class="col-lg-8 ftco-animate">
-            <div>조회수 [<span th:text="${dto.viewCount}"></span>]</div>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-6 ftco-animate">
+            <div class="row justify-content-end mt-5">조회수 [<span th:text="${dto.viewCount}"></span>]</div>
             <div class="uploadResult mb-4">
               <ul>
                 <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
-                  <img class="block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
+                  <img class="img-fluid block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
                 </li>
               </ul>
             </div>
             <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
-            <p th:text="${dto.text}">
+            <p class="text-break" th:text="${dto.text}">
               text 내용 들어갈 자리
             </p>
             <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
@@ -91,7 +93,7 @@
                 </span>
               </div> -->
               <!-- js 에서 처리할꺼임 -->
-              <div class="comment-form-wrap p-5" sec:authorize="hasRole('ROLE_MEMBER')">
+              <div class="comment-form-wrap p-5 c" sec:authorize="hasRole('ROLE_MEMBER')">
                 <h3 class="mb-5">Leave a comment</h3>
                 <form action="/review/add" class="review-form p-5 bg-light " method="post">
                   <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
@@ -113,109 +115,111 @@
                   </div>
                 </form>
               </div>
+              <div class="comment-form-wrap p-5">
+                <ul class="comment-list replyList" id="replyList">
+                  <!-- <li class="comment">
+                    <div class="vcard bio">
+                      <img src="images/person_1.jpg" alt="Image placeholder" />
+                    </div>
+                    <div class="comment-body">
+                      <h3>John Doe</h3>
+                      <div class="meta">April 7, 2020 at 10:05pm</div>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
+                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                      </p>
+                      <p><a href="#" class="reply">Reply</a></p>
+                    </div>
+                  </li>
 
-              <ul class="comment-list replyList" id="replyList">
-                <!-- <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder" />
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                      officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                    </p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
+                  <li class="comment">
+                    <div class="vcard bio">
+                      <img src="images/person_1.jpg" alt="Image placeholder" />
+                    </div>
+                    <div class="comment-body">
+                      <h3>John Doe</h3>
+                      <div class="meta">April 7, 2020 at 10:05pm</div>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
+                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                      </p>
+                      <p><a href="#" class="reply">Reply</a></p>
+                    </div>
 
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder" />
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                      officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                    </p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
+                    <ul class="children">
+                      <li class="comment">
+                        <div class="vcard bio">
+                          <img src="images/person_1.jpg" alt="Image placeholder" />
+                        </div>
+                        <div class="comment-body">
+                          <h3>John Doe</h3>
+                          <div class="meta">April 7, 2020 at 10:05pm</div>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem,
+                            eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                          </p>
+                          <p><a href="#" class="reply">Reply</a></p>
+                        </div>
 
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard bio">
-                        <img src="images/person_1.jpg" alt="Image placeholder" />
-                      </div>
-                      <div class="comment-body">
-                        <h3>John Doe</h3>
-                        <div class="meta">April 7, 2020 at 10:05pm</div>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem,
-                          eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                        </p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
+                        <ul class="children">
+                          <li class="comment">
+                            <div class="vcard bio">
+                              <img src="images/person_1.jpg" alt="Image placeholder" />
+                            </div>
+                            <div class="comment-body">
+                              <h3>John Doe</h3>
+                              <div class="meta">April 7, 2020 at 10:05pm</div>
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae
+                                autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                              </p>
+                              <p><a href="#" class="reply">Reply</a></p>
+                            </div>
 
-                      <ul class="children">
-                        <li class="comment">
-                          <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Image placeholder" />
-                          </div>
-                          <div class="comment-body">
-                            <h3>John Doe</h3>
-                            <div class="meta">April 7, 2020 at 10:05pm</div>
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                              autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                            </p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                          </div>
+                            <ul class="children">
+                              <li class="comment">
+                                <div class="vcard bio">
+                                  <img src="images/person_1.jpg" alt="Image placeholder" />
+                                </div>
+                                <div class="comment-body">
+                                  <h3>John Doe</h3>
+                                  <div class="meta">April 7, 2020 at 10:05pm</div>
+                                  <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit
+                                    vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                                  </p>
+                                  <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
 
-                          <ul class="children">
-                            <li class="comment">
-                              <div class="vcard bio">
-                                <img src="images/person_1.jpg" alt="Image placeholder" />
-                              </div>
-                              <div class="comment-body">
-                                <h3>John Doe</h3>
-                                <div class="meta">April 7, 2020 at 10:05pm</div>
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit
-                                  vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                                </p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder" />
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                      officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                    </p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li> -->
-              </ul>
+                  <li class="comment">
+                    <div class="vcard bio">
+                      <img src="images/person_1.jpg" alt="Image placeholder" />
+                    </div>
+                    <div class="comment-body">
+                      <h3>John Doe</h3>
+                      <div class="meta">April 7, 2020 at 10:05pm</div>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
+                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
+                      </p>
+                      <p><a href="#" class="reply">Reply</a></p>
+                    </div>
+                  </li> -->
+                </ul>
+              </div>
               <!-- END comment-list -->
 
               
             </div>
           </div>
+          <div class="col-lg-3"></div>
           <!-- .col-md-8 -->
         </div>
       </div>

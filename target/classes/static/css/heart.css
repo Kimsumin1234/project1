@@ -1,3 +1,7 @@
 .full {
   color: indianred;
 }
+
+.text-break {
+  word-wrap: break-word;
+}
