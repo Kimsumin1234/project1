@@ -27,15 +27,19 @@
             <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-        </div>
-          <div><a th:href="@{/review/register}" class="btn btn-primary" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a></div>
-          <!-- 이것도 패치써서 그냥 제목만 쭉 보여주는식으로 ㄱ -->
+        
           
-          <div><button class="btn btn-warning" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
-            <ul class="list-group">
-              <!-- <li class="list-group-item">An item</li> -->
-            </ul>
+          
+          <div class="m-3 row justify-content-end">
+            <a th:href="@{/review/register}" class="btn btn-primary mr-2" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a>
+            <!-- 이것도 패치써서 그냥 제목만 쭉 보여주는식으로 ㄱ -->
+            <button class="btn btn-warning" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
           </div>
+            
+              <ul class="list-group ">
+                <!-- <li class="list-group-item">An item</li> -->
+              </ul>
+            
           <div class="row mt-3">
             <!-- 여기 div가 반복될 예정 -->
             <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate">
@@ -43,7 +47,7 @@
                 <div class="img-wrap d-flex align-items-stretch">
                   <!-- style="background-image: url(images/staff-1.jpg)" -->
                   <a th:href="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|" class="icon image-popup d-flex justify-content-center align-items-center" th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}">
-                    <span class="fa fa-expand">
+                    <span class="">
                       <img class="img align-self-stretch" 
                       th:src="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|"
                       loading="lazy"/>
@@ -52,7 +56,7 @@
           
                   <!-- 기본이미지 -->
                   <a th:href="@{/assets/images/animal.jpg}" class="icon image-popup d-flex justify-content-center align-items-center"  th:if="${dto.reviewImageDtos[0].path == null}">
-                    <span class="fa fa-expand">
+                    <span class="">
                       <img class="img align-self-stretch"  th:src="@{/assets/images/animal.jpg}" loading="lazy"/>
                     </span>
                   </a>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +23,11 @@ public class ReviewDto {
 
     private Long rno;
 
+    @Size(max = 20, message = "제목은 20자 이내로 가능합니다.")
     @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
+    @Size(max = 500, message = "내용은 500자 이내로 가능합니다.")
     @NotBlank(message = "내용을 입력해주세요.")
     private String text;
 

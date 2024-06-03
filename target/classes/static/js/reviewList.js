@@ -7,12 +7,12 @@ document.querySelector("#heartList").addEventListener("click", (e) => {
     .then((data) => {
       console.log(data);
       let tags = "";
-      tags += `<a class=close>창닫기<i class="fa fa-times close" aria-hidden="true"></i></a>`;
+      tags += `<p class="row justify-content-end" ><i class="fa fa-times close" aria-hidden="true"></i></p>`;
       if (data.length == 0) {
-        tags += "<span>현재 좋아요한 목록이 없습니다.</span>";
+        tags += `<span class="row justify-content-end">현재 좋아요한 목록이 없습니다.</span>`;
       }
       data.forEach((reviewDto) => {
-        tags += `<a href="/review/read?rno=${reviewDto.rno}"><li class="list-group-item">${reviewDto.title}</li></a>`;
+        tags += `<a href="/review/read?rno=${reviewDto.rno}" class="row justify-content-end col-sm-12"><li class="list-group-item">${reviewDto.title}</li></a>`;
       });
 
       document.querySelector(".list-group").innerHTML = tags;
