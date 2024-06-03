@@ -21,10 +21,14 @@ public class QMember extends EntityPathBase<Member> {
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
+    public final BooleanPath checkPhone = createBoolean("checkPhone");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
     public final StringPath email = createString("email");
+
+    public final BooleanPath fromSocial = createBoolean("fromSocial");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
@@ -36,6 +40,10 @@ public class QMember extends EntityPathBase<Member> {
     public final StringPath password = createString("password");
 
     public final StringPath phone = createString("phone");
+
+    public final StringPath provider = createString("provider");
+
+    public final StringPath providerId = createString("providerId");
 
     public final EnumPath<com.example.project1.constant.MemberRole> role = createEnum("role", com.example.project1.constant.MemberRole.class);
 

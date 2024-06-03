@@ -26,7 +26,9 @@ public class MemberRepositoryTest {
                     .email("member" + i + "@naver.com")
                     .nickname("User" + i)
                     .phone("010-1234-123" + i)
+                    .checkPhone(true)
                     .password(passwordEncoder.encode("1111"))
+                    .fromSocial(false)
                     .role(MemberRole.MEMBER)
                     .build();
             memberRepository.save(member);
