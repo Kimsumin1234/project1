@@ -65,8 +65,7 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/nickname")
     public String postEditNickname(@Valid NicknameChangeDto nicknameChangeDto, BindingResult result,
-            PasswordChangeDto pDto,
-            RedirectAttributes rttr, Model model) {
+            PasswordChangeDto pDto, RedirectAttributes rttr, Model model) {
         log.info("닉네임 수정 요청 {}", nicknameChangeDto);
 
         if (result.hasErrors()) {
@@ -99,8 +98,8 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit/password")
-    public String postEditPassword(@Valid PasswordChangeDto pDto, BindingResult result, MemberDto upMemberDto,
-            HttpSession session, Model model, RedirectAttributes rttr) {
+    public String postEditPassword(@Valid PasswordChangeDto pDto, BindingResult result,
+            NicknameChangeDto nicknameChangeDto, HttpSession session, Model model, RedirectAttributes rttr) {
         log.info("비밀번호 수정 요청 {}", pDto);
 
         if (result.hasErrors()) {
@@ -261,8 +260,8 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd2")
-    public String postMethodName(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto,
-            PasswordChangeDto pDto, HttpSession session, Model model) {
+    public String postMethodName(@Valid CertificationDto cDto, BindingResult result, PasswordChangeDto pDto,
+            HttpSession session, Model model) {
         log.info("비밀번호찾기 페이지3 요청 {}", pDto);
 
         // 유효성 검사
@@ -289,7 +288,7 @@ public class MemberController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/findpwd3")
-    public String postFindPassword(@Valid PasswordChangeDto pDto, BindingResult result, MemberDto upMemberDto,
+    public String postFindPassword(@Valid PasswordChangeDto pDto, BindingResult result, CertificationDto cDto,
             Model model, RedirectAttributes rttr) {
         log.info("비밀번호 수정 요청 {}", pDto);
 
@@ -298,7 +297,7 @@ public class MemberController {
         }
 
         if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
-            model.addAttribute("error2", "변경할 비밀번호와 다릅니다");
+            model.addAttribute("findPwdError", "변경할 비밀번호와 다릅니다");
             return "/member/findpwd3";
         }
 
