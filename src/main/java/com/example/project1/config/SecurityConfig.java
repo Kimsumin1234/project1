@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.project1.handler.AdoptLoginSuccessHandler;
+
 @EnableMethodSecurity
 @EnableWebSecurity
 @Configuration
@@ -28,7 +30,9 @@ public class SecurityConfig {
                 // .requestMatchers("/adopt/read").permitAll()
                 .anyRequest().permitAll());
         http.formLogin(login -> login
-                .loginPage("/member/login").permitAll());
+                .loginPage("/member/login").permitAll()
+                .successHandler(adoptLoginSuccessHandler()));
+        http.oauth2Login(login -> login.successHandler(adoptLoginSuccessHandler())); // 공통인증
         http.logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/"));
@@ -51,5 +55,10 @@ public class SecurityConfig {
                 encodingAlgorithm);
         rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 31); // 7일, 쿠키 만료 시간 (필수로설정)
         return rememberMeServices;
+    }
+
+    @Bean
+    AdoptLoginSuccessHandler adoptLoginSuccessHandler() {
+        return new AdoptLoginSuccessHandler();
     }
 }

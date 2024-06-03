@@ -41,11 +41,19 @@ public class Member extends BaseEntity {
     @Column(unique = true) // 중복불가 유니크 제약조건
     private String phone;
 
+    private boolean checkPhone;
+
     @Column(unique = true) // 중복불가 유니크 제약조건
     private String nickname;
 
     @Column(nullable = false)
     private String password;
+
+    private boolean fromSocial; // 소셜가입
+
+    private String provider;
+
+    private String providerId;
 
     @Enumerated(EnumType.STRING)
     private MemberRole role;

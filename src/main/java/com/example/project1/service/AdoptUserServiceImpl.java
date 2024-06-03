@@ -33,14 +33,14 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         // 로그인 메소드
         log.info("로그인 요청 {}", username);
 
-        Optional<Member> result = memberRepository.findByEmail(username);
+        Optional<Member> result = memberRepository.findByEmailAndFromSocial(username, false);
 
         if (!result.isPresent()) {
             throw new UsernameNotFoundException("Check Email");
         }
         Member member = result.get();
 
-        return new AuthMemberDto(entityToDto(member));
+        return new AuthMemberDto(entityToDto(member), false);
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException {
         log.info("비밀번호 수정 service {}", pDto);
 
-        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+        Member member = memberRepository.findByEmailAndFromSocial(pDto.getEmail(), false).get();
 
         if (!passwordEncoder.matches(pDto.getCurrentPassword(), member.getPassword())) {
             throw new IllegalStateException("현재 비밀번호가 다릅니다.");
@@ -110,6 +110,8 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
                 .nickname(insertDto.getNickname())
                 .phone(insertDto.getPhone())
                 .password(passwordEncoder.encode(insertDto.getPassword()))
+                .fromSocial(insertDto.isFromSocial())
+                .checkPhone(true)
                 .role(MemberRole.MEMBER)
                 .build();
         memberRepository.save(member);
@@ -123,7 +125,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent()) {
-            throw new IllegalStateException("중복된 이메일 입니다.");
+            throw new IllegalStateException("이미 가입된 이메일 이거나 소셜로그인을 확인해 주세요.");
         }
     }
 
@@ -133,7 +135,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Optional<Member> member = memberRepository.findByPhone(phone);
 
         if (member.isPresent()) {
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+            throw new IllegalStateException("이미 가입된 회원이거나 소셜 로그인을 확인해주세요.");
         }
     }
 
@@ -141,7 +143,11 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public MemberDto findId(String phone) throws IllegalStateException {
         log.info("아이디 찾기 service {}", phone);
         Optional<Member> member = memberRepository.findByPhone(phone);
+        Optional<Member> member2 = memberRepository.findByPhoneAndFromSocial(phone, true);
 
+        if (member2.isPresent()) {
+            throw new IllegalStateException("소셜로그인 으로 가입된 회원입니다.");
+        }
         if (!member.isPresent()) {
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
         } else {
@@ -156,6 +162,11 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
     public void findIdEmail(String email) throws IllegalStateException {
         log.info("아이디 찾기 service {}", email);
         Optional<Member> member = memberRepository.findByEmail(email);
+        Optional<Member> member2 = memberRepository.findByEmailAndFromSocial(email, true);
+
+        if (member2.isPresent()) {
+            throw new IllegalStateException("소셜로그인으로 등록된 회원입니다. 소셜로그인을 확인해 주세요.");
+        }
 
         if (!member.isPresent()) {
             throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");

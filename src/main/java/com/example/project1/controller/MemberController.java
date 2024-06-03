@@ -22,6 +22,7 @@ import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.service.AdoptUserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -47,7 +48,7 @@ public class MemberController {
         log.info("로그인 페이지 요청");
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public void getProfile() {
         log.info("마이 페이지 요청");
