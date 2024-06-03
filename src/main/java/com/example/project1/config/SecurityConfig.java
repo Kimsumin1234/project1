@@ -26,8 +26,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/member/profile").hasAnyRole("MEMBER")
                 .requestMatchers("/member/register").permitAll()
-                // .requestMatchers("/adopt/list").permitAll()
-                // .requestMatchers("/adopt/read").permitAll()
+                .requestMatchers("/animal/read").permitAll()
                 .anyRequest().permitAll());
         http.formLogin(login -> login
                 .loginPage("/member/login").permitAll()
@@ -37,7 +36,7 @@ public class SecurityConfig {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/"));
         http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
-        http.csrf(csrf -> csrf.disable()); // csrf 비활성화
+        // http.csrf(csrf -> csrf.disable()); // csrf 비활성화
         return http.build();
     }
 

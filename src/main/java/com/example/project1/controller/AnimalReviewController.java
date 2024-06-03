@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project1.dto.AnimalReplyDto;
-import com.example.project1.dto.ReviewDto;
 import com.example.project1.service.AnimalReplyService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Log4j2
 @RestController
@@ -38,6 +36,7 @@ public class AnimalReviewController {
     }
 
     // /animalReviews/new + POST
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/new")
     public ResponseEntity<Long> postReply(@RequestBody AnimalReplyDto dto) {
         log.info("댓글 등록 {}", dto);
@@ -46,8 +45,9 @@ public class AnimalReviewController {
     }
 
     // /animalReviews/{rno} + DELETE
+    @PreAuthorize("authentication.name == #email")
     @DeleteMapping("/{rno}")
-    public ResponseEntity<String> deleteReply(@PathVariable("rno") Long rno) {
+    public ResponseEntity<String> deleteReply(@PathVariable("rno") Long rno, String email) {
 
         log.info("댓글 제거 {}", rno);
         animalReplyService.remove(rno);
@@ -62,6 +62,7 @@ public class AnimalReviewController {
     }
 
     // /animalReviews/{rno} + PUT
+    @PreAuthorize("authentication.name == #replyDto.email")
     @PutMapping("/{rno}")
     public ResponseEntity<String> putReply(@PathVariable("rno") String rno, @RequestBody AnimalReplyDto replyDto) {
         log.info("댓글 수정 요청 {}, {}", rno, replyDto);

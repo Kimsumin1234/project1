@@ -97,7 +97,7 @@
               <div class="animalReview">
                 <div class="comment-form-wrap pt-5">
                   <h4 class="mb-5 review-cnt"></h4>
-                  <form th:action="@{/animalReviews/new}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
+                  <form th:action="@{/animalReviews/}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
                     <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                     <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
                     <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
@@ -118,8 +118,8 @@
                 </div>
               </div>
               <!-- 댓글 영역 / 좋아요 -->
-              <h5 class="good"><div class="animalHeart" id="animalHeart" sec:authorize="hasRole('ROLE_MEMBER')"></div>
-              <div class="animalHeartCount"></div></h5>
+                <h5 class="good" sec:authorize="hasRole('ROLE_MEMBER')"><div class="animalHeart" id="animalHeart"></div>
+                  <div class="animalHeartCount"></div></h5>
               <div class="pt-5 mt-5 reviewList">
                 <div class="mb-5">
 
@@ -163,6 +163,10 @@
   </div>
   <th:block layout:fragment="script">
     <script>
+
+      // csrf 토큰 설정
+      const csrfValue = '[[${_csrf.token}]]';
+
       // 입양등록 번호 변수에 담기
       const sId = "[[${dto.sId}]]";
 

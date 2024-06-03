@@ -18,6 +18,7 @@ public class AnimalHeartDto {
     private Long hid;
 
     private Long mid;
+    private String email;
 
     private Long sid;
 
