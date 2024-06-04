@@ -146,7 +146,7 @@ reviewForm.addEventListener("submit", (e) => {
   if (!replyNo.value) {
     fetch(`/reply/${rno}`, {
       method: "post",
-      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
       body: JSON.stringify(body),
     })
       .then((response) => response.text())
@@ -163,7 +163,7 @@ reviewForm.addEventListener("submit", (e) => {
   } else {
     fetch(`/reply/${rno}/${replyNo.value}`, {
       method: "put",
-      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
       body: JSON.stringify(body),
     })
       .then((response) => response.text())
@@ -203,7 +203,7 @@ replyList.addEventListener("click", (e) => {
 
     fetch(`/reply/${rno}/${replyNo}`, {
       method: "delete",
-      // headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
+      headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
       body: form,
     })
       .then((response) => response.text())
@@ -277,7 +277,7 @@ replyList.addEventListener("click", (e) => {
 
     fetch(`/comment/${replyNo}/${commentNo}`, {
       method: "delete",
-      // headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
+      headers: { "X-CSRF-TOKEN": csrfValue }, // json으로 보내던걸 다른걸로 보냄
       body: form,
     })
       .then((response) => response.text())
@@ -326,7 +326,7 @@ replyList.addEventListener("submit", (e) => {
   if (!commentNo.value) {
     fetch(`/comment/add`, {
       method: "post",
-      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
       body: JSON.stringify(body),
     })
       .then((response) => response.text())
@@ -343,7 +343,7 @@ replyList.addEventListener("submit", (e) => {
   } else {
     fetch(`/comment/${replyNo.value}/${commentNo.value}`, {
       method: "put",
-      headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
       body: JSON.stringify(body),
     })
       .then((response) => response.text())

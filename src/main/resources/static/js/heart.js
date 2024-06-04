@@ -16,7 +16,7 @@ const body = {
 const getHeart = () => {
   fetch(`/heart/${mid}/${rno}`, {
     method: "get",
-    headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+    headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
   })
     .then((response) => response.text())
     .then((data) => {
@@ -34,7 +34,7 @@ getHeart();
 function addHeart() {
   fetch(`/heart/add`, {
     method: "post",
-    headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+    headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
     body: JSON.stringify(body),
   })
     .then((response) => response.text())
@@ -51,7 +51,10 @@ function addHeart() {
 function deleteHeart() {
   fetch(`/heart/delete`, {
     method: "delete",
-    headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+    headers: {
+      "content-type": "application/json",
+      "X-CSRF-TOKEN": csrfValue,
+    },
     body: JSON.stringify(body),
   })
     .then((response) => response.text())
@@ -67,7 +70,7 @@ function deleteHeart() {
 function loadHeartCount() {
   fetch(`/heart/${rno}`, {
     method: "get",
-    headers: { "content-type": "application/json" }, // , "X-CSRF-TOKEN": csrfValue
+    headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
   })
     .then((response) => response.text())
     .then((data) => {

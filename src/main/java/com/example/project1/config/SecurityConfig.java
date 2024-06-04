@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .requestMatchers("/member/profile").hasAnyRole("MEMBER")
                 .requestMatchers("/member/register").permitAll()
                 .requestMatchers("/animal/read").permitAll()
+                .requestMatchers("/review/list", "/review/read").permitAll()
                 .anyRequest().permitAll());
         http.formLogin(login -> login
                 .loginPage("/member/login").permitAll()

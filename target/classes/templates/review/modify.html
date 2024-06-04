@@ -31,7 +31,7 @@
           <div class="col-lg-8 ftco-animate">
             <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
               <h3 class="mb-5">글 수정</h3>
-              <form class="register-form p-5 bg-light" id="register-form" method="post" action="/review/modify">
+              <form class="register-form p-5 bg-light" id="register-form" method="post" th:action="@{/review/modify}">
                 <input type="hidden" name="rno" id="rno" th:value="${dto.rno}" />
                 <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
                 <!-- <input type="hidden" name="inum" id="inum" th:value="${dto.inum}" /> -->
@@ -111,7 +111,7 @@
                 </div>
               </form>
             </div>
-            <form method="post" id="actionForm" action="/review/remove">
+            <form method="post" id="actionForm" th:action="@{/review/remove}">
               <input type="hidden" name="rno" th:value="${dto.rno}" />
               <input type="hidden" name="page" th:value="${requestDto.page}" />
               <input type="hidden" name="type" th:value="${requestDto.type}" />
@@ -126,6 +126,8 @@
   </div>
   <th:block layout:fragment="script">
     <script>
+      const csrfValue = "[[${_csrf.token}]]";
+
       const replyList = document.querySelector(".replyList");
       const rno = "[[${dto.rno}]]";
       const title = "[[${dto.title}]]";

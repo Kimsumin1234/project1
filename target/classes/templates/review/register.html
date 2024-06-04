@@ -31,7 +31,14 @@
           <!--  나중에 이걸로 register form 바꾼다 -->
           <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
             <h3 class="mb-5">글작성</h3>
-            <form class="register-form p-5 bg-light" id="register-form" method="post" th:object="${reviewDto}" novalidate>
+            <form
+              class="register-form p-5 bg-light"
+              th:action="@{/review/register}"
+              id="register-form"
+              method="post"
+              th:object="${reviewDto}"
+              novalidate
+            >
               <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
               <input type="hidden" name="replyNo" id="replyNo" />
               <div class="form-group">
@@ -147,6 +154,9 @@
     <!-- .section -->
   </div>
   <th:block layout:fragment="script">
+    <script>
+      const csrfValue = "[[${_csrf.token}]]";
+    </script>
     <script th:src="@{/js/register.js}"></script>
     <script th:src="@{/js/upload.js}"></script>
   </th:block>

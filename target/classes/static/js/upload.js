@@ -52,7 +52,7 @@ document.querySelector("#fileInput").addEventListener("change", (e) => {
   fetch("/upload/uploadAjax", {
     method: "post",
     headers: {
-      // "X-CSRF-TOKEN": csrfValue,
+      "X-CSRF-TOKEN": csrfValue,
     },
     body: formData,
   })
