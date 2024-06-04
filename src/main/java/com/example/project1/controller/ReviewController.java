@@ -1,6 +1,7 @@
 package com.example.project1.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ public class ReviewController {
 
     private final ReviewService service;
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/list")
     public void getReviewList(@ModelAttribute("requestDto") PageRequestDto requestDto, Model model) {
         log.info("review controller 요청");
@@ -44,6 +46,7 @@ public class ReviewController {
         model.addAttribute("result", result);
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/read")
     public String getincrementViewCount(@RequestParam Long rno, HttpServletRequest request, Model model,
             HttpServletResponse response, @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -88,6 +91,7 @@ public class ReviewController {
 
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping({ "/modify" })
     public void getRead(@RequestParam Long rno, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review read 요청 {}", rno);
@@ -96,6 +100,7 @@ public class ReviewController {
         model.addAttribute("dto", result);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/modify")
     public String postModify(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -115,6 +120,7 @@ public class ReviewController {
         return "redirect:/review/read";
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/remove")
     public String postRemove(@RequestParam Long rno, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -128,12 +134,14 @@ public class ReviewController {
         return "redirect:/review/list";
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/register")
     public void getCreate(ReviewDto reviewDto, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review create 요청");
 
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/register")
     public String postRegister(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {

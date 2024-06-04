@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class ReviewReplyCommentController {
 
     private final ReviewReplyCommentService commentService;
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/{replyNo}/all")
     public ResponseEntity<List<ReviewReplyCommentDto>> getList(@PathVariable("replyNo") Long replyNo) {
         log.info("comment controller 요청 {}", replyNo);
@@ -40,6 +42,7 @@ public class ReviewReplyCommentController {
         return new ResponseEntity<>(commentService.getListOfComment(replyNo), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/add")
     public ResponseEntity<Long> postAddReply(
             @RequestBody ReviewReplyCommentDto commentDto) {
@@ -55,6 +58,7 @@ public class ReviewReplyCommentController {
         return new ResponseEntity<>(commentService.getComment(commentNo), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @PutMapping("/{replyNo}/{commentNo}")
     public ResponseEntity<Long> putReview(@PathVariable("commentNo") Long commentNo,
             @RequestBody ReviewReplyCommentDto commentDto) {
@@ -63,6 +67,7 @@ public class ReviewReplyCommentController {
         return new ResponseEntity<>(commentService.updateComment(commentDto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @DeleteMapping("/{replyNo}/{commentNo}")
     public ResponseEntity<Long> deleteReview(@PathVariable("commentNo") Long commentNo, String email) {
         // RequestBody 변수명 => review.js의 fetch함수 body의 변수명과 같음
