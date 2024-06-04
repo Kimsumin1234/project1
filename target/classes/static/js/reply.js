@@ -61,7 +61,7 @@ const reviewsLoaded = () => {
             <p>`;
             if (`${comment.email}` == user) {
               result += '<button class="btn btn-danger btn-sm">삭제</button>';
-              result += '<button class="btn btn-success btn-sm reply">수정</button>';
+              result += '<button class="btn btn-success btn-sm reply2">수정</button>';
             }
             result += `</p></li>`;
             if (idx == reply.comments.length - 1 && user != "anonymousUser") {
@@ -233,7 +233,7 @@ replyList.addEventListener("click", (e) => {
         reviewForm.querySelector("button").innerHTML = "리뷰 수정";
       });
   }
-  if (e.target.classList.contains("reply")) {
+  if (e.target.classList.contains("reply2")) {
     const commentNo = e.target.closest(".replyComment").dataset.commentno;
     const replyNo = e.target.closest(".replyComment").querySelector(".comment").value;
 
