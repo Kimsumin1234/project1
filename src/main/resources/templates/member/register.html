@@ -6,8 +6,7 @@
         <div class="col-lg-8 ftco-animate">
           <div class="comment-form-wrap pt-5">
             <hr class="my-8" />
-
-            <form th:action="@{register}" id="changeForm" method="post" th:object="${memberDto}" novalidate class="p-5 bg-light">
+            <form th:action="@{/member/register}" id="changeForm" method="post" th:object="${memberDto}" novalidate class="p-5 bg-light">
               <div class="form-group">
                 <label for="email">이메일 *</label>
                 <input type="text" class="form-control" id="email" name="email" th:value="${memberDto.email}" />
@@ -42,8 +41,6 @@
         </div>
       </div>
     </div>
-    <th:block layout:fragment="script">
-      <!-- <script th:src="@{/js/edit-profile.js}"></script> -->
-    </th:block>
+    <th:block layout:fragment="script"> </th:block>
   </div>
 </html>

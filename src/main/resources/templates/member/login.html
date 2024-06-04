@@ -56,7 +56,7 @@
           <a class="ml-2" href="/oauth2/authorization/google">
             <img class="img-fluid" th:src="@{/images/google4.png}" />
           </a>
-          <a class="" href="/oauth2/authorization/naver">
+          <a class="" th:href="@{/oauth2/authorization/naver}">
             <img class="img-fluid" th:src="@{/images/btnG.png}" style="height: 80px" />
           </a>
           <a class="" href="/oauth2/authorization/kakao">
@@ -80,6 +80,11 @@
           showConfirmButton: false,
           timer: 1500,
         });
+      }
+
+      const msg2 = "[[${duplierror}]]";
+      if (msg2) {
+        alert(msg2);
       }
     </script>
   </th:block>

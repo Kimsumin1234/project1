@@ -65,6 +65,7 @@ public class CoolSmsController {
         // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01063323055"); // 발신번호 입력
         message.setTo(cDto.getPhone()); // 수신번호 입력
+        // message.setTo("01063323055"); // 수신번호 입력
         message.setText("[2팀] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
 
         session.setAttribute("rNum", rNum);

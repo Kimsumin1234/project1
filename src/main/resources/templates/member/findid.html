@@ -49,6 +49,10 @@
       </div>
     </div>
     <th:block layout:fragment="script">
+      <script>
+        // csrf 토큰 설정
+        const csrfValue = `[[${_csrf.token}]]`;
+      </script>
       <script th:src="@{/js/findid.js}"></script>
     </th:block>
   </div>

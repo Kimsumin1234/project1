@@ -11,12 +11,6 @@ const btn = document.querySelector(".btn-primary.py-2");
 console.log(phone);
 const email = document.querySelector("#email");
 
-// function checkPhone(pNum) {
-//   const regex = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$"/;
-//   console.log(regex.test(pNum));
-//   return regex.test(pNum);
-// }
-
 let time = 180;
 let timer = setInterval(function () {
   if (time > 0) {
@@ -41,14 +35,11 @@ addon1.addEventListener("click", () => {
   const formData = new FormData();
   formData.append("phone", phone.value);
   formData.append("email", email.value);
-  //   console.log(phone.value);
-  //   for (const key of formData.keys()) {
-  //     console.log(key);
-  //   }
-  //   for (const value of formData.values()) {
-  //     console.log(value);
-  //   }
+
   fetch(`/send-one3`, {
+    headers: {
+      "X-CSRF-TOKEN": csrfValue,
+    },
     method: "post",
     body: formData,
   })
@@ -93,6 +84,9 @@ addon2.addEventListener("click", () => {
   formData.append("certNum", certNum.value);
 
   fetch(`/certif`, {
+    headers: {
+      "X-CSRF-TOKEN": csrfValue,
+    },
     method: "post",
     body: formData,
   })

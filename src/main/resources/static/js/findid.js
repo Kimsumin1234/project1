@@ -8,7 +8,6 @@ const certNum = document.querySelector("#certNum");
 const phoneCheck = document.querySelector("#phoneCheck");
 const certifCheck = document.querySelector("#certifCheck");
 const btn = document.querySelector(".btn-primary.py-2");
-// console.log(phone);
 
 let time = 180;
 let timer = setInterval(function () {
@@ -31,14 +30,11 @@ addon1.addEventListener("click", () => {
 
   const formData = new FormData();
   formData.append("phone", phone.value);
-  //   console.log(phone.value);
-  //   for (const key of formData.keys()) {
-  //     console.log(key);
-  //   }
-  //   for (const value of formData.values()) {
-  //     console.log(value);
-  //   }
+
   fetch(`/send-one2`, {
+    headers: {
+      "X-CSRF-TOKEN": csrfValue,
+    },
     method: "post",
     body: formData,
   })
@@ -83,6 +79,9 @@ addon2.addEventListener("click", () => {
   formData.append("certNum", certNum.value);
 
   fetch(`/certif`, {
+    headers: {
+      "X-CSRF-TOKEN": csrfValue,
+    },
     method: "post",
     body: formData,
   })

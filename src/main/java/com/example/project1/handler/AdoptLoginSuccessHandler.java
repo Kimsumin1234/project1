@@ -29,8 +29,8 @@ public class AdoptLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         // 로그인 성공후 이전페이지로
         setDefaultTargetUrl("/");
         SavedRequest savedRequest = requestCache.getRequest(request, response);
-        // log.info("핸들러 {} {}", request, response);
-        // log.info("savedRequest {}", savedRequest);
+        log.info("핸들러 {} {}", request, response);
+        log.info("savedRequest {}", savedRequest);
         if (savedRequest != null) {
             // 로그인 하기 전 url로 이동하기
             String targetUrl = savedRequest.getRedirectUrl();

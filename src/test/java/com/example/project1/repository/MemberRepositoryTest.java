@@ -25,7 +25,7 @@ public class MemberRepositoryTest {
             Member member = Member.builder()
                     .email("member" + i + "@naver.com")
                     .nickname("User" + i)
-                    .phone("010-1234-123" + i)
+                    .phone("0101234123" + i)
                     .checkPhone(true)
                     .password(passwordEncoder.encode("1111"))
                     .fromSocial(false)

@@ -1,14 +1,18 @@
 package com.example.project1.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.project1.constant.MemberRole;
 import com.example.project1.dto.AuthMemberDto;
@@ -31,7 +35,8 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
 
     // load 만 치면 자동완성
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+    public OAuth2User loadUser(OAuth2UserRequest userRequest)
+            throws OAuth2AuthenticationException, IllegalStateException {
         // 소셜로그인 공통인증 방식으로 로그인하면 뜨는 정보들
         log.info("========================================");
         log.info("userRequest : {}", userRequest);
@@ -60,8 +65,12 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             log.info("info {} {} {}", nEmail, nName, nPhone);
             log.info("========================================");
 
-            Member member = saveSocialMember(nEmail, nName + " for naver", nPhone);
+            // Member member = saveSocialMember(nEmail, nName + " for naver", nPhone);
+            Member member = saveSocialMember(nEmail, nName);
+            member.setNickname(nName + " for naver");
+
             return new AuthMemberDto(entityToDto(member), true);
+
         }
 
         // 카카오 로그인
@@ -83,7 +92,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
                         .password(passwordEncoder.encode("1111"))
                         .fromSocial(true)
                         .checkPhone(false)
-                        .role(MemberRole.COMMON)
+                        .role(MemberRole.MEMBER)
                         .build();
                 memberRepository.save(member);
                 return new AuthMemberDto(entityToDto(member), true);
@@ -117,15 +126,22 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
         return member;
     }
 
-    private Member saveSocialMember(String email, String name, String phone) {
-        Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
+    private Member saveSocialMember(String email, String name, String phone) throws IllegalStateException {
 
+        String rePhone = phone.replace("-", "");
+
+        Optional<Member> member2 = memberRepository.findByPhoneAndFromSocial(rePhone, false);
+        if (member2.isPresent()) {
+            log.info("예외발생 : {}", member2);
+            throw new IllegalStateException("사이트에 동일한 핸드폰번호로 가입한 회원이 존재합니다.");
+        }
+
+        Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
         if (result.isPresent()) {
             // 찾은 이메일이 회원이 되있으면 여기서 끝
             return result.get();
         }
 
-        String rePhone = phone.replace("-", "");
         Member member = Member.builder()
                 .email(email)
                 .nickname(name)

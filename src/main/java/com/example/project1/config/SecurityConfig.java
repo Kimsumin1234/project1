@@ -21,44 +21,57 @@ import com.example.project1.handler.AdoptLoginSuccessHandler;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http, RememberMeServices rememberMeServices) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/member/profile").hasAnyRole("MEMBER")
-                .requestMatchers("/member/register").permitAll()
-                .requestMatchers("/animal/read").permitAll()
-                .requestMatchers("/review/list", "/review/read").permitAll()
-                .anyRequest().permitAll());
-        http.formLogin(login -> login
-                .loginPage("/member/login").permitAll()
-                .successHandler(adoptLoginSuccessHandler()));
-        http.oauth2Login(login -> login.successHandler(adoptLoginSuccessHandler())); // 공통인증
-        http.logout(logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/"));
-        http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
-        // http.csrf(csrf -> csrf.disable()); // csrf 비활성화
-        return http.build();
-    }
+        @Bean
+        SecurityFilterChain securityFilterChain(HttpSecurity http, RememberMeServices rememberMeServices)
+                        throws Exception {
+                http.authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/images/**", "/auth")
+                                .permitAll()
+                                .requestMatchers("/upload/display", "/upload/ex1").permitAll()
+                                .requestMatchers("/animal/read").permitAll()
+                                .requestMatchers("/review/list", "/review/read").permitAll()
+                                .requestMatchers("/member/sms", "/send-one", "/send-one2", "/send-one3", "/certif")
+                                .permitAll()
+                                .requestMatchers("/member/registerPage").permitAll()
+                                .requestMatchers("/member/register").permitAll()
+                                .requestMatchers("/member/findid", "/member/resultfindid").permitAll()
+                                .requestMatchers("/member/findpwd1", "/member/findpwd2", "/member/findpwd3").permitAll()
+                                .anyRequest().authenticated());
+                // .anyRequest().permitAll());
+                http.formLogin(login -> login
+                                .loginPage("/member/login").permitAll()
+                                .defaultSuccessUrl("/", true));
+                // .successHandler(adoptLoginSuccessHandler()));
+                http.oauth2Login(login -> login
+                                .defaultSuccessUrl("/", true)); // 공통인증
+                // .successHandler(adoptLoginSuccessHandler())
+                http.logout(logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                                .logoutSuccessUrl("/"));
+                http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
+                // http.csrf(csrf -> csrf.disable()); // csrf 비활성화
+                return http.build();
+        }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+        @Bean
+        PasswordEncoder passwordEncoder() {
+                return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        }
 
-    @Bean
-    RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
-        // RememberMeTokenAlgorithm.SHA256 : 비밀번호 알고리즘 (암호화 시켜서 저장)
-        RememberMeTokenAlgorithm encodingAlgorithm = RememberMeTokenAlgorithm.SHA256;
-        // TokenBased : Token 기반의 쿠키
-        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("myKey", userDetailsService,
-                encodingAlgorithm);
-        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 31); // 7일, 쿠키 만료 시간 (필수로설정)
-        return rememberMeServices;
-    }
+        @Bean
+        RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
+                // RememberMeTokenAlgorithm.SHA256 : 비밀번호 알고리즘 (암호화 시켜서 저장)
+                RememberMeTokenAlgorithm encodingAlgorithm = RememberMeTokenAlgorithm.SHA256;
+                // TokenBased : Token 기반의 쿠키
+                TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("myKey",
+                                userDetailsService,
+                                encodingAlgorithm);
+                rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 31); // 31일, 쿠키 만료 시간 (필수로설정)
+                return rememberMeServices;
+        }
 
-    @Bean
-    AdoptLoginSuccessHandler adoptLoginSuccessHandler() {
-        return new AdoptLoginSuccessHandler();
-    }
+        @Bean
+        AdoptLoginSuccessHandler adoptLoginSuccessHandler() {
+                return new AdoptLoginSuccessHandler();
+        }
 }

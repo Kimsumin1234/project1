@@ -57,7 +57,7 @@ public class MemberController {
 
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/edit")
     public void getEditProfile(PasswordChangeDto pDto, NicknameChangeDto nicknameChangeDto) {
         log.info("회원정보수정 페이지 요청");
@@ -124,13 +124,13 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/leave")
     public void getLeave(MemberDto memberDto) {
         log.info("회원탈퇴 페이지 요청");
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/leave")
     public String postLeave(RedirectAttributes rttr, HttpSession session, MemberDto leaveMemberDto, Model model) {
         log.info("회원탈퇴 요청 {}", leaveMemberDto);
@@ -163,10 +163,9 @@ public class MemberController {
         log.info("문자인증 페이지 요청 {}", cDto);
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/registerPage")
     public String postRegisterPage(@Valid CertificationDto cDto, BindingResult result, MemberDto memberDto,
-            HttpSession session, Model model) {
+            HttpSession session, Model model, RedirectAttributes rttr) {
         log.info("회원가입 페이지 요청 {}", memberDto);
         // 유효성 검사
         if (result.hasErrors()) {
@@ -184,13 +183,14 @@ public class MemberController {
             model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
             return "/member/sms";
         } else {
-            session.invalidate();
+            // session.invalidate(); // 이거 때문에 이유는 모르지만 문제가 생겼음
+            // rttr.addAttribute("memberDtoPhone", memberDto.getPhone());
+            // return "redirect:/member/register";
             return "/member/register";
         }
 
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/register")
     public String postRegister(@Valid MemberDto insertDto, BindingResult result, RedirectAttributes rttr, Model model) {
         log.info("회원가입 요청 {}", insertDto);
@@ -209,11 +209,6 @@ public class MemberController {
         try {
             newEmail = adoptUserService.register(insertDto);
         } catch (Exception e) {
-            // 이방식은 MemberDto insertDto 이거를 살릴수없음
-            // rttr.addFlashAttribute("Exception", e.getMessage());
-            // return "redirect:/member/register";
-
-            // model 에 담으면 Exception 메세지도 띄우고 MemberDto insertDto 도 살릴수있다
             model.addAttribute("Exception", e.getMessage());
             return "/member/register";
         }
@@ -228,7 +223,6 @@ public class MemberController {
         log.info("아이디찾기 페이지 요청 {}", cDto);
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/resultfindid")
     public String postFindId(HttpSession session, Model model) {
         log.info("찾는 아이디 session:{}", session);
@@ -244,7 +238,6 @@ public class MemberController {
         log.info("비밀번호찾기 페이지1 요청 {}", fDto);
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/findpwd1")
     public String postFindPwd2(CertificationDto cDto, FindPasswordDto fDto, RedirectAttributes rttr, Model model) {
         log.info("비밀번호찾기 페이지2 요청 {}", fDto);
@@ -259,7 +252,6 @@ public class MemberController {
         return "/member/findpwd2";
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/findpwd2")
     public String postMethodName(@Valid CertificationDto cDto, BindingResult result, FindPasswordDto fDto,
             HttpSession session, Model model) {
@@ -281,13 +273,12 @@ public class MemberController {
             model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
             return "/member/findpwd2";
         } else {
-            session.invalidate();
+            // session.invalidate();
             return "/member/findpwd3";
         }
 
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/findpwd3")
     public String postFindPassword(@Valid FindPasswordDto fDto, BindingResult result, CertificationDto cDto,
             Model model, RedirectAttributes rttr) {

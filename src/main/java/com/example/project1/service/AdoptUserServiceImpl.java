@@ -127,7 +127,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent()) {
-            throw new IllegalStateException("이미 가입된 이메일 이거나 소셜로그인을 확인해 주세요.");
+            throw new IllegalStateException("중복된 이메일 입니다.");
         }
     }
 

@@ -23,7 +23,7 @@
                   placeholder="'-' 를 제외하고 휴대폰번호를 입력해주세요."
                 />
                 <button class="btn btn-outline-secondary" type="button" id="button-addon1">인증번호 전송</button>
-                <div id="phoneCheck" class="text-danger col-md-10 mb-3"></div>
+                <div id="phoneCheck" class="text-danger col-md-12 mb-3"></div>
                 <div class="text-danger col-md-10 mb-3" th:if="${dupliError}" th:text="${dupliError}"></div>
                 <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger input-group col-md-10 mb-3"></div>
               </div>
@@ -44,20 +44,14 @@
               </div>
             </div>
           </form>
-          <!-- <div class="form-group">
-            <button type="button" class="btn btn-primary col-md-10 py-2" th:style="'font-size: 18px;'">인증완료</button>
-          </div> -->
         </div>
       </div>
     </div>
     <th:block layout:fragment="script">
-      <!-- <script>
-        const DupliPhone = "[[${session.DupliPhone}]]";
-        if (DupliPhone) {
-          alert("이미 가입된 회원");
-          sessionStorage.removeItem("DupliPhone");
-        }
-      </script> -->
+      <script>
+        // csrf 토큰 설정
+        const csrfValue = `[[${_csrf.token}]]`;
+      </script>
       <script th:src="@{/js/certification.js}"></script>
     </th:block>
   </div>
