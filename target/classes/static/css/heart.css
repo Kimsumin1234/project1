@@ -5,3 +5,8 @@
 .text-break {
   word-wrap: break-word;
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}

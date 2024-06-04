@@ -91,7 +91,6 @@ public class ReviewController {
 
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping({ "/modify" })
     public void getRead(@RequestParam Long rno, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review read 요청 {}", rno);
@@ -100,7 +99,6 @@ public class ReviewController {
         model.addAttribute("dto", result);
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/modify")
     public String postModify(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -120,7 +118,6 @@ public class ReviewController {
         return "redirect:/review/read";
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/remove")
     public String postRemove(@RequestParam Long rno, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -134,14 +131,12 @@ public class ReviewController {
         return "redirect:/review/list";
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/register")
     public void getCreate(ReviewDto reviewDto, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review create 요청");
 
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/register")
     public String postRegister(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {

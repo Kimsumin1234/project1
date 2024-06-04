@@ -60,11 +60,11 @@
                 </form>
             </div>
             
-            <div class="about-author d-flex p-4 bg-light">
-              <div class="bio mr-5">
+            <div class="about-author d-flex p-1 bg-light">
+              <div class="bio mr-5 w-25 p-3">
                 <img src="data:image/jpeg;base64,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" alt="Image placeholder" class="img-fluid mb-4" />
               </div>
-              <div class="desc">
+              <div class="desc mt-4">
                 <h3 th:text="${dto.nickname}">멤버 정보</h3>
                 <p th:text="${dto.email}">
                   멤버 정보
@@ -76,24 +76,8 @@
             <div class="pt-5 mt-5">
               <h3 class="mb-5" sec:authorize="hasRole('ROLE_MEMBER')"><span><div class="" id="heart" ></div> <span class="heartCount" th:text="${dto.heartCount}"></span></h3>
               <h3 class="mb-5"><span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
-              <!-- <div
-                class="flex items-center justify-between p-3 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-              >
-                <span>
-                  <button
-                    class="px-1 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-full active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                    aria-label="Edit"
-                  >
-                    <svg class="review-edit w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                      ></path>
-                    </svg>
-                  </button>
-                </span>
-              </div> -->
               <!-- js 에서 처리할꺼임 -->
-              <div class="comment-form-wrap p-5 c" sec:authorize="hasRole('ROLE_MEMBER')">
+              <div class="comment-form-wrap p-3" sec:authorize="hasRole('ROLE_MEMBER')">
                 <h3 class="mb-5">Leave a comment</h3>
                 <form th:action="@{/review/add}" class="review-form p-5 bg-light " method="post">
                   <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
@@ -108,7 +92,7 @@
                   </div>
                   <div class="form-group">
                     <label for="message">text</label>
-                    <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn py-3 px-4 btn-primary">댓글 등록</button>
@@ -117,101 +101,6 @@
               </div>
               <div class="comment-form-wrap p-5">
                 <ul class="comment-list replyList list-group" id="replyList">
-                  <!-- <li class="comment">
-                    <div class="vcard bio">
-                      <img src="images/person_1.jpg" alt="Image placeholder" />
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">April 7, 2020 at 10:05pm</div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                      </p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-                  </li>
-
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img src="images/person_1.jpg" alt="Image placeholder" />
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">April 7, 2020 at 10:05pm</div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                      </p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-
-                    <ul class="children">
-                      <li class="comment">
-                        <div class="vcard bio">
-                          <img src="images/person_1.jpg" alt="Image placeholder" />
-                        </div>
-                        <div class="comment-body">
-                          <h3>John Doe</h3>
-                          <div class="meta">April 7, 2020 at 10:05pm</div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem,
-                            eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                          </p>
-                          <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-
-                        <ul class="children">
-                          <li class="comment">
-                            <div class="vcard bio">
-                              <img src="images/person_1.jpg" alt="Image placeholder" />
-                            </div>
-                            <div class="comment-body">
-                              <h3>John Doe</h3>
-                              <div class="meta">April 7, 2020 at 10:05pm</div>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                              </p>
-                              <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="images/person_1.jpg" alt="Image placeholder" />
-                                </div>
-                                <div class="comment-body">
-                                  <h3>John Doe</h3>
-                                  <div class="meta">April 7, 2020 at 10:05pm</div>
-                                  <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit
-                                    vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                                  </p>
-                                  <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img src="images/person_1.jpg" alt="Image placeholder" />
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">April 7, 2020 at 10:05pm</div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                        officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                      </p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-                  </li> -->
                 </ul>
               </div>
               <!-- END comment-list -->

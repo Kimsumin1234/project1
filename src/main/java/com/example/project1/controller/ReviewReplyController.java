@@ -43,7 +43,6 @@ public class ReviewReplyController {
         return new ResponseEntity<>(replyService.getListOfReview(rno), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/{rno}")
     public ResponseEntity<Long> postAddReply(@PathVariable("rno") Long rno,
             @RequestBody ReviewReplyDto replyDto) {
@@ -52,7 +51,6 @@ public class ReviewReplyController {
         return new ResponseEntity<>(replyService.addReply(replyDto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @DeleteMapping("/{rno}/{replyNo}")
     public ResponseEntity<Long> deleteReview(@PathVariable("replyNo") Long replyNo, String email) {
         // RequestBody 변수명 => review.js의 fetch함수 body의 변수명과 같음
@@ -68,7 +66,6 @@ public class ReviewReplyController {
         return new ResponseEntity<>(replyService.getReply(replyNo), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
     @PutMapping("/{rno}/{replyNo}")
     public ResponseEntity<Long> putReview(@PathVariable("replyNo") Long replyNo,
             @RequestBody ReviewReplyDto replyDto) {

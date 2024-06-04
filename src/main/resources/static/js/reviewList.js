@@ -7,7 +7,7 @@ document.querySelector("#heartList").addEventListener("click", (e) => {
     .then((data) => {
       console.log(data);
       let tags = "";
-      tags += `<p class="row justify-content-end" ><i class="fa fa-times close" aria-hidden="true"></i></p>`;
+      tags += `<p class="row justify-content-end" >닫기 <i class="fa fa-times close" aria-hidden="true"></i></p>`;
       if (data.length == 0) {
         tags += `<span class="row justify-content-end">현재 좋아요한 목록이 없습니다.</span>`;
       }
