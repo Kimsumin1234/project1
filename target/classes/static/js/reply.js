@@ -128,8 +128,12 @@ reviewForm.addEventListener("submit", (e) => {
   const replyNo = reviewForm.querySelector("#replyNo");
   const commentNo = reviewForm.querySelector("#replyComment");
   console.log(text.value.length);
-  if (text == "" || text.value.length > 501) {
+  if (text.value.length == 0) {
     alert("내용 확인");
+    return;
+  }
+  if (text.value.length > 501) {
+    alert("500 자 이상 불가능");
     return;
   }
 
@@ -305,10 +309,15 @@ replyList.addEventListener("submit", (e) => {
   const email = form.querySelector('input[name="email"]');
   const replyNo = form.querySelector('input[name="replyNo"]');
 
-  if (text == "") {
+  if (text.value.length == 0) {
     alert("내용 확인");
     return;
   }
+  if (text.value.length > 501) {
+    alert("500 자 이상 불가능");
+    return;
+  }
+
   console.log(mid);
   console.log(nickname);
   console.log(email);

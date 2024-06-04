@@ -36,7 +36,7 @@ public class ReviewRepositoryTest {
 
     @Test
     public void testInsert() {
-        LongStream.rangeClosed(1, 10).forEach(i -> {
+        LongStream.rangeClosed(22, 27).forEach(i -> {
 
             Member member = Member.builder().mid(i).build();
 
@@ -44,11 +44,10 @@ public class ReviewRepositoryTest {
                     .title("title..." + i)
                     .text("text..." + i)
                     .writer(member)
+                    .viewCount(0L)
                     .build();
             reviewRepository.save(review);
             ReviewImage reviewImage = ReviewImage.builder()
-                    .uuid(UUID.randomUUID().toString())
-                    .imagename("img" + i + ".jpg")
                     .review(review)
                     .build();
             reviewImageRepository.save(reviewImage);
