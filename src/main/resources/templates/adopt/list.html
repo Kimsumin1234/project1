@@ -47,8 +47,8 @@
                         <span scope="col" th:text="${dto.kindCd}"></span>
                         <div>
                           <span scope="col" th:text="${dto.orgNm}"></span>
-                          <div>
-                            좋아요 [<span class="heartCnt" th:text="${dto.animalCnt}"></span>]
+                          <div class="heartCnt">
+                            좋아요 : <span th:text="${dto.animalCnt}"></span>
                           </div>
                         </div>
                       </tr> 

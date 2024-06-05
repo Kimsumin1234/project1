@@ -11,22 +11,20 @@
   border-radius: 10%;
 }
 
-/* 검색창 */
-/* .searchdes {
-  padding: 40px;
-  padding-left: 35%;
-  padding-right: 35%;
-  align-items: center;
-} */
-
 /* list 제목 */
 .listname {
   margin-top: 0px;
 }
+
 /* list 제목 */
 .listname .faded {
   margin-bottom: 0px;
   line-height: 1.2;
+}
+
+.heartCnt {
+  color: palevioletred;
+  font-size: 15px;
 }
 
 .animalHeartCount {
