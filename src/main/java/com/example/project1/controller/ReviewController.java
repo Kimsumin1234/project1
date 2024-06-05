@@ -91,6 +91,7 @@ public class ReviewController {
 
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping({ "/modify" })
     public void getRead(@RequestParam Long rno, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review read 요청 {}", rno);
@@ -131,6 +132,7 @@ public class ReviewController {
         return "redirect:/review/list";
     }
 
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/register")
     public void getCreate(ReviewDto reviewDto, @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("review create 요청");
