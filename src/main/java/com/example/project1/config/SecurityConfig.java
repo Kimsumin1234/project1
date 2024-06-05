@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers("/upload/display", "/upload/ex1").permitAll()
                                 .requestMatchers("/adopt/list", "/adopt/read").permitAll()
                                 .requestMatchers("/review/list", "/review/read").permitAll()
+                                .requestMatchers("/reply/**", "/comment/**").permitAll()
                                 .requestMatchers("/animalReviews/**").permitAll()
                                 .requestMatchers("/member/sms", "/send-one", "/send-one2", "/send-one3", "/certif")
                                 .permitAll()
@@ -37,8 +38,8 @@ public class SecurityConfig {
                                 .requestMatchers("/member/register").permitAll()
                                 .requestMatchers("/member/findid", "/member/resultfindid").permitAll()
                                 .requestMatchers("/member/findpwd1", "/member/findpwd2", "/member/findpwd3").permitAll()
-                                .anyRequest().permitAll());
-                // .anyRequest().authenticated());
+                                // .anyRequest().permitAll());
+                                .anyRequest().authenticated());
                 http.formLogin(login -> login
                                 .loginPage("/member/login").permitAll()
                                 .defaultSuccessUrl("/", true));
