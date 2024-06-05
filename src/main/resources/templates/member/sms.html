@@ -23,9 +23,10 @@
                   placeholder="'-' 를 제외하고 휴대폰번호를 입력해주세요."
                 />
                 <button class="btn btn-outline-secondary" type="button" id="button-addon1">인증번호 전송</button>
-                <div id="phoneCheck" class="text-danger col-md-12 mb-3"></div>
-                <div class="text-danger col-md-10 mb-3" th:if="${dupliError}" th:text="${dupliError}"></div>
-                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger input-group col-md-10 mb-3"></div>
+                <div id="phoneCheck" class="text-danger col-md-12"></div>
+                <div id="phoneCheckSuccess" class="text-success col-md-12"></div>
+                <div class="text-danger col-md-12" th:if="${dupliError}" th:text="${dupliError}"></div>
+                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger input-group col-md-10"></div>
               </div>
               <div class="input-group col-md-10 mb-3">
                 <input type="text" name="certNum" id="certNum" th:value="${certificationDto.certNum}" class="form-control" placeholder="인증번호" />
@@ -34,8 +35,9 @@
                   <span id="timeSec" th:style="'font-size: 24px;'">00</span>
                 </div>
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" disabled>인증요청</button>
-                <div class="text-danger col-md-10 mb-3" th:if="${smsError}" th:text="${smsError}"></div>
-                <div id="certifCheck" class="text-danger input-group col-md-10 mb-3"></div>
+                <div class="text-danger col-md-10" th:if="${smsError}" th:text="${smsError}"></div>
+                <div id="certifCheck" class="text-danger input-group col-md-10"></div>
+                <div id="certifCheckSuccess" class="text-success input-group col-md-10"></div>
               </div>
               <div class="col-md-10">
                 <div class="form-group">
