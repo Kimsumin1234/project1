@@ -29,6 +29,7 @@ public class AnimalReviewController {
 
     private final AnimalReplyService animalReplyService;
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/{sId}/all")
     public ResponseEntity<List<AnimalReplyDto>> getReviews(@PathVariable("sId") Long sId) {
 
