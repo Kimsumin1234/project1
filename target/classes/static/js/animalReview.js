@@ -75,7 +75,7 @@ replyForm.addEventListener("submit", (e) => {
       .then((response) => response.text())
       .then((data) => {
         if (data) {
-          alert(data + " 번 댓글 등록");
+          alert("댓글 등록 성공");
 
           // replyForm 내용 제거
           text.value = "";
@@ -96,7 +96,7 @@ replyForm.addEventListener("submit", (e) => {
       .then((response) => response.text())
       .then((data) => {
         if (data) {
-          alert(data + " 번 댓글 수정");
+          alert("댓글 수정 성공");
 
           // replyForm 내용 제거
           text.value = "";
