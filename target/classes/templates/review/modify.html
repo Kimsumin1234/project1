@@ -34,7 +34,6 @@
               <form class="register-form p-5 bg-light" id="register-form" method="post" th:action="@{/review/modify}">
                 <input type="hidden" name="rno" id="rno" th:value="${dto.rno}" />
                 <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}" />
-                <!-- <input type="hidden" name="inum" id="inum" th:value="${dto.inum}" /> -->
                 <input type="hidden" name="replyNo" id="replyNo" />
                 <div class="form-group">
                   <label for="nickname">닉네임 *</label>
