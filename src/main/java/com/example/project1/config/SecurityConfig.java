@@ -36,8 +36,8 @@ public class SecurityConfig {
                                 .requestMatchers("/member/register").permitAll()
                                 .requestMatchers("/member/findid", "/member/resultfindid").permitAll()
                                 .requestMatchers("/member/findpwd1", "/member/findpwd2", "/member/findpwd3").permitAll()
-                                .anyRequest().authenticated());
-                // .anyRequest().permitAll());
+                                .anyRequest().permitAll());
+                // .anyRequest().authenticated());
                 http.formLogin(login -> login
                                 .loginPage("/member/login").permitAll()
                                 .defaultSuccessUrl("/", true));

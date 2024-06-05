@@ -30,8 +30,6 @@
   <th:block layout:fragment="script">
     <script>
       const mid = "[[${#authentication.principal.memberDto.mid}]]"
-      const allLi = document.querySelectorAll(".nav-item");
-      allLi[5].classList.add("active");
 
       const msg = "[[${msg}]]";
       if (msg) {
@@ -44,6 +42,5 @@
         });
       }
     </script>
-    <script th:src="@{/js/animalCart.js}"></script>
   </th:block>
 </html>
