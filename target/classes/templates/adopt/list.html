@@ -7,16 +7,18 @@
     <link rel="stylesheet" th:href="@{/css/animal-review.css}">
   </th:block>
   <div layout:fragment="content">
-    <div class="searchdes">
-      <form class="d-flex" role="search" id="searchForm">
-        <!-- 검색 후 결과 페이지는 1로 보여주기 -->
-        <input type="hidden" name="page" value="1" />
-        <select name="type" id="type" class="form-select me-2 search">
-          <option value="" th:selected="${requestDto.type == null}">조건 선택</option>
-          <option value="oNm" th:selected="${requestDto.type == 'oNm'}">관할기관(도/특별시/광역시)</option>
-          <option value="oNmc" th:selected="${requestDto.type == 'oNmc'}">관할기관(시,군,구)</option>
-        </select>
-        <input
+    <div>    
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <form class="d-flex" role="search" id="searchForm">
+          <!-- 검색 후 결과 페이지는 1로 보여주기 -->
+          <input type="hidden" name="page" value="1" />
+          <select name="type" id="type" class="form-select me-2 search">
+            <option value="" th:selected="${requestDto.type == null}">조건 선택</option>
+            <option value="oNm" th:selected="${requestDto.type == 'oNm'}">관할기관(도/특별시/광역시)</option>
+            <option value="oNmc" th:selected="${requestDto.type == 'oNmc'}">관할기관(시,군,구)</option>
+          </select>
+          <input
           class="form-control me-2"
           type="search"
           placeholder="Search"
@@ -24,24 +26,18 @@
           name="keyword"
           id="keyword"
           th:value="${requestDto.keyword}"
-        />
-        <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-<div>
-
-
-      <section class="ftco-section bg-light">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 col-lg-3 ftco-animate" th:each="dto : ${result.dtoList}">
-              <div class="staff" >
-                <a th:href="@{read(sId=${dto.sId}, page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
-                  <div class="img-wrap d-flex align-items-stretch">
+          />
+          <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <div class="row mt-3">
+          <div class="col-md-6 col-lg-3 ftco-animate" th:each="dto : ${result.dtoList}">
+            <div class="staff" >
+              <a th:href="@{read(sId=${dto.sId}, page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
+                <div class="img-wrap d-flex align-items-stretch">
                     <img class="img align-self-stretch" th:src="${dto.popfile}"></img>
                   </div>
-                    <div class="text pt-3 px-3 pb-4 text-center listname" >
+                  <div class="text pt-3 px-3 pb-4 text-center listname" >
                     <div class="faded">
                       <tr>
                         <span scope="col" th:text="${dto.noticeNo}"></span>
@@ -52,19 +48,18 @@
                         <div>
                           <span scope="col" th:text="${dto.orgNm}"></span>
                           <div>
-                            좋아요 [<span th:text="${dto.animalCnt}"></span>]
+                            좋아요 [<span class="heartCnt" th:text="${dto.animalCnt}"></span>]
                           </div>
                         </div>
                       </tr> 
                     </div>
-                </div>
+                  </div>
                 </a>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item" th:if="${result.prev}">
@@ -78,8 +73,12 @@
           <li class="page-item" th:if="${result.next}">
             <a class="page-link" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Next</a>
           </li>
-      </nav>
-    </div>
+        </nav>
+      </section>
+    </body>
+  </div>
+    
+    
     <th:block layout:fragment="script">
       <script>
       </script>
