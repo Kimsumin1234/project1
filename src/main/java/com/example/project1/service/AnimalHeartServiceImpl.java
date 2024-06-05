@@ -74,4 +74,10 @@ public class AnimalHeartServiceImpl implements AnimalHeartService {
         return (long) heart.size();
     }
 
+    // count 구하기
+    @Override
+    public Long countheart(Long sId) {
+        return animalHeartRepository.countByAnimalSId(sId);
+    }
+
 }

@@ -15,6 +15,8 @@ public interface AnimalHeartService {
 
     Long animalHeart(Long sId);
 
+    Long countheart(Long sId);
+
     public default AnimalHeartDto entityToDto(AnimalHeart heart) {
         return AnimalHeartDto.builder()
                 .hid(heart.getHid())

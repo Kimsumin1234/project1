@@ -7,34 +7,35 @@ import com.example.project1.entity.Animal;
 
 public interface AdoptApiService {
 
-    PageResultDto<AnimalDto, Animal> getList(PageRequestDto requestDto);
+    PageResultDto<AnimalDto, Object[]> getList(PageRequestDto requestDto);
 
     AnimalDto getRow(Long sId);
 
     // entity → dto
-    public default AnimalDto entityToDto(Animal adoptApi) {
+    public default AnimalDto entityToDto(Animal animal, Long animalCnt) {
         return AnimalDto.builder()
-                .sId(adoptApi.getSId())
-                .filename(adoptApi.getFilename())
-                .happenDt(adoptApi.getHappenDt())
-                .kindCd(adoptApi.getKindCd())
-                .colorCd(adoptApi.getColorCd())
-                .age(adoptApi.getAge())
-                .weight(adoptApi.getWeight())
-                .noticeNo(adoptApi.getNoticeNo())
-                .noticeSdt(adoptApi.getNoticeSdt())
-                .noticeEdt(adoptApi.getNoticeEdt())
-                .popfile(adoptApi.getPopfile())
-                .procssState(adoptApi.getProcssState())
-                .sexCd(adoptApi.getSexCd())
-                .neuterYn(adoptApi.getNeuterYn())
-                .specialMark(adoptApi.getSpecialMark())
-                .careNm(adoptApi.getCareNm())
-                .careTel(adoptApi.getCareTel())
-                .careAddr(adoptApi.getCareAddr())
-                .orgNm(adoptApi.getOrgNm())
-                .orgNmc(adoptApi.getOrgNmc())
-                .officetel(adoptApi.getOfficetel())
+                .sId(animal.getSId())
+                .filename(animal.getFilename())
+                .happenDt(animal.getHappenDt())
+                .kindCd(animal.getKindCd())
+                .colorCd(animal.getColorCd())
+                .age(animal.getAge())
+                .weight(animal.getWeight())
+                .noticeNo(animal.getNoticeNo())
+                .noticeSdt(animal.getNoticeSdt())
+                .noticeEdt(animal.getNoticeEdt())
+                .popfile(animal.getPopfile())
+                .procssState(animal.getProcssState())
+                .sexCd(animal.getSexCd())
+                .neuterYn(animal.getNeuterYn())
+                .specialMark(animal.getSpecialMark())
+                .careNm(animal.getCareNm())
+                .careTel(animal.getCareTel())
+                .careAddr(animal.getCareAddr())
+                .orgNm(animal.getOrgNm())
+                .orgNmc(animal.getOrgNmc())
+                .officetel(animal.getOfficetel())
+                .animalCnt(animalCnt != null ? animalCnt : 0)
                 .build();
     }
 

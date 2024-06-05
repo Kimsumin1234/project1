@@ -51,9 +51,11 @@
                         <span scope="col" th:text="${dto.kindCd}"></span>
                         <div>
                           <span scope="col" th:text="${dto.orgNm}"></span>
-                          <span scope="col" th:text="${dto.orgNmc}"></span>
+                          <div>
+                            좋아요 [<span th:text="${dto.animalCnt}"></span>]
+                          </div>
                         </div>
-                      </tr>
+                      </tr> 
                     </div>
                 </div>
                 </a>
@@ -77,12 +79,10 @@
             <a class="page-link" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Next</a>
           </li>
       </nav>
+    </div>
     <th:block layout:fragment="script">
       <script>
-        const allLi = document.querySelectorAll(".nav-item");
-        allLi[3].classList.add("active");
       </script>
       <script th:src="@{/js/animalSearch.js}"></script>
     </th:block>
-  </div>
 </html>

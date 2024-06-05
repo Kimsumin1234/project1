@@ -1,7 +1,11 @@
 package com.example.project1.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
+@ToString(exclude = "animalHeart")
 @Setter
 @Getter
 @Entity
@@ -61,5 +65,10 @@ public class Animal {
     private String orgNmc; // 관할기관(시,군,구)
 
     private String officetel; // 관할기관연락처
+
+    // AnimalHeart
+    @Builder.Default
+    @OneToMany(mappedBy = "animal")
+    List<AnimalHeart> animalHeart = new ArrayList<>();
 
 }

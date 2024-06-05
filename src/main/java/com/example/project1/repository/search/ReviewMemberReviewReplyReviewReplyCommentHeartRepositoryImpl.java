@@ -56,10 +56,12 @@ public class ReviewMemberReviewReplyReviewReplyCommentHeartRepositoryImpl extend
                 .from(reply)
                 .where(reply.review.eq(review))
                 .groupBy(reply.review);
+
         JPQLQuery<Long> heartCount = JPAExpressions.select(heart.hno.count().as("heartCount"))
                 .from(heart)
                 .where(heart.review.eq(review))
                 .groupBy(heart.review);
+
         JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
                 JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),

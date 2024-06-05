@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,13 @@ public class AnimalHeartController {
         log.info(heartDto);
         animalHeartService.deleteHeart(heartDto);
         return new ResponseEntity<>(animalHeartService.dtoToEntity(heartDto).getHid(), HttpStatus.OK);
+    }
+
+    // 하트 값 구하기
+    @GetMapping("/animalHeartCount/{sId}")
+    public Long getAnimalHeartCount(@PathVariable("sId") Long sId) {
+        log.info("하트 값 구하기 {} ", sId);
+        return animalHeartService.countheart(sId);
     }
 
 }

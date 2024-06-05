@@ -22,6 +22,6 @@ public class AnimalHeartDto {
 
     private Long sid;
 
-    private int animalHeartCount;
+    // private Long animalHeartCount;
 
 }

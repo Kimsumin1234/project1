@@ -58,4 +58,8 @@ public class AnimalDto {
     private String officetel; // 관할기관연락처
 
     private Long reviewCnt; // 리뷰 개수
+
+    // 하트 개수
+    private Long animalCnt;
+
 }
