@@ -28,7 +28,7 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/images/**", "/auth")
                                 .permitAll()
                                 .requestMatchers("/upload/display", "/upload/ex1").permitAll()
-                                .requestMatchers("/animal/list", "/animal/read").permitAll()
+                                .requestMatchers("/adopt/list", "/adopt/read").permitAll()
                                 .requestMatchers("/review/list", "/review/read").permitAll()
                                 .requestMatchers("/member/sms", "/send-one", "/send-one2", "/send-one3", "/certif")
                                 .permitAll()
