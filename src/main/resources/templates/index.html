@@ -8,9 +8,7 @@
           <div class="col-md-11 ftco-animate text-center">
             <h1 class="mb-4">" 사지마세요, 입양하세요. "</h1>
             <p>
-              <a href="/member/login" class="btn btn-primary mr-md-4 py-3 px-4" sec:authorize="!isAuthenticated()"
-                >로그인 하러 가기 <span class="ion-ios-arrow-forward"></span
-              ></a>
+              <a th:href="@{/adopt/list}" class="btn btn-primary mr-md-4 py-3 px-4">입양 하러 가기 <span class="ion-ios-arrow-forward"></span></a>
             </p>
           </div>
         </div>
