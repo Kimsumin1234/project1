@@ -3,7 +3,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
- 
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/heart.css}">
+  </th:block>
   <div layout:fragment="content">
       <section class="ftco-section bg-light">
         <div class="container">
@@ -35,10 +37,11 @@
             <!-- 이것도 패치써서 그냥 제목만 쭉 보여주는식으로 ㄱ -->
             <button class="btn btn-warning" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
           </div>
-            
+            <div class="hartlistContainer ">
               <ul class="list-group ">
                 <!-- <li class="list-group-item">An item</li> -->
               </ul>
+            </div>
             
           <div class="row mt-3">
             <!-- 여기 div가 반복될 예정 -->
@@ -46,24 +49,18 @@
               <div class="staff">
                 <!-- style="background-image: url(images/staff-1.jpg)" -->
                   <a th:href="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|" class="icon image-popup d-flex justify-content-center align-items-center" th:if="${dto.reviewImageDtos.size() > 0 && dto.reviewImageDtos[0].path != null}">
-                    
-                      <div class="img-wrap d-flex align-items-stretch">
-                        <img class="img align-self-stretch" 
+                    <div class="img-wrap d-flex align-items-stretch">
+                      <img class="img align-self-stretch" 
                         th:src="|/upload/display?fileName=${dto.reviewImageDtos[0].getImageURL()}|"
                         loading="lazy"/>
-                      </div>
-                      
+                    </div>
                   </a>
-                  
                   <!-- 기본이미지 -->
-                  <a th:href="@{/assets/images/animal.jpg}" class="icon img image-popup d-flex justify-content-center align-items-center"  th:if="${dto.reviewImageDtos[0].path == null}">
-                    
+                  <a th:href="@{/assets/images/animal.jpg}" class="icon img image-popup d-flex justify-content-center align-items-center"  th:if="${dto.reviewImageDtos[0].path == null}">   
                     <div class="img-wrap d-flex align-items-stretch">
                       <img class="img align-self-stretch"  th:src="@{/assets/images/animal.jpg}" loading="lazy"/>
-                    </div>
-                    
+                    </div>                  
                   </a>
-
                 <div class="text pt-3 px-3 pb-2 text-center">
                   <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"><h3 th:text="${dto.title}"></h3></a>
                   <span class="position mb-2" th:text="${dto.nickname}"></span>
