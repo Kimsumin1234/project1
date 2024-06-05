@@ -38,7 +38,7 @@
             <div class="uploadResult mb-4">
               <ul>
                 <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
-                  <img class="img-fluid block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
+                  <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|" />
                 </li>
               </ul>
             </div>
