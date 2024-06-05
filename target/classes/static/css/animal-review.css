@@ -29,6 +29,12 @@
   line-height: 1.2;
 }
 
+.animalHeartCount {
+  margin-bottom: 0px;
+  line-height: 1.2;
+  text-align: center;
+}
+
 .searchdes .form-control {
   width: 50%;
   height: 50%;

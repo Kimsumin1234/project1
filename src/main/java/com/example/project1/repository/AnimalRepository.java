@@ -8,10 +8,11 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.example.project1.entity.Animal;
 import com.example.project1.entity.QAnimal;
+import com.example.project1.repository.animal.AnimalAnimalHeartRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public interface AnimalRepository extends JpaRepository<Animal, Long>, QuerydslPredicateExecutor<Animal> {
+public interface AnimalRepository extends JpaRepository<Animal, Long>, AnimalAnimalHeartRepository {
 
     public default Predicate makePredicate(String type, String keyword) {
         BooleanBuilder builder = new BooleanBuilder();
