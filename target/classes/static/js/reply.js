@@ -56,7 +56,7 @@ const reviewsLoaded = () => {
             <div class="comment-body">
             <h3>${comment.nickname}</h3>
             <div class="meta">${formatDate(comment.lastModifiedDate)}</div>
-            <p>${comment.text}
+            <p class="text-break">${comment.text}
             </p>
             <p>`;
             if (`${comment.email}` == user) {
@@ -76,7 +76,7 @@ const reviewsLoaded = () => {
               <div class="form-group">
                 <div class="input-group mb-3">
                   <input name="text" id="commentText" class="form-control"></input>
-                  <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">답글 등록</button>
+                  <button type="submit" class="btn btn-primary">답글 등록</button>
                 </div>
               </div>
             </form>`;
@@ -95,7 +95,7 @@ const reviewsLoaded = () => {
             <div class="form-group">
               <div class="input-group mb-3">
                 <input name="text" id="commentText" class="form-control"></input>
-                <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">답글 등록</button>
+                <button type="submit" class="btn  btn-primary" >답글 등록</button>
               </div>
             </div>
           </form>`;
@@ -264,7 +264,7 @@ replyList.addEventListener("click", (e) => {
               <input name="text" id="commentText" class="form-control" value="${data.text}"></input>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn py-3 px-4 btn-primary" id="commentBtn">댓글 수정</button>
+              <button type="submit" class="btn btn-primary" >댓글 수정</button>
             </div>
           </form>
         `;
