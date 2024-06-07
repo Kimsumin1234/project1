@@ -47,7 +47,7 @@ const reviewsLoaded = () => {
           reply.comments.forEach((comment, idx) => {
             console.log(comment);
 
-            result += `<ul class="children">
+            result += `<ul class="children pt-0">
             <li class="replyComment" data-commentNo="${comment.commentNo}">
             <input type="hidden" class="comment" value="${replyNo}" />
             <div class="vcard bio">
