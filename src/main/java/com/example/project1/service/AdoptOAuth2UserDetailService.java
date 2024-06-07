@@ -63,12 +63,12 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             String nName = map.get("name");
             String nPhone = map.get("mobile");
             String nId = map.get("id");
-            log.info("info {} {} {}", nEmail, nName, nPhone, nId);
+            log.info("info {} {} {} {}", nEmail, nName, nPhone, nId);
             log.info("========================================");
 
             // Member member = saveSocialMember(nEmail, nName + " for naver", nPhone);
-            Member member = saveSocialMember(nEmail, nName);
-            member.setNickname("(Guest)Naver" + nId);
+            Member member = saveSocialMember(nEmail, nId);
+            member.setNickname("(Guest)Naver" + nId.substring(27, 31));
 
             return new AuthMemberDto(entityToDto(member), true);
 
@@ -82,14 +82,14 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             log.info("info : {} , {}", kUserId, kNickname);
             log.info("========================================");
 
-            String kEmail = "kakao" + kUserId + "@kakao.com";
+            String kEmail = "kakao" + kUserId.substring(0, 5) + "@kakao.com";
             Optional<Member> result = memberRepository.findByEmailAndFromSocial(kEmail, true);
             if (result.isPresent()) {
                 return new AuthMemberDto(entityToDto(result.get()), true);
             } else {
                 Member member = Member.builder()
-                        .email("kakao" + kUserId + "@kakao.com")
-                        .nickname("(Guest)Kakao" + kUserId)
+                        .email("kakao" + kUserId.substring(0, 5) + "@kakao.com")
+                        .nickname("(Guest)Kakao" + kUserId.substring(0, 5))
                         .password(passwordEncoder.encode("1111"))
                         .fromSocial(true)
                         .checkPhone(false)
@@ -103,7 +103,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
         // 구글 로그인
         // 소셜로그인 을 하면 DB테이블에 저장하는 작업 (회원가입?)
         Member member = saveSocialMember(oAuth2User.getAttribute("email"),
-                oAuth2User.getAttribute("id"));
+                oAuth2User.getAttribute("sub"));
         return new AuthMemberDto(entityToDto(member), true);
     }
 
@@ -117,7 +117,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = Member.builder()
                 .email(email)
-                .nickname("(Guest)Google" + id)
+                .nickname("(Guest)Google" + id.substring(3, 8))
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .fromSocial(true) // 소셜로그인
                 .checkPhone(false)
