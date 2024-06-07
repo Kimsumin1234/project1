@@ -62,12 +62,13 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             String nEmail = map.get("email");
             String nName = map.get("name");
             String nPhone = map.get("mobile");
-            log.info("info {} {} {}", nEmail, nName, nPhone);
+            String nId = map.get("id");
+            log.info("info {} {} {}", nEmail, nName, nPhone, nId);
             log.info("========================================");
 
             // Member member = saveSocialMember(nEmail, nName + " for naver", nPhone);
             Member member = saveSocialMember(nEmail, nName);
-            member.setNickname(nName + " for naver");
+            member.setNickname("(Guest)Naver" + nId);
 
             return new AuthMemberDto(entityToDto(member), true);
 
@@ -88,7 +89,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
             } else {
                 Member member = Member.builder()
                         .email("kakao" + kUserId + "@kakao.com")
-                        .nickname(kNickname + " for kakao")
+                        .nickname("(Guest)Kakao" + kUserId)
                         .password(passwordEncoder.encode("1111"))
                         .fromSocial(true)
                         .checkPhone(false)
@@ -102,11 +103,11 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
         // 구글 로그인
         // 소셜로그인 을 하면 DB테이블에 저장하는 작업 (회원가입?)
         Member member = saveSocialMember(oAuth2User.getAttribute("email"),
-                oAuth2User.getAttribute("name"));
+                oAuth2User.getAttribute("id"));
         return new AuthMemberDto(entityToDto(member), true);
     }
 
-    private Member saveSocialMember(String email, String name) {
+    private Member saveSocialMember(String email, String id) {
         Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
 
         if (result.isPresent()) {
@@ -116,7 +117,7 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = Member.builder()
                 .email(email)
-                .nickname(name + " for google")
+                .nickname("(Guest)Google" + id)
                 .password(passwordEncoder.encode("1111")) // 임의 지정
                 .fromSocial(true) // 소셜로그인
                 .checkPhone(false)

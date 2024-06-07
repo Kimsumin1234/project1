@@ -91,7 +91,7 @@ public class CoolSmsController {
         Message message = new Message();
         message.setFrom("01063323055");
         message.setTo(cDto.getPhone());
-        message.setText("[2팀] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
+        message.setText("[Saving Paws] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
 
         session.setAttribute("rNum", rNum);
         session.setAttribute("findId", finDto.getEmail());
@@ -118,7 +118,7 @@ public class CoolSmsController {
         Message message = new Message();
         message.setFrom("01063323055");
         message.setTo(cDto.getPhone());
-        message.setText("[2팀] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
+        message.setText("[Saving Paws] 본인확인\n" + "인증번호[" + rNum + "]를\n" + "화면에 입력해주세요.");
 
         session.setAttribute("rNum", rNum);
         // session.setAttribute("findId", finDto.getEmail());
