@@ -8,6 +8,8 @@ const certNum = document.querySelector("#certNum");
 const phoneCheck = document.querySelector("#phoneCheck");
 const certifCheck = document.querySelector("#certifCheck");
 const btn = document.querySelector(".btn-primary.py-2");
+const phoneCheckSuccess = document.querySelector("#phoneCheckSuccess");
+const certifCheckSuccess = document.querySelector("#certifCheckSuccess");
 console.log(phone);
 const email = document.querySelector("#email");
 
@@ -30,6 +32,8 @@ clearInterval(timer);
 addon1.addEventListener("click", () => {
   clearInterval(timer);
   certifCheck.innerText = "";
+  certifCheckSuccess.innerText = ""; // 변경
+  phoneCheckSuccess.innerHTML = ""; // 변경
   addon2.disabled = false;
 
   const formData = new FormData();
@@ -47,17 +51,22 @@ addon1.addEventListener("click", () => {
     .then((data) => {
       console.log(data);
       if (data.phone == "- 를 제외한 휴대폰 번호를 입력해주세요.") {
+        phoneCheckSuccess.innerHTML = ""; // 변경
         phoneCheck.innerHTML = data.phone;
         addon2.disabled = true;
         return;
       }
       if (data.duplierror) {
+        certification.style.visibility = "hidden"; // 변경
+        phoneCheckSuccess.innerHTML = ""; // 변경
         phoneCheck.innerHTML = data.duplierror;
         addon2.disabled = true;
+        btn.disabled = true; // 변경
         return;
       }
       certification.style.visibility = "visible";
-      phoneCheck.innerHTML = "인증 완료";
+      phoneCheck.innerHTML = ""; // 변경
+      phoneCheckSuccess.innerHTML = "인증 완료"; // 변경
       time = 180;
       timer = setInterval(function () {
         if (time > 0) {
@@ -71,6 +80,7 @@ addon1.addEventListener("click", () => {
         } else {
           certNum.value = null;
           certifCheck.innerText = "";
+          certifCheckSuccess.innerText = ""; // 변경
           btn.disabled = true;
           addon2.disabled = true;
           certification.style.visibility = "hidden";
@@ -94,10 +104,12 @@ addon2.addEventListener("click", () => {
     .then((data) => {
       console.log(data);
       if (data == "fail") {
+        certifCheckSuccess.innerText = ""; // 변경
         certifCheck.innerText = "인증번호를 다시 확인해주세요.";
         btn.disabled = true;
       } else if (data == "success") {
-        certifCheck.innerText = "인증 완료";
+        certifCheck.innerText = ""; // 변경
+        certifCheckSuccess.innerText = "인증 완료"; // 변경
         btn.disabled = false;
       }
     });
