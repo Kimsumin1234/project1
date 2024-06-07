@@ -151,7 +151,7 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("소셜로그인 으로 가입된 회원입니다.");
         }
         if (!member.isPresent()) {
-            throw new IllegalStateException("존재하지 않는 회원 아이디입니다.");
+            throw new IllegalStateException("존재하지 않는 회원 입니다.");
         } else {
             MemberDto memberDto = new MemberDto();
             memberDto.setEmail(member.get().getEmail());
