@@ -19,7 +19,12 @@
                 <li><a th:href="@{/member/edit}"><strong>회원정보 수정</strong> <span class="fa fa-chevron-right"></span></a></li>
                 <li><a th:href="@{/member/leave}"><strong>회원탈퇴</strong>  <span class="fa fa-chevron-right"></span></a></li>
                 <li><a th:href="@{/cart/animalCarts}"><strong>입양문의 내역</strong> <span class="fa fa-chevron-right"></span></a></li>
-                <li><a href="#"><strong>좋아요한 글</strong> <span class="fa fa-chevron-right"></span></a></li>
+                <li><a id="heartList"><strong>좋아요한 글</strong> <span class="fa fa-chevron-right"></span></a></li>
+                <div class="hartlistContainer ">
+                  <ul class="list-group ">
+                    <!-- <li class="list-group-item">An item</li> -->
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -42,5 +47,6 @@
         });
       }
     </script>
+    <script th:src="@{/js/reviewList2.js}"></script>
   </th:block>
 </html>
