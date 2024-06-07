@@ -120,7 +120,7 @@ public class MemberController {
         }
 
         session.invalidate();
-
+        rttr.addFlashAttribute("successPwd", "비밀번호 변경 완료");
         return "redirect:/member/login";
     }
 

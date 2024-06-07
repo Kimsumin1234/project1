@@ -86,6 +86,17 @@
       if (msg2) {
         alert(msg2);
       }
+
+      const msg3 = "[[${successPwd}]]";
+      if (msg3) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: msg3,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     </script>
   </th:block>
 </html>
