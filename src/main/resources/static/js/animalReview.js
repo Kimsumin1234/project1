@@ -128,6 +128,7 @@ reviewList.addEventListener("click", (e) => {
   // 삭제 or 수정 버튼이 눌러졌을 때만 동작 (댓글 전체 선택해도 동작 - 제한 필요)
   // 삭제 or 수정 버튼이 클릭이 되었는지 구분하기
   if (btn.classList.contains("btn-outline-danger")) {
+    if (!confirm("정말로 삭제하시겠습니까?")) return;
     fetch(`/animalReviews/${rno}`, {
       method: "delete",
       headers: {
