@@ -33,9 +33,21 @@
               <p><img th:src="${dto.popfile}" alt="" class="img-fluid" /></p>
               <h2 class="mb-3"></h2>
 
-              <table class="table">
-                <tbody>
-                  <tr>
+              <div class="card shadow-2dp" >
+                <div>&emsp;발견 날짜 : [[${dto.happenDt}]]</div>
+                <div>&emsp;공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</div>
+                <div>&emsp;품종 : [[${dto.kindCd}]]</div>
+                <div>&emsp;나이(추정) : [[${dto.age}]]</div>
+                <div>&emsp;성별 : [[${dto.sexCd}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+                <div>&emsp;보호 장소 : [[${dto.careAddr}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+            </div>
+              
+
+                <!-- <table class="table">
+                  <tbody>
+                    <tr>
                     <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th>
                   </tr>
                   <tr>
@@ -56,11 +68,8 @@
                   <tr>
                     <th scope="row">보호 장소 : [[${dto.careAddr}]]</th>
                   </tr>
-                  <tr>
-                    <th scope="row">체중 : [[${dto.weight}]]</th>
-                  </tr>
                 </tbody>
-              </table>
+              </table> -->
     
               <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p>
               <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p>
@@ -75,11 +84,10 @@
               <!-- 입양문의 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                <div class="form-group">
+                <div class="form-group mt-2">
                   <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
                 </div>
               </form>
-
 
               <div class="carename">
                 <div class="about-author d-flex p-4 bg-light">
@@ -89,9 +97,16 @@
                   <div class="desc">
                       <h3>[[${dto.careNm}]]</h3>
                       <p>전화번호 : [[${dto.careTel}]]</p>
+                      <p>★ 입양 문의는 해당보호소로 문의해주시길 바랍니다.</p>
                   </div>
                 </div>
               </div>
+              
+              <div class="container mt-3">
+                <div id="map" style="width:100%; height:400px;"></div>
+              </div>
+
+
 
               <!-- 댓글 생성 -->
               <div class="animalReview">
@@ -162,6 +177,8 @@
     </body>
   </div>
   <th:block layout:fragment="script">
+    <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc}"></script>
+    <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc&submodules=geocoder}"></script>
     <script>
 
       // csrf 토큰 설정
@@ -182,8 +199,27 @@
       const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
       if (reviewCnt > 0) reviewList.classList.remove("hidden");
 
-    </script>
+      </script>
     <script th:src="@{/js/animalReview.js}"></script>
     <script th:src="@{/js/animalHeart.js}"></script>
+    <script th:src="@{/js/naverMap.js}"></script>
+
+    <style>
+    body {
+      background: #ffffff02;
+      /* 폰트 넣을건지 고민 ! */
+      /* font-size: 30px;
+      font-family: "Dongle", sans-serif; */
+    }
+
+    .shadow-2dp {
+      height: auto;
+      width: auto;
+      /* filter: drop-shadow(0 2px 2px rgba(103, 120, 167, 0.12))
+                          drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+                          drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+                          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1)); */
+    }
+    </style>
   </th:block>
 </html>

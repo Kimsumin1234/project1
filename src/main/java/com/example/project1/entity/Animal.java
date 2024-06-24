@@ -71,4 +71,10 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     List<AnimalHeart> animalHeart = new ArrayList<>();
 
+    // 위도
+    private Long latitude;
+
+    // 경도
+    private Long longitude;
+
 }

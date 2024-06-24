@@ -62,4 +62,10 @@ public class AnimalDto {
     // 하트 개수
     private Long animalCnt;
 
+    // 위도
+    private Long latitude;
+
+    // 경도
+    private Long longitude;
+
 }
