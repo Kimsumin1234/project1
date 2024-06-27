@@ -37,16 +37,17 @@
                 <div class="img-wrap d-flex align-items-stretch">
                     <img class="img align-self-stretch" th:src="${dto.popfile}"></img>
                   </div>
-                  <div class="text pt-3 px-3 pb-4 text-center listname" >
+                  <div class="text pt-3 px-3 pb-2 text-center" >
                     <div class="faded">
                       <tr>
-                        <span scope="col" th:text="${dto.noticeNo}"></span>
                         <div>
+                          <h3 scope="col" th:text="${dto.noticeNo}"></h3>
+                        </div>
+                        <div class="mb-1">
                           <span scope="col" th:text="${dto.careNm}"></span>
                         </div>
-                        <span scope="col" th:text="${dto.kindCd}"></span>
                         <div>
-                          <span scope="col" th:text="${dto.orgNm}"></span>
+                          <!-- <span scope="col" th:text="${dto.orgNm}"></span> -->
                           <div class="heartCnt">
                             좋아요 : <span th:text="${dto.animalCnt}"></span>
                           </div>
@@ -82,5 +83,14 @@
       <script>
       </script>
       <script th:src="@{/js/animalSearch.js}"></script>
+
+      <!-- 폰트 넣을건지 고민 !  -->
+      <!-- <style>
+        body {
+          font-size: 30px;
+          font-family: "Dongle", sans-serif;
+        }
+      </style> -->
+
     </th:block>
 </html>

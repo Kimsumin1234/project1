@@ -38,6 +38,10 @@ public class QAnimal extends EntityPathBase<Animal> {
 
     public final StringPath kindCd = createString("kindCd");
 
+    public final StringPath latitude = createString("latitude");
+
+    public final StringPath longitude = createString("longitude");
+
     public final StringPath neuterYn = createString("neuterYn");
 
     public final StringPath noticeEdt = createString("noticeEdt");

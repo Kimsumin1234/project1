@@ -4,93 +4,79 @@
     <link rel="stylesheet" th:href="@{/css/animal-review.css}">
   </th:block>
   <div layout:fragment="content">
+
     <body>
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar"></nav>
       <!-- END nav -->
       <section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
-        <div class="container" > 
+        <div class="container">
           <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
               <p class="breadcrumbs mb-2">
-                <span class="mr-2"
-                ><a th:href="@{/}">Home<i class="ion-ios-arrow-forward"></i></a
-                  ></span>
-                  <span class="mr-2"
-                  ><a th:href="@{list}">입양목록<i class="ion-ios-arrow-forward"></i></a
-                    ></span>
-                  </p>
-                  <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
-                </div>
-              </div>
+                <span class="mr-2">
+                  <a th:href="@{/}">Home<i class="ion-ios-arrow-forward"></i>
+                  </a>
+                </span>
+                <span class="mr-2">
+                  <a th:href="@{list}">입양목록<i class="ion-ios-arrow-forward"></i>
+                  </a>
+                </span>
+              </p>
+              <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
             </div>
-          </section>
-          
-          <div class="ftco-section ftco-degree-bg animaltext">
-            <div class="container">
-              <div class="row justify-content-center">
+          </div>
+        </div>
+      </section>
+
+      <div class="ftco-section ftco-degree-bg animaltext">
+        <div class="container">
+          <div class="row justify-content-center">
             <div class="col-lg-8 ftco-animate">
-              <p><img th:src="${dto.popfile}" alt="" class="img-fluid" /></p>
+              <p><img th:src="${dto.popfile}" alt="" class="img-fluid"/></p>
               <h2 class="mb-3"></h2>
 
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">품종 : [[${dto.kindCd}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">나이(추정) : [[${dto.age}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">성별 : [[${dto.sexCd}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">체중 : [[${dto.weight}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">보호 장소 : [[${dto.careAddr}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">체중 : [[${dto.weight}]]</th>
-                  </tr>
-                </tbody>
-              </table>
-    
-              <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p>
-              <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p>
-              <p>품종 : [[${dto.kindCd}]]</p>
-              <p>나이(추정) : [[${dto.age}]]</p>
-              <p>성별 : [[${dto.sexCd}]]</p>
-              <p>체중 : [[${dto.weight}]]</p>
-              <p>보호 장소 : [[${dto.careAddr}]]</p>
-              <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
+              <div class="card shadow-2dp">
+                <div>&emsp;발견 날짜 : [[${dto.happenDt}]]</div>
+                <div>&emsp;공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</div>
+                <div>&emsp;품종 : [[${dto.kindCd}]]</div>
+                <div>&emsp;나이(추정) : [[${dto.age}]]</div>
+                <div>&emsp;성별 : [[${dto.sexCd}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+                <div>&emsp;보호 장소 : [[${dto.careAddr}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+              </div>
 
+              <!-- <table class="table"> <tbody> <tr> <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th> </tr> <tr> <th scope="row">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</th> </tr> <tr> <th scope="row">품종 : [[${dto.kindCd}]]</th> </tr> <tr> <th scope="row">나이(추정) : [[${dto.age}]]</th> </tr> <tr> <th scope="row">성별 : [[${dto.sexCd}]]</th> </tr> <tr> <th scope="row">체중 : [[${dto.weight}]]</th> </tr> <tr> <th scope="row">보호 장소 : [[${dto.careAddr}]]</th> </tr> </tbody> </table> -->
+
+              <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p> <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p> <p>품종 : [[${dto.kindCd}]]</p> <p>나이(추정) : [[${dto.age}]]</p> <p>성별 : [[${dto.sexCd}]]</p> <p>체중 : [[${dto.weight}]]</p> <p>보호 장소 : [[${dto.careAddr}]]</p> <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
 
               <!-- 입양문의 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                <div class="form-group">
+                <div class="form-group mt-2">
                   <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
                 </div>
               </form>
 
-
               <div class="carename">
                 <div class="about-author d-flex p-4 bg-light">
                   <div class="bio mr-5">
-                    <img th:src="@{/assets/images/animal.jpg}" alt="Image placeholder" class="img-fluid mb-4" />
+                    <img th:src="@{/images/dog2.jpg}" alt="Image placeholder" class="img-fluid mb-4"/>
                   </div>
                   <div class="desc">
-                      <h3>[[${dto.careNm}]]</h3>
-                      <p>전화번호 : [[${dto.careTel}]]</p>
+                    <h3>[[${dto.careNm}]]</h3>
+                    <p>전화번호 : [[${dto.careTel}]]</p>
+                    <p>★ 입양 문의는 해당보호소로 문의해주시길 바랍니다.</p>
                   </div>
                 </div>
+              </div>
+
+              <div class="container mt-3">
+                <div id="map" style="width:100%; height:400px;"></div>
+                <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                <input type="hidden" name="latitude" id="latitude" th:value="${dto.latitude}"/>
+                <input type="hidden" name="longitude" id="longitude" th:value="${dto.longitude}"/>
               </div>
 
               <!-- 댓글 생성 -->
@@ -101,44 +87,31 @@
                     <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                     <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
                     <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                    <input type="hidden" name="rno" id="rno" />
+                    <input type="hidden" name="rno" id="rno"/>
                     <div class="form-group">
                       <label for="email">이메일</label>
-                      <input type="email" class="form-control" name="email" id="email"th:value="${#authentication.principal.memberDto.email}" />
+                      <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
                     </div>
-            
+
                     <div class="form-group">
                       <label for="text">내용</label>
                       <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                      <input type="submit" value="등록" class="btn py-3 px-4 btn-primary" />
+                      <input type="submit" value="등록" class="btn py-3 px-4 btn-primary"/>
                     </div>
                   </form>
                 </div>
               </div>
               <!-- 댓글 영역 / 좋아요 -->
-                <h5 class="good" sec:authorize="hasRole('ROLE_MEMBER')"><div class="animalHeart" id="animalHeart"></div>
-                  <div class="animalHeartCount"></div></h5>
+              <h5 class="good" sec:authorize="hasRole('ROLE_MEMBER')">
+                <div class="animalHeart" id="animalHeart"></div>
+                <div class="animalHeartCount"></div>
+              </h5>
               <div class="pt-5 mt-5 reviewList">
                 <div class="mb-5">
 
-                <!-- <ul class="comment-list">
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img th:src="@{/assets/images/person_1.jpg}" alt="Image placeholder" />
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">April 7, 2020 at 10:05pm</div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem,
-                        eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?
-                      </p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-                  </li>
-                </ul> -->
+                  <!-- <ul class="comment-list"> <li class="comment"> <div class="vcard bio"> <img th:src="@{/assets/images/person_1.jpg}" alt="Image placeholder" /> </div> <div class="comment-body"> <h3>John Doe</h3> <div class="meta">April 7, 2020 at 10:05pm</div> <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil? </p> <p><a href="#" class="reply">Reply</a></p> </div> </li> </ul> -->
                 </div>
               </div>
             </div>
@@ -146,44 +119,61 @@
           </div>
         </div>
       </div>
-      </section>
-      
-      <!-- .section -->
+    </section>
 
-      <!-- loader -->
-      <!-- <div id="ftco-loader" class="show fullscreen">
-        <svg class="circular" width="48px" height="48px">
-          <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-          <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-        </svg>
-      </div> -->
+    <!-- .section -->
 
+    <!-- loader -->
+    <!-- <div id="ftco-loader" class="show fullscreen"> <svg class="circular" width="48px" height="48px"> <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /> </svg> </div> -->
 
-    </body>
-  </div>
-  <th:block layout:fragment="script">
-    <script>
+  </body>
+</div>
+<th:block layout:fragment="script">
+  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc}"></script>
+  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc&submodules=geocoder}"></script>
+  <script>
 
-      // csrf 토큰 설정
-      const csrfValue = '[[${_csrf.token}]]';
+    // csrf 토큰 설정
+    const csrfValue = '[[${_csrf.token}]]';
 
-      // 입양등록 번호 변수에 담기
-      const sId = "[[${dto.sId}]]";
+    // 입양등록 번호 변수에 담기
+    const sId = "[[${dto.sId}]]";
 
-      // 리뷰 영역 찾기
-      const reviewList = document.querySelector(".reviewList");
+    // 리뷰 영역 찾기
+    const reviewList = document.querySelector(".reviewList");
 
-      const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+    const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
 
-      // 로그인 유저
-      const user = "[[${#authentication.name}]]";
+    // 로그인 유저
+    const user = "[[${#authentication.name}]]";
 
-      // 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
-      const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
-      if (reviewCnt > 0) reviewList.classList.remove("hidden");
+    // 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
+    const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
+    if (reviewCnt > 0) 
+      reviewList
+        .classList
+        .remove("hidden");
+  </script>
+  <script th:src="@{/js/animalReview.js}"></script>
+  <script th:src="@{/js/animalHeart.js}"></script>
+  <script th:src="@{/js/naverMap.js}"></script>
 
-    </script>
-    <script th:src="@{/js/animalReview.js}"></script>
-    <script th:src="@{/js/animalHeart.js}"></script>
-  </th:block>
+  <style>
+    body {
+      background: #ffffff02;
+      /* 폰트 넣을건지 고민 ! */
+      /* font-size: 30px;
+      font-family: "Dongle", sans-serif; */
+    }
+
+    .shadow-2dp {
+      height: auto;
+      width: auto;
+      /* filter: drop-shadow(0 2px 2px rgba(103, 120, 167, 0.12))
+                          drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+                          drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+                          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1)); */
+    }
+  </style>
+</th:block>
 </html>
