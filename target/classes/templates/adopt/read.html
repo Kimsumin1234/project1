@@ -72,6 +72,8 @@
                 </div>
               </div>
 
+              <div id="map-data" th:data-care-nm="${dto.careNm}" th:data-care-addr="${dto.careAddr}"></div>
+
               <div class="container mt-3">
                 <div id="map" style="width:100%; height:400px;"></div>
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
