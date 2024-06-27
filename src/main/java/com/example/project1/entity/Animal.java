@@ -72,9 +72,10 @@ public class Animal {
     List<AnimalHeart> animalHeart = new ArrayList<>();
 
     // 위도
-    private Long latitude;
+    // 자바스크립트에서 parseDouble 사용하여 타입변환하기
+    private String latitude;
 
     // 경도
-    private Long longitude;
+    private String longitude;
 
 }

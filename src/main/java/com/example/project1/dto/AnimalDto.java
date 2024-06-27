@@ -63,9 +63,9 @@ public class AnimalDto {
     private Long animalCnt;
 
     // 위도
-    private Long latitude;
+    private String latitude;
 
     // 경도
-    private Long longitude;
+    private String longitude;
 
 }

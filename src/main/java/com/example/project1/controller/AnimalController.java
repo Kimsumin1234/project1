@@ -1,5 +1,7 @@
 package com.example.project1.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -48,4 +50,5 @@ public class AnimalController {
 
         model.addAttribute("dto", service.getRow(sId));
     }
+
 }
