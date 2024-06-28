@@ -36,7 +36,7 @@ public class ReviewRepositoryTest {
 
     @Test
     public void testInsert() {
-        LongStream.rangeClosed(22, 27).forEach(i -> {
+        LongStream.rangeClosed(1, 5).forEach(i -> {
 
             Member member = Member.builder().mid(i).build();
 

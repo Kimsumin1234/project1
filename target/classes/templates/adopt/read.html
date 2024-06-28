@@ -51,11 +51,11 @@
 
               <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p> <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p> <p>품종 : [[${dto.kindCd}]]</p> <p>나이(추정) : [[${dto.age}]]</p> <p>성별 : [[${dto.sexCd}]]</p> <p>체중 : [[${dto.weight}]]</p> <p>보호 장소 : [[${dto.careAddr}]]</p> <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
 
-              <!-- 입양문의 -->
+              <!-- 찜목록 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
                 <div class="form-group mt-2">
-                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
+                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">찜하기</button>
                 </div>
               </form>
 
