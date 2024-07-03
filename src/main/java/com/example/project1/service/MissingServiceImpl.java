@@ -84,14 +84,27 @@ public class MissingServiceImpl implements MissingService {
 
         Map<String, Object> entityMap = dtoToEntity(missingDto);
 
+        Missing entity = missingRepository.findById(missingDto.getMissno()).get();
+        entity.setTitle(missingDto.getTitle());
+        entity.setText(missingDto.getText());
+
+        missingRepository.save(entity);
+
         // missing 기존 image 제거
         Missing missing = (Missing) entityMap.get("missing");
         missingImageRepository.deleteByMissing(missing);
+
         // Missingimage 삽입
         List<Missingimage> missingImages = (List<Missingimage>) entityMap.get("imgList");
+        if (missingImages != null) {
+            for (Missingimage missingimage : missingImages) {
+                missingimage.setMissing(missing);
+                missingImageRepository.save(missingimage);
+            }
+        }
         missingImages.forEach(img -> missingImageRepository.save(img));
 
-        missingRepository.save((Missing) entityMap.get("missing"));
+        // missingRepository.save((Missing) entityMap.get("missing"));
 
         return missing.getMissno();
     }

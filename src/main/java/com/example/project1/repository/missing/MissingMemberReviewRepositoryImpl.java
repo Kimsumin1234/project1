@@ -14,8 +14,6 @@ import com.example.project1.entity.Missingimage;
 import com.example.project1.entity.QMember;
 import com.example.project1.entity.QMissing;
 import com.example.project1.entity.QMissingimage;
-import com.example.project1.entity.Review;
-import com.example.project1.entity.ReviewImage;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
@@ -94,8 +92,35 @@ public class MissingMemberReviewRepositoryImpl extends QuerydslRepositorySupport
 
     @Override
     public List<Object[]> getRow(Long missno) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRow'");
+        log.info("Missing getRow");
+
+        // Q 클래스 사용
+        QMissing missing = QMissing.missing;
+        QMember member = QMember.member;
+        QMissingimage missingimage = QMissingimage.missingimage;
+
+        // @Query("select b, m from board b left join b.writer m") // findby*
+        JPQLQuery<Missingimage> query = from(missingimage);
+        query.leftJoin(missingimage.missing, missing);
+        // query.leftJoin(reviewImage.review, replyComment.reply.review);
+        // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
+        // JPQLQuery<Long> replyCount =
+        // JPAExpressions.select(reply.replyNo.count().as("replycnt"))
+        // .from(reply)
+        // .where(reply.review.eq(review))
+        // .groupBy(reply.review);
+        // JPAExpressions.select(replyComment.text).from(replyComment)
+        // .where(reply.replyNo.eq(replyComment.reply.replyNo)
+        JPQLQuery<Tuple> tuple = query.select(missing, missingimage,
+                JPAExpressions.select(member.mid).from(member).where(missing.member.eq(member)),
+                JPAExpressions.select(member.email).from(member).where(missing.member.eq(member)),
+                JPAExpressions.select(member.nickname).from(member).where(missing.member.eq(member)))
+                .where(missingimage.missing.missno.eq(missno))
+                .orderBy(missingimage.inum.desc());
+
+        List<Tuple> result = tuple.fetch();
+
+        return result.stream().map(t -> t.toArray()).collect(Collectors.toList()); // Tuple -> Array
     }
 
 }

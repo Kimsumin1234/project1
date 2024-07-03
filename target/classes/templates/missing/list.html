@@ -41,7 +41,10 @@
           <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <div class="row d-flex mt-3">
+        <div class="m-3 row justify-content-end">
+          <a th:href="@{/missing/create}" class="btn btn-primary" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a>
+        </div>
+        <div class="row d-flex mt-2 ml-6">
           <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate">
             <div class="blog-entry align-self-stretch">
               <a th:href="|/upload/display?fileName=${dto.missingImageDtos[0].getImageURL()}|" class="icon image-popup d-flex justify-content-center align-items-center" th:if="${dto.missingImageDtos.size() > 0 && dto.missingImageDtos[0].path != null}">
@@ -70,33 +73,39 @@
                   </div>
                 </div>
                 <h3 class="heading">
-                  <a href="#" th:text="${dto.title}"></a>
-                </h3>
+                  <a th:href="@{/missing/read(missno=${dto.missno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${dto.title}"></h3>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- 페이지 버튼 영역 -->
-        <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul class="pagination justify-content-center">
-                <li th:if="${result.prev}" class="">
-                  <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
-                </li>
+          <!-- 페이지 버튼 영역 -->
+          <div class="row mt-5">
+            <div class="col text-center">
+              <div class="block-27">
+                <ul class="pagination justify-content-center">
+                  <li th:if="${result.prev}" class="">
+                    <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+                  </li>
 
-                <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
-                </li>
+                  <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
+                    <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
+                  </li>
 
-                <li th:if="${result.next}" class="">
-                  <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
-                </li>
-              </ul>
+                  <li th:if="${result.next}" class="">
+                    <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-  </html>
+        </div>
+      </section>
+      <th:block layout:fragment="script">
+        <script th:src="@{/js/missingSearch.js}"></script>
+
+        <!-- 폰트 넣을건지 고민 ! -->
+        <!-- <style> body { font-size: 30px; font-family: "Dongle", sans-serif; } </style> -->
+
+      </th:block>
+    </html>

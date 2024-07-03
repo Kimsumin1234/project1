@@ -92,13 +92,13 @@ public class MissingRepositoryTest {
     // }
     // }
 
-    // @Test
-    // public void testeRow() {
-    // List<Object[]> result = reviewImageRepository.getRow(1L);
-    // for (Object[] objects : result) {
-    // System.out.println(Arrays.toString(objects));
-    // }
-    // }
+    @Test
+    public void testRow() {
+        List<Object[]> result = missingImageRepository.getRow(1L);
+        for (Object[] objects : result) {
+            System.out.println(Arrays.toString(objects));
+        }
+    }
 
     // @Transactional
     // @Test
