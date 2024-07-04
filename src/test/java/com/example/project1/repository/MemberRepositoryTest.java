@@ -20,14 +20,7 @@ public class MemberRepositoryTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     // @Transactional
->>>>>>> mando1
-=======
-    // @Transactional
->>>>>>> mando1
     public void memberInsertTest() {
         IntStream.rangeClosed(1, 10).forEach(i -> {
             Member member = Member.builder()
@@ -43,7 +36,6 @@ public class MemberRepositoryTest {
         });
         // 데이터가 제대로 저장되었는지 확인하기 위해 flush를 호출합니다.
         memberRepository.flush();
-<<<<<<< HEAD
     }
 
     @Test
@@ -60,8 +52,6 @@ public class MemberRepositoryTest {
                 .build();
         memberRepository.save(member);
 
-=======
->>>>>>> mando1
     }
 
 }
