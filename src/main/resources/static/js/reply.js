@@ -22,7 +22,7 @@ const reviewsLoaded = () => {
       data.forEach((reply) => {
         console.log(reply.replyNo);
         let replyNo = reply.replyNo;
-        result += `<li class="comment" data-replyNo="${reply.replyNo}">
+        result += `<li class="comment p-3 mb-0" data-replyNo="${reply.replyNo}">
                               <div class="vcard bio">
                                   <img src="data:image/jpeg;base64,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" alt="Image placeholder" />
                               </div>
@@ -31,12 +31,14 @@ const reviewsLoaded = () => {
                                   <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
                                   <p class="text-break">${reply.text}
                                   </p>
-                                  <p>`;
+                                  <p>
+                                    <div class="bottom">
+                                      <a href="#" class="btn btn-light">답글</a>`;
         if (`${reply.email}` == user) {
           result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
           result += '<button class="btn btn-outline-success btn-sm">수정</button>';
         }
-        result += `</p></div>`;
+        result += `</div></p></div>`;
         result += `</li>`;
 
         console.log("댓글");
@@ -47,8 +49,9 @@ const reviewsLoaded = () => {
           reply.comments.forEach((comment, idx) => {
             console.log(comment);
 
-            result += `<ul class="children pt-0">
-            <li class="replyComment" data-commentNo="${comment.commentNo}">
+            result += `
+            <li class="replyComment p-3 pl-5 mb-0" data-commentNo="${comment.commentNo}">
+            <i class="fa fa-arrow-right"></i>
             <input type="hidden" class="comment" value="${replyNo}" />
             <div class="vcard bio">
             <img src="data:image/jpeg;base64,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" alt="Image placeholder"/>
@@ -58,21 +61,25 @@ const reviewsLoaded = () => {
             <div class="meta">${formatDate(comment.lastModifiedDate)}</div>
             <p class="text-break">${comment.text}
             </p>
-            <p>`;
+            <p>
+              <div class="bottom">
+                <a href="#" class="btn btn-light">답글</a>
+              `;
             if (`${comment.email}` == user) {
               result += '<button class="btn btn-danger btn-sm">삭제</button>';
               result += '<button class="btn btn-success btn-sm reply2">수정</button>';
             }
-            result += `</p></li>`;
+            result += `</div></p></li>`;
             if (idx == reply.comments.length - 1 && user != "anonymousUser") {
               result += `<form action="/comment/add" class="comment-form" method="post">
               
+
               <input type="hidden" name="commentNo"/>
               <input type="hidden" name="replyNo" value="${replyNo}"/>
               <input type="hidden" name="mid" value="${mid}"/>
               <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
               <input type="hidden" class="form-control" name="email" value="${user}"/>
-              
+                            
               <div class="form-group">
                 <div class="input-group mb-3">
                   <input name="text" id="commentText" class="form-control"></input>
@@ -81,7 +88,7 @@ const reviewsLoaded = () => {
               </div>
             </form>`;
             }
-            result += `</ul>`;
+            result += ``;
           });
         } else if (reply.comments.length == 0 && user != "anonymousUser") {
           result += `<form action="/comment/add" class="comment-form" method="post" >
@@ -118,6 +125,7 @@ reviewsLoaded(); // 나중에 댓글을 수정했을때 바로바로 업데이�
 
 // 리뷰 등록 or 수정
 const reviewForm = document.querySelector(".review-form");
+// if 로그인 했을때
 reviewForm.addEventListener("submit", (e) => {
   e.preventDefault();
   // text, grade, mid, mno
