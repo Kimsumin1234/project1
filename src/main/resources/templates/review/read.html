@@ -25,6 +25,7 @@
                     <i class="ion-ios-arrow-forward"></i>
                   </a>
                 </span>
+<<<<<<< HEAD
                 <!-- <span>Blog Single <i class="ion-ios-arrow-forward"></i></span> -->
               </p>
               <h1 class="mb-0 bread" th:text="${dto.title}">Blog</h1>
@@ -130,11 +131,113 @@
       <script>
 
         const csrfValue = "[[${_csrf.token}]]"
+=======
+                <span>Blog Single
+                  <i class="ion-ios-arrow-forward"></i>
+                </span>
+              </p>
+              <h1 class="mb-0 bread">Blog</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        const replyList = document.querySelector(".replyList");
-        const rno = "[[${dto.rno}]]";
-        const title = "[[${dto.title}]]";
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container justify-content-center">
+        <div class="row">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-6 ftco-animate">
+            <div class="row justify-content-end mt-5">조회수 [<span th:text="${dto.viewCount}"></span>]</div>
+            <div class="uploadResult mb-4">
+              <ul>
+                <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
+                  <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
+                </li>
+              </ul>
+            </div>
+            <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
+            <p class="text-break" th:text="${dto.text}">
+              text 내용 들어갈 자리
+            </p>
+            <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
+              <div class="">
+                <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
+                <a href="" class="btn btn-danger">삭제</a>
+                <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록</a>
+              </div>
+              <form method="post" id="actionForm" th:action="@{/review/remove}">
+                <input type="hidden" name="rno" th:value="${dto.rno}"/>
+                <input type="hidden" name="page" th:value="${requestDto.page}"/>
+                <input type="hidden" name="type" th:value="${requestDto.type}"/>
+                <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
+              </form>
+            </div>
 
+            <div class="about-author d-flex p-1 bg-light">
+              <div class="bio mr-5 w-25 p-3">
+                <img src="data:image/jpeg;base64,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" alt="Image placeholder" class="img-fluid mb-4"/>
+              </div>
+              <div class="desc mt-4">
+                <h3 th:text="${dto.nickname}">멤버 정보</h3>
+                <p th:text="${dto.email}">
+                  멤버 정보
+                </p>
+              </div>
+            </div>
+
+            <!-- reply 들어갈 자리 -->
+            <div class="pt-5 mt-5">
+              <h3 class="mb-5" sec:authorize="hasRole('ROLE_MEMBER')">
+                <span>
+                  <div class="" id="heart"></div>
+                  <span class="heartCount" th:text="${dto.heartCount}"></span></h3>
+                <h3 class="mb-5">
+                  <span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
+                  <!-- js 에서 처리할꺼임 -->
+                  <div class="comment-form-wrap p-3" sec:authorize="hasRole('ROLE_MEMBER')">
+                    <h3 class="mb-5">Leave a comment</h3>
+                    <form th:action="@{/review/add}" class="review-form p-5 bg-light " method="post">
+                      <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                      <input type="hidden" name="replyNo" id="replyNo"/>
+                      <div class="form-group">
+                        <label for="name" hidden="hidden">닉네임 *</label>
+                        <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly="readonly" hidden="hidden"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="email" hidden="hidden">Email *</label>
+                        <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}" readonly="readonly" hidden="hidden"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="message">댓글</label>
+                        <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn py-3 px-4 btn-primary">댓글 등록</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="comment-form-wrap p-5">
+                    <ul class="comment-list replyList list-group" id="replyList"></ul>
+                  </div>
+                  <!-- END comment-list -->
+
+                </div>
+              </div>
+              <div class="col-lg-3"></div>
+              <!-- .col-md-8 -->
+            </div>
+          </div>
+        </section>
+        <!-- .section -->
+      </div>
+      <th:block layout:fragment="script">
+        <script>
+>>>>>>> mando1
+
+          const csrfValue = "[[${_csrf.token}]]"
+
+<<<<<<< HEAD
         const user = "[[${#authentication.name}]]";
         const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
         const nickname = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.nickname}]]"
@@ -143,3 +246,17 @@
       <script th:src="@{/js/heart.js}"></script>
     </th:block>
   </html>
+=======
+          const replyList = document.querySelector(".replyList");
+          const rno = "[[${dto.rno}]]";
+          const title = "[[${dto.title}]]";
+
+          const user = "[[${#authentication.name}]]";
+          const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+          const nickname = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.nickname}]]"
+        </script>
+        <script th:src="@{/js/reply.js}"></script>
+        <script th:src="@{/js/heart.js}"></script>
+      </th:block>
+    </html>
+>>>>>>> mando1

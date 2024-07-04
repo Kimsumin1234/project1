@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet"/>
+  <div layout:fragment="content">
+    <!-- END nav -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs mb-2">
+              <span class="mr-2">
+                <a th:href="@{/}">Home
+                  <i class="ion-ios-arrow-forward"></i>
+                </a>
+              </span>
+              <span class="mr-2">
+                <a th:href="@{/missing/list}">실종·신고
+                  <i class="ion-ios-arrow-forward"></i>
+                </a>
+              </span>
+              <span>Blog Single<i class="ion-ios-arrow-forward"></i>
+              </span>
+            </p>
+            <h1 class="mb-0 bread">CREATE</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container justify-content-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="comment-form-wrap pt-5 col-md-10 col-lg-8 col-xl-7" sec:authorize="hasRole('ROLE_MEMBER')">
+            <h3 class="mb-5">글작성</h3>
+            <form class="register-form mb-3" th:action="@{/missing/create}" id="register-form" method="post" th:object="${missingDto}" novalidate="novalidate">
+              <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+              <input type="hidden" name="replyNo" id="replyNo"/>
+              <div class="form-group mb-3">
+                <label for="nickname">닉네임 *</label>
+                <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly="readonly"/>
+              </div>
+              <div class="form-group mb-3">
+                <label for="email">Email *</label>
+                <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}" readonly="readonly"/>
+              </div>
+              <div class="form-group mb-3">
+                <span class="block text-gray-700 dark:text-gray-400">Image Files</span>
+                <input type="file" class="block w-full mt-1 form-control text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" id="fileInput" multiple="multiple"/>
+                <div class="uploadResult">
+                  <ul style="list-style-type: none"></ul>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="title">제목 *</label>
+                <input type="text" class="form-control" name="title" id="title"/>
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="text">내용 *</label>
+                <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="text-danger"></div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn py-3 px-4 btn-primary">작성 완료</button>
+              </div>
+              <div class="about-author d-flex p-4 bg-light">
+                <div class="bio mr-5">
+                  <img th:src="@{/assets/images/replyperson_1.jpg}" alt="Image placeholder" class="img-fluid mb-4" style="width: 150px"/>
+                </div>
+                <div class="desc">
+                  <input type="hidden" name="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                  <h3 name="nickname" th:text="${#authentication.principal.memberDto.nickname}">닉네임</h3>
+                  <p name="email" th:text="${#authentication.principal.memberDto.email}">이메일</p>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-3"></div>
+          <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section>
+    <!-- .section -->
+  </div>
+  <th:block layout:fragment="script">
+    <script>
+      const csrfValue = "[[${_csrf.token}]]";
+    </script>
+    <script th:src="@{/js/create.js}"></script>
+    <script th:src="@{/js/imageupload.js}"></script>
+  </th:block>
+</html>

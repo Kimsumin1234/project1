@@ -120,3 +120,45 @@
   margin-left: 6px;
   padding-left: 9px;
 }
+<<<<<<< HEAD
+=======
+
+.dongle-regular {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* missing 댓글 삭제 영역 */
+.missingdel {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.missingMod {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* missing 이미지 영역 */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.onebonimg {
+  width: 300px;
+  height: 300px;
+}
+
+.missingtitle p {
+  font-size: 19px;
+  color: #000000;
+}
+
+.missimg {
+  width: 210px;
+  height: 210px;
+}
+>>>>>>> mando1
