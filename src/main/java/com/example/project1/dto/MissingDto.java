@@ -31,6 +31,9 @@ public class MissingDto {
     @NotBlank(message = "내용을 입력해주세요.")
     private String text;
 
+    // 댓글 수
+    private Long replyCount;
+
     // member
     private Long mid;
     private String email;

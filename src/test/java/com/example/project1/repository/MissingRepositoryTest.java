@@ -31,10 +31,6 @@ public class MissingRepositoryTest {
     private MissingImageRepository missingImageRepository;
     @Autowired
     private ReviewReplyRepository replyRepository;
-    @Autowired
-    private ReviewReplyCommentRepository commentRepository;
-    @Autowired
-    private HeartRepository heartRepository;
 
     @Test
     public void testInsert() {

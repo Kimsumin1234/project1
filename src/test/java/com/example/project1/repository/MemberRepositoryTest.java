@@ -22,9 +22,9 @@ public class MemberRepositoryTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    @Transactional
+    // @Transactional
     public void memberInsertTest() {
-        IntStream.rangeClosed(0, 9).forEach(i -> {
+        IntStream.rangeClosed(1, 10).forEach(i -> {
             Member member = Member.builder()
                     .email("member" + i + "@naver.com")
                     .nickname("User" + i)
@@ -36,6 +36,8 @@ public class MemberRepositoryTest {
                     .build();
             memberRepository.save(member);
         });
+        // 데이터가 제대로 저장되었는지 확인하기 위해 flush를 호출합니다.
+        memberRepository.flush();
     }
 
 }

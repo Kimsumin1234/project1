@@ -38,7 +38,7 @@ public interface MissingService {
 
     // entity, dto 형변환
     public default MissingDto entityToDto(Missing missing, List<Missingimage> missingImages, Long mid, String email,
-            String nickname) {
+            String nickname, Long replyCount) {
         MissingDto missingDto = MissingDto.builder()
                 .missno(missing.getMissno())
                 .title(missing.getTitle())
@@ -46,6 +46,7 @@ public interface MissingService {
                 .mid(mid)
                 .email(email)
                 .nickname(nickname)
+                .replyCount(replyCount != null ? replyCount : 0)
                 .createdDate(missing.getCreatedDate())
                 .lastModifiedDate(missing.getLastModifiedDate())
                 .build();

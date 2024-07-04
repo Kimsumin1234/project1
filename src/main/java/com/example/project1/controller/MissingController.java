@@ -20,7 +20,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Log4j2
 @Controller
@@ -30,7 +29,6 @@ public class MissingController {
 
     private final MissingService service;
 
-    @PreAuthorize("permitAll()")
     @GetMapping("/list")
     public void getReviewList(@ModelAttribute("requestDto") PageRequestDto requestDto, Model model) {
         log.info("missing controller 요청");
@@ -40,7 +38,6 @@ public class MissingController {
         model.addAttribute("result", result);
     }
 
-    @PreAuthorize("permitAll()")
     @GetMapping("/read")
     public void getRead(@RequestParam Long missno, Model model,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
@@ -52,7 +49,7 @@ public class MissingController {
 
     }
 
-    @PreAuthorize("hasRole('MEMBER')")
+    // @PreAuthorize("hasRole('MEMBER')")
     @GetMapping({ "/modify" })
     public void getModify(@RequestParam Long missno, Model model,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {

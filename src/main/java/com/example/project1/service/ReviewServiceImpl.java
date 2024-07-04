@@ -23,7 +23,6 @@ import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.repository.HeartRepository;
-import com.example.project1.repository.MemberRepository;
 import com.example.project1.repository.ReviewImageRepository;
 import com.example.project1.repository.ReviewReplyCommentRepository;
 import com.example.project1.repository.ReviewReplyRepository;

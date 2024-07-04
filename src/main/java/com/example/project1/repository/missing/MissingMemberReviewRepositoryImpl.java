@@ -13,6 +13,7 @@ import com.example.project1.entity.Missing;
 import com.example.project1.entity.Missingimage;
 import com.example.project1.entity.QMember;
 import com.example.project1.entity.QMissing;
+import com.example.project1.entity.QMissingReply;
 import com.example.project1.entity.QMissingimage;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
@@ -39,14 +40,21 @@ public class MissingMemberReviewRepositoryImpl extends QuerydslRepositorySupport
         QMissing missing = QMissing.missing;
         QMember member = QMember.member;
         QMissingimage missingimage = QMissingimage.missingimage;
+        QMissingReply reply = QMissingReply.missingReply;
 
         JPQLQuery<Missingimage> query = from(missingimage);
         query.leftJoin(missingimage.missing, missing);
 
+        JPQLQuery<Long> replyCount = JPAExpressions.select(reply.missrno.count().as("replycnt"))
+                .from(reply)
+                .where(reply.missing.eq(missing))
+                .groupBy(reply.missing);
+
         JPQLQuery<Tuple> tuple = query.select(missing, missingimage,
                 JPAExpressions.select(member.mid).from(member).where(missing.member.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(missing.member.eq(member)),
-                JPAExpressions.select(member.nickname).from(member).where(missing.member.eq(member)))
+                JPAExpressions.select(member.nickname).from(member).where(missing.member.eq(member)),
+                replyCount)
                 .where(missingimage.inum.in(
                         JPAExpressions.select(missingimage.inum.min()).from(missingimage)
                                 .groupBy(missingimage.missing)));
@@ -98,23 +106,20 @@ public class MissingMemberReviewRepositoryImpl extends QuerydslRepositorySupport
         QMissing missing = QMissing.missing;
         QMember member = QMember.member;
         QMissingimage missingimage = QMissingimage.missingimage;
+        QMissingReply reply = QMissingReply.missingReply;
 
         // @Query("select b, m from board b left join b.writer m") // findby*
         JPQLQuery<Missingimage> query = from(missingimage);
         query.leftJoin(missingimage.missing, missing);
-        // query.leftJoin(reviewImage.review, replyComment.reply.review);
         // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
-        // JPQLQuery<Long> replyCount =
-        // JPAExpressions.select(reply.replyNo.count().as("replycnt"))
-        // .from(reply)
-        // .where(reply.review.eq(review))
-        // .groupBy(reply.review);
-        // JPAExpressions.select(replyComment.text).from(replyComment)
-        // .where(reply.replyNo.eq(replyComment.reply.replyNo)
+        JPQLQuery<Long> replyCount = JPAExpressions.select(reply.missrno.count().as("replycnt"))
+                .from(reply)
+                .where(reply.missing.eq(missing))
+                .groupBy(reply.missing);
         JPQLQuery<Tuple> tuple = query.select(missing, missingimage,
                 JPAExpressions.select(member.mid).from(member).where(missing.member.eq(member)),
                 JPAExpressions.select(member.email).from(member).where(missing.member.eq(member)),
-                JPAExpressions.select(member.nickname).from(member).where(missing.member.eq(member)))
+                JPAExpressions.select(member.nickname).from(member).where(missing.member.eq(member)), replyCount)
                 .where(missingimage.missing.missno.eq(missno))
                 .orderBy(missingimage.inum.desc());
 

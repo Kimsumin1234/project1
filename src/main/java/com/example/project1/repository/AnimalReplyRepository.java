@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.project1.entity.Animal;
 import com.example.project1.entity.AnimalReply;
-import com.example.project1.entity.Review;
 
 public interface AnimalReplyRepository extends JpaRepository<AnimalReply, Long> {
 

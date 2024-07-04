@@ -3,6 +3,8 @@ package com.example.project1.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,5 +48,9 @@ public class Missing extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "missing", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Missingimage> missingImages = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "missing", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<MissingReply> missingreply = new ArrayList<>();
 
 }

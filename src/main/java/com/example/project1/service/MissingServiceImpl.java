@@ -44,7 +44,7 @@ public class MissingServiceImpl implements MissingService {
 
         Function<Object[], MissingDto> fn = (entity -> entityToDto((Missing) entity[0],
                 (List<Missingimage>) Arrays.asList((Missingimage) entity[1]), (Long) entity[2],
-                (String) entity[3], (String) entity[4]));
+                (String) entity[3], (String) entity[4], (Long) entity[5]));
         return new PageResultDto<>(result, fn);
     }
 
@@ -56,6 +56,7 @@ public class MissingServiceImpl implements MissingService {
         Long mid = (Long) result.get(0)[2];
         String email = (String) result.get(0)[3];
         String nickname = (String) result.get(0)[4];
+        Long reviewCnt = (Long) result.get(0)[5];
 
         List<Missingimage> missingImages = new ArrayList<>();
         result.forEach(arr -> {
@@ -63,7 +64,7 @@ public class MissingServiceImpl implements MissingService {
             missingImages.add(missingImage);
         });
 
-        return entityToDto(missing, missingImages, mid, email, nickname);
+        return entityToDto(missing, missingImages, mid, email, nickname, reviewCnt);
     }
 
     @Override
@@ -112,12 +113,13 @@ public class MissingServiceImpl implements MissingService {
     @Transactional
     @Override
     public void missingRemove(Long missno) {
-        // 모든 댓글 지우고, 글 삭제
 
-        Missing missing = missingRepository.findById(missno).get();
-
-        missingImageRepository.deleteByMissing(missing);
+        // cascade 해서 글만 삭제해도 자동으로 자식도 지워지게함.
         missingRepository.deleteById(missno);
+
+        // 모든 댓글 지우고, 글 삭제
+        // missingImageRepository.deleteByMissing(missing);
+        // Missing missing = missingRepository.findById(missno).get();
     }
 
 }

@@ -34,6 +34,8 @@ public class QMissing extends EntityPathBase<Missing> {
 
     public final ListPath<Missingimage, QMissingimage> missingImages = this.<Missingimage, QMissingimage>createList("missingImages", Missingimage.class, QMissingimage.class, PathInits.DIRECT2);
 
+    public final ListPath<MissingReply, QMissingReply> missingreply = this.<MissingReply, QMissingReply>createList("missingreply", MissingReply.class, QMissingReply.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> missno = createNumber("missno", Long.class);
 
     public final StringPath text = createString("text");

@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet"/>
-  <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/animal-review.css}">
-  </th:block>
-  <div layout:fragment="content">
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-            <p class="breadcrumbs mb-2">
-              <span class="mr-2">
-                <a href="index.html">Home
-                  <i class="ion-ios-arrow-forward"></i>
-                </a>
-              </span>
-              <span class="mr-2">
-                <a th:href="@{/missing/list}">실종·신고게시판
-                  <i class="ion-ios-arrow-forward"></i>
-                </a>
-              </span>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet"/>
+    <th:block layout:fragment="css">
+      <link rel="stylesheet" th:href="@{/css/animal-review.css}">
+    </th:block>
+  </head>
+
+  <body>
+    <div layout:fragment="content">
+      <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+              <p class="breadcrumbs mb-2">
+                <span class="mr-2">
+                  <a th:href="@{/}">Home
+                    <i class="ion-ios-arrow-forward"></i>
+                  </a>
+                </span>
+                <span class="mr-2">
+                  <a th:href="@{/missing/list}">실종·신고게시판
+                    <i class="ion-ios-arrow-forward"></i>
+                  </a>
+                </span>
+              </p>
               <h1 class="mb-0 bread">[[${dto.title}]]</h1>
-            </span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="ftco-section ftco-degree-bg">
-      <div class="container justify-content-center">
-        <div class="row">
-          <div class="col-lg-8 ftco-animate">
-            <p>
-              <img src="images/image_1.jpg" alt="" class="img-fluid">
-            </p>
-            <h2 class="mb-3"></h2>
-            <ul>
-              <li th:each="image : ${dto.missingImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
-                <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
-              </li>
-            </ul>
-            <div>
-              <p class="text-break">
-                <!-- <img src="images/image_2.jpg" alt="" class="img-fluid">-->
-                <h3 th:text="${dto.title}"></h3>
-                <p th:text="${dto.text}"></p>
+      <section class="ftco-section ftco-degree-bg">
+        <div class="container justify-content-center">
+          <div class="row">
+            <div class="col-lg-8 ftco-animate">
+              <p>
+                <img src="images/image_1.jpg" alt="" class="img-fluid">
+              </p>
+              <div class="uploadResult mb-4">
+                <ul>
+                  <li th:each="image : ${dto.missingImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
+                    <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h2 th:text="${dto.title}"></h2>
+                <p class="text-break" th:text="${dto.text}"></p>
               </div>
               <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
                 <div class="">
@@ -64,57 +67,60 @@
                 </form>
               </div>
 
-              <div class="pt-5 mt-5">
-                <h3 class="mb-5">6 Comments</h3>
-                <ul class="comment-list">
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img src="images/person_1.jpg" alt="Image placeholder">
+              <!-- 댓글 생성 -->
+              <div class="MissingReview">
+                <div class="comment-form-wrap pt-5">
+                  <h3 class="review-cnt" th:text="${dto.replyCount}"></h3>
+                  <form th:action="@{/missingreply/}" method="post" id="replyForm" name="replyForm" class="p-5 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
+                    <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                    <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
+                    <input type="hidden" name="missno" id="missno" th:value="${dto.missno}"/>
+                    <input type="hidden" name="missrno" id="missrno"/>
+                    <div class="form-group">
+                      <label for="email">이메일</label>
+                      <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
                     </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">April 7, 2020 at 10:05pm</div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                      <p>
-                        <a href="#" class="reply">Reply</a>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <!-- END comment-list -->
 
-        <!-- 댓글 작성 -->
-        <div class="comment-form-wrap pt-5">
-          <h3 class="mb-5">Leave a comment</h3>
-          <form action="#" class="p-5 bg-light">
-            <div class="form-group">
-              <label for="name">Name *</label>
-              <input type="text" class="form-control" id="name">
+                    <div class="form-group">
+                      <label for="text">내용</label>
+                      <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" value="등록" class="btn py-3 px-4 btn-primary"/>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- 댓글 영역 -->
+              <div class="pt-5 mt-5 reviewList" id="reviewList">
+                <div class="mb-5"></div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-            </div>
-          </form>
+            <!-- END comment-list -->
+          </div>
         </div>
-        <!-- 댓글 END -->
-      </div>
+      </section>
     </div>
-  </div>
-</div>
-</section>
-<th:block layout:fragment="script">
-<script th:src="@{/js/missingmodify.js}"></script>
-</th:block>
+    <th:block layout:fragment="script">
+      <script>
+        // csrf 토큰 설정
+        const csrfValue = '[[${_csrf.token}]]';
+
+        // 입양등록 번호 변수에 담기
+        const missno = "[[${dto.missno}]]";
+
+        // 리뷰 영역 찾기
+        const reviewList = document.querySelector(".reviewList");
+
+        const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+        const nickname = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.nickname}]]"
+
+        // 로그인 유저
+        const user = "[[${#authentication.name}]]";
+      </script>
+
+      <script th:src="@{/js/missingmodify.js}"></script>
+      <script th:src="@{/js/missingreply.js}"></script>
+    </th:block>
+  </body>
 </html>
