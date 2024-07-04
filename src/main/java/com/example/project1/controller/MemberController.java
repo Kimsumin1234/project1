@@ -46,8 +46,20 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public void getLogin() {
-        log.info("로그인 페이지 요청");
+    public void getLogin(String error, Model model, String oauth, HttpSession session, HttpServletRequest request) {
+
+        log.info("로그인 페이지 요청 {}", session.getAttribute("oauth"));
+
+        if (session.getAttribute("oauth") != null) {
+            session.invalidate();
+            model.addAttribute("oauth", "회원님의 소셜 계정 이메일과 동일한 이메일 주소가 이미 가입되어 있습니다.");
+        }
+
+    }
+
+    @GetMapping("/oauth2")
+    public void getOAuth2() {
+        log.info("소셜 페이지 요청");
     }
 
     @PreAuthorize("isAuthenticated()")

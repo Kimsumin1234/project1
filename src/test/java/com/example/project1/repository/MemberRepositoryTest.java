@@ -35,4 +35,20 @@ public class MemberRepositoryTest {
         });
     }
 
+    @Test
+    public void memberInsertTest2() {
+        // whshaks14@gmail.com
+        Member member = Member.builder()
+                .email("whshaks14@gmail.com")
+                .nickname("김수민1")
+                .phone("01013335555")
+                .checkPhone(true)
+                .password(passwordEncoder.encode("1111"))
+                .fromSocial(false)
+                .role(MemberRole.MEMBER)
+                .build();
+        memberRepository.save(member);
+
+    }
+
 }

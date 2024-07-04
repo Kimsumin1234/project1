@@ -51,6 +51,9 @@
     </div>
     <div class="container">
       <div class="row d-md-flex justify-content-center">
+        <!-- <div class="alert alert-danger col-md-12" th:if="${oauth}" style="float: none; margin: 0 auto">
+          <strong>소셜로그인 중복가입 [[${oauth}]]</strong>
+        </div> -->
         <div class="col-sm-6 col-md-4 m-2 mb-5">
           <h4 class="text-center" style="border-bottom: 3px whitesmoke solid; color: whitesmoke"><strong>소셜 로그인</strong></h4>
           <a class="ml-2" href="/oauth2/authorization/google">
@@ -96,6 +99,11 @@
           showConfirmButton: false,
           timer: 1500,
         });
+      }
+
+      const msg4 = "[[${oauth}]]";
+      if (msg4) {
+        alert(msg4);
       }
     </script>
   </th:block>

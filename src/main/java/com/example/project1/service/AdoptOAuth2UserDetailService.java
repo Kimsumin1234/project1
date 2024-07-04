@@ -21,6 +21,7 @@ import com.example.project1.entity.Member;
 import com.example.project1.repository.MemberRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -107,9 +108,14 @@ public class AdoptOAuth2UserDetailService extends DefaultOAuth2UserService {
         return new AuthMemberDto(entityToDto(member), true);
     }
 
-    private Member saveSocialMember(String email, String id) {
-        Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
+    private Member saveSocialMember(String email, String id) throws OAuth2AuthenticationException {
+        Optional<Member> result2 = memberRepository.findByEmailAndFromSocial(email, false);
+        if (result2.isPresent()) {
 
+            throw new OAuth2AuthenticationException("OAuth2Error");
+        }
+
+        Optional<Member> result = memberRepository.findByEmailAndFromSocial(email, true);
         if (result.isPresent()) {
             // 찾은 이메일이 회원이 되있으면 여기서 끝
             return result.get();
