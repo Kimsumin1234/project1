@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
   <!-- 구글폰트 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
   <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/animal-review.css}">
@@ -10,8 +10,7 @@
   <section class="ftco-section bg-light">
     <div layout:fragment="content" class="container">
       <div>
-        <h3 class="cartname">
-          입양문의 신청내역 : [[${#lists.size(cartItems)}]] 마리</h3>
+        <h3 class="cartname"> 입양문의 신청내역 : [[${#lists.size(cartItems)}]] 마리</h3>
       </div>
         <table class="table" th:if="${#lists.size(cartItems) <= 1}">
         <thead>
@@ -29,7 +28,7 @@
           <div>
             <form th:action="@{/cart/delete}" method="post" id="deleteForm" name="deleteForm">
               <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
-              <button class="btn btn-warning" for="btn-check-2" id="deleteCart">찜취소</button>
+              <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
             </form>
           </div>
         </tr>
@@ -45,7 +44,7 @@
         <div>
           <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm" class="deleteCartForm">
             <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
-            <button class="btn btn-warning" for="btn-check-2" id="deleteCart">찜취소</button>
+            <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
           </form>
         </div>  
       </div>

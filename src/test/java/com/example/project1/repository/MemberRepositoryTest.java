@@ -10,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.project1.constant.MemberRole;
 import com.example.project1.entity.Member;
 
-import jakarta.transaction.Transactional;
-
 @SpringBootTest
 public class MemberRepositoryTest {
 
@@ -22,7 +20,6 @@ public class MemberRepositoryTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    @Transactional
     public void memberInsertTest() {
         IntStream.rangeClosed(0, 9).forEach(i -> {
             Member member = Member.builder()

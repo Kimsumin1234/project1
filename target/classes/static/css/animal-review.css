@@ -1,6 +1,6 @@
 /* read 보호소이름 */
 .carename {
-  width: 100%;
+  width: 120%;
   font-size: 18px;
 }
 
@@ -92,7 +92,7 @@
 
 /* 하트 거리 */
 #animalHeart {
-  margin-left: 4px;
+  margin-left: 6px;
   padding-left: 9px;
 }
 
@@ -119,10 +119,4 @@
 .animalReviewMod {
   margin-left: 6px;
   padding-left: 9px;
-}
-
-.dongle-regular {
-  font-family: "Dongle", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
