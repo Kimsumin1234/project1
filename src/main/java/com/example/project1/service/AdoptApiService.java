@@ -1,15 +1,22 @@
 package com.example.project1.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.project1.dto.AnimalDto;
 import com.example.project1.dto.PageRequestDto;
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
+import com.example.project1.repository.AnimalRepository;
 
 public interface AdoptApiService {
 
     PageResultDto<AnimalDto, Object[]> getList(PageRequestDto requestDto);
 
     AnimalDto getRow(Long sId);
+
+    // List<Animal> getAllAnimals(Long sId);
 
     // entity → dto
     public default AnimalDto entityToDto(Animal animal, Long animalCnt) {
@@ -36,6 +43,8 @@ public interface AdoptApiService {
                 .orgNmc(animal.getOrgNmc())
                 .officetel(animal.getOfficetel())
                 .animalCnt(animalCnt != null ? animalCnt : 0)
+                .latitude(animal.getLatitude())
+                .longitude(animal.getLongitude())
                 .build();
     }
 
@@ -63,6 +72,8 @@ public interface AdoptApiService {
                 .orgNm(dto.getOrgNm())
                 .orgNmc(dto.getOrgNmc())
                 .officetel(dto.getOfficetel())
+                .latitude(dto.getLatitude())
+                .longitude(dto.getLongitude())
                 .build();
     }
 }
