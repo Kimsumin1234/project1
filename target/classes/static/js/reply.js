@@ -53,7 +53,7 @@ const reviewsLoaded = () => {
            
             <div class="form-group">
               <div class="input-group mb-3">
-                <input name="text" id="commentText" class="form-control"></input>
+                <input name="text" id="commentText" class="form-control" value="@${nickname} "></input>
                 <button type="submit" class="btn  btn-primary" >답글 등록</button>
               </div>
             </div>
@@ -86,24 +86,21 @@ const reviewsLoaded = () => {
               result += '<button class="btn btn-success btn-sm reply2">수정</button>';
             }
             result += `</div></p>`;
-            if (idx == reply.comments.length - 1) {
-              // && user != "anonymousUser"
-              result += `<form action="/comment/add" class="comment-form hidden" method="post">
 
+            result += `<form action="/comment/add" class="comment-form hidden" method="post">
               <input type="hidden" name="commentNo"/>
               <input type="hidden" name="replyNo" value="${replyNo}"/>
               <input type="hidden" name="mid" value="${mid}"/>
-              <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
+              <input type="hidden" class="form-control" name="nickname" value="${nickname} "/>
               <input type="hidden" class="form-control" name="email" value="${user}"/>
 
               <div class="form-group">
                 <div class="input-group mb-3">
-                  <input name="text" id="commentText" class="form-control"></input>
+                  <input name="text" id="commentText" class="form-control" value="@${nickname}"></input>
                   <button type="submit" class="btn btn-primary">답글 등록</button>
                 </div>
               </div>
             </form>`;
-            }
             result += `</div></li>`;
           });
           // } else if (reply.comments.length == 0 && user != "anonymousUser") {
@@ -336,6 +333,7 @@ replyList.addEventListener("click", (e) => {
     e.preventDefault();
     console.log(e.target);
     const commentBody = e.target.closest(".comment-body");
+    console.log(commentBody);
     const commentform = commentBody.querySelector("form");
     console.log(commentform);
     if (commentform.classList.contains("hidden")) {

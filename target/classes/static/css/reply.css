@@ -3,13 +3,13 @@
   border-color: darkgray;
   margin-bottom: 0px;
 }
-/* .replyComment {
+.replyComment {
   padding-left: 18px;
-  border-top: dashed 1px;
-  border-color: darkgray;
+  /* border-top: dashed 1px;
+  border-color: darkgray; */
   margin-bottom: 0px;
   position: relative;
-} */
+}
 .fa-arrow-right {
   position: absolute;
   left: 14px;

@@ -90,7 +90,7 @@
                     <span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
                     <!-- js 에서 처리할꺼임 -->
                     <div class="comment-form-wrap" sec:authorize="hasRole('ROLE_MEMBER')">
-                      <form th:action="@{/review/add}" class="review-form pl-3 pr-3 pt-1 pb-1 bg-light" method="post">
+                      <form th:action="@{/review/add}" class="review-form pl-3 pr-3 pt-1 pb-1" method="post">
                         <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                         <input type="hidden" name="replyNo" id="replyNo"/>
                         <div class="form-group">
@@ -110,7 +110,7 @@
                         </div>
                       </form>
                     </div>
-                    <div class="comment-form-wrap p-5">
+                    <div class="comment-form-wrap pt-5">
                       <ul class="comment-list replyList list-group" id="replyList"></ul>
                     </div>
                     <!-- END comment-list -->
