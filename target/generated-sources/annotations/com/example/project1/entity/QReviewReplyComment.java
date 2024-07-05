@@ -36,6 +36,8 @@ public class QReviewReplyComment extends EntityPathBase<ReviewReplyComment> {
 
     public final QMember replyer;
 
+    public final QReview review;
+
     public final StringPath text = createString("text");
 
     public QReviewReplyComment(String variable) {
@@ -58,6 +60,7 @@ public class QReviewReplyComment extends EntityPathBase<ReviewReplyComment> {
         super(type, metadata, inits);
         this.reply = inits.isInitialized("reply") ? new QReviewReply(forProperty("reply"), inits.get("reply")) : null;
         this.replyer = inits.isInitialized("replyer") ? new QMember(forProperty("replyer")) : null;
+        this.review = inits.isInitialized("review") ? new QReview(forProperty("review"), inits.get("review")) : null;
     }
 
 }

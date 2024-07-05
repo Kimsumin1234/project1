@@ -38,4 +38,7 @@ public class ReviewReplyComment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ReviewReply reply;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Review review;
 }

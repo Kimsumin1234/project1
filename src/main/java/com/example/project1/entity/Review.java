@@ -3,6 +3,7 @@ package com.example.project1.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.aspectj.weaver.tools.Trace;
 import org.hibernate.annotations.ColumnDefault;
 
 import jakarta.persistence.Column;
@@ -51,6 +52,14 @@ public class Review extends BaseEntity {
     private Member writer;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", orphanRemoval = true)
     private List<Heart> heart = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "review", orphanRemoval = true)
+    private List<ReviewReply> reviewReply = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "review", orphanRemoval = true)
+    private List<ReviewReplyComment> reviewReplyComment = new ArrayList<>();
 }
