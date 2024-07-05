@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers("/upload/display", "/upload/ex1").permitAll()
                                 .requestMatchers("/adopt/list", "/adopt/read").permitAll()
                                 .requestMatchers("/review/list", "/review/read").permitAll()
+                                .requestMatchers("/reply/**", "/comment/**").permitAll()
                                 .requestMatchers("/animalReviews/**").permitAll()
                                 .requestMatchers("/missing/list", "/missing/read", "/missing/**").permitAll()
                                 .requestMatchers("/missingreply/**").permitAll()
