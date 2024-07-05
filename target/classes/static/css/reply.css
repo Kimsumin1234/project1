@@ -18,3 +18,14 @@
 .hidden {
   display: none;
 }
+.about-author {
+  display: flex;
+}
+.about-author img {
+  width: 25px;
+}
+.user-tag {
+  color: blue;
+  cursor: pointer;
+  font-weight: bold;
+}

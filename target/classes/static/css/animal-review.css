@@ -1,6 +1,6 @@
 /* read 보호소이름 */
 .carename {
-  width: 120%;
+  width: 100%;
   font-size: 18px;
 }
 
@@ -92,7 +92,7 @@
 
 /* 하트 거리 */
 #animalHeart {
-  margin-left: 6px;
+  margin-left: 4px;
   padding-left: 9px;
 }
 
