@@ -42,7 +42,7 @@ function addHeart() {
       console.log(data);
       if (data) {
         alert(data + "add 좋아요 성공");
-        // 리뷰 리스트 다시 가져오기
+        // 다시 가져오기
       }
       loadHeartCount();
     });
@@ -62,7 +62,7 @@ function deleteHeart() {
       console.log(data);
       if (data) {
         alert(data + "delete 좋아요 성공");
-        // 리뷰 리스트 다시 가져오기
+        // 다시 가져오기
       }
       loadHeartCount();
     });

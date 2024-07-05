@@ -7,67 +7,29 @@
     <link rel="stylesheet" th:href="@{/css/animal-review.css}">
   </th:block>
   <div layout:fragment="content">
-
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-            <p class="breadcrumbs mb-2">
-              <span class="mr-2">
-                <a th:href="@{/}">Home
-                  <i class="ion-ios-arrow-forward"></i>
-                </a>
-              </span>
-              <i class="ion-ios-arrow-forward"></i></span></p>
-          <h1 class="mb-0 bread">유기견입양</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <div>
     <section class="ftco-section bg-light">
       <div class="container">
         <form class="d-flex" role="search" id="searchForm">
           <!-- 검색 후 결과 페이지는 1로 보여주기 -->
-          <input type="hidden" name="page" value="1"/>
+            <input type="hidden" name="page" value="1"/>
           <select name="type" id="type" class="form-select me-2 search">
             <option value="" th:selected="${requestDto.type == null}">조건 선택</option>
             <option value="oNm" th:selected="${requestDto.type == 'oNm'}">관할기관(도/특별시/광역시)</option>
             <option value="oNmc" th:selected="${requestDto.type == 'oNmc'}">관할기관(시,군,구)</option>
           </select>
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" th:value="${requestDto.keyword}"/>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" th:value="${requestDto.keyword}"/>
           <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <div class="row mt-3">
           <div class="col-md-6 col-lg-3 ftco-animate" th:each="dto : ${result.dtoList}">
-            <div class="staff">
+              <div class="staff">
               <a th:href="@{read(sId=${dto.sId}, page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
                 <div class="img-wrap d-flex align-items-stretch">
                   <img class="img align-self-stretch" th:src="${dto.popfile}"></img>
-                </div>
-                <div class="text pt-3 px-3 pb-2 text-center">
-                  <div class="faded">
-                    <tr>
-                      <div>
-                        <h3 scope="col" th:text="${dto.noticeNo}"></h3>
-                      </div>
-                      <div class="mb-1">
-                        <span scope="col" th:text="${dto.careNm}"></span>
-                      </div>
-                      <div>
-                        <!-- <span scope="col" th:text="${dto.orgNm}"></span> -->
-                        <div class="heartCnt">
-                          <span>좋아요 : [[${dto.animalCnt}]] 개</span>
-                        </div>
-                      </div>
-                    </tr>
                   </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                  <div class="text pt-3 px-3 pb-4 text-center listname" >
+                  <div class="text pt-3 px-3 pb-4 text-center listname">
                     <div class="faded">
                       <tr>
                         <span scope="col" th:text="${dto.noticeNo}"></span>
@@ -78,51 +40,39 @@
                         <div>
                           <span scope="col" th:text="${dto.orgNm}"></span>
                           <div class="heartCnt">
-                            좋아요 : <span th:text="${dto.animalCnt}"></span>
+                            좋아요 :
+                            <span th:text="${dto.animalCnt}"></span>
                           </div>
                         </div>
                       </tr> 
                     </div>
-=======
->>>>>>> mando1
-=======
->>>>>>> mando1
                 </div>
               </a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row mt-5 mb-5">
-      <div class="col text-center">
-        <div class="block-27">
+      <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
-            <li th:if="${result.prev}" class="">
-              <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+          <li class="page-item" th:if="${result.prev}">
+            <a class="page-link" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Previous</a>
             </li>
-
-            <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-              <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
+          <!-- 현재 선택된 페이지 번호에 포인터 -->
+          <li th:class="'page-item ' + ${result.page == page ? 'active' : ''}" th:each="page : ${result.pageList}">
+            <a class="page-link" th:text="${page}" th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"></a>
             </li>
-
-            <li th:if="${result.next}" class="">
-              <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+          <!-- result.next 값에 따라 -->
+          <li class="page-item" th:if="${result.next}">
+            <a class="page-link" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Next</a>
             </li>
-          </ul>
-        </div>
-      </div>
+        </nav>
+      </section>
+    </body>
     </div>
-
+    
     <th:block layout:fragment="script">
+      <script></script>
       <script th:src="@{/js/animalSearch.js}"></script>
-<<<<<<< HEAD
-=======
-
-      <!-- 폰트 넣을건지 고민 ! -->
-      <!-- <style> body { font-size: 30px; font-family: "Dongle", sans-serif; } </style> -->
-
->>>>>>> mando1
     </th:block>
 
   </html>

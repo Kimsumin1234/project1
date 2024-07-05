@@ -25,25 +25,21 @@
                     <i class="ion-ios-arrow-forward"></i>
                   </a>
                 </span>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <!-- <span>Blog Single <i class="ion-ios-arrow-forward"></i></span> -->
               </p>
               <h1 class="mb-0 bread" th:text="${dto.title}">Blog</h1>
-=======
+
                 <span>Blog Single
                   <i class="ion-ios-arrow-forward"></i>
                 </span>
               </p>
               <h1 class="mb-0 bread">Blog</h1>
->>>>>>> mando1
+
             </div>
           </div>
         </div>
       </div>
     </section>
-<<<<<<< HEAD
-
     <body>
       <section class="ftco-section ftco-degree-bg">
         <div class="container justify-content-center">
@@ -140,7 +136,6 @@
       <script>
 
         const csrfValue = "[[${_csrf.token}]]"
-=======
                 <span>Blog Single
                   <i class="ion-ios-arrow-forward"></i>
                 </span>
@@ -151,39 +146,37 @@
         </div>
       </div>
     </section>
-=======
->>>>>>> mando1
 
-    <section class="ftco-section ftco-degree-bg">
-      <div class="container justify-content-center">
-        <div class="row">
-          <div class="col-lg-3"></div>
-          <div class="col-lg-6 ftco-animate">
-            <div class="row justify-content-end mt-5">조회수 [<span th:text="${dto.viewCount}"></span>]</div>
-            <div class="uploadResult mb-4">
-              <ul>
-                <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
-                  <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
-                </li>
-              </ul>
+  <section class="ftco-section ftco-degree-bg">
+    <div class="container justify-content-center">
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 ftco-animate">
+          <div class="row justify-content-end mt-5">조회수 [<span th:text="${dto.viewCount}"></span>]</div>
+          <div class="uploadResult mb-4">
+            <ul>
+              <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
+                <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
+              </li>
+            </ul>
+          </div>
+          <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
+          <p class="text-break" th:text="${dto.text}">
+            text 내용 들어갈 자리
+          </p>
+          <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
+            <div class="">
+              <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
+              <a href="" class="btn btn-danger">삭제</a>
+              <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록</a>
             </div>
-            <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
-            <p class="text-break" th:text="${dto.text}">
-              text 내용 들어갈 자리
-            </p>
-            <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
-              <div class="">
-                <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
-                <a href="" class="btn btn-danger">삭제</a>
-                <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록</a>
-              </div>
-              <form method="post" id="actionForm" th:action="@{/review/remove}">
-                <input type="hidden" name="rno" th:value="${dto.rno}"/>
-                <input type="hidden" name="page" th:value="${requestDto.page}"/>
-                <input type="hidden" name="type" th:value="${requestDto.type}"/>
-                <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
-              </form>
-            </div>
+            <form method="post" id="actionForm" th:action="@{/review/remove}">
+              <input type="hidden" name="rno" th:value="${dto.rno}"/>
+              <input type="hidden" name="page" th:value="${requestDto.page}"/>
+              <input type="hidden" name="type" th:value="${requestDto.type}"/>
+              <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
+            </form>
+          </div>
 
             <div class="about-author d-flex p-1 bg-light">
               <div class="bio mr-5 w-25 p-3">
@@ -248,8 +241,6 @@
 >>>>>>> mando1
 
           const csrfValue = "[[${_csrf.token}]]"
-
-<<<<<<< HEAD
         const user = "[[${#authentication.name}]]";
         const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
         const nickname = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.nickname}]]"
@@ -263,7 +254,7 @@
 
           const csrfValue = "[[${_csrf.token}]]"
 
->>>>>>> mando1
+
           const replyList = document.querySelector(".replyList");
           const rno = "[[${dto.rno}]]";
           const title = "[[${dto.title}]]";
@@ -276,7 +267,3 @@
         <script th:src="@{/js/heart.js}"></script>
       </th:block>
     </html>
-<<<<<<< HEAD
->>>>>>> mando1
-=======
->>>>>>> mando1

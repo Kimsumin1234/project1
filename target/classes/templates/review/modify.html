@@ -40,7 +40,7 @@
               <form class="register-form p-5 bg-light" id="register-form" method="post" th:action="@{/review/modify}">
                 <input type="hidden" name="rno" id="rno" th:value="${dto.rno}"/>
                 <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
-                {% comment %} <input type="hidden" name="replyNo" id="replyNo"/> {% endcomment %}
+                <input type="hidden" name="replyNo" id="replyNo"/>
                 <div class="form-group">
                   <label for="nickname">닉네임 *</label>
                   <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly="readonly"/>

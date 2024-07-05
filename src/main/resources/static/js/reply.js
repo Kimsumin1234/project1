@@ -33,16 +33,32 @@ const reviewsLoaded = () => {
                                   </p>
                                   <p>
                                     <div class="bottom">
-                                      <a href="#" class="btn btn-light">답글</a>`;
+                                      <a href="#" class="btn btn-light btn-sm mr-2 addcomment">답글</a>`;
         if (`${reply.email}` == user) {
           result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
           result += '<button class="btn btn-outline-success btn-sm">수정</button>';
         }
-        result += `</div></p></div>`;
-        result += `</li>`;
+        result += `</div></p>`;
 
-        console.log("댓글");
-        console.log(result);
+        // console.log("댓글");
+        // console.log(result);
+
+        result += `<form action="/comment/add" class="comment-form hidden" method="post">
+
+            <input type="hidden" name="commentNo"/>
+            <input type="hidden" name="replyNo" value="${replyNo}"/>
+            <input type="hidden" name="mid" value="${mid}"/>
+            <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
+            <input type="hidden" class="form-control" name="email" value="${user}"/>
+           
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <input name="text" id="commentText" class="form-control"></input>
+                <button type="submit" class="btn  btn-primary" >답글 등록</button>
+              </div>
+            </div>
+          </form>`;
+        result += `</div></li>`;
 
         // reReList(replyNo);
         if (reply.comments.length > 0) {
@@ -63,16 +79,16 @@ const reviewsLoaded = () => {
             </p>
             <p>
               <div class="bottom">
-                <a href="#" class="btn btn-light">답글</a>
+                <a href="#" class="btn btn-light btn-sm mr-2 addcomment">답글</a>
               `;
             if (`${comment.email}` == user) {
               result += '<button class="btn btn-danger btn-sm">삭제</button>';
               result += '<button class="btn btn-success btn-sm reply2">수정</button>';
             }
-            result += `</div></p></li>`;
-            if (idx == reply.comments.length - 1 && user != "anonymousUser") {
-              result += `<form action="/comment/add" class="comment-form" method="post">
-              
+            result += `</div></p>`;
+            if (idx == reply.comments.length - 1) {
+              // && user != "anonymousUser"
+              result += `<form action="/comment/add" class="comment-form hidden" method="post">
 
               <input type="hidden" name="commentNo"/>
               <input type="hidden" name="replyNo" value="${replyNo}"/>
@@ -88,24 +104,9 @@ const reviewsLoaded = () => {
               </div>
             </form>`;
             }
-            result += ``;
+            result += `</div></li>`;
           });
-        } else if (reply.comments.length == 0 && user != "anonymousUser") {
-          result += `<form action="/comment/add" class="comment-form" method="post" >
-            
-            <input type="hidden" name="commentNo"/>
-            <input type="hidden" name="replyNo" value="${replyNo}"/>
-            <input type="hidden" name="mid" value="${mid}"/>
-            <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
-            <input type="hidden" class="form-control" name="email" value="${user}"/>
-           
-            <div class="form-group">
-              <div class="input-group mb-3">
-                <input name="text" id="commentText" class="form-control"></input>
-                <button type="submit" class="btn  btn-primary" >답글 등록</button>
-              </div>
-            </div>
-          </form>`;
+          // } else if (reply.comments.length == 0 && user != "anonymousUser") {
         }
       });
       console.log("댓글");
@@ -237,12 +238,52 @@ replyList.addEventListener("click", (e) => {
       .then((data) => {
         console.log(data);
 
-        reviewForm.querySelector("#replyNo").value = data.replyNo;
-        reviewForm.querySelector("#nickname").value = data.nickname;
-        reviewForm.querySelector("#text").value = data.text;
-        reviewForm.querySelector("#mid").value = data.mid;
-        reviewForm.querySelector("#email").value = data.email;
-        reviewForm.querySelector("button").innerHTML = "리뷰 수정";
+        const commentBody = e.target.closest(".comment-body");
+        console.log(commentBody);
+        const textBreak = commentBody.querySelector(".text-break");
+        const bottoms = commentBody.querySelector(".bottom");
+        bottoms.innerHTML = ``;
+        const replyFormHTML = `
+          <input type="hidden" class="editreplyNo" name="replyNo" value="${data.replyNo}"/>
+          <input type="hidden" class="editmid" name="mid" value="${data.mid}"/>
+          <input type="hidden" class="editnickname" name="nickname" value="${data.nickname}"/>
+          <input type="hidden" class="editemail" name="email" value="${data.email}"/>
+          <div class="form-group">
+            <input name="text" class="edittext" value="${data.text}"></input>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary edit">댓글 수정</button>
+            <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
+          </div>
+        `;
+        textBreak.innerHTML = replyFormHTML;
+      });
+  }
+  if (e.target.classList.contains("edit")) {
+    const commentBody = e.target.closest(".comment-body");
+    const body = {
+      text: commentBody.querySelector(".edittext").value,
+      email: commentBody.querySelector(".editemail").value,
+      mid: commentBody.querySelector(".editmid").value,
+      nickname: commentBody.querySelector(".editnickname").value,
+      rno: rno,
+      replyNo: commentBody.querySelector(".editreplyNo").value,
+    };
+    console.log(body);
+
+    fetch(`/reply/${rno}/${body.replyNo}`, {
+      method: "put",
+      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          alert(data + "번 리뷰 수정 성공");
+
+          reviewsLoaded(); // 리뷰 리스트 다시 가져오기
+        }
       });
   }
   if (e.target.classList.contains("reply2")) {
@@ -261,8 +302,11 @@ replyList.addEventListener("click", (e) => {
         // reply 버튼 클릭
         const commentBody = e.target.closest(".comment-body");
         console.log(commentBody);
+        const textBreak = commentBody.querySelector(".text-break");
+        const bottoms = commentBody.querySelector(".bottom");
+        bottoms.innerHTML = ``;
         const replyFormHTML = `
-          <form action="/comment/modify" class="comment-form" method="post">
+          <form action="/comment/modify" class="comment-form modify-form" method="post">
             <input type="hidden" name="commentNo" value="${data.commentNo}"/>
             <input type="hidden" name="replyNo" value="${data.replyNo}"/>
             <input type="hidden" name="mid" value="${mid}"/>
@@ -273,10 +317,11 @@ replyList.addEventListener("click", (e) => {
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary" >댓글 수정</button>
+              <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
             </div>
           </form>
         `;
-        commentBody.innerHTML = replyFormHTML;
+        textBreak.innerHTML = replyFormHTML;
       });
   } else if (e.target.classList.contains("btn-danger")) {
     const commentNo = e.target.closest(".replyComment").dataset.commentno;
@@ -302,13 +347,29 @@ replyList.addEventListener("click", (e) => {
         }
       });
   }
+  if (e.target.classList.contains("cancel")) {
+    reviewsLoaded();
+  }
+  if (e.target.classList.contains("addcomment")) {
+    e.preventDefault();
+    console.log(e.target);
+    const commentBody = e.target.closest(".comment-body");
+    const commentform = commentBody.querySelector("form");
+    console.log(commentform);
+    if (commentform.classList.contains("hidden")) {
+      commentform.classList.remove("hidden");
+    } else {
+      commentform.classList.add("hidden");
+    }
+  }
 });
 
 // 대댓글 추가 form
 replyList.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("대댓글 submit 일시중지");
-  const form = e.target.closest("form");
+  const form = e.target;
+  console.log(e.target);
 
   const commentNo = form.querySelector('input[name="commentNo"]');
   const text = form.querySelector('input[name="text"]');
@@ -357,7 +418,7 @@ replyList.addEventListener("submit", (e) => {
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
       });
-  } else {
+  } else if (commentNo.value) {
     fetch(`/comment/${replyNo.value}/${commentNo.value}`, {
       method: "put",
       headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
