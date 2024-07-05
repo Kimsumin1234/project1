@@ -105,14 +105,14 @@
 /* 댓글 삭제 영역 */
 .animalReviewdel {
   margin: 0px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .animalReviewMod {
   margin: 0px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 /* 댓글 영역 */
@@ -130,13 +130,13 @@
 /* missing 댓글 삭제 영역 */
 .missingdel {
   margin: 0px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 5px;
+  border-radius: 5px;
 }
 .missingMod {
   margin: 0px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 /* missing 이미지 영역 */
@@ -158,4 +158,34 @@
 .missimg {
   width: 210px;
   height: 210px;
+}
+
+.adopt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-cnt {
+  text-align: left;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.animalHeart {
+  margin-right: 10px;
+}
+
+.animalHeartCount {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.image-card-container {
+  display: flex;
+  align-items: flex-start;
+}
+.image-card-container img {
+  margin-right: 20px;
 }
