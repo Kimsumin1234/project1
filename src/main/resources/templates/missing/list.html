@@ -48,8 +48,8 @@
       <div class="row mt-3">
         <div th:each="dto : ${result.dtoList}" class="col-md-6 col-lg-3 ftco-animate misslist">
           <div class="blog-entry align-self-stretch">
-            <a th:href="|/upload/display?fileName=${dto.missingImageDtos[0].getImageURL()}|" class="icon image-popup d-flex justify-content-center align-items-center" th:if="${dto.missingImageDtos.size() > 0 && dto.missingImageDtos[0].path != null}">
-              <div class="img-wrap d-flex align-items-stretch">
+            <a th:href="@{/missing/read(missno=${dto.missno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
+              <div class="img-wrap d-flex align-items-stretch justify-content-center align-items-center">
                 <img class="img align-self-stretch missimg" th:src="|/upload/display?fileName=${dto.missingImageDtos[0].getImageURL()}|" loading="lazy"/>
               </div>
             </a>
