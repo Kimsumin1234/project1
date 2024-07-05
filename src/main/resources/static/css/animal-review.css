@@ -185,7 +185,24 @@
 .image-card-container {
   display: flex;
   align-items: flex-start;
+  height: 400px;
 }
 .image-card-container img {
   margin-right: 20px;
+}
+
+.card shadow-2dp {
+  height: 400px;
+}
+
+/* missing 블로그 선 긋기 */
+.jb-division-line {
+  border-top: 1px solid #444444;
+  margin: 30px 0px;
+}
+
+.animalinfo {
+  line-height: 40px;
+  text-indent: 4%;
+  list-style-image: url("/images/dog10.jpg");
 }

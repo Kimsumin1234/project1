@@ -36,15 +36,15 @@
               <div class="image-card-container">
                 <p><img th:src="${dto.popfile}" alt="" class="img-fluid" style="width: 400px; height: 400px;"/></p>
                 <div class="animaltext">
-                  <div class="ml-3 card shadow-2dp" style="width: 95%;">
-                    <div>&emsp;발견 날짜 : [[${dto.happenDt}]]</div>
-                    <div>&emsp;공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</div>
-                    <div>&emsp;품종 : [[${dto.kindCd}]]</div>
-                    <div>&emsp;나이(추정) : [[${dto.age}]]</div>
-                    <div>&emsp;성별 : [[${dto.sexCd}]]</div>
-                    <div>&emsp;체중 : [[${dto.weight}]]</div>
-                    <div>&emsp;보호 장소 : [[${dto.careAddr}]]</div>
-                    <div>&emsp;체중 : [[${dto.weight}]]</div>
+                  <div class="ml-3 card shadow-2dp" style="width: 95%; height: 100%;">
+                    <li class="animalinfo">발견 날짜 : [[${dto.happenDt}]]</li>
+                    <li class="animalinfo">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</li>
+                    <li class="animalinfo">품종 : [[${dto.kindCd}]]</li>
+                    <li class="animalinfo">나이(추정) : [[${dto.age}]]</li>
+                    <li class="animalinfo">성별 : [[${dto.sexCd}]]</li>
+                    <li class="animalinfo">체중 : [[${dto.weight}]]</li>
+                    <li class="animalinfo">보호 장소 : [[${dto.careAddr}]]</li>
+                    <li class="animalinfo">체중 : [[${dto.weight}]]</li>
                   </div>
                 </div>
               </div>
