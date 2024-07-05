@@ -38,37 +38,21 @@
       <section class="ftco-section ftco-degree-bg">
         <div class="container justify-content-center">
           <div class="row">
-<<<<<<< HEAD
-            <div class="col-lg-8 ftco-animate">
-              <p>
-                <img src="images/image_1.jpg" alt="" class="img-fluid">
-              </p>
-              <div class="uploadResult mb-4">
-=======
             <div class="col-lg-10 ftco-animate mr-10" style="text-align:center">
               <h2 class="mb-5" th:text="${dto.title}" style="text-align:center"></h2>
               <h5 class="mb-5" th:text="${dto.nickname}" style="text-align:right">멤버 정보</h5>
               <div class="uploadResult mb-10" style="text-align:center">
->>>>>>> d0deca70cdd952a43841bb5b6813ac4fe2e695f8
                 <ul>
                   <li th:each="image : ${dto.missingImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
                     <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
                   </li>
                 </ul>
               </div>
-<<<<<<< HEAD
-              <div>
-                <h2 th:text="${dto.title}"></h2>
-                <p class="text-break" th:text="${dto.text}"></p>
-              </div>
-              <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
-=======
 
               <h5 class="text-break mt-5" th:text="${dto.text}">
                 text 내용 들어갈 자리
               </h5>
               <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}" style="text-align:right">
->>>>>>> d0deca70cdd952a43841bb5b6813ac4fe2e695f8
                 <div class="">
                   <a th:href="@{/missing/modify(missno=${dto.missno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
                   <a href="" class="btn btn-danger">삭제</a>
@@ -131,8 +115,6 @@
         // 로그인 유저
         const user = "[[${#authentication.name}]]";
       </script>
-
-      <script th:src="@{/js/missingmodify.js}"></script>
       <script th:src="@{/js/missingreply.js}"></script>
     </th:block>
   </body>
