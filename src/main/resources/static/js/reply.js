@@ -33,7 +33,7 @@ const reviewsLoaded = () => {
                                   </p>
                                   <p>
                                     <div class="bottom">
-                                      <a href="#" class="btn btn-light btn-sm mr-2 addcomment">답글</a>`;
+                                      <a href="/member/login" class="btn btn-light btn-sm mr-2 addcomment">답글</a>`;
         if (`${reply.email}` == user) {
           result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
           result += '<button class="btn btn-outline-success btn-sm">수정</button>';
@@ -79,7 +79,7 @@ const reviewsLoaded = () => {
             </p>
             <p>
               <div class="bottom">
-                <a href="#" class="btn btn-light btn-sm mr-2 addcomment">답글</a>
+                <a href="/member/login" class="btn btn-light mr-2 addcomment">답글</a>
               `;
             if (`${comment.email}` == user) {
               result += '<button class="btn btn-danger btn-sm">삭제</button>';
