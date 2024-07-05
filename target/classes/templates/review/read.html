@@ -45,7 +45,7 @@
               <div class="uploadResult mb-4">
                 <ul>
                   <li th:each="image : ${dto.reviewImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
-                    <img class="img-fluid block onebonimg" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
+                    <img class="img-fluid block onebonimg m-3" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getImageURL()}|"/>
                   </li>
                 </ul>
               </div>
@@ -90,8 +90,7 @@
                     <span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
                     <!-- js 에서 처리할꺼임 -->
                     <div class="comment-form-wrap" sec:authorize="hasRole('ROLE_MEMBER')">
-                      <h3 class="mb-5">Leave a comment</h3>
-                      <form th:action="@{/review/add}" class="review-form pl-3 pr-3 pt-1 pb-1 bg-light" method="post">
+                      <form th:action="@{/review/add}" class="review-form pl-3 pr-3 pt-1 pb-1" method="post">
                         <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                         <input type="hidden" name="replyNo" id="replyNo"/>
                         <div class="form-group">
@@ -106,12 +105,12 @@
                           <!--<label for="message">댓글</label>-->
                           <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
-                          <button type="submit" class="btn py-3 px-4 btn-primary">댓글 등록</button>
+                        <div class="form-group mb-0">
+                          <button type="submit" class="btn py-1 px-2 btn-primary float-right">댓글 등록</button>
                         </div>
                       </form>
                     </div>
-                    <div class="comment-form-wrap p-5">
+                    <div class="comment-form-wrap pt-5">
                       <ul class="comment-list replyList list-group" id="replyList"></ul>
                     </div>
                     <!-- END comment-list -->

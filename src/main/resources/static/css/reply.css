@@ -5,8 +5,8 @@
 }
 .replyComment {
   padding-left: 18px;
-  border-top: dashed 1px;
-  border-color: darkgray;
+  /* border-top: dashed 1px;
+  border-color: darkgray; */
   margin-bottom: 0px;
   position: relative;
 }
