@@ -53,7 +53,8 @@ const reviewsLoaded = () => {
            
             <div class="form-group">
               <div class="input-group mb-3">
-                <textarea  name="text" id="commentText" class="form-control"> <span class="user-tag">@${nickname} </span></textarea>
+              <span class="user-tag">@${reply.nickname} </span>
+              <input name="text" id="commentText" class="form-control"></input>
                 <button type="submit" class="btn  btn-primary" >답글 등록</button>
               </div>
             </div>
@@ -75,8 +76,9 @@ const reviewsLoaded = () => {
             <div class="comment-body">
             <h3>${comment.nickname}</h3>
             <div class="meta">${formatDate(comment.lastModifiedDate)}</div>
-            <p class="text-break">${comment.text}
-            </p>
+            <div class="commentinline">
+            <span class="user-tag">@${reply.nickname}</span><p class="text-break ml-2 comment-text-inline">${comment.text}</p>
+            </div>
             <p>
               <div class="bottom">
                 <a href="/member/login" class="btn btn-secondary mr-2 addcomment">답글</a>
@@ -95,8 +97,9 @@ const reviewsLoaded = () => {
               <input type="hidden" class="form-control" name="email" value="${user}"/>
 
               <div class="form-group">
+              <span class="user-tag">@${reply.nickname}</span>
                 <div class="input-group mb-3">
-                  <input name="text" id="commentText" class="form-control" value="@${nickname}"></input>
+                  <input name="text" id="commentText" class="form-control"></input>
                   <button type="submit" class="btn btn-primary">답글 등록</button>
                 </div>
               </div>
@@ -165,7 +168,7 @@ reviewForm.addEventListener("submit", (e) => {
         if (data) {
           text.value = "";
 
-          alert(data + "번 리뷰 작성 성공");
+          // alert(data + "번 리뷰 작성 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
@@ -202,7 +205,7 @@ replyList.addEventListener("click", (e) => {
       .then((data) => {
         console.log(data);
         if (data) {
-          alert(data + "번 리뷰 삭제 성공");
+          // alert(data + "번 리뷰 삭제 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
@@ -248,6 +251,14 @@ replyList.addEventListener("click", (e) => {
       rno: rno,
       replyNo: commentBody.querySelector(".editreplyNo").value,
     };
+    if (body.text.trim().length == 0) {
+      alert("내용 이 비어있습니다.");
+      return;
+    }
+    if (body.text.trim().length > 500) {
+      alert("500 자 이상 불가능");
+      return;
+    }
     console.log(body);
 
     fetch(`/reply/${rno}/${body.replyNo}`, {
@@ -259,7 +270,7 @@ replyList.addEventListener("click", (e) => {
       .then((data) => {
         console.log(data);
         if (data) {
-          alert(data + "번 리뷰 수정 성공");
+          // alert(data + "번 리뷰 수정 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
@@ -320,7 +331,7 @@ replyList.addEventListener("click", (e) => {
       .then((data) => {
         console.log(data);
         if (data) {
-          alert(data + "번 리뷰 삭제 성공");
+          // alert(data + "번 리뷰 삭제 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
@@ -358,11 +369,11 @@ replyList.addEventListener("submit", (e) => {
   const email = form.querySelector('input[name="email"]');
   const replyNo = form.querySelector('input[name="replyNo"]');
 
-  if (text.value.length == 0) {
-    alert("내용 확인");
+  if (text.value.trim().length == 0) {
+    alert("내용 이 비어있습니다.");
     return;
   }
-  if (text.value.length > 501) {
+  if (text.value.trim().length > 500) {
     alert("500 자 이상 불가능");
     return;
   }
@@ -392,7 +403,7 @@ replyList.addEventListener("submit", (e) => {
         if (data) {
           text.value = "";
 
-          alert(data + "번 리뷰 작성 성공");
+          // alert(data + "번 리뷰 작성 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
@@ -409,7 +420,7 @@ replyList.addEventListener("submit", (e) => {
         if (data) {
           text.value = "";
 
-          alert(data + "번 리뷰 수정 성공");
+          // alert(data + "번 리뷰 수정 성공");
 
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }

@@ -24,8 +24,20 @@
 .about-author img {
   width: 25px;
 }
+.commentinline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
 .user-tag {
-  color: blue;
   cursor: pointer;
   font-weight: bold;
+  color: #a6cafe;
+  background-color: #dfecff;
+  height: 26px;
+}
+.comment-text-inline {
+  display: inline;
+  word-wrap: break-word;
+  margin-left: 0.5rem;
 }
