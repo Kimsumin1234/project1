@@ -15,3 +15,6 @@
   left: 14px;
   top: 28px;
 }
+.hidden {
+  display: none;
+}

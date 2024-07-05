@@ -95,7 +95,7 @@ const reviewsLoaded = () => {
               <input type="hidden" name="mid" value="${mid}"/>
               <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
               <input type="hidden" class="form-control" name="email" value="${user}"/>
-                            
+
               <div class="form-group">
                 <div class="input-group mb-3">
                   <input name="text" id="commentText" class="form-control"></input>

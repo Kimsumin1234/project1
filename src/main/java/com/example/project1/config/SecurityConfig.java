@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.project1.handler.AdoptLoginSuccessHandler;
-import com.example.project1.handler.OAuth2LoginFailureHandler;
 
 @EnableMethodSecurity
 @EnableWebSecurity
@@ -33,11 +32,9 @@ public class SecurityConfig {
                                 .requestMatchers("/review/list", "/review/read").permitAll()
                                 .requestMatchers("/reply/**", "/comment/**").permitAll()
                                 .requestMatchers("/animalReviews/**").permitAll()
-                                .requestMatchers("/missing/list", "/missing/read", "/missing/**").permitAll()
-                                .requestMatchers("/missingreply/**").permitAll()
                                 .requestMatchers("/member/sms", "/send-one", "/send-one2", "/send-one3", "/certif")
                                 .permitAll()
-                                .requestMatchers("/member/registerPage", "/member/oauth2").permitAll()
+                                .requestMatchers("/member/registerPage").permitAll()
                                 .requestMatchers("/member/register").permitAll()
                                 .requestMatchers("/member/findid", "/member/resultfindid").permitAll()
                                 .requestMatchers("/member/findpwd1", "/member/findpwd2", "/member/findpwd3").permitAll()
@@ -48,8 +45,7 @@ public class SecurityConfig {
                                 .defaultSuccessUrl("/", true));
                 // .successHandler(adoptLoginSuccessHandler()));
                 http.oauth2Login(login -> login
-                                .defaultSuccessUrl("/", true)
-                                .failureHandler(oauth2error())); // 공통인증
+                                .defaultSuccessUrl("/", true)); // 공통인증
                 // .successHandler(adoptLoginSuccessHandler())
                 http.logout(logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
@@ -79,9 +75,5 @@ public class SecurityConfig {
         @Bean
         AdoptLoginSuccessHandler adoptLoginSuccessHandler() {
                 return new AdoptLoginSuccessHandler();
-        }
-
-        OAuth2LoginFailureHandler oauth2error() {
-                return new OAuth2LoginFailureHandler();
         }
 }
