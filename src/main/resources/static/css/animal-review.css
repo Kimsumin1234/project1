@@ -182,6 +182,7 @@
   margin-left: 10px;
 }
 
+/* 입양READ부분 사진과 유기동물설명 */
 .image-card-container {
   display: flex;
   align-items: flex-start;
