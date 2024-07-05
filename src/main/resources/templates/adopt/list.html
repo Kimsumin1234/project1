@@ -20,7 +20,7 @@
                 </a>
               </span>
               <i class="ion-ios-arrow-forward"></i></span></p>
-          <h1 class="mb-0 bread">유기견입양</h1>
+          <h1 class="mb-0 bread">입양게시판</h1>
         </div>
       </div>
     </div>
@@ -60,7 +60,8 @@
                       <div>
                         <!-- <span scope="col" th:text="${dto.orgNm}"></span> -->
                         <div class="heartCnt">
-                          <span>좋아요 : [[${dto.animalCnt}]] 개</span>
+                          좋아요 :
+                          <span th:text="${dto.animalCnt}"></span>
                         </div>
                       </div>
                     </tr>
@@ -72,32 +73,31 @@
         </div>
       </div>
     </div>
-    <div class="row mt-5 mb-5">
-      <div class="col text-center">
-        <div class="block-27">
-          <ul class="pagination justify-content-center">
-            <li th:if="${result.prev}" class="">
-              <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
-            </li>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:if="${result.prev}">
+          <a class="page-link" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Previous</a>
+        </li>
+        <!-- 현재 선택된 페이지 번호에 포인터 -->
+        <li th:class="'page-item ' + ${result.page == page ? 'active' : ''}" th:each="page : ${result.pageList}">
+          <a class="page-link" th:text="${page}" th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}"></a>
+        </li>
+        <!-- result.next 값에 따라 -->
+        <li class="page-item" th:if="${result.next}">
+          <a class="page-link" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">Next</a>
+        </li>
+      </nav>
+    </section>
+  </body>
+</div>
 
-            <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-              <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
-            </li>
+<th:block layout:fragment="script">
+  <script></script>
+  <script th:src="@{/js/animalSearch.js}"></script>
 
-            <li th:if="${result.next}" class="">
-              <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <!-- 폰트 넣을건지 고민 ! -->
+  <!-- <style> body { font-size: 30px; font-family: "Dongle", sans-serif; } </style> -->
 
-    <th:block layout:fragment="script">
-      <script th:src="@{/js/animalSearch.js}"></script>
+</th:block>
 
-      <!-- 폰트 넣을건지 고민 ! -->
-      <!-- <style> body { font-size: 30px; font-family: "Dongle", sans-serif; } </style> -->
-
-    </th:block>
-
-  </html>
+</html>

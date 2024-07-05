@@ -51,11 +51,11 @@
 
               <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p> <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p> <p>품종 : [[${dto.kindCd}]]</p> <p>나이(추정) : [[${dto.age}]]</p> <p>성별 : [[${dto.sexCd}]]</p> <p>체중 : [[${dto.weight}]]</p> <p>보호 장소 : [[${dto.careAddr}]]</p> <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
 
-              <!-- 찜목록 -->
+              <!-- 입양문의 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
                 <div class="form-group mt-2">
-                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">찜하기</button>
+                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
                 </div>
               </form>
 
@@ -71,8 +71,6 @@
                   </div>
                 </div>
               </div>
-
-              <div id="map-data" th:data-care-nm="${dto.careNm}" th:data-care-addr="${dto.careAddr}"></div>
 
               <div class="container mt-3">
                 <div id="map" style="width:100%; height:400px;"></div>
@@ -111,7 +109,10 @@
                 <div class="animalHeartCount"></div>
               </h5>
               <div class="pt-5 mt-5 reviewList">
-                <div class="mb-5"></div>
+                <div class="mb-5">
+
+                  <!-- <ul class="comment-list"> <li class="comment"> <div class="vcard bio"> <img th:src="@{/assets/images/person_1.jpg}" alt="Image placeholder" /> </div> <div class="comment-body"> <h3>John Doe</h3> <div class="meta">April 7, 2020 at 10:05pm</div> <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil? </p> <p><a href="#" class="reply">Reply</a></p> </div> </li> </ul> -->
+                </div>
               </div>
             </div>
             <!-- END comment-list -->
@@ -119,6 +120,7 @@
         </div>
       </div>
     </section>
+
     <!-- .section -->
 
     <!-- loader -->
@@ -152,7 +154,6 @@
         .classList
         .remove("hidden");
   </script>
-
   <script th:src="@{/js/animalReview.js}"></script>
   <script th:src="@{/js/animalHeart.js}"></script>
   <script th:src="@{/js/naverMap.js}"></script>
