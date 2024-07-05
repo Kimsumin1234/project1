@@ -110,7 +110,7 @@ const reviewsLoaded = () => {
         }
       });
       console.log("댓글");
-      console.log(result);
+      // console.log(result);
       document.querySelector("#replyList").innerHTML = result;
 
       document.querySelectorAll(".btn-outline-success").forEach((button) => {
@@ -170,24 +170,6 @@ reviewForm.addEventListener("submit", (e) => {
 
           alert(data + "번 리뷰 작성 성공");
 
-          reviewsLoaded(); // 리뷰 리스트 다시 가져오기
-        }
-      });
-  } else {
-    fetch(`/reply/${rno}/${replyNo.value}`, {
-      method: "put",
-      headers: { "content-type": "application/json", "X-CSRF-TOKEN": csrfValue },
-      body: JSON.stringify(body),
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          text.value = "";
-          // nickname.value = "";
-          replyNo.value = "";
-          alert(data + "번 리뷰 수정 성공");
-          reviewForm.querySelector("button").innerHTML = "답글 등록";
           reviewsLoaded(); // 리뷰 리스트 다시 가져오기
         }
       });
@@ -392,7 +374,6 @@ replyList.addEventListener("submit", (e) => {
   console.log(email);
   console.log(replyNo);
   // 값 존재 하는지 없는지
-
   const body = {
     text: text.value,
     email: email.value,
