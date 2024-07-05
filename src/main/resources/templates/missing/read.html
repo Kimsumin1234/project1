@@ -42,6 +42,7 @@
               <p>
                 <img src="images/image_1.jpg" alt="" class="img-fluid">
               </p>
+              <h2 th:text="${dto.title}"></h2>
               <div class="uploadResult mb-4">
                 <ul>
                   <li th:each="image : ${dto.missingImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
@@ -49,10 +50,8 @@
                   </li>
                 </ul>
               </div>
-              <div>
-                <h2 th:text="${dto.title}"></h2>
-                <p class="text-break" th:text="${dto.text}"></p>
-              </div>
+
+              <p class="text-break" th:text="${dto.text}"></p>
               <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
                 <div class="">
                   <a th:href="@{/missing/modify(missno=${dto.missno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
