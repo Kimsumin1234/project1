@@ -37,7 +37,7 @@ public class CoolSmsController {
     private AdoptUserService adoptUserService;
 
     public CoolSmsController() {
-        this.messageService = NurigoApp.INSTANCE.initialize("NCSNJJ9FSXV2CGUH", "HUZV8WFKIJDXSCIZFQWPAN94LQQFG9TC",
+        this.messageService = NurigoApp.INSTANCE.initialize("NCSB2PTLSVLJ2L5A", "BEOGHWSJWICEFGKFTIRYMWJLEGWLEYCK",
                 "https://api.coolsms.co.kr");
     }
 
