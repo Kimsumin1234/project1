@@ -19,6 +19,7 @@ import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
 import com.example.project1.service.AdoptApiService;
 import com.example.project1.service.AnimalHeartService;
+import com.example.project1.dto.AnimalCartDto;
 import com.example.project1.dto.AnimalDto;
 import com.example.project1.dto.PageRequestDto;
 
@@ -49,6 +50,6 @@ public class AnimalController {
         log.info("read 요청");
 
         model.addAttribute("dto", service.getRow(sId));
-    }
 
+    }
 }

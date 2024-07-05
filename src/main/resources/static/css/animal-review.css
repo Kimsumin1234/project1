@@ -206,3 +206,37 @@
   text-indent: 4%;
   list-style-image: url("/images/dog10.jpg");
 }
+
+.adoptline {
+  margin-top: 130px;
+}
+
+/* 찜목록 위치 바꾸기 */
+.overlay {
+  position: relative;
+}
+
+.overlay .cart-btn i {
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+}
+body .overlay .cart-btn i:hover {
+  color: #2ecc71;
+}
+
+.cart-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 31%;
+  width: 150px;
+  height: 80px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+}
+
+.cart-btn:focus {
+  outline: none !important;
+}
