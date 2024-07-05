@@ -80,76 +80,79 @@
                 </div>
               </a>
               <!-- 기본이미지 -->
-              <a th:href="@{/assets/images/animal.jpg}" class="icon img image-popup d-flex justify-content-center align-items-center" th:if="${dto.reviewImageDtos[0].path == null}"></div>
-            </a>
-            <div class="text pt-3 px-3 pb-2 text-center">
-              <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
-                <h3 th:text="${dto.title}"></h3>
+              <a th:href="@{/assets/images/animal.jpg}" class="icon img image-popup d-flex justify-content-center align-items-center" th:if="${dto.reviewImageDtos[0].path == null}">
+                <div class="img-wrap d-flex align-items-stretch">
+                  <img class="img align-self-stretch" th:src="@{/assets/images/animal.jpg}" loading="lazy"/>
+                </div>
               </a>
-              <span class="position mb-2" th:text="${dto.nickname}"></span>
-              <div class="faded">
-                <p>댓글 [<span th:text="${dto.replyCount}"></span>] 조회수 [<span th:text="${dto.viewCount}"></span>] 좋아요 [<span th:text="${dto.heartCount}"></span>]</p>
-                <ul class="ftco-social text-center">
-                  <li class="ftco-animate">
-                    <a href="#" class="d-flex align-items-center justify-content-center">
-                      <span class="fa fa-twitter"></span></a>
-                  </li>
-                  <li class="ftco-animate">
-                    <a href="#" class="d-flex align-items-center justify-content-center">
-                      <span class="fa fa-facebook"></span></a>
-                  </li>
-                  <li class="ftco-animate">
-                    <a href="#" class="d-flex align-items-center justify-content-center">
-                      <span class="fa fa-google"></span></a>
-                  </li>
-                  <li class="ftco-animate">
-                    <a href="#" class="d-flex align-items-center justify-content-center">
-                      <span class="fa fa-instagram"></span></a>
-                  </li>
-                </ul>
+              <div class="text pt-3 px-3 pb-2 text-center">
+                <a th:href="@{/review/read(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}">
+                  <h3 th:text="${dto.title}"></h3>
+                </a>
+                <span class="position mb-2" th:text="${dto.nickname}"></span>
+                <div class="faded">
+                  <p>댓글 [<span th:text="${dto.replyCount}"></span>] 조회수 [<span th:text="${dto.viewCount}"></span>] 좋아요 [<span th:text="${dto.heartCount}"></span>]</p>
+                  <ul class="ftco-social text-center">
+                    <li class="ftco-animate">
+                      <a href="#" class="d-flex align-items-center justify-content-center">
+                        <span class="fa fa-twitter"></span></a>
+                    </li>
+                    <li class="ftco-animate">
+                      <a href="#" class="d-flex align-items-center justify-content-center">
+                        <span class="fa fa-facebook"></span></a>
+                    </li>
+                    <li class="ftco-animate">
+                      <a href="#" class="d-flex align-items-center justify-content-center">
+                        <span class="fa fa-google"></span></a>
+                    </li>
+                    <li class="ftco-animate">
+                      <a href="#" class="d-flex align-items-center justify-content-center">
+                        <span class="fa fa-instagram"></span></a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
+          <!-- 여기까지 -->
         </div>
-        <!-- 여기까지 -->
-      </div>
-      <!-- 페이지 버튼 영역 -->
-      <div class="row mt-5">
-        <div class="col text-center">
-          <div class="block-27">
-            <ul class="pagination justify-content-center">
-              <li th:if="${result.prev}" class="">
-                <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
-              </li>
+        <!-- 페이지 버튼 영역 -->
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul class="pagination justify-content-center">
+                <li th:if="${result.prev}" class="">
+                  <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+                </li>
 
-              <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
-              </li>
+                <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
+                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
+                </li>
 
-              <li th:if="${result.next}" class="">
-                <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
-              </li>
-            </ul>
+                <li th:if="${result.next}" class="">
+                  <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</body>
+    </section>
+  </body>
 </div>
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
-<svg class="circular" width="48px" height="48px">
-  <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-  <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg>
+  <svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg>
 </div>
 
 <th:block layout:fragment="script">
-<script>
-  const allLi = document.querySelectorAll(".nav-item");
-  const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
-</script>
-<script th:src="@{/js/reviewList.js}"></script>
+  <script>
+    const allLi = document.querySelectorAll(".nav-item");
+    const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+  </script>
+  <script th:src="@{/js/reviewList.js}"></script>
 </th:block>
 
 </html>
