@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet"/>
+  <div layout:fragment="content">
+    <!-- END nav -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg')" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs mb-2">
+              <span class="mr-2">
+                <a th:href="@{/}">Home
+                  <i class="ion-ios-arrow-forward"></i>
+                </a>
+              </span>
+              <span class="mr-2">
+                <a th:href="@{/missint/list}">실종·신고
+                  <i class="ion-ios-arrow-forward"></i>
+                </a>
+              </span>
+            </p>
+            <h1 class="mb-0 bread">[[${dto.title}]]</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <div class="comment-form-wrap pt-5" sec:authorize="hasRole('ROLE_MEMBER')">
+              <h3 class="mb-5">글 수정</h3>
+              <form class="register-form p-5 bg-light" id="register-form" method="post" th:action="@{/missing/modify}">
+                <input type="hidden" name="missno" id="missno" th:value="${dto.missno}"/>
+                <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                <div class="form-group">
+                  <label for="nickname">닉네임 *</label>
+                  <input type="text" class="form-control" name="nickname" id="nickname" th:value="${#authentication.principal.memberDto.nickname}" readonly="readonly"/>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" class="form-control" name="email" id="email" th:value="${#authentication.principal.memberDto.email}" readonly="readonly"/>
+                </div>
+                <div class="form-group">
+                  <span class="block text-gray-700 dark:text-gray-400">Image Files</span>
+                  <input type="file" class="block w-full mt-1 form-control text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" id="fileInput" multiple="multiple"/>
+                  <div class="uploadResult mt-2">
+                    <!-- 기존에 이미 있는 포스터 보여주기 + 포스터 수정-->
+                    <ul>
+                      <li th:each="image : ${dto.missingImageDtos}" data-bs-toggle="modal" data-bs-target="#imgModal" th:attr="data-file=${image.getImageURL()},  data-name=${image.getImagename()}, data-path=${image.getPath()}, data-uuid=${image.getUuid()}" style="list-style-type: none">
+                        <div>
+                          <a href="" class="fa fa-times">
+                            <img class="block" th:if="${image.path != null}" th:src="|/upload/display?fileName=${image.getThumbImageURL()}|"/>
+                          </a>
+                          <span class="text-sm d-inline-block mx-1" th:text="${image.imagename}"></span>
+                          <a href="#">
+                            <i class="fa-solid fa-xmark"></i>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="title">제목 *</label>
+                  <input type="title" class="form-control" name="title" id="title" th:value="${dto.title}"/>
+                </div>
+                <div class="form-group">
+                  <label for="text">text</label>
+                  <textarea name="text" id="text" cols="30" rows="10" class="form-control" th:text="${dto.text}"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn py-3 px-4 btn-warning">수정</button>
+                  <button type="" class="btn py-3 px-4 btn-danger">삭제</button>
+                  <a th:href="@{/missing/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn py-3 px-4 btn-primary">목록</a >
+                </div>
+                <div class="about-author d-flex p-4 bg-light">
+                  <div class="bio mr-5">
+                    <img th:src="@{/assets/images/replyperson_1.jpg}" alt="Image placeholder" class="img-fluid mb-4" style="width: 150px"/>
+                  </div>
+                  <div class="desc">
+                    <input type="hidden" name="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+                    <h3 name="nickname" th:text="${#authentication.principal.memberDto.nickname}">닉네임</h3>
+                    <p name="email" th:text="${#authentication.principal.memberDto.email}">이메일</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <form method="post" id="actionForm" th:action="@{/missing/remove}">
+              <input type="hidden" name="missno" th:value="${dto.missno}"/>
+              <input type="hidden" name="page" th:value="${requestDto.page}"/>
+              <input type="hidden" name="type" th:value="${requestDto.type}"/>
+              <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
+            </form>
+          </div>
+          <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section>
+    <!-- .section -->
+  </div>
+  <th:block layout:fragment="script">
+    <script>
+      const csrfValue = "[[${_csrf.token}]]";
+      const missno = "[[${dto.missno}]]";
+      const title = "[[${dto.title}]]";
+      const user = "[[${#authentication.name}]]";
+    </script>
+    <script th:src="@{/js/missingmodify.js}"></script>
+    <script th:src="@{/js/imageupload.js}"></script>
+  </th:block>
+</html>

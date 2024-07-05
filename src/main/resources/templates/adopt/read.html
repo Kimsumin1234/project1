@@ -36,55 +36,49 @@
               <p><img th:src="${dto.popfile}" alt="" class="img-fluid"/></p>
               <h2 class="mb-3"></h2>
 
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">품종 : [[${dto.kindCd}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">나이(추정) : [[${dto.age}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">성별 : [[${dto.sexCd}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">체중 : [[${dto.weight}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">보호 장소 : [[${dto.careAddr}]]</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">체중 : [[${dto.weight}]]</th>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="card shadow-2dp">
+                <div>&emsp;발견 날짜 : [[${dto.happenDt}]]</div>
+                <div>&emsp;공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</div>
+                <div>&emsp;품종 : [[${dto.kindCd}]]</div>
+                <div>&emsp;나이(추정) : [[${dto.age}]]</div>
+                <div>&emsp;성별 : [[${dto.sexCd}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+                <div>&emsp;보호 장소 : [[${dto.careAddr}]]</div>
+                <div>&emsp;체중 : [[${dto.weight}]]</div>
+              </div>
+
+              <!-- <table class="table"> <tbody> <tr> <th scope="row">발견 날짜 : [[${dto.happenDt}]]</th> </tr> <tr> <th scope="row">공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</th> </tr> <tr> <th scope="row">품종 : [[${dto.kindCd}]]</th> </tr> <tr> <th scope="row">나이(추정) : [[${dto.age}]]</th> </tr> <tr> <th scope="row">성별 : [[${dto.sexCd}]]</th> </tr> <tr> <th scope="row">체중 : [[${dto.weight}]]</th> </tr> <tr> <th scope="row">보호 장소 : [[${dto.careAddr}]]</th> </tr> </tbody> </table> -->
 
               <!-- <p>발견 날짜 : [[${dto.happenDt}]]</p> <p>공고 시작일 : [[${dto.noticeSdt}]] / 공고 마감일 : [[${dto.noticeEdt}]]</p> <p>품종 : [[${dto.kindCd}]]</p> <p>나이(추정) : [[${dto.age}]]</p> <p>성별 : [[${dto.sexCd}]]</p> <p>체중 : [[${dto.weight}]]</p> <p>보호 장소 : [[${dto.careAddr}]]</p> <p>중성화 여부 : [[${dto.neuterYn}]]</p> -->
 
-              <!-- 입양문의 -->
+              <!-- 찜목록 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                <div class="form-group">
-                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">입양문의</button>
+                <div class="form-group mt-2">
+                  <button class="btn btn-warning" for="btn-check-2" id="addCartButton">찜하기</button>
                 </div>
               </form>
 
               <div class="carename">
                 <div class="about-author d-flex p-4 bg-light">
                   <div class="bio mr-5">
-                    <img th:src="@{/assets/images/animal.jpg}" alt="Image placeholder" class="img-fluid mb-4"/>
+                    <img th:src="@{/images/dog2.jpg}" alt="Image placeholder" class="img-fluid mb-4"/>
                   </div>
                   <div class="desc">
                     <h3>[[${dto.careNm}]]</h3>
                     <p>전화번호 : [[${dto.careTel}]]</p>
+                    <p>★ 입양 문의는 해당보호소로 문의해주시길 바랍니다.</p>
                   </div>
                 </div>
+              </div>
+
+              <div id="map-data" th:data-care-nm="${dto.careNm}" th:data-care-addr="${dto.careAddr}"></div>
+
+              <div class="container mt-3">
+                <div id="map" style="width:100%; height:400px;"></div>
+                <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                <input type="hidden" name="latitude" id="latitude" th:value="${dto.latitude}"/>
+                <input type="hidden" name="longitude" id="longitude" th:value="${dto.longitude}"/>
               </div>
 
               <!-- 댓글 생성 -->
@@ -117,10 +111,7 @@
                 <div class="animalHeartCount"></div>
               </h5>
               <div class="pt-5 mt-5 reviewList">
-                <div class="mb-5">
-
-                  <!-- <ul class="comment-list"> <li class="comment"> <div class="vcard bio"> <img th:src="@{/assets/images/person_1.jpg}" alt="Image placeholder" /> </div> <div class="comment-body"> <h3>John Doe</h3> <div class="meta">April 7, 2020 at 10:05pm</div> <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil? </p> <p><a href="#" class="reply">Reply</a></p> </div> </li> </ul> -->
-                </div>
+                <div class="mb-5"></div>
               </div>
             </div>
             <!-- END comment-list -->
@@ -128,7 +119,6 @@
         </div>
       </div>
     </section>
-
     <!-- .section -->
 
     <!-- loader -->
@@ -137,6 +127,8 @@
   </body>
 </div>
 <th:block layout:fragment="script">
+  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc}"></script>
+  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc&submodules=geocoder}"></script>
   <script>
 
     // csrf 토큰 설정
@@ -160,7 +152,27 @@
         .classList
         .remove("hidden");
   </script>
+
   <script th:src="@{/js/animalReview.js}"></script>
   <script th:src="@{/js/animalHeart.js}"></script>
+  <script th:src="@{/js/naverMap.js}"></script>
+
+  <style>
+    body {
+      background: #ffffff02;
+      /* 폰트 넣을건지 고민 ! */
+      /* font-size: 30px;
+      font-family: "Dongle", sans-serif; */
+    }
+
+    .shadow-2dp {
+      height: auto;
+      width: auto;
+      /* filter: drop-shadow(0 2px 2px rgba(103, 120, 167, 0.12))
+                          drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+                          drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+                          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1)); */
+    }
+  </style>
 </th:block>
 </html>
