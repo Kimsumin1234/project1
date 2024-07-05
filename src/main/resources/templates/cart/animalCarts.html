@@ -13,7 +13,7 @@
         <h3 class="cartname">
           찜 목록 : [[${#lists.size(cartItems)}]] 마리</h3>
       </div>
-    <div class="row cart-class">
+    <div class="row cart-class mt-5">
       <div class="col-4" th:each="item : ${cartItems}">
         <a th:href="@{/adopt/read(sId=${item.animal.sId})}">
           <img th:src="${item.animal.popfile}" class="rounded mx-auto d-block w-75 h-75" />
@@ -22,7 +22,7 @@
         <div>
           <form th:action="@{/cart/delete}" method="post" id="deleteCartForm" name="deleteCartForm" class="deleteCartForm">
             <input type="hidden" name="itemId" id="itemId" th:value="${item.itemId}"/>
-            <button class="btn btn-warning" for="btn-check-2" id="deleteCart">문의취소</button>
+            <button class="btn btn-warning" for="btn-check-2" id="deleteCart">찜 취소</button>
           </form>
         </div>  
       </div>

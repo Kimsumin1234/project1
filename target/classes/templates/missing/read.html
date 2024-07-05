@@ -69,9 +69,10 @@
               </div>
 
               <!-- 댓글 생성 -->
+              <div class="jb-division-line"></div>
               <div class="MissingReview mt-10">
-                <div class="comment-form-wrap pt-3">
-                  <h3 class="mb-4 review-cnt" th:text="${dto.replyCount}" style="text-align:left"></h3>
+                <div class="comment-form-wrap pt-3 mt-10">
+                  <h3 class="review-cnt" th:text="${dto.replyCount}" style="text-align:left"></h3>
                   <form th:action="@{/missingreply/}" method="post" id="replyForm" name="replyForm" class="p-2 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
                     <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
                     <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
