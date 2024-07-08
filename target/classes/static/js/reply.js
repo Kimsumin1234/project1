@@ -29,8 +29,10 @@ const reviewsLoaded = () => {
                               <div class="comment-body">
                                   <h3>${reply.nickname}</h3>
                                   <div class="meta">${formatDate(reply.lastModifiedDate)}</div>
+                                  <div class="commentinline">
                                   <p class="text-break">${reply.text}
                                   </p>
+                                  </div>
                                   <p>
                                     <div class="bottom">
                                       <a href="/member/login" class="btn btn-secondary mr-2 addcomment py-1 px-2">답글</a>`;
@@ -54,7 +56,7 @@ const reviewsLoaded = () => {
             <div class="form-group">
             <span class="user-tag">@${reply.nickname}</span>
               <div class="input-group mb-3">
-                <input name="text" id="commentText" class="form-control"></input>
+                <textarea name="text" id="commentText" class="form-control"></textarea>
                 <button type="submit" class="btn  btn-primary" >답글 등록</button>
               </div>
             </div>
@@ -99,7 +101,7 @@ const reviewsLoaded = () => {
               <div class="form-group">
               <span class="user-tag">@${reply.nickname}</span>
                 <div class="input-group mb-3">
-                  <input name="text" id="commentText" class="form-control"></input>
+                  <textarea name="text" id="commentText" class="form-control"></textarea>
                   <button type="submit" class="btn btn-primary">답글 등록</button>
                 </div>
               </div>
@@ -112,13 +114,6 @@ const reviewsLoaded = () => {
       console.log("댓글");
       // console.log(result);
       document.querySelector("#replyList").innerHTML = result;
-
-      document.querySelectorAll(".btn-outline-success").forEach((button) => {
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          document.querySelector(".review-form").scrollIntoView({ behavior: "smooth" });
-        });
-      });
     });
 };
 
@@ -137,11 +132,12 @@ reviewForm.addEventListener("submit", (e) => {
   const replyNo = reviewForm.querySelector("#replyNo");
   const commentNo = reviewForm.querySelector("#replyComment");
   console.log(text.value.length);
-  if (text.value.length == 0) {
+
+  if (text.value.trim().length == 0) {
     alert("내용 확인");
     return;
   }
-  if (text.value.length > 501) {
+  if (text.value.length > 500) {
     alert("500 자 이상 불가능");
     return;
   }
@@ -222,21 +218,23 @@ replyList.addEventListener("click", (e) => {
 
         const commentBody = e.target.closest(".comment-body");
         console.log(commentBody);
-        const textBreak = commentBody.querySelector(".text-break");
+        const textBreak = commentBody.querySelector(".commentinline");
         const bottoms = commentBody.querySelector(".bottom");
         bottoms.innerHTML = ``;
         const replyFormHTML = `
+        <div>
           <input type="hidden" class="editreplyNo" name="replyNo" value="${data.replyNo}"/>
           <input type="hidden" class="editmid" name="mid" value="${data.mid}"/>
           <input type="hidden" class="editnickname" name="nickname" value="${data.nickname}"/>
           <input type="hidden" class="editemail" name="email" value="${data.email}"/>
           <div class="form-group">
-            <input name="text" class="edittext" value="${data.text}"></input>
+            <textarea name="text" class="edittext">${data.text}</textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group right">
             <button class="btn btn-primary edit">댓글 수정</button>
             <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
           </div>
+        </div>
         `;
         textBreak.innerHTML = replyFormHTML;
       });
@@ -255,7 +253,7 @@ replyList.addEventListener("click", (e) => {
       alert("내용 이 비어있습니다.");
       return;
     }
-    if (body.text.trim().length > 500) {
+    if (body.text.length > 500) {
       alert("500 자 이상 불가능");
       return;
     }
@@ -292,7 +290,7 @@ replyList.addEventListener("click", (e) => {
         // reply 버튼 클릭
         const commentBody = e.target.closest(".comment-body");
         console.log(commentBody);
-        const textBreak = commentBody.querySelector(".text-break");
+        const textBreak = commentBody.querySelector(".commentinline");
         const bottoms = commentBody.querySelector(".bottom");
         bottoms.innerHTML = ``;
         const replyFormHTML = `
@@ -303,9 +301,9 @@ replyList.addEventListener("click", (e) => {
             <input type="hidden" class="form-control" name="nickname" value="${nickname}"/>
             <input type="hidden" class="form-control" name="email" value="${user}"/>
             <div class="form-group">
-              <input name="text" id="commentText" class="form-control" value="${data.text}"></input>
+              <textarea name="text" class="form-control commentText">${data.text}</textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group right">
               <button type="submit" class="btn btn-primary" >댓글 수정</button>
               <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
             </div>
@@ -363,7 +361,7 @@ replyList.addEventListener("submit", (e) => {
   console.log(e.target);
 
   const commentNo = form.querySelector('input[name="commentNo"]');
-  const text = form.querySelector('input[name="text"]');
+  const text = form.querySelector('textarea[name="text"]');
   const mid = form.querySelector('input[name="mid"]');
   const nickname = form.querySelector('input[name="nickname"]');
   const email = form.querySelector('input[name="email"]');
@@ -373,7 +371,7 @@ replyList.addEventListener("submit", (e) => {
     alert("내용 이 비어있습니다.");
     return;
   }
-  if (text.value.trim().length > 500) {
+  if (text.value.length > 500) {
     alert("500 자 이상 불가능");
     return;
   }
@@ -436,4 +434,14 @@ document.querySelector(".btn-danger").addEventListener("click", (e) => {
     return;
   }
   actionForm.submit();
+});
+
+// 숫자 세기
+document.addEventListener("DOMContentLoaded", (event) => {
+  const textInput = document.getElementById("text");
+  const charCount2 = document.getElementById("charCount2");
+
+  textInput.addEventListener("input", () => {
+    charCount2.textContent = `${textInput.value.length}`;
+  });
 });

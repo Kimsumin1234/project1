@@ -58,3 +58,12 @@
   right: 0px;
   top: 30px;
 }
+.right {
+  float: right;
+}
+.edittext {
+  width: 400px;
+}
+.commentText {
+  width: 400px;
+}
