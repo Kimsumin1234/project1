@@ -262,7 +262,8 @@ body .overlay .cart-btn i:hover {
 }
 
 /* "Search" 버튼의 스타일을 설정합니다 */
-.btn-outline-success {
+.adoptsubmit,
+.missingsubmit {
   padding-top: 9px; /* 버튼 내 텍스트를 세로 방향으로 중앙 정렬합니다 */
   padding-bottom: 9px; /* 버튼 내 텍스트를 세로 방향으로 중앙 정렬합니다 */
   padding-left: 2px;
@@ -277,4 +278,10 @@ body .overlay .cart-btn i:hover {
 #size {
   height: 38px; /* 입력 요소들의 높이를 일치시킵니다 */
   font-size: 14px; /* 필요에 따라 글꼴 크기를 조정하세요 */
+}
+
+/* missing 검색창 */
+.missingsearch {
+  height: 35px;
+  margin-right: 10px;
 }
