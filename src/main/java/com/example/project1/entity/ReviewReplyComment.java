@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = { "replyer", "reply" })
+@ToString(exclude = { "replyer", "reply", "review" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

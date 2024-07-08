@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.entity.ReviewReplyComment;
@@ -21,4 +22,10 @@ public interface ReviewReplyRepository extends JpaRepository<ReviewReply, Long> 
     List<ReviewReply> findByReplyComment(List<ReviewReplyComment> replyComment);
 
     List<ReviewReply> findByReview(Review review);
+
+    List<ReviewReply> findByReplyer(Member replyer);
+
+    @Modifying
+    @Query("delete from ReviewReply r where r.replyer = ?1")
+    void deleteByMember(Member replyer);
 }

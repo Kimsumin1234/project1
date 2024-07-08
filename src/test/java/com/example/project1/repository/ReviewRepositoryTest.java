@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.project1.entity.Heart;
@@ -119,5 +120,18 @@ public class ReviewRepositoryTest {
             reviewRepository.findByHeart(heart.getHno());
         }
 
+    }
+
+    @Commit
+    @Transactional
+    @Test
+    public void testFindReply() {
+        Member member = Member.builder().mid(25L).build();
+        List<ReviewReply> list = replyRepository.findByReplyer(member);
+        list.forEach(r -> {
+            r.setText(null);
+            System.out.println(r);
+            replyRepository.save(r);
+        });
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.aspectj.weaver.tools.Trace;
 import org.hibernate.annotations.ColumnDefault;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,7 +31,7 @@ import lombok.Builder.Default;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "writer")
+@ToString(exclude = { "writer", "heart" })
 public class Review extends BaseEntity {
 
     @SequenceGenerator(name = "animal_review_seq_gen", sequenceName = "animal_review_seq", allocationSize = 1)
@@ -52,14 +53,27 @@ public class Review extends BaseEntity {
     private Member writer;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review", orphanRemoval = true)
+    @OneToMany(mappedBy = "review")
     private List<Heart> heart = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "review", orphanRemoval = true)
-    private List<ReviewReply> reviewReply = new ArrayList<>();
+    // @Builder.Default
+    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
+    // CascadeType.ALL, orphanRemoval = true)
+    // private List<Heart> heart = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "review", orphanRemoval = true)
-    private List<ReviewReplyComment> reviewReplyComment = new ArrayList<>();
+    // @Builder.Default
+    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
+    // CascadeType.ALL, orphanRemoval = true)
+    // private List<ReviewImage> reviewImage = new ArrayList<>();
+
+    // @Builder.Default
+    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
+    // CascadeType.ALL, orphanRemoval = true)
+    // private List<ReviewReply> reviewReply = new ArrayList<>();
+
+    // @Builder.Default
+    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
+    // CascadeType.ALL, orphanRemoval = true)
+    // private List<ReviewReplyComment> reviewReplyComment = new ArrayList<>();
+
 }

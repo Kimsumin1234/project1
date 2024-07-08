@@ -156,7 +156,7 @@ public class MemberController {
 
         try {
             msg = adoptUserService.leave(leaveMemberDto);
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
             return "/member/leave";
         }

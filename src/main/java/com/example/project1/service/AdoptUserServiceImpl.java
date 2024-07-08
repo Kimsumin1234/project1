@@ -1,5 +1,6 @@
 package com.example.project1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,12 @@ import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.NicknameChangeDto;
 import com.example.project1.dto.PasswordChangeDto;
 import com.example.project1.entity.Member;
+import com.example.project1.entity.ReviewReply;
+import com.example.project1.repository.HeartRepository;
 import com.example.project1.repository.MemberRepository;
+import com.example.project1.repository.ReviewReplyCommentRepository;
+import com.example.project1.repository.ReviewReplyRepository;
+import com.example.project1.repository.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,6 +33,14 @@ import lombok.extern.log4j.Log4j2;
 public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserService {
 
     private final MemberRepository memberRepository;
+
+    private final HeartRepository heartRepository;
+
+    private final ReviewReplyCommentRepository reviewReplyCommentRepository;
+
+    private final ReviewReplyRepository reviewReplyRepository;
+
+    private final ReviewRepository reviewRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -92,7 +106,10 @@ public class AdoptUserServiceImpl implements UserDetailsService, AdoptUserServic
             throw new IllegalStateException("현재 비밀번호가 다릅니다.");
 
         } else {
-            // reviewRepository.deleteByMember(member);
+            heartRepository.deleteByMember(member);
+            reviewReplyCommentRepository.deleteByMember(member);
+            reviewReplyRepository.deleteByMember(member);
+            reviewRepository.deleteByMember(member);
             memberRepository.delete(member);
         }
 
