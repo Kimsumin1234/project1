@@ -45,3 +45,21 @@ document.querySelector(".uploadResult").addEventListener("click", (e) => {
 //   });
 //   form.insertAdjacentHTML("beforeend", result);
 // });
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  const titleInput = document.getElementById("title");
+  const charCount1 = document.getElementById("charCount1");
+
+  titleInput.addEventListener("input", () => {
+    charCount1.textContent = `${titleInput.value.length}`;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  const textInput = document.getElementById("text");
+  const charCount2 = document.getElementById("charCount2");
+
+  textInput.addEventListener("input", () => {
+    charCount2.textContent = `${textInput.value.length}`;
+  });
+});
