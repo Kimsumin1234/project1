@@ -62,13 +62,16 @@
 
         <div class="m-3 row justify-content-end">
           <a th:href="@{/review/register}" class="btn btn-primary m-2" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a>
-          <button class="btn btn-warning m-2 btn-open-modal" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')">내가 좋아요한 목록</button>
+          <button type="button" class="btn btn-warning m-2" id="heartList" sec:authorize="hasRole('ROLE_MEMBER')" data-toggle="modal" data-target="#myModal">내가 좋아요한 목록</button>
         </div>
-        <div class="modal">
-          <div class="hartlistContainer modal-body">
-            <ul class="list-group list-group-flush">
-              <!-- <li class="list-group-item">An item</li> -->
-            </ul>
+
+        <div class="modal fade" id="myModal">
+          <div class="hartlistContainer modal-body modal-dialog">
+            <div class="modal-content m-3">
+              <ul class="list-group list-group-flush">
+                <!-- <li class="list-group-item">An item</li> -->
+              </ul>
+            </div>
           </div>
         </div>
 

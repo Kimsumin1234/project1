@@ -7,22 +7,23 @@ document.querySelector("#heartList").addEventListener("click", (e) => {
     .then((data) => {
       console.log(data);
       let tags = "";
-      tags += `<p class="row justify-content-end close" >닫기 <i class="fa fa-times close" aria-hidden="true"></i></p>`;
+
+      // tags += `<p class="row justify-content-end close" ><i class="fa fa-times close" aria-hidden="true"></i></p>`;
+
+      // tags += `<button type="button" class="close" data-dismiss="modal">&times;</button>`;
+
       if (data.length == 0) {
-        tags += `<span class="row justify-content-end">현재 좋아요한 목록이 없습니다.</span>`;
+        tags += `<span class="row justify-content-center">현재 좋아요한 목록이 없습니다.</span>`;
+      } else {
+        tags += `<span class="row justify-content-center pt-2">좋아요한 목록</span>`;
       }
+
+      tags += `<ul class="list-group list-group-flush">`;
       data.forEach((reviewDto) => {
-        tags += `<a href="/review/read?rno=${reviewDto.rno}" class="row justify-content-end col-sm-12"><li class="list-group-item">${reviewDto.title}</li></a>`;
+        tags += `<li class="heartlist list-group-item"><a href="/review/read?rno=${reviewDto.rno}" class="row col-sm-12">${reviewDto.title}</a></li>`;
       });
+      tags += `</ul>`;
 
       document.querySelector(".list-group").innerHTML = tags;
     });
-});
-
-document.querySelector(".list-group").addEventListener("click", (e) => {
-  console.log(e.target);
-  if (e.target.classList.contains("close")) {
-    let tags = "";
-    document.querySelector(".list-group").innerHTML = tags;
-  }
 });
