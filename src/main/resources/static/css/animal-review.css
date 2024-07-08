@@ -241,3 +241,8 @@ body .overlay .cart-btn i:hover {
 .cart-btn:focus {
   outline: none !important;
 }
+
+.addCartButton {
+  text-align: center;
+  margin-left: 550px;
+}
