@@ -38,7 +38,7 @@
       <section class="ftco-section ftco-degree-bg">
         <div class="container justify-content-center">
           <div class="row">
-            <div class="col-lg-10 ftco-animate mr-10" style="text-align:center">
+            <div class="col-lg-10 ftco-animate mr-10">
               <h2 class="mb-5" th:text="${dto.title}" style="text-align:center"></h2>
               <div class="jb-division-line"></div>
               <h5 class="mb-5" th:text="${dto.nickname}" style="text-align:right">멤버 정보</h5>
@@ -50,9 +50,10 @@
                 </ul>
               </div>
 
-              <h5 class="text-break mt-5" th:text="${dto.text}">
-                text 내용 들어갈 자리
+              <h5 class="text-align:left mt-5">
+                <pre th:text="${dto.text}"></pre>
               </h5>
+
               <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}" style="text-align:right">
                 <div class="">
                   <a th:href="@{/missing/modify(missno=${dto.missno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
@@ -118,7 +119,19 @@
         const user = "[[${#authentication.name}]]";
       </script>
 
-      <script th:src="@{/js/missingmodify.js}"></script>
+      <script>
+        const actionForm = document.querySelector("#actionForm");
+        document
+          .querySelector(".btn-danger")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            if (!confirm("삭제하시겠습니까?")) {
+              return;
+            }
+            actionForm.submit();
+          });
+      </script>
+
       <script th:src="@{/js/missingreply.js}"></script>
     </th:block>
   </body>
