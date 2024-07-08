@@ -89,26 +89,25 @@
             </div>
           </div>
         </div>
-      </section>
 
-      <div class="row mb-5">
-        <div class="col text-center">
-          <div class="block-27">
-            <ul class="pagination justify-content-center">
-              <li th:if="${result.prev}" class="">
-                <a th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&lt;</a>
-              </li>
-              <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}" th:text="${page}" class="text-center"></a>
-              </li>
-              <li th:if="${result.next}" class="">
-                <a th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&gt;</a>
-              </li>
-            </ul>
+        <div class="row mb-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul class="pagination justify-content-center">
+                <li th:if="${result.prev}" class="">
+                  <a th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&lt;</a>
+                </li>
+                <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
+                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}" th:text="${page}" class="text-center"></a>
+                </li>
+                <li th:if="${result.next}" class="">
+                  <a th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&gt;</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-
+      </section>
     </div>
 
     <th:block layout:fragment="script">
