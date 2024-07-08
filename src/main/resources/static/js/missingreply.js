@@ -20,9 +20,9 @@ const reviewsLoaded = () => {
       data.forEach((review) => {
         result += `<ul class="comment-list"> <li class="comment" data-missrno="${review.missrno}"> <div class="vcard bio">`;
         result += `<img src="/assets/images/replyperson_1.jpg" alt="Image placeholder" /></div>`;
-        result += `<div class="comment-body" style="text-align:left"><h3>${review.nickname}</h3>`;
+        result += `<div class="comment-body"><h3>${review.nickname}</h3>`;
         result += `<div class="meta">${formatDate(review.createdDate)}</div>`;
-        result += `<p style="width:300px; text-align:justify;" >${review.text}</p>`;
+        result += `<p style="width:400px; text-align:justify;" >${review.text}</p>`;
         if (`${review.email}` == user) {
           result += `<div class ="delMod"><div class="mb-2 delete"><button class="btn btn-outline-danger btn-sm missingdel">삭제</button>`;
           result += `<button class="btn btn-outline-success btn-sm missingMod">수정</button></div>`;

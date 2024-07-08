@@ -9,17 +9,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar"></nav>
       <!-- END nav -->
       <section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5">
-        <div class="overlay">
-          <!-- 찜목록 -->
-          <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="cartForm">
-            <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-            <div class="form-group mt-2 ftco-animated ">
-              <button type="submit" class="cart-btn">
-                <i class="fa fa-heart full"></i>찜하기
-              </button>
-            </div>
-          </form>
-        </div>
+        <div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
@@ -33,6 +23,15 @@
                   </a>
                 </span>
               </p>
+              <!-- 찜목록 -->
+              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="cartForm">
+                <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                <div class="form-group mt-2 ftco-animated ">
+                  <button type="submit" class="cart-btn">
+                    <i class="fa fa-heart full adoptzzim"></i>찜하기
+                  </button>
+                </div>
+              </form>
               <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
             </div>
           </div>
@@ -118,7 +117,7 @@
                 <div class="mb-5"></div>
               </div>
             </div>
-
+            <!-- END comment-list -->
           </div>
         </div>
       </div>
