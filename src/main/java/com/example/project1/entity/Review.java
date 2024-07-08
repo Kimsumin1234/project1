@@ -56,24 +56,4 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review")
     private List<Heart> heart = new ArrayList<>();
 
-    // @Builder.Default
-    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
-    // CascadeType.ALL, orphanRemoval = true)
-    // private List<Heart> heart = new ArrayList<>();
-
-    // @Builder.Default
-    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
-    // CascadeType.ALL, orphanRemoval = true)
-    // private List<ReviewImage> reviewImage = new ArrayList<>();
-
-    // @Builder.Default
-    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
-    // CascadeType.ALL, orphanRemoval = true)
-    // private List<ReviewReply> reviewReply = new ArrayList<>();
-
-    // @Builder.Default
-    // @OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade =
-    // CascadeType.ALL, orphanRemoval = true)
-    // private List<ReviewReplyComment> reviewReplyComment = new ArrayList<>();
-
 }
