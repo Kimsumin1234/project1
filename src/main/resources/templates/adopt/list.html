@@ -47,7 +47,7 @@
             </select>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" th:value="${requestDto.keyword}"/>
             <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success adoptsubmit" type="submit">Search</button>
 
             <select name="size" id="size" class="form-select me-2">
               <option value="12" th:selected="${requestDto.size == 12}">12개씩</option>
