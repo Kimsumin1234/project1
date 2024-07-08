@@ -43,6 +43,11 @@ public class ReviewReply extends BaseEntity {
     private Review review;
 
     @Builder.Default
-    @OneToMany(mappedBy = "reply", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reply", fetch = FetchType.EAGER)
     private List<ReviewReplyComment> replyComment = new ArrayList<>();
+
+    // @Builder.Default
+    // @OneToMany(mappedBy = "reply", fetch = FetchType.EAGER, cascade =
+    // CascadeType.ALL, orphanRemoval = true)
+    // private List<ReviewReplyComment> replyComment = new ArrayList<>();
 }

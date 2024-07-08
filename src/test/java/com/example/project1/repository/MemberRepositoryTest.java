@@ -50,7 +50,7 @@ public class MemberRepositoryTest {
 
     @Test
     public void memberInsertTest2() {
-        IntStream.rangeClosed(11, 18).forEach(i -> {
+        IntStream.rangeClosed(20, 30).forEach(i -> {
             Member member = Member.builder()
                     .email("user" + i + "@naver.com")
                     .nickname("User" + i)
