@@ -137,7 +137,7 @@ reviewForm.addEventListener("submit", (e) => {
     alert("내용 확인");
     return;
   }
-  if (text.value.length > 500) {
+  if (text.value.trim().length > 500) {
     alert("500 자 이상 불가능");
     return;
   }
@@ -145,7 +145,7 @@ reviewForm.addEventListener("submit", (e) => {
   // replyNo 값 존재 하는지 없는지
 
   const body = {
-    text: text.value,
+    text: text.value.trim(),
     email: email.value,
     mid: mid.value,
     nickname: nickname.value,
@@ -231,8 +231,8 @@ replyList.addEventListener("click", (e) => {
             <textarea name="text" class="edittext">${data.text}</textarea>
           </div>
           <div class="form-group right">
-            <button class="btn btn-primary edit">댓글 수정</button>
-            <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
+            <button class="btn btn-primary edit py-1 px-2">댓글 수정</button>
+            <a type="buttom" class="btn btn-warning cancel py-1 px-2" >수정 취소</a>
           </div>
         </div>
         `;
@@ -242,7 +242,7 @@ replyList.addEventListener("click", (e) => {
   if (e.target.classList.contains("edit")) {
     const commentBody = e.target.closest(".comment-body");
     const body = {
-      text: commentBody.querySelector(".edittext").value,
+      text: commentBody.querySelector(".edittext").value.trim(),
       email: commentBody.querySelector(".editemail").value,
       mid: commentBody.querySelector(".editmid").value,
       nickname: commentBody.querySelector(".editnickname").value,
@@ -253,7 +253,7 @@ replyList.addEventListener("click", (e) => {
       alert("내용 이 비어있습니다.");
       return;
     }
-    if (body.text.length > 500) {
+    if (body.text.trim().length > 500) {
       alert("500 자 이상 불가능");
       return;
     }
@@ -304,8 +304,8 @@ replyList.addEventListener("click", (e) => {
               <textarea name="text" class="form-control commentText">${data.text}</textarea>
             </div>
             <div class="form-group right">
-              <button type="submit" class="btn btn-primary" >댓글 수정</button>
-              <a type="buttom" class="btn btn-warning cancel" >수정 취소</a>
+              <button type="submit" class="btn btn-primary py-1 px-2" >댓글 수정</button>
+              <a type="buttom" class="btn btn-warning cancel py-1 px-2" >수정 취소</a>
             </div>
           </form>
         `;

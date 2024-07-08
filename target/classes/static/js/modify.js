@@ -63,3 +63,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     charCount2.textContent = `${textInput.value.length}`;
   });
 });
+
+// document.querySelector("form").addEventListener("submit", (e) => {
+//   e.preventDefault();
+
+//   e.querySelector();
+
+//   e.submit();
+// });

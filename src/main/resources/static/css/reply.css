@@ -33,6 +33,7 @@
   word-wrap: break-word; /* 단어가 길 경우 줄바꿈 */
   word-break: break-all; /* 단어가 경계를 넘어갈 때 줄바꿈 */
   max-width: 100%; /* 텍스트가 부모 요소를 넘지 않도록 */
+  width: auto;
 }
 .user-tag {
   cursor: pointer;

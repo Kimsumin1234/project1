@@ -100,9 +100,10 @@ public class ReviewController {
     }
 
     @PostMapping("/modify")
-    public String postModify(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
+    public String postModify(@Valid ReviewDto reviewDto, BindingResult result, Model model, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
         if (result.hasErrors()) {
+            model.addAttribute("dto", reviewDto);
             return "/review/modify";
         }
 
