@@ -104,14 +104,18 @@
 
 /* 댓글 삭제 영역 */
 .animalReviewdel {
+  position: absolute;
+  right: 55px;
   margin: 0px;
-  padding: 5px;
+  padding: 4px;
   border-radius: 5px;
 }
 
 .animalReviewMod {
+  position: absolute;
+  right: 100px;
   margin: 0px;
-  padding: 5px;
+  padding: 4px;
   border-radius: 5px;
 }
 
@@ -129,11 +133,15 @@
 
 /* missing 댓글 삭제 영역 */
 .missingdel {
+  position: absolute;
+  right: 200px;
   margin: 0px;
   padding: 5px;
   border-radius: 5px;
 }
 .missingMod {
+  position: absolute;
+  right: 250px;
   margin: 0px;
   padding: 5px;
   border-radius: 5px;
@@ -229,11 +237,11 @@ body .overlay .cart-btn i:hover {
 .cart-btn {
   position: absolute;
   bottom: 20px;
-  right: 31%;
+  left: 90%;
   width: 150px;
   height: 80px;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   border: none;
 }
@@ -245,6 +253,10 @@ body .overlay .cart-btn i:hover {
 .addCartButton {
   text-align: center;
   margin-left: 550px;
+}
+
+.adoptzzim {
+  margin-right: 3px;
 }
 
 /* form 요소들을 가로로 나열하고 간격을 조정합니다 */
