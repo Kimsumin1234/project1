@@ -28,7 +28,7 @@
   display: flex;
   align-items: flex-start;
 }
-.comment-text-inline {
+.text-break {
   white-space: pre-wrap; /* 줄바꿈과 공백을 그대로 유지 */
   word-wrap: break-word; /* 단어가 길 경우 줄바꿈 */
   word-break: break-all; /* 단어가 경계를 넘어갈 때 줄바꿈 */
