@@ -29,18 +29,3 @@ document.querySelector(".uploadResult").addEventListener("click", (e) => {
       }
     });
 });
-
-// 첫 번째 textarea 요소를 가져옵니다.
-const textarea = document.querySelector("textarea:first-of-type");
-
-// textarea를 클릭할 때 실행할 함수를 설정합니다.
-textarea.addEventListener("click", function () {
-  // textarea의 값을 가져옵니다.
-  const text = this.value;
-
-  // <br> 태그를 "x" 문자열로 대체합니다.
-  text = text.replace(/<br\s*\/?>/gim, "x");
-
-  // 대체된 값을 textarea에 설정합니다.
-  this.value = text;
-});
