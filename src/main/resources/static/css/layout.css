@@ -36,7 +36,7 @@ button {
 
 button::before,
 button::after {
-  background: #fff;
+  /* background: #fff; */
   content: "";
   position: absolute;
   z-index: -1;
