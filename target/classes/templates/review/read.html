@@ -52,6 +52,20 @@
                 </div>
               </div>
 
+              <div class="tag-widget post-tag-container mb-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
+                <div class="float-right">
+                  <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning py-1 px-2">수정</a>
+                  <a href="" class="btn btn-danger py-1 px-2">삭제</a>
+                </div>
+
+                <form method="post" id="actionForm" th:action="@{/review/remove}">
+                  <input type="hidden" name="rno" th:value="${dto.rno}"/>
+                  <input type="hidden" name="page" th:value="${requestDto.page}"/>
+                  <input type="hidden" name="type" th:value="${requestDto.type}"/>
+                  <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
+                </form>
+              </div>
+
               <h2 class="mb-3" th:text="${dto.title}">title 글 제목 들어갈 자리</h2>
               <div class="uploadResult mb-4">
                 <ul>
@@ -64,23 +78,9 @@
               <p class="text-break" th:text="${dto.text}">
                 text 내용 들어갈 자리
               </p>
-              <div class="tag-widget post-tag-container mb-5 mt-5" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${#authentication.principal.memberDto.email == dto.email}">
-                <div class="">
-                  <a th:href="@{/review/modify(rno=${dto.rno},page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-warning">수정</a>
-                  <a href="" class="btn btn-danger">삭제</a>
-                  <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록</a>
-                </div>
-
-                <form method="post" id="actionForm" th:action="@{/review/remove}">
-                  <input type="hidden" name="rno" th:value="${dto.rno}"/>
-                  <input type="hidden" name="page" th:value="${requestDto.page}"/>
-                  <input type="hidden" name="type" th:value="${requestDto.type}"/>
-                  <input type="hidden" name="keyword" th:value="${requestDto.keyword}"/>
-                </form>
-              </div>
 
               <!-- reply 들어갈 자리 -->
-              <div class="pt-5 mt-5">
+              <div class="mt-5">
                 <h3 class="mb-5" sec:authorize="hasRole('ROLE_MEMBER')">
                   <span>
                     <div class="" id="heart"></div>
@@ -114,6 +114,9 @@
                     </div>
                     <!-- END comment-list -->
 
+                    <div class="backlist">
+                      <a th:href="@{/review/list(page=${requestDto.page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" class="btn btn-primary">목록으로 돌아가기</a>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-2"></div>

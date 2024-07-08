@@ -26,8 +26,13 @@
 }
 .commentinline {
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-start;
+}
+.comment-text-inline {
+  white-space: pre-wrap; /* 줄바꿈과 공백을 그대로 유지 */
+  word-wrap: break-word; /* 단어가 길 경우 줄바꿈 */
+  word-break: break-all; /* 단어가 경계를 넘어갈 때 줄바꿈 */
+  max-width: 100%; /* 텍스트가 부모 요소를 넘지 않도록 */
 }
 .user-tag {
   cursor: pointer;
@@ -36,8 +41,20 @@
   background-color: #dfecff;
   height: 26px;
 }
-.comment-text-inline {
-  display: inline;
-  word-wrap: break-word;
-  margin-left: 0.5rem;
+.backlist {
+  display: flex;
+  justify-content: center;
+}
+.comment-body {
+  position: relative;
+}
+.delete1 {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.modify1 {
+  position: absolute;
+  right: 0px;
+  top: 30px;
 }

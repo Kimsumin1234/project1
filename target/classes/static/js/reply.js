@@ -33,10 +33,10 @@ const reviewsLoaded = () => {
                                   </p>
                                   <p>
                                     <div class="bottom">
-                                      <a href="/member/login" class="btn btn-secondary mr-2 addcomment">답글</a>`;
+                                      <a href="/member/login" class="btn btn-secondary mr-2 addcomment py-1 px-2">답글</a>`;
         if (`${reply.email}` == user) {
-          result += '<button class="btn btn-outline-danger btn-sm">삭제</button>';
-          result += '<button class="btn btn-outline-success btn-sm">수정</button>';
+          result += '<button class="btn btn-outline-danger py-1 px-2 delete1">삭제</button>';
+          result += '<button class="btn btn-outline-success py-1 px-2 modify1">수정</button>';
         }
         result += `</div></p>`;
 
@@ -52,9 +52,9 @@ const reviewsLoaded = () => {
             <input type="hidden" class="form-control" name="email" value="${user}"/>
            
             <div class="form-group">
+            <span class="user-tag">@${reply.nickname}</span>
               <div class="input-group mb-3">
-              <span class="user-tag">@${reply.nickname} </span>
-              <input name="text" id="commentText" class="form-control"></input>
+                <input name="text" id="commentText" class="form-control"></input>
                 <button type="submit" class="btn  btn-primary" >답글 등록</button>
               </div>
             </div>
@@ -81,11 +81,11 @@ const reviewsLoaded = () => {
             </div>
             <p>
               <div class="bottom">
-                <a href="/member/login" class="btn btn-secondary mr-2 addcomment">답글</a>
+                <a href="/member/login" class="btn btn-secondary mr-2 addcomment py-1 px-2">답글</a>
               `;
             if (`${comment.email}` == user) {
-              result += '<button class="btn btn-danger btn-sm">삭제</button>';
-              result += '<button class="btn btn-success btn-sm reply2">수정</button>';
+              result += '<button class="btn btn-danger py-1 px-2 delete1">삭제</button>';
+              result += '<button class="btn btn-success py-1 px-2 reply2 modify1">수정</button>';
             }
             result += `</div></p>`;
 
