@@ -48,6 +48,12 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" th:value="${requestDto.keyword}"/>
             <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
             <button class="btn btn-outline-success" type="submit">Search</button>
+
+            <select name="size" id="size" class="form-select me-2">
+              <option value="12" th:selected="${requestDto.size == 12}">12개씩</option>
+              <option value="24" th:selected="${requestDto.size == 24}">24개씩</option>
+              <option value="36" th:selected="${requestDto.size == 36}">36개씩</option>
+            </select>
           </form>
 
           <div class="adoptlistpage">
@@ -90,13 +96,13 @@
           <div class="block-27">
             <ul class="pagination justify-content-center">
               <li th:if="${result.prev}" class="">
-                <a th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+                <a th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&lt;</a>
               </li>
               <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
+                <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}" th:text="${page}" class="text-center"></a>
               </li>
               <li th:if="${result.next}" class="">
-                <a th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+                <a th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, size=${requestDto.size})}">&gt;</a>
               </li>
             </ul>
           </div>
@@ -107,7 +113,17 @@
 
     <th:block layout:fragment="script">
       <script th:src="@{/js/animalSearch.js}"></script>
+      <script>
+        document
+          .getElementById('size')
+          .addEventListener('change', function () {
+            document
+              .getElementById('searchForm')
+              .submit();
+          });
+      </script>
     </th:block>
+
   </body>
 
 </html>

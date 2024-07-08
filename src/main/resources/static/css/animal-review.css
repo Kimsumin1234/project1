@@ -246,3 +246,35 @@ body .overlay .cart-btn i:hover {
   text-align: center;
   margin-left: 550px;
 }
+
+/* form 요소들을 가로로 나열하고 간격을 조정합니다 */
+.d-flex {
+  display: flex;
+  align-items: center; /* 요소들을 세로 중앙 정렬합니다 */
+}
+
+/* 조건 선택 드롭다운과 검색 입력 창 사이의 간격을 조정합니다 */
+.form-select.search,
+.form-control {
+  margin-right: 10px; /* 필요에 따라 조정하세요 */
+  height: 38px !important; /* 입력 요소들의 높이를 일치시킵니다 */
+  font-size: 14px; /* 필요에 따라 글꼴 크기를 조정하세요 */
+}
+
+/* "Search" 버튼의 스타일을 설정합니다 */
+.btn-outline-success {
+  padding-top: 9px; /* 버튼 내 텍스트를 세로 방향으로 중앙 정렬합니다 */
+  padding-bottom: 9px; /* 버튼 내 텍스트를 세로 방향으로 중앙 정렬합니다 */
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 14px; /* 필요에 따라 글꼴 크기를 조정하세요 */
+  height: 38px; /* 입력 요소들의 높이를 일치시킵니다 */
+  min-width: 100px; /* 최소 너비를 지정하여 버튼의 크기를 유지합니다 */
+  text-align: center;
+}
+
+/* "개씩" 선택 드롭다운의 스타일을 설정합니다 */
+#size {
+  height: 38px; /* 입력 요소들의 높이를 일치시킵니다 */
+  font-size: 14px; /* 필요에 따라 글꼴 크기를 조정하세요 */
+}
