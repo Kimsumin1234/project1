@@ -3,8 +3,10 @@ package com.example.project1.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.aspectj.weaver.tools.Trace;
 import org.hibernate.annotations.ColumnDefault;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +31,7 @@ import lombok.Builder.Default;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "writer")
+@ToString(exclude = { "writer", "heart" })
 public class Review extends BaseEntity {
 
     @SequenceGenerator(name = "animal_review_seq_gen", sequenceName = "animal_review_seq", allocationSize = 1)
@@ -53,4 +55,5 @@ public class Review extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "review")
     private List<Heart> heart = new ArrayList<>();
+
 }

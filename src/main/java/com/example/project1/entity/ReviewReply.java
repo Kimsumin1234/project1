@@ -3,6 +3,7 @@ package com.example.project1.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,7 +23,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = { "replyer", "review" })
+@ToString(exclude = { "replyer", "review", "replyComment" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +45,5 @@ public class ReviewReply extends BaseEntity {
     @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
     private List<ReviewReplyComment> replyComment = new ArrayList<>();
+
 }

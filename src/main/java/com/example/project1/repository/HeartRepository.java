@@ -1,6 +1,8 @@
 package com.example.project1.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.project1.entity.Heart;
 import com.example.project1.entity.Review;
@@ -16,5 +18,9 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
     List<Heart> findByMember(Member member);
 
     void deleteByReview(Review review);
+
+    @Modifying
+    @Query("delete from Heart h where h.member = ?1")
+    void deleteByMember(Member member);
 
 }

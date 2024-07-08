@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = { "replyer", "reply" })
+@ToString(exclude = { "replyer", "reply", "review" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,4 +38,7 @@ public class ReviewReplyComment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ReviewReply reply;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Review review;
 }
