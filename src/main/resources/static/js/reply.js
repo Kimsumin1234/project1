@@ -388,6 +388,7 @@ replyList.addEventListener("submit", (e) => {
     nickname: nickname.value,
     replyNo: replyNo.value,
     commentNo: commentNo.value,
+    rno: rno,
   };
   if (!commentNo.value) {
     fetch(`/comment/add`, {

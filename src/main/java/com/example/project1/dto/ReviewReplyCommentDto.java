@@ -32,4 +32,7 @@ public class ReviewReplyCommentDto {
     private LocalDateTime createdDate;
 
     private LocalDateTime lastModifiedDate;
+
+    // Review
+    private Long rno;
 }

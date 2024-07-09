@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.project1.dto.ReviewReplyCommentDto;
 import com.example.project1.dto.ReviewReplyDto;
 import com.example.project1.entity.Member;
+import com.example.project1.entity.Review;
 import com.example.project1.entity.ReviewReply;
 import com.example.project1.entity.ReviewReplyComment;
 
@@ -37,6 +38,7 @@ public interface ReviewReplyCommentService {
     public default ReviewReplyComment dtoToEntity(ReviewReplyCommentDto commentDto) {
 
         ReviewReplyComment comment = new ReviewReplyComment();
+        comment.setReview(Review.builder().rno(commentDto.getRno()).build());
         comment.setCommentNo(commentDto.getCommentNo());
         comment.setText(commentDto.getText());
         comment.setReply(ReviewReply.builder().replyNo(commentDto.getReplyNo()).build());
