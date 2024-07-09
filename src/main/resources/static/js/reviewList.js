@@ -1,3 +1,7 @@
+document.getElementById("sorting").addEventListener("change", function () {
+  document.getElementById("searchForm").submit();
+});
+
 console.log(mid);
 document.querySelector("#heartList").addEventListener("click", (e) => {
   fetch(`/heart/${mid}/heartList`, {

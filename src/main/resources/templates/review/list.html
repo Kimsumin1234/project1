@@ -43,6 +43,11 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" th:value="${requestDto.keyword}"/>
           <!-- search 클릭 시, keword, type - requestdto로 넘어감 -->
           <button class="btn btn-outline-success" type="submit">Search</button>
+
+          <select name="sorting" id="sorting" class="form-select me-2">
+            <option value="r" th:selected="${requestDto.sorting == 'r'}">최신순</option>
+            <option value="v" th:selected="${requestDto.sorting == 'v'}">조회수</option>
+          </select>
         </form>
 
         <div class="m-3 row justify-content-end">

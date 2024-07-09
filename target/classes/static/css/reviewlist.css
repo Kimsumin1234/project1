@@ -4,3 +4,11 @@
 .text-center {
   height: 154.67px;
 }
+#searchForm {
+  position: relative;
+}
+#sorting {
+  position: absolute;
+  top: -70px;
+  right: 10px;
+}

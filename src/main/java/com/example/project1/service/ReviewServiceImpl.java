@@ -10,6 +10,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,10 +46,22 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     @Override
     public PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto) {
+        // 기본 정렬 기준 설정 (rno 내림차순)
+        Sort sort = Sort.by("rno").descending();
+
+        // sorting 변수를 기반으로 정렬 기준 변경
+        if ("r".equals(requestDto.getSorting())) {
+            sort = Sort.by("rno").descending();
+        } else if ("v".equals(requestDto.getSorting())) {
+            sort = Sort.by("viewCount").descending();
+        }
+
+        // Pageable 객체 생성
+        Pageable pageable = requestDto.getPageable(sort);
 
         Page<Object[]> result = reviewRepository.list(requestDto.getType(),
                 requestDto.getKeyword(),
-                requestDto.getPageable(Sort.by("rno").descending()));
+                pageable);
 
         Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
                 (List<ReviewImage>) Arrays.asList((ReviewImage) entity[1]), (Long) entity[2], (String) entity[3],
