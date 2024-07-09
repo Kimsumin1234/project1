@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
+import com.example.project1.entity.AnimalItem;
 import com.example.project1.service.AdoptApiService;
+import com.example.project1.service.AnimalCartService;
 import com.example.project1.service.AnimalHeartService;
 import com.example.project1.dto.AnimalCartDto;
 import com.example.project1.dto.AnimalDto;
@@ -30,6 +32,8 @@ import com.example.project1.dto.PageRequestDto;
 public class AnimalController {
 
     private final AdoptApiService service;
+
+    private final AnimalCartService animalCartService;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/list")
@@ -50,6 +54,10 @@ public class AnimalController {
         log.info("read 요청");
 
         model.addAttribute("dto", service.getRow(sId));
+
+        // AnimalItem 정보를 가져오는 예시
+        List<AnimalItem> cartItems = animalCartService.findItemsId(sId);
+        model.addAttribute("cartItems", cartItems);
 
     }
 }

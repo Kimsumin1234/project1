@@ -1,6 +1,9 @@
 package com.example.project1.service;
 
+import java.util.List;
+
 import com.example.project1.entity.AnimalCart;
+import com.example.project1.entity.AnimalItem;
 
 public interface AnimalCartService {
 
@@ -15,5 +18,8 @@ public interface AnimalCartService {
 
         // 장바구니 item 삭제
         void cartItemDelete(Long itemId);
+
+        // 찜목록
+        List<AnimalItem> findItemsId(Long sId);
 
 }
