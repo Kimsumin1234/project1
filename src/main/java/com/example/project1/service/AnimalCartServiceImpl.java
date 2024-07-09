@@ -32,6 +32,13 @@ public class AnimalCartServiceImpl implements AnimalCartService {
     private final MemberRepository memberRepository;
     private final AnimalRepository animalRepository;
 
+    // 찜목록
+    @Override
+    public List<AnimalItem> findItemsId(Long sId) {
+        return animalItemRepository.findBysId(sId);
+
+    }
+
     // 장바구니 생성과 아이템 추가
     @Override
     public void createCart(Long mid, Long sId, int count) {

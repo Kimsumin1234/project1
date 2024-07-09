@@ -23,15 +23,18 @@
                   </a>
                 </span>
               </p>
+
               <!-- 찜목록 -->
               <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="cartForm">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                <div class="form-group mt-2 ftco-animated ">
+                <div class="form-group mt-2 ftco-animated">
+                  <!-- th:if="${item.animal.sId == dto.sId}" disabled="disabled" -->
                   <button type="submit" class="cart-btn">
                     <i class="fa fa-heart full adoptzzim"></i>찜하기
                   </button>
                 </div>
               </form>
+
               <h1 class="mb-0 bread" th:text="${dto.noticeNo}"></h1>
             </div>
           </div>
@@ -156,23 +159,7 @@
   <script th:src="@{/js/animalReview.js}"></script>
   <script th:src="@{/js/animalHeart.js}"></script>
   <script th:src="@{/js/naverMap.js}"></script>
+  <script th:src="@{/js/cart.js}"></script>
 
-  <style>
-    body {
-      background: #ffffff02;
-      /* 폰트 넣을건지 고민 ! */
-      /* font-size: 30px;
-      font-family: "Dongle", sans-serif; */
-    }
-
-    .shadow-2dp {
-      height: auto;
-      width: auto;
-      /* filter: drop-shadow(0 2px 2px rgba(103, 120, 167, 0.12))
-                          drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
-                          drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
-                          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1)); */
-    }
-  </style>
 </th:block>
 </html>
