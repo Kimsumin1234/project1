@@ -45,8 +45,15 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
     @Transactional
     @Override
     public void removeReply(Long replyNo) {
-        commentRepository.deleteByReply(ReviewReply.builder().replyNo(replyNo).build());
-        replyRepository.deleteById(replyNo);
+
+        if (commentRepository.findByReplyOrderByCommentNo(ReviewReply.builder().replyNo(replyNo).build()) != null) {
+            ReviewReply reply = replyRepository.findById(replyNo).get();
+            reply.setText("삭제된 메시지 입니다.");
+        } else {
+            commentRepository.deleteByReply(ReviewReply.builder().replyNo(replyNo).build());
+            replyRepository.deleteById(replyNo);
+        }
+
     }
 
     @Override
