@@ -101,15 +101,15 @@
             <div class="block-27">
               <ul class="pagination justify-content-center">
                 <li th:if="${result.prev}" class="">
-                  <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&lt;</a>
+                  <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&lt;</a>
                 </li>
 
                 <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword})}" th:text="${page}" class="text-center"></a>
+                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}" th:text="${page}" class="text-center"></a>
                 </li>
 
                 <li th:if="${result.next}" class="">
-                  <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword})}">&gt;</a>
+                  <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&gt;</a>
                 </li>
               </ul>
             </div>
