@@ -29,6 +29,14 @@
                   <span>입양게시판</span>
                 </span>
               </p>
+              <!-- 현재 유기동물지역 버튼누르면 modal창 -->
+
+              <!--모달 팝업-->
+              <main>
+                <section>
+                  <button type="button" class="modal_btn">SavingPaws 유기동물 지역별통계</button>
+                </section>
+              </main>
               <h1 class="mb-0 bread">입양게시판</h1>
             </div>
           </div>
@@ -57,6 +65,17 @@
           </form>
 
           <div class="adoptlistpage">
+            <!-- 통계 modal -->
+            <div class="modal">
+              <div class="modal_popup">
+                <p>SavingPaws 내 유기동물이 많은 지역 순</p>
+                <img th:src="@{/images/org_Nm.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+
+                <img th:src="@{/images/org_Nmc.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+                <button type="button" class="close_btn">닫기</button>
+              </div>
+            </div>
+
             <div class="row mt-3">
               <div class="col-md-6 col-lg-3 ftco-animate" th:each="dto : ${result.dtoList}">
                 <div class="staff">
@@ -106,7 +125,7 @@
               </ul>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
 

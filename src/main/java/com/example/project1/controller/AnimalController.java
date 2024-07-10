@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project1.dto.PageResultDto;
 import com.example.project1.entity.Animal;
+import com.example.project1.entity.AnimalCart;
 import com.example.project1.entity.AnimalItem;
 import com.example.project1.service.AdoptApiService;
 import com.example.project1.service.AnimalCartService;
 import com.example.project1.service.AnimalHeartService;
 import com.example.project1.dto.AnimalCartDto;
 import com.example.project1.dto.AnimalDto;
+import com.example.project1.dto.MemberDto;
 import com.example.project1.dto.PageRequestDto;
 
 @Log4j2
@@ -58,6 +60,6 @@ public class AnimalController {
         // AnimalItem 정보를 가져오는 예시
         List<AnimalItem> cartItems = animalCartService.findItemsId(sId);
         model.addAttribute("cartItems", cartItems);
-
+        log.info("cartItems {}", cartItems);
     }
 }
