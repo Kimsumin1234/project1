@@ -34,6 +34,7 @@
       <div class="container">
         <form class="d-flex" role="search" id="searchForm">
           <!-- 검색 후 결과 페이지는 1로 보여주기 -->
+          <input type="hidden" name="writermid" th:value="${#authentication.principal.memberDto.mid}"/>
           <input type="hidden" name="page" value="1"/>
           <select name="type" id="type" class="form-select me-2">
             <option value="" th:selected="${requestDto.type == null}">조건 선택</option>
