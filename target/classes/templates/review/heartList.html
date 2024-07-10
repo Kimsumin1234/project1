@@ -23,7 +23,7 @@
                 </span>
                 <!-- <span>Blog Single <i class="ion-ios-arrow-forward"></i></span> -->
               </p>
-              <h1 class="mb-0 bread">입양후기 게시판</h1>
+              <h1 class="mb-0 bread">내가 좋아요 한 게시판</h1>
             </div>
           </div>
         </div>
@@ -101,15 +101,15 @@
             <div class="block-27">
               <ul class="pagination justify-content-center">
                 <li th:if="${result.prev}" class="">
-                  <a class="" th:href="@{list(page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&lt;</a>
+                  <a class="" th:href="@{heartList(writermid=${#authentication.principal.memberDto.mid}, page=${result.start-1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&lt;</a>
                 </li>
 
                 <li th:each="page : ${result.pageList}" class="" th:class="${result.page == page ? 'active' : ''}">
-                  <a th:href="@{list(page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}" th:text="${page}" class="text-center"></a>
+                  <a th:href="@{heartList(writermid=${#authentication.principal.memberDto.mid}, page=${page}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}" th:text="${page}" class="text-center"></a>
                 </li>
 
                 <li th:if="${result.next}" class="">
-                  <a class="" th:href="@{list(page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&gt;</a>
+                  <a class="" th:href="@{heartList(writermid=${#authentication.principal.memberDto.mid}, page=${result.end+1}, type=${requestDto.type}, keyword=${requestDto.keyword}, sorting=${requestDto.sorting})}">&gt;</a>
                 </li>
               </ul>
             </div>
