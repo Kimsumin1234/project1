@@ -23,4 +23,6 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
     @Query("delete from Heart h where h.member = ?1")
     void deleteByMember(Member member);
 
+    Long countByReview(Review review);
+
 }

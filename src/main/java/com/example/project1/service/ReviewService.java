@@ -38,6 +38,7 @@ public interface ReviewService {
                 .title(review.getTitle())
                 .text(review.getText())
                 .viewCount(review.getViewCount() != null ? review.getViewCount() : 0)
+                .heartCount(review.getHeartCount() != null ? review.getHeartCount() : 0)
                 .createdDate(review.getCreatedDate())
                 .lastModifiedDate(review.getLastModifiedDate())
                 .build();
@@ -82,6 +83,7 @@ public interface ReviewService {
                 .title(dto.getTitle())
                 .text(dto.getText())
                 .viewCount(dto.getViewCount())
+                .heartCount(dto.getHeartCount() != null ? dto.getHeartCount() : 0)
                 .writer(member)
                 .build();
         entityMap.put("review", review);

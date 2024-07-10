@@ -10,6 +10,7 @@ import com.example.project1.entity.Heart;
 import com.example.project1.entity.Member;
 import com.example.project1.entity.Review;
 import com.example.project1.repository.HeartRepository;
+import com.example.project1.repository.ReviewRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class HeartServiceImpl implements HeartService {
     private final HeartRepository heartRepository;
+    private final ReviewRepository reviewRepository;
 
     @Transactional
     @Override
@@ -31,6 +33,11 @@ public class HeartServiceImpl implements HeartService {
 
         heartRepository.save(heart);
 
+        Long rno = heartDto.getReviewRno();
+        Review review = reviewRepository.findById(rno).get();
+        review.setHeartCount(heartRepository.countByReview(review));
+        reviewRepository.save(review);
+
     }
 
     @Transactional
@@ -39,11 +46,16 @@ public class HeartServiceImpl implements HeartService {
         Heart heart = dtoToEntity(heartDto);
 
         Member member = Member.builder().mid(heart.getMember().getMid()).build();
-        Review review = Review.builder().rno(heart.getReview().getRno()).build();
+        // Review review = Review.builder().rno(heart.getReview().getRno()).build();
+        Long rno = heartDto.getReviewRno();
+        Review review = reviewRepository.findById(rno).get();
 
         heart = heartRepository.findByMemberAndReview(member, review);
 
         heartRepository.delete(heart);
+
+        review.setHeartCount(heartRepository.countByReview(review));
+        reviewRepository.save(review);
     }
 
     @Override

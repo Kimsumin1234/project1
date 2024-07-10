@@ -47,6 +47,7 @@
           <select name="sorting" id="sorting" class="form-select me-2">
             <option value="r" th:selected="${requestDto.sorting == 'r'}">최신순</option>
             <option value="v" th:selected="${requestDto.sorting == 'v'}">조회수</option>
+            <option value="h" th:selected="${requestDto.sorting == 'h'}">좋아요</option>
           </select>
         </form>
 

@@ -29,6 +29,8 @@ public class QReview extends EntityPathBase<Review> {
 
     public final ListPath<Heart, QHeart> heart = this.<Heart, QHeart>createList("heart", Heart.class, QHeart.class, PathInits.DIRECT2);
 
+    public final NumberPath<Long> heartCount = createNumber("heartCount", Long.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 

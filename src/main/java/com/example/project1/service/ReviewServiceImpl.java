@@ -54,6 +54,8 @@ public class ReviewServiceImpl implements ReviewService {
             sort = Sort.by("rno").descending();
         } else if ("v".equals(requestDto.getSorting())) {
             sort = Sort.by("viewCount").descending();
+        } else if ("h".equals(requestDto.getSorting())) {
+            sort = Sort.by("heartCount").descending();
         }
 
         // Pageable 객체 생성
@@ -107,7 +109,7 @@ public class ReviewServiceImpl implements ReviewService {
     public Long reviewUpdate(ReviewDto reviewDto) {
 
         reviewDto.setViewCount(reviewDto.getViewCount() != null ? reviewDto.getViewCount() : 0); // NULL 체크
-
+        reviewDto.setHeartCount(reviewDto.getHeartCount() != null ? reviewDto.getHeartCount() : 0);
         Map<String, Object> entityMap = dtoToEntity(reviewDto);
 
         // review 기존 image 제거

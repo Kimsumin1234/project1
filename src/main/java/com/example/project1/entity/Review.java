@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -55,5 +56,9 @@ public class Review extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "review")
     private List<Heart> heart = new ArrayList<>();
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private Long heartCount = 0L;
 
 }
