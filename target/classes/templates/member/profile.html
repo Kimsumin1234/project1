@@ -32,11 +32,11 @@
                     <span class="fa fa-chevron-right"></span></a>
                 </li>
                 <li>
-                  <a id="heartList">
+                  <a th:href="@{/review/heartList(writermid=${#authentication.principal.memberDto.mid})}">
                     <strong>좋아요한 글</strong>
                     <span class="fa fa-chevron-right"></span></a>
                 </li>
-                <div class="hartlistContainer ">
+                <div class="hartlistContainer">
                   <ul class="list-group ">
                     <!-- <li class="list-group-item">An item</li> -->
                   </ul>

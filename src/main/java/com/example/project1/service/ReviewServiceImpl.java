@@ -71,6 +71,34 @@ public class ReviewServiceImpl implements ReviewService {
         return new PageResultDto<>(result, fn);
     }
 
+    @Transactional
+    @Override
+    public PageResultDto<ReviewDto, Object[]> getHeartList2(PageRequestDto requestDto, Long writermid) {
+        // 기본 정렬 기준 설정 (rno 내림차순)
+        Sort sort = Sort.by("rno").descending();
+
+        // sorting 변수를 기반으로 정렬 기준 변경
+        if ("r".equals(requestDto.getSorting())) {
+            sort = Sort.by("rno").descending();
+        } else if ("v".equals(requestDto.getSorting())) {
+            sort = Sort.by("viewCount").descending();
+        } else if ("h".equals(requestDto.getSorting())) {
+            sort = Sort.by("heartCount").descending();
+        }
+
+        // Pageable 객체 생성
+        Pageable pageable = requestDto.getPageable(sort);
+
+        Page<Object[]> result = reviewRepository.heartlist(requestDto.getType(),
+                requestDto.getKeyword(),
+                pageable, writermid);
+
+        Function<Object[], ReviewDto> fn = (entity -> entityToDto((Review) entity[0],
+                (List<ReviewImage>) Arrays.asList((ReviewImage) entity[1]), (Long) entity[2], (String) entity[3],
+                (String) entity[4], (Long) entity[5], (Long) entity[6]));
+        return new PageResultDto<>(result, fn);
+    }
+
     @Override
     public ReviewDto getRow(Long rno) {
         List<Object[]> result = reviewImageRepository.getRow(rno);

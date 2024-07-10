@@ -14,6 +14,8 @@ public interface ReviewMemberReviewReplyReviewReplyCommentHeartRepository {
     // 전체 조회 시 review, member, reply 정보 다 조회
     Page<Object[]> list(String type, String keyword, Pageable pageable);
 
+    Page<Object[]> heartlist(String type, String keyword, Pageable pageable, Long writermid);
+
     List<Object[]> getRow(Long rno);
 
 }

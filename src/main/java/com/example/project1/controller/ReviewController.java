@@ -45,6 +45,16 @@ public class ReviewController {
         model.addAttribute("result", result);
     }
 
+    @GetMapping("/heartList")
+    public void getReviewHeartList(@RequestParam("writermid") Long writermid,
+            @ModelAttribute("requestDto") PageRequestDto requestDto, Model model) {
+        log.info("review controller 요청");
+
+        PageResultDto<ReviewDto, Object[]> result = service.getHeartList2(requestDto, writermid);
+        log.info(result.getDtoList());
+        model.addAttribute("result", result);
+    }
+
     @PreAuthorize("permitAll()")
     @GetMapping("/read")
     public String getincrementViewCount(@RequestParam Long rno, HttpServletRequest request, Model model,

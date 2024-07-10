@@ -110,6 +110,84 @@ public class ReviewMemberReviewReplyReviewReplyCommentHeartRepositoryImpl extend
     }
 
     @Override
+    public Page<Object[]> heartlist(String type, String keyword, Pageable pageable, Long writermid) {
+        log.info("================== queryDsl List ====================");
+        log.info("review + reply + member + reviewimage join");
+
+        // Q 클래스 사용
+        QReview review = QReview.review;
+        QMember member = QMember.member;
+        QReviewReply reply = QReviewReply.reviewReply;
+        QReviewImage reviewImage = QReviewImage.reviewImage;
+        QHeart heart = QHeart.heart;
+
+        // @Query("select r, m from review r left join r.writer m") // findby*
+        JPQLQuery<ReviewImage> query = from(reviewImage);
+        query.leftJoin(reviewImage.review, review);
+        // subquery => JPAExpressions // JPAExpressions.select() 메서드는 서브쿼리를 생성합니다.
+        JPQLQuery<Long> replyCount = JPAExpressions.select(reply.replyNo.count().as("replycnt"))
+                .from(reply)
+                .where(reply.review.eq(review))
+                .groupBy(reply.review);
+
+        JPQLQuery<Long> heartCount = JPAExpressions.select(heart.hno.count().as("heartCount"))
+                .from(heart)
+                .where(heart.review.eq(review))
+                .groupBy(heart.review);
+
+        JPQLQuery<Long> userHeart = JPAExpressions.select(heart.review.rno)
+                .from(heart)
+                .where(heart.member.mid.eq(writermid));
+
+        JPQLQuery<Tuple> tuple = query.select(review, reviewImage,
+                JPAExpressions.select(member.mid).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.email).from(member).where(review.writer.eq(member)),
+                JPAExpressions.select(member.nickname).from(member).where(review.writer.eq(member)),
+                replyCount, heartCount)
+                .where(reviewImage.inum.in(
+                        JPAExpressions.select(reviewImage.inum.min()).from(reviewImage).groupBy(reviewImage.review)))
+                .where(review.rno.in(userHeart));
+
+        // 검색
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(review.rno.gt(0L));
+
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+        if (type.contains("t")) {
+            conditionBuilder.or(review.title.contains(keyword));
+        }
+        if (type.contains("c")) {
+            conditionBuilder.or(review.text.contains(keyword));
+        }
+        if (type.contains("w")) {
+            conditionBuilder.or(review.writer.nickname.contains(keyword));
+        }
+        builder.and(conditionBuilder);
+        tuple.where(builder);
+
+        // 페이지 나누기 정보
+        // sort 지정
+        Sort sort = pageable.getSort();
+        sort.stream().forEach(order -> {
+            Order direction = order.isAscending() ? Order.ASC : Order.DESC;
+            String prop = order.getProperty();
+
+            PathBuilder<Review> orderByExpression = new PathBuilder<>(Review.class,
+                    "review");
+            tuple.orderBy(new OrderSpecifier(direction, orderByExpression.get(prop)));
+        });
+        // 페이지 처리
+        tuple.offset(pageable.getOffset());
+        tuple.limit(pageable.getPageSize());
+
+        List<Tuple> result = tuple.fetch();
+        // 전체 개수
+        long count = tuple.fetchCount();
+
+        return new PageImpl<>(result.stream().map(t -> t.toArray()).collect(Collectors.toList()), pageable, count);
+    }
+
+    @Override
     public List<Object[]> getRow(Long rno) {
         log.info("get Row SearchBoardRepository");
 

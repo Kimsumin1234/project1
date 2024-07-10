@@ -18,6 +18,8 @@ public interface ReviewService {
 
     PageResultDto<ReviewDto, Object[]> getList(PageRequestDto requestDto);
 
+    PageResultDto<ReviewDto, Object[]> getHeartList2(PageRequestDto requestDto, Long writermid);
+
     ReviewDto getRow(Long rno);
 
     Long reviewUpdate(ReviewDto reviewDto);
