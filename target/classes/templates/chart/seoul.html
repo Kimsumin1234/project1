@@ -1,53 +1,141 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
   <div layout:fragment="content">
+    <th:block layout:fragment="css">
+      <link rel="stylesheet" th:href="@{/css/seoul.css}"/>
+    </th:block>
+
     <section class="ftco-counter" id="section-counter">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 text-center">
               <div class="text">
-                <strong class="number" data-number="50">0</strong>
+                <strong class="number" id="totalNumber"></strong>
               </div>
               <div class="text">
-                <span>Customer</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18 text-center">
-              <div class="text">
-                <strong class="number" data-number="8500">0</strong>
-              </div>
-              <div class="text">
-                <span>Professionals</span>
+                <span>전체수</span>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 text-center">
               <div class="text">
-                <strong class="number" data-number="20">0</strong>
+                <strong class="number" id="dogsNumber"></strong>
               </div>
               <div class="text">
-                <span>Products</span>
+                <span>개</span>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
             <div class="block-18 text-center">
               <div class="text">
-                <strong class="number" data-number="50">0</strong>
+                <strong class="number" id="catsNumber"></strong>
               </div>
               <div class="text">
-                <span>Pets Hosted</span>
+                <span>고양이</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18 text-center">
+              <div class="text">
+                <strong class="number" id="etcNumber"></strong>
+              </div>
+              <div class="text">
+                <span>기타</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <th:block layout:fragment="script"></th:block>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">chId</th>
+          <th scope="col">happenDt</th>
+          <th scope="col">processState</th>
+          <th scope="col">kindCd</th>
+          <th scope="col">careNm</th>
+          <th scope="col">careAddr</th>
+          <th scope="col">careTel</th>
+        </tr>
+      </thead>
+      <tbody id="chartList">
+        <!--리스트 영역-->
+      </tbody>
+    </table>
+
+    <nav id="chartNavbar" class="navbar navbar-expand-lg navbar-dark bg-success w-75 mx-4">
+      <div class="container-fluid">
+        <img class="navbar-brand" th:src="@{/images/search.png}" alt="" width="50" height="50">
+        <h1 class="navbar-brand align-self-center m-0">서울특별시</h1>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <form id="chartForm" class="d-flex appointment">
+
+            <div class="d-flex align-items-center col-md-4">
+              <div class="form-group m-0">
+                <select name="careAddr" id="careAddr" class="form-control">
+                  <option value="강동구" selected="강동구">강동구</option>
+                  <option value="구로구" selected="구로구">구로구</option>
+                  <option value="노원구" selected="노원구">노원구</option>
+                  <option value="동대문구" selected="동대문구">동대문구</option>
+                  <option value="동작구" selected="동작구">동작구</option>
+                  <option value="마포구" selected="마포구">마포구</option>
+                  <option value="서대문구" selected="서대문구">서대문구</option>
+                  <option value="서초구" selected="서초구">서초구</option>
+                  <option value="성동구" selected="성동구">성동구</option>
+                  <option value="양천구" selected="양천구">양천구</option>
+                  <option value="용산구" selected="용산구">용산구</option>
+                  <option value="서울" selected="전체">전체</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center col-md-4">
+              <div class="form-group m-0">
+                <div class="input-wrap">
+                  <div class="icon">
+                    <span class="fa fa-calendar"></span></div>
+                  <input type="text" id="startDate" class="form-control appointment_date" placeholder="startDate"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center col-md-4">
+              <div class="form-group m-0">
+                <div class="input-wrap">
+                  <div class="icon">
+                    <span class="fa fa-calendar"></span></div>
+                  <input type="text" id="endDate" class="form-control appointment_date" placeholder="endDate"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center form-group m-0">
+              <button class="btn btn-outline-light m-0" type="submit" style="height: 52px;">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <th:block layout:fragment="script">
+      <script>
+        // csrf 토큰 설정
+        const csrfValue = `[[${_csrf.token}]]`;
+      </script>
+      <script th:src="@{/js/seoul.js}"></script>
+    </th:block>
   </div>
 
 </html>

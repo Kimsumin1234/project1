@@ -1,9 +1,7 @@
-package com.example.project1.entity;
+package com.example.project1.dto;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +15,8 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-@Entity
-public class Chart {
+public class ChartDto {
 
-    @Id
     private Long chId; // 유기번호
 
     private LocalDate happenDt; // 접수일
