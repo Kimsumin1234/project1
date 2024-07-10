@@ -63,7 +63,6 @@ document.querySelector("#fileInput").addEventListener("change", (e) => {
       showUploadImages(data);
     });
 });
-
 // form submit 기능 중지
 // uploadResult ul li 태그 요소 가져오기
 document.querySelector("#register-form").addEventListener("submit", (e) => {
