@@ -3,6 +3,7 @@
   <footer class="footer pt-3 pb-0" th:fragment="footer">
     <div class="container">
       <div class="row">
+
         <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
           <h2 class="footer-heading">Quick Links</h2>
           <ul class="list-unstyled">
@@ -10,16 +11,20 @@
               <a th:href="@{/}" class="py-2 d-block">Home</a>
             </li>
             <li>
-              <a th:href="@{/member/login}" class="py-2 d-block">Login</a>
+              <a th:href="@{/member/login}" class="py-2 d-block">로그인</a>
             </li>
             <li>
-              <a th:href="@{/adopt/list}" class="py-2 d-block">Adopt</a>
+              <a th:href="@{/adopt/list}" class="py-2 d-block">입양</a>
             </li>
             <li>
-              <a th:href="@{/review/list}" class="py-2 d-block">Blog</a>
+              <a th:href="@{/review/list}" class="py-2 d-block">입양후기</a>
+            </li>
+            <li>
+              <a th:href="@{/missing/list}" class="py-2 d-block">실종·신고</a>
             </li>
           </ul>
         </div>
+
         <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
           <h2 class="footer-heading">유기요 회사</h2>
           <div class="block-23 mb-3">
@@ -37,6 +42,7 @@
             </ul>
           </div>
         </div>
+
       </div>
       <div class="row mt-3">
         <div class="col-md-12 text-center">
