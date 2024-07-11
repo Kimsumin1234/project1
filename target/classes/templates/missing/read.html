@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
 
   <head>
+    <!-- Kakao SDK 스크립트 로드 -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet"/>
@@ -69,6 +71,14 @@
                 </form>
               </div>
 
+              <!-- 카카오톡공유링크 -->
+              <div class="kakaolink mt-5">
+                <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
+                  <img src="/images/icon-kakao.png" alt="카카오톡 공유 보내기 버튼"/>
+                  공유
+                </a>
+              </div>
+
               <!-- 댓글 생성 -->
               <div class="jb-division-line"></div>
               <div class="MissingReview mt-10">
@@ -133,6 +143,7 @@
         </script>
 
         <script th:src="@{/js/missingreply.js}"></script>
+        <script th:src="@{/js/msg.js}"></script>
       </th:block>
     </body>
   </html>
