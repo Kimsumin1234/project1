@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-    <link rel="stylesheet" th:href="@{/assets/css/animate.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/animate.css}"/>
 
-    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}"/>
 
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/jquery.timepicker.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/jquery.timepicker.css}"/>
 
-    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}"/>
 
     <!-- favicon 탭 아이콘 -->
-    <link rel="icon" th:href="@{/assets/images/android48.png}" />
+    <link rel="icon" th:href="@{/assets/images/android48.png}"/>
 
     <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet"/>
 
     <!-- 로그인 버튼 디자인 -->
-    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}"/>
 
     <th:block layout:fragment="css"></th:block>
     <title>Document</title>
   </head>
+
   <body>
     <header th:replace="~{fragments/header::header}"></header>
     <div layout:fragment="content"></div>
@@ -42,8 +44,8 @@
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
       <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
       </svg>
     </div>
 
@@ -69,4 +71,5 @@
 
     <th:block layout:fragment="script"></th:block>
   </body>
+
 </html>

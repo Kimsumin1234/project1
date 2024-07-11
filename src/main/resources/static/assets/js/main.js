@@ -171,7 +171,7 @@
   contentWayPoint();
 
   $(".appointment_date").datepicker({
-    format: "yyyy-m-d",
+    format: "yyyy-mm-dd",
     autoclose: true,
   });
 

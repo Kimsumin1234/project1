@@ -4,12 +4,6 @@ const startDate = document.querySelector("#startDate");
 const endDate = document.querySelector("#endDate");
 const chartForm = document.querySelector("#chartForm");
 
-chartForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  console.log(startDate.value);
-  console.log(endDate.value);
-});
-
 // 세자리마다 콤마 찍는 함수
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -33,9 +27,10 @@ function numberAnimate(end, document) {
   );
 }
 
+// 리스트 가져오는 함수
 let result = "";
-const chartLoaded = () => {
-  fetch(`/chart/list/${careAddr.value}`, { method: "get" })
+const chartLoaded = (keyword, start, end) => {
+  fetch(`/chart/list/${keyword}/${start}/${end}`, { method: "get" })
     .then((response) => response.json())
     .then((data) => {
       // console.log(data);
@@ -87,8 +82,20 @@ const chartLoaded = () => {
     });
 };
 
-chartLoaded();
+// 기본 리스트
+chartLoaded("서울", "2023-01-01", "2024-07-01");
 
-careAddr.addEventListener("change", () => {
-  chartLoaded();
+// 검색후 리스트
+chartForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  // console.log(startDate.value);
+  // console.log(endDate.value);
+  // console.log(careAddr.value);
+  if (!startDate.value) {
+    startDate.value = "2023-01-01";
+  }
+  if (!endDate.value) {
+    endDate.value = "2024-07-01";
+  }
+  chartLoaded(careAddr.value, startDate.value, endDate.value);
 });
