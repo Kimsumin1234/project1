@@ -5,7 +5,8 @@
       <link rel="stylesheet" th:href="@{/css/seoul.css}"/>
     </th:block>
 
-    <section class="ftco-counter" id="section-counter">
+    <!--숫자 카운트 영역-->
+    <section class="ftco-counter mb-4" id="section-counter">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
@@ -52,13 +53,16 @@
       </div>
     </section>
 
+    <!--차트 영역-->
+    <div id="chartContainer1"></div>
+    <div id="chartContainer2"></div><br/>
+
+    <div>
+      <h1>지역내 보호소 리스트</h1>
+    </div>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">chId</th>
-          <th scope="col">happenDt</th>
-          <th scope="col">processState</th>
-          <th scope="col">kindCd</th>
           <th scope="col">careNm</th>
           <th scope="col">careAddr</th>
           <th scope="col">careTel</th>
@@ -133,10 +137,6 @@
     </nav>
 
     <th:block layout:fragment="script">
-      <script>
-        // csrf 토큰 설정
-        const csrfValue = `[[${_csrf.token}]]`;
-      </script>
       <script th:src="@{/js/seoul.js}"></script>
     </th:block>
   </div>
