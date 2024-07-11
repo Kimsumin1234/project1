@@ -12,8 +12,8 @@ public interface AnimalItemRepository extends JpaRepository<AnimalItem, Long> {
     @Query("select a from AnimalItem a where a.animalCart.cartId = :cartId and a.animal.sId = :sId")
     AnimalItem findByAnimalCartIdAndItemId(Long cartId, Long sId);
 
-    // 찜목록
-    @Query("select a from AnimalItem a where a.animal.sId = :sId")
-    List<AnimalItem> findBysId(Long sId);
+    // // 찜목록
+    @Query("select a from AnimalItem a where a.animalCart.member.mid = :mid and a.animal.sId = :sId")
+    AnimalItem findByAnimalMidAndItemId(Long mid, Long sId);
 
 }

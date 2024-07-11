@@ -34,9 +34,11 @@ public class AnimalCartServiceImpl implements AnimalCartService {
 
     // 찜목록
     @Override
-    public List<AnimalItem> findItemsId(Long sId) {
-        return animalItemRepository.findBysId(sId);
-
+    public AnimalItem findItemsByCartIdAndSId(Long sId, Long mid) {
+        log.info("찜목록 확인: sId {}", sId);
+        // Cart에 있는 Member 조회
+        // AnimalCart cart = animalCartRepository.findByMember(mid);
+        return animalItemRepository.findByAnimalMidAndItemId(mid, sId);
     }
 
     // 장바구니 생성과 아이템 추가

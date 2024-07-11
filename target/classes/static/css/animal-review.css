@@ -231,7 +231,7 @@ body .overlay .cart-btn i:hover {
   position: absolute;
   bottom: 20px;
   left: 90%;
-  width: 150px;
+  width: 200px;
   height: 80px;
   color: white;
   font-size: 22px;
@@ -294,10 +294,10 @@ body .overlay .cart-btn i:hover {
 /* list 모달(통계) */
 .modal_btn {
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   left: 80%;
-  width: 430px;
-  height: 70px;
+  width: 410px;
+  height: 60px;
   color: white;
   font-size: 22px;
   font-weight: bold;

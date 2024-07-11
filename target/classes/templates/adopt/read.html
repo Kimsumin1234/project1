@@ -24,12 +24,15 @@
                 </span>
               </p>
 
-              <!-- 찜목록 -->
-              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="cartForm">
+              <!-- 찜목록 : 전체목록에서 상세조회 시 카트에 담겼는지 확인 -->
+              <form th:action="@{/cart/new}" method="post" id="cartForm" name="cartForm" class="cartForm" sec:authorize="isAuthenticated()">
                 <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+                <input type="hidden" name="cartItems" id="cartItems" th:value="${cartItems}"/>
                 <div class="form-group mt-2 ftco-animated">
-                  <!-- th:if="${item.animal.sId == dto.sId}" disabled="disabled" -->
-                  <button type="submit" class="cart-btn">
+                  <button type="submit" th:if="${jjim}" class="cart-btn" th:disabled="true">
+                    <i class="fa fa-heart full adoptzzim"></i>이미 찜한 동물
+                  </button>
+                  <button type="submit" th:if="${!jjim}" class="cart-btn">
                     <i class="fa fa-heart full adoptzzim"></i>찜하기
                   </button>
                 </div>
@@ -159,6 +162,6 @@
   <script th:src="@{/js/animalReview.js}"></script>
   <script th:src="@{/js/animalHeart.js}"></script>
   <script th:src="@{/js/naverMap.js}"></script>
-
+  <script th:src="@{/js/cart.js}"></script>
 </th:block>
 </html>

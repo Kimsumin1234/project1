@@ -20,6 +20,6 @@ public interface AnimalCartService {
         void cartItemDelete(Long itemId);
 
         // 찜목록
-        List<AnimalItem> findItemsId(Long sId);
+        AnimalItem findItemsByCartIdAndSId(Long sId, Long mid);
 
 }
