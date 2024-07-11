@@ -47,7 +47,10 @@ function shareMessage() {
     content: {
       title: "SavingPaws", // 공유할 컨텐츠의 제목을 설정합니다.
       description: "SavingPaws", // 공유할 컨텐츠의 설명을 설정합니다.
-      imageUrl: "https://image.dongascience.com/Photo/2022/06/6982fdc1054c503af88bdefeeb7c8fa8.jpg", // 공유할 이미지 URL을 설정합니다.
+      imageUrl:
+        "https://postfiles.pstatic.net/MjAyNDA3MTFfMjk2/MDAxNzIwNjg4OTYwMDEz.QSt01728hMxY2_Kc-BSJq50GYLU1zprboSQnb3vADJQg.NRmCI4joxqF6SXbG0yKu2aJXpQn-B4YH4wx7kH_U5vcg.PNG/logo_(1).png?type=w773", // 공유할 이미지 URL을 설정합니다.
+      imageWidth: 800,
+      imageHeight: 400,
       link: {
         mobileWebUrl: window.location.href, // 모바일 웹 URL을 현재 페이지의 URL로 설정합니다.
         webUrl: window.location.href, // 웹 URL을 현재 페이지의 URL로 설정합니다.
