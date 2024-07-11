@@ -4,3 +4,40 @@
   bottom: 10px;
   left: 165px;
 }
+
+#section-counter {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#chartContainer1 {
+  width: 45%;
+  height: 450px;
+  display: inline-block;
+}
+
+#chartContainer2 {
+  width: 45%;
+  height: 450px;
+  display: inline-block;
+}
+
+/* .donut_chart {
+  position: relative;
+  width: 50%;
+  height: 400px;
+  display: inline-block;
+}
+
+.total_countBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  margin: 0px;
+}
+
+.total_countBox p {
+  margin: 0px;
+} */
