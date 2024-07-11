@@ -69,9 +69,29 @@
             <div class="modal">
               <div class="modal_popup">
                 <p>SavingPaws 내 유기동물이 많은 지역 순</p>
-                <img th:src="@{/images/org_Nm.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+
+                <!-- 첫 번째 이미지-->
+                <div class="row">
+                  <div class="col">
+                    <img th:src="@{/images/org_Nm.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+                  </div>
+                  <div class="col" style="padding-top:70px;">
+                    <img th:src="@{/images/bar_chart.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+                  </div>
+                </div>
+
                 <div class="jb-division-line"></div>
-                <img th:src="@{/images/org_Nmc.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+
+                <!-- 두 번째 이미지 -->
+                <div class="row">
+                  <div class="col">
+                    <img th:src="@{/images/org_Nmc.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+                  </div>
+                  <div class="col">
+                    <img th:src="@{/images/bar_chart_org_Nmc.png}" alt="Image placeholder" class="img-fluid mb-4"/>
+                  </div>
+                </div>
+
                 <button type="button" class="close_btn">닫기</button>
               </div>
             </div>
