@@ -95,12 +95,23 @@
                 <input type="hidden" name="longitude" id="longitude" th:value="${dto.longitude}"/>
               </div>
 
-              <!-- 카카오톡 공유 링크 -->
+              <!-- 공유 링크 -->
               <div class="kakaolink">
-                <a id="kakaotalk-sharing-btn" href="javascript:void(0);" onclick="shareMessage()">
+                <!-- Kakao -->
+                <button type="button" id="kakaotalk-sharing-btn" href="javascript:void(0);" onclick="shareMessage()">
                   <img src="/images/icon-kakao.png" alt="카카오톡 공유 보내기 버튼"/>
                   공유하기
-                </a>
+                </button>
+                <!-- Twitter -->
+                <button type="button" id="twitter-sharing-btn" href="javascript:void(0)" onclick="shareTwitter()">
+                  <img src="/images/icon-twitter.png" alt="트위터 공유하기">
+                  공유하기
+                </button>
+                <!-- NAVER -->
+                <button type="button" class="sns_btn" id="naver-sharing-btn" onclick="shareNaver()">
+                  <img src="/images/naver-icon.png" alt="네이버 공유하기">
+                  공유하기
+                </button>
               </div>
 
               <!-- 댓글 생성 -->
