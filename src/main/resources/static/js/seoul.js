@@ -13,35 +13,46 @@ function makeCharts(keyword, start, end, y1, y2, y3, y4, y5, y6, y7) {
   var chart1 = new CanvasJS.Chart("chartContainer1", {
     animationEnabled: true,
     animationDuration: 500,
+    theme: "dark2", //"light1"
     title: {
       text: "서울특별시 " + keyword + " 유기동물현황",
       fontFamily: "돋음",
       fontWeight: "bold",
-      borderThickness: 2,
-      padding: 10,
-      backgroundColor: "#fc9e7b",
-      borderColor: "white",
-      cornerRadius: 10,
-      fontColor: "white",
+      // borderThickness: 2,
+      padding: 1,
+      // backgroundColor: "#fc9e7b",
+      // borderColor: "white",
+      // cornerRadius: 10,
+      fontColor: "#fc9e7b",
+      fontSize: 25,
     },
+    subtitles: [
+      {
+        text: "(2024.07.01 기준)",
+        fontColor: "#fc9e7b",
+        //Uncomment properties below to see how they behave
+        //fontColor: "red",
+        //fontSize: 30
+      },
+    ],
     data: [
       {
         type: "doughnut",
         startAngle: 0,
         innerRadius: 100,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 15,
         indexLabel: "{label} #percent%",
         // toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         toolTipContent: "<b>{label}:</b> {y} 마리",
         connectNullData: true,
         dataPoints: [
+          { y: y7, label: "방사" },
+          { y: y5, label: "기증" },
           { y: y1, label: "보호중" },
+          { y: y6, label: "안락사" },
           { y: y2, label: "자연사" },
           { y: y3, label: "반환" },
           { y: y4, label: "입양", exploded: true },
-          { y: y5, label: "기증" },
-          { y: y6, label: "안락사" },
-          { y: y7, label: "방사" },
         ],
       },
     ],
@@ -63,12 +74,21 @@ function makeCharts(keyword, start, end, y1, y2, y3, y4, y5, y6, y7) {
 
   var chart2 = new CanvasJS.Chart("chartContainer2", {
     animationEnabled: true,
+    theme: "dark2",
     title: {
       text: start + " ~ " + end,
-      padding: 20,
+      padding: 10,
       fontColor: "#fc9e7b",
+      fontSize: 25,
+      // fontWeight: "bold",
+    },
+    axisY: {
+      gridThickness: 0,
+      tickLength: 0,
     },
     axisX: {
+      labelFontFamily: "돋음",
+      labelFontWeight: "bolder",
       interval: 1,
     },
     // axisY2: {
@@ -78,10 +98,15 @@ function makeCharts(keyword, start, end, y1, y2, y3, y4, y5, y6, y7) {
     // },
     data: [
       {
+        bevelEnabled: true,
         type: "bar",
         // name: "companies",
-        color: "#014D65",
-        axisYType: "secondary",
+        // color: "#014D65",
+        // axisYType: "secondary",
+        indexLabelFontSize: 15,
+        indexLabelFontFamily: "돋음",
+        indexLabelFontWeight: "bolder",
+        indexLabel: "{y} 마리",
         toolTipContent: "<b>{label}:</b> {y} 마리",
         dataPoints: [
           { y: y7, label: "방사" },

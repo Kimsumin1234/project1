@@ -1,3 +1,21 @@
+.seoul {
+  background-color: rgb(50, 55, 58);
+}
+
+.table-dark {
+  background-color: rgb(50, 55, 58);
+}
+
+.table-dark thead th {
+  border-bottom-color: rgba(240, 248, 255, 0.886);
+  border-top: solid 2px rgba(240, 248, 255, 0.886);
+}
+
+.seoulTitle {
+  color: rgba(255, 255, 255, 0.945);
+  border-top: solid 7px #fc9e7b;
+}
+
 #chartNavbar {
   border-radius: 50px;
   position: sticky;
@@ -6,18 +24,25 @@
 }
 
 #section-counter {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: rgb(50, 55, 58);
+  border-top: solid 7px #fc9e7b;
+}
+
+.ftco-counter .text .number,
+.ftco-counter .text span {
+  color: #fc9e7b;
 }
 
 #chartContainer1 {
-  width: 45%;
+  width: 560px;
   height: 450px;
   display: inline-block;
 }
 
 #chartContainer2 {
-  width: 45%;
+  width: 543px;
   height: 450px;
   display: inline-block;
 }
