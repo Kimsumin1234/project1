@@ -43,7 +43,7 @@
             <div class="col-lg-10 ftco-animate mr-10">
               <h2 class="mb-5" th:text="${dto.title}" style="text-align:center"></h2>
               <div class="jb-division-line"></div>
-              <h5 class="mb-5" th:text="${dto.nickname}" style="text-align:right">멤버 정보</h5>
+              <h5 class="mb-5 mt-2" th:text="${dto.nickname}" style="text-align:right">멤버 정보</h5>
               <div class="uploadResult mb-10" style="text-align:center">
                 <ul>
                   <li th:each="image : ${dto.missingImageDtos}" th:attr="data-file=${image.getImageURL()}" style="list-style-type: none;">
