@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,11 +30,11 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/assets/**", "/css/**", "/js/**", "/images/**", "/auth")
                                 .permitAll()
                                 .requestMatchers("/upload/display", "/upload/ex1").permitAll()
-                                .requestMatchers("/adopt/list", "/adopt/read/**", "/adopt/**").permitAll()
+                                .requestMatchers("/adopt/list", "/adopt/read/**").permitAll()
                                 .requestMatchers("/review/list", "/review/read").permitAll()
                                 .requestMatchers("/reply/**", "/comment/**").permitAll()
                                 .requestMatchers("/animalReviews/**").permitAll()
-                                .requestMatchers("/missing/list", "/missing/read", "/missing/**").permitAll()
+                                .requestMatchers("/missing/list", "/missing/read").permitAll()
                                 .requestMatchers("/missingreply/**").permitAll()
                                 .requestMatchers("/member/sms", "/send-one", "/send-one2", "/send-one3", "/certif")
                                 .permitAll()
@@ -57,6 +58,9 @@ public class SecurityConfig {
                                 .logoutSuccessUrl("/"));
                 http.rememberMe(remember -> remember.rememberMeServices(rememberMeServices));
                 // http.csrf(csrf -> csrf.disable()); // csrf 비활성화
+
+                http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+
                 return http.build();
         }
 
