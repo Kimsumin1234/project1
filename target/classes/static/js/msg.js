@@ -67,3 +67,17 @@ function shareMessage() {
     ],
   });
 }
+
+// Twitter
+function shareTwitter() {
+  const text = "SavingPaws";
+  const url = encodeURI(window.location.href);
+  window.open("https://twitter.com/intent/tweet?text=" + url + text);
+}
+
+// NAVER
+function shareNaver() {
+  const title = "SavingPaws";
+  const url = encodeURI(window.location.href);
+  window.open("https://share.naver.com/web/shareView?url=" + url + "&title=" + title);
+}

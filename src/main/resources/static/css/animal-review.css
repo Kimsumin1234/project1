@@ -411,4 +411,28 @@ h2 {
 .kakaolink {
   margin-top: 30px;
   text-align: right;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+/* 트위터링크버튼 */
+#twitter-sharing-btn {
+  display: inline-block;
+  text-align: center;
+}
+
+#twitter-sharing-btn img {
+  display: block; /* 이미지를 블록 레벨 요소로 설정하여 여백을 추가할 수 있도록 함 */
+  margin: 10px; /* 이미지를 가운데 정렬 */
+}
+
+/* 네이버링크버튼 */
+#naver-sharing-btn {
+  display: inline-block;
+  text-align: center;
+}
+
+#naver-sharing-btn img {
+  display: block; /* 이미지를 블록 레벨 요소로 설정하여 여백을 추가할 수 있도록 함 */
+  margin: 10px; /* 이미지를 가운데 정렬 */
 }
