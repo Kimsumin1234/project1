@@ -19,6 +19,7 @@ import com.example.project1.service.ReviewService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -59,6 +60,13 @@ public class ReviewController {
     @GetMapping("/read")
     public String getincrementViewCount(@RequestParam Long rno, HttpServletRequest request, Model model,
             HttpServletResponse response, @ModelAttribute("requestDto") PageRequestDto requestDto) {
+
+        HttpSession session = request.getSession();
+        if (session.isNew()) {
+            log.info("New session created: " + session.getId());
+        } else {
+            log.info("Existing session ID: " + session.getId());
+        }
 
         Cookie oldCookie = null;
         // Check if the user has already viewed this page
