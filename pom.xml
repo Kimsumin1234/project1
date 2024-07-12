@@ -18,6 +18,31 @@
 	</properties>
 	<dependencies>
 
+		<!-- 오라클 클라우드 라이브러리 -->
+		<!-- <dependency>
+    		<groupId>com.oracle.oci.sdk</groupId>
+    		<artifactId>oci-java-sdk-common</artifactId>
+    		<version>3.44.2</version>
+		</dependency>	 -->
+		<!-- <dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ucp</artifactId>	
+		</dependency> -->
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>oraclepki</artifactId>  
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>osdt_cert</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>osdt_core</artifactId>
+		</dependency>
+		
 		<!-- Oauth2 Client Security 라이브러리 -->
 		<!-- 공통의 인증방식 : oauth2 (Open Authorization) 사용 -->
 		<!-- 공통으로 인증할수있게 해주는 기능 (소셜 로그인 인증) -->
