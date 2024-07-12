@@ -58,6 +58,7 @@ public class AnimalController {
 
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/read")
     public void getRead(@RequestParam Long sId, Model model, @ModelAttribute("requestDto") PageRequestDto requestDto,
             HttpServletRequest request) {
