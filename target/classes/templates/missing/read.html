@@ -84,7 +84,7 @@
                   공유하기
                 </button>
                 <!-- NAVER -->
-                <button type="button" class="sns_btn" href="javascript:void(0)" id="naver-sharing-btn" onclick="shareNaver()">
+                <button type="button" class="sns_btn" id="naver-sharing-btn" href="javascript:void(0)" onclick="shareNaver()">
                   <img src="/images/naver-icon.png" alt="네이버 공유하기">
                   공유하기
                 </button>
@@ -125,6 +125,8 @@
       <th:block layout:fragment="script">
         <script>
           // csrf 토큰 설정
+          <<<<<<< HEAD ======= const csrfValue = '[[${_csrf.token}]]';
+          >>>>>>>2 man
 
           // 입양등록 번호 변수에 담기
           const missno = "[[${dto.missno}]]";
