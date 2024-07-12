@@ -98,94 +98,94 @@
               <!-- 공유 링크 -->
               <div class="kakaolink">
                 <!-- Kakao -->
-                <button type="button" id="kakaotalk-sharing-btn" href="javascript:void(0);" onclick="shareMessage()">
-                  <img src="/images/icon-kakao.png" alt="카카오톡 공유 보내기 버튼"/>
-                  공유하기
-                </button>
-                <!-- 구 Twitter 현 X -->
-                <button type="button" id="twitter-sharing-btn" href="javascript:void(0)" onclick="shareTwitter()">
-                  <img src="/images/icon-twitter.png" alt="트위터 공유하기">
-                  공유하기
-                </button>
-                <!-- NAVER -->
-                <button type="button" class="sns_btn" id="naver-sharing-btn" onclick="shareNaver()">
-                  <img src="/images/naver-icon.png" alt="네이버 공유하기">
-                  공유하기
-                </button>
-              </div>
+                <button type="button" id="kakaotalk-sharing-btn" href="javascript:void(0);" onclick="shareMessage()"/>
+                <img src="/images/icon-kakao.png" alt="카카오톡 공유 보내기 버튼"/>
+                공유하기
+              </button>
+              <!-- 구 Twitter 현 X -->
+              <button type="button" id="twitter-sharing-btn" href="javascript:void(0)" onclick="shareTwitter()"/>
+              <img src="/images/icon-twitter.png" alt="트위터 공유하기">
+              공유하기
+            </button>
+            <!-- NAVER -->
+            <button type="button" class="sns_btn" id="naver-sharing-btn" onclick="shareNaver()"/>
+            <img src="/images/naver-icon.png" alt="네이버 공유하기">
+            공유하기
+          </button>
+        </div>
 
-              <!-- 댓글 생성 -->
-              <div class="jb-division-line adoptline"></div>
-              <div class="animalReview">
-                <div class="comment-form">
-                  <div class="adopt">
-                    <h4 class="mb-5 review-cnt"></h4>
-                    <!-- 좋아요 영역 -->
-                    <h5 class="good" sec:authorize="hasRole('ROLE_MEMBER')">
-                      <div class="animalHeart" id="animalHeart"></div>
-                      <div class="animalHeartCount mb-10"></div>
-                    </h5>
-                  </div>
-                  <form th:action="@{/animalReviews/}" method="post" id="replyForm" name="replyForm" class="p-2 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
-                    <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
-                    <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
-                    <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
-                    <input type="hidden" name="rno" id="rno"/>
-
-                    <div class="form-group" style="text-align:center">
-                      <label for="text">댓글작성</label>
-                      <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group" style="text-align:right">
-                      <input type="submit" value="댓글등록" class="btn py-2 px-3 btn-primary"/>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <!-- 댓글 영역 -->
-              <div class="pt-5 mt-5 reviewList">
-                <div class="mb-5"></div>
-              </div>
+        <!-- 댓글 생성 -->
+        <div class="jb-division-line adoptline"></div>
+        <div class="animalReview">
+          <div class="comment-form">
+            <div class="adopt">
+              <h4 class="mb-5 review-cnt"></h4>
+              <!-- 좋아요 영역 -->
+              <h5 class="good" sec:authorize="hasRole('ROLE_MEMBER')">
+                <div class="animalHeart" id="animalHeart"></div>
+                <div class="animalHeartCount mb-10"></div>
+              </h5>
             </div>
-            <!-- END comment-list -->
+            <form th:action="@{/animalReviews/}" method="post" id="replyForm" name="replyForm" class="p-2 bg-light" sec:authorize="hasRole('ROLE_MEMBER')">
+              <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.memberDto.mid}"/>
+              <input type="hidden" name="email" id="email" th:value="${#authentication.principal.memberDto.email}"/>
+              <input type="hidden" name="sId" id="sId" th:value="${dto.sId}"/>
+              <input type="hidden" name="rno" id="rno"/>
+
+              <div class="form-group" style="text-align:center">
+                <label for="text">댓글작성</label>
+                <textarea name="text" id="text" cols="30" rows="3" class="form-control"></textarea>
+              </div>
+              <div class="form-group" style="text-align:right">
+                <input type="submit" value="댓글등록" class="btn py-2 px-3 btn-primary"/>
+              </div>
+            </form>
           </div>
         </div>
+        <!-- 댓글 영역 -->
+        <div class="pt-5 mt-5 reviewList">
+          <div class="mb-5"></div>
+        </div>
       </div>
-    </section>
-    <!-- .section -->
+      <!-- END comment-list -->
+    </div>
+  </div>
+</div>
+</section>
+<!-- .section -->
 
-  </body>
+</body>
 </div>
 <th:block layout:fragment="script">
-  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc}"></script>
-  <script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc&submodules=geocoder}"></script>
-  <script>
+<script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc}"></script>
+<script th:src="@{https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fas5rtyssc&submodules=geocoder}"></script>
+<script>
 
-    // csrf 토큰 설정
-    const csrfValue = '[[${_csrf.token}]]';
+// csrf 토큰 설정
+const csrfValue = '[[${_csrf.token}]]';
 
-    // 입양등록 번호 변수에 담기
-    const sId = "[[${dto.sId}]]";
+// 입양등록 번호 변수에 담기
+const sId = "[[${dto.sId}]]";
 
-    // 리뷰 영역 찾기
-    const reviewList = document.querySelector(".reviewList");
+// 리뷰 영역 찾기
+const reviewList = document.querySelector(".reviewList");
 
-    const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
+const mid = "[[${#authentication.principal}eq('anonymousUser') ? 'anonymousUser' : ${#authentication.principal.memberDto.mid}]]"
 
-    // 로그인 유저
-    const user = "[[${#authentication.name}]]";
+// 로그인 유저
+const user = "[[${#authentication.name}]]";
 
-    // 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
-    const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
-    if (reviewCnt > 0) 
-      reviewList
-        .classList
-        .remove("hidden");
-  </script>
+// 리뷰 개수가 존재한다면 reviewList 클래스명 hidden 제거
+const reviewCnt = parseInt("[[${dto.reviewCnt}]]");
+if (reviewCnt > 0) 
+reviewList
+  .classList
+  .remove("hidden");
+</script>
 
-  <script th:src="@{/js/animalReview.js}"></script>
-  <script th:src="@{/js/animalHeart.js}"></script>
-  <script th:src="@{/js/naverMap.js}"></script>
-  <script th:src="@{/js/msg.js}"></script>
+<script th:src="@{/js/animalReview.js}"></script>
+<script th:src="@{/js/animalHeart.js}"></script>
+<script th:src="@{/js/naverMap.js}"></script>
+<script th:src="@{/js/msg.js}"></script>
 </th:block>
 </html>
