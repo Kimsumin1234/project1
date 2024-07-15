@@ -86,7 +86,7 @@
                     <div class="" id="heart"></div>
                     <span class="heartCount" th:text="${dto.heartCount}"></span></h3>
                   <h3 class="mb-5">
-                    <span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] Comments</h3>
+                    <span>[<span class="review-cnt" th:text="${dto.replyCount}"></span>] 댓글</h3>
                     <!-- js 에서 처리할꺼임 -->
                     <div class="comment-form-wrap" sec:authorize="hasRole('ROLE_MEMBER')">
                       <form th:action="@{/review/add}" class="review-form pl-3 pr-3 pt-1 pb-1" method="post">
