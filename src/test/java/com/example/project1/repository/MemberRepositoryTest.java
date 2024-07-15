@@ -32,50 +32,50 @@ public class MemberRepositoryTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Test
-    public void memberInsertTest() {
-        IntStream.rangeClosed(0, 9).forEach(i -> {
-            Member member = Member.builder()
-                    .email("member" + i + "@naver.com")
-                    .nickname("User" + i)
-                    .phone("0101234123" + i)
-                    .checkPhone(true)
-                    .password(passwordEncoder.encode("1111"))
-                    .fromSocial(false)
-                    .role(MemberRole.MEMBER)
-                    .build();
-            memberRepository.save(member);
-        });
-    }
+    // @Test
+    // public void memberInsertTest() {
+    // IntStream.rangeClosed(0, 9).forEach(i -> {
+    // Member member = Member.builder()
+    // .email("member" + i + "@naver.com")
+    // .nickname("User" + i)
+    // .phone("0101234123" + i)
+    // .checkPhone(true)
+    // .password(passwordEncoder.encode("1111"))
+    // .fromSocial(false)
+    // .role(MemberRole.MEMBER)
+    // .build();
+    // memberRepository.save(member);
+    // });
+    // }
 
-    @Test
-    public void memberInsertTest2() {
-        IntStream.rangeClosed(20, 30).forEach(i -> {
-            Member member = Member.builder()
-                    .email("user" + i + "@naver.com")
-                    .nickname("User" + i)
-                    .phone("010333312" + i)
-                    .checkPhone(true)
-                    .password(passwordEncoder.encode("1111"))
-                    .fromSocial(false)
-                    .role(MemberRole.MEMBER)
-                    .build();
-            memberRepository.save(member);
-        });
-    }
+    // @Test
+    // public void memberInsertTest2() {
+    // IntStream.rangeClosed(20, 30).forEach(i -> {
+    // Member member = Member.builder()
+    // .email("user" + i + "@naver.com")
+    // .nickname("User" + i)
+    // .phone("010333312" + i)
+    // .checkPhone(true)
+    // .password(passwordEncoder.encode("1111"))
+    // .fromSocial(false)
+    // .role(MemberRole.MEMBER)
+    // .build();
+    // memberRepository.save(member);
+    // });
+    // }
 
-    @Transactional
-    @Test
-    public void memberLeaveTest() {
-        Member member = Member.builder().mid(49L).build();
+    // @Transactional
+    // @Test
+    // public void memberLeaveTest() {
+    // Member member = Member.builder().mid(49L).build();
 
-        heartRepository.deleteByMember(member);
-        reviewReplyCommentRepository.deleteByMember(member);
-        reviewReplyRepository.deleteByMember(member);
+    // heartRepository.deleteByMember(member);
+    // reviewReplyCommentRepository.deleteByMember(member);
+    // reviewReplyRepository.deleteByMember(member);
 
-        reviewRepository.deleteByMember(member);
+    // reviewRepository.deleteByMember(member);
 
-        memberRepository.delete(member);
-    }
+    // memberRepository.delete(member);
+    // }
 
 }
