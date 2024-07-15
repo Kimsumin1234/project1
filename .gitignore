@@ -1,5 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,java
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+**/src/main/**/target/
+**/src/test/**/target/
 
 # 1. 프로젝트 마다 생성되는 .gitignore 제외
 */.gitignore
@@ -56,3 +61,10 @@ replay_pid*
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,java
+
+### VS Code ###
+.mvn/wrapper/maven-wrapper.properties
+### 테스트 폴더 제외 ###
+src/test/
+### 웹에 배포하려면 DB 정보는 git에 올라가면 안되서 제외 ###
+src/main/resources/application-db.properties
