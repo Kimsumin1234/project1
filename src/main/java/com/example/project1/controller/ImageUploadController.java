@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ImageUploadController {
 
     // application.properties 설정한 변수 가져오기
+    @Autowired
     @Value("${com.example.upload.path}")
     private String uploadPath; // c:\\upload
 
