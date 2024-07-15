@@ -1,0 +1,85 @@
+-------------------------------------------------------------------------------
+Test set: com.example.project1.repository.AnimalReplyRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.183 s <<< FAILURE! -- in com.example.project1.repository.AnimalReplyRepositoryTest
+com.example.project1.repository.AnimalReplyRepositoryTest.insertTest -- Time elapsed: 0.178 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+could not execute statement [ORA-02291: 무결성 제약조건(ADMIN.FK5C85N3339BM5OAADBFWUTB3RG)이 위배되었습니다- 부모 키가 없습니다
+] [insert into animal_reply (animal_s_id,created_date,last_modified_date,member_mid,text,rno) values (?,?,?,?,?,?)]; SQL [insert into animal_reply (animal_s_id,created_date,last_modified_date,member_mid,text,rno) values (?,?,?,?,?,?)]; constraint [ADMIN.FK5C85N3339BM5OAADBFWUTB3RG]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:676)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:426)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy158.save(Unknown Source)
+	at com.example.project1.repository.AnimalReplyRepositoryTest.lambda$0(AnimalReplyRepositoryTest.java:33)
+	at java.base/java.util.stream.Streams$RangeIntSpliterator.forEachRemaining(Streams.java:104)
+	at java.base/java.util.stream.IntPipeline$Head.forEach(IntPipeline.java:617)
+	at com.example.project1.repository.AnimalReplyRepositoryTest.insertTest(AnimalReplyRepositoryTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [ORA-02291: 무결성 제약조건(ADMIN.FK5C85N3339BM5OAADBFWUTB3RG)이 위배되었습니다- 부모 키가 없습니다
+] [insert into animal_reply (animal_s_id,created_date,last_modified_date,member_mid,text,rno) values (?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:108)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:40)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:52)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2873)
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:104)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:632)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:499)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:363)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1403)
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2319)
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1976)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
+	... 21 more
+Caused by: java.sql.SQLIntegrityConstraintViolationException: ORA-02291: 무결성 제약조건(ADMIN.FK5C85N3339BM5OAADBFWUTB3RG)이 위배되었습니다- 부모 키가 없습니다
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:629)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:563)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1230)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:771)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:298)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:511)
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:162)
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForRows(T4CPreparedStatement.java:1240)
+	at oracle.jdbc.driver.OracleStatement.executeSQLStatement(OracleStatement.java:1819)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1471)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3760)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeLargeUpdate(OraclePreparedStatement.java:4061)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeUpdate(OraclePreparedStatement.java:4036)
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeUpdate(OraclePreparedStatementWrapper.java:995)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 42 more
+Caused by: Error : 2291, Position : 0, Sql = insert into animal_reply (animal_s_id,created_date,last_modified_date,member_mid,text,rno) values (:1 ,:2 ,:3 ,:4 ,:5 ,:6 ), OriginalSql = insert into animal_reply (animal_s_id,created_date,last_modified_date,member_mid,text,rno) values (?,?,?,?,?,?), Error Msg = ORA-02291: 무결성 제약조건(ADMIN.FK5C85N3339BM5OAADBFWUTB3RG)이 위배되었습니다- 부모 키가 없습니다
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:636)
+	... 58 more
+

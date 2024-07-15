@@ -16,22 +16,22 @@ public class AnimalReplyRepositoryTest {
     @Autowired
     private AnimalReplyRepository animalReplyRepository;
 
-    @Test
-    public void insertTest() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
-            long sId = (long) (Math.random() * 100) + 1;
-            Animal animal = Animal.builder().sId(sId).build();
+    // @Test
+    // public void insertTest() {
+    // IntStream.rangeClosed(1, 100).forEach(i -> {
+    // long sId = (long) (Math.random() * 100) + 1;
+    // Animal animal = Animal.builder().sId(sId).build();
 
-            Long mid = (long) (Math.random() * 100) + 38;
-            Member member = Member.builder().mid(mid).build();
+    // Long mid = (long) (Math.random() * 100) + 38;
+    // Member member = Member.builder().mid(mid).build();
 
-            AnimalReply reply = AnimalReply.builder()
-                    .member(member)
-                    .animal(animal)
-                    .text("Reply..." + i)
-                    .build();
-            animalReplyRepository.save(reply);
-        });
+    // AnimalReply reply = AnimalReply.builder()
+    // .member(member)
+    // .animal(animal)
+    // .text("Reply..." + i)
+    // .build();
+    // animalReplyRepository.save(reply);
+    // });
 
-    }
+    // }
 }

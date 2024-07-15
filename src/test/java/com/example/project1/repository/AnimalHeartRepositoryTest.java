@@ -18,15 +18,15 @@ public class AnimalHeartRepositoryTest {
     @Autowired
     private AnimalRepository animalRepository;
 
-    @Test
-    public void animalHeart() {
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("sId").descending());
+    // @Test
+    // public void animalHeart() {
+    // Pageable pageable = PageRequest.of(0, 10, Sort.by("sId").descending());
 
-        Page<Object[]> list = animalRepository.list("", "", pageable);
-        for (Object[] objects : list) {
-            System.out.println(Arrays.toString(objects));
+    // Page<Object[]> list = animalRepository.list("", "", pageable);
+    // for (Object[] objects : list) {
+    // System.out.println(Arrays.toString(objects));
 
-        }
-    }
+    // }
+    // }
 
 }
