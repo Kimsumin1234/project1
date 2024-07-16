@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UploadController {
 
     // application.properties 설정한 변수 가져오기
-    @Value("$ {com.example.upload.path}")
+    @Value("${com.example.upload.path}")
     private String uploadPath; // c:\\upload
 
     @GetMapping("/ex1")
