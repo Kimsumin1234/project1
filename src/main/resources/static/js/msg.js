@@ -38,7 +38,7 @@
 //   });
 // }
 
-Kakao.init("640f36c2cc3f107ac975b399758b0d28");
+Kakao.init("5e44ce4e82460abeae0dd9a678017b47");
 
 // 현재위치링크공유
 function shareMessage() {
