@@ -122,7 +122,7 @@ public class ReviewController {
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
         if (result.hasErrors()) {
             model.addAttribute("dto", reviewDto);
-            return "/review/modify";
+            return "review/modify";
         }
 
         log.info("modify post controller 요청 {}", reviewDto);
@@ -161,7 +161,7 @@ public class ReviewController {
     public String postRegister(@Valid ReviewDto reviewDto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
         if (result.hasErrors()) {
-            return "/review/register";
+            return "review/register";
         }
 
         if (reviewDto.getViewCount() == null) {
