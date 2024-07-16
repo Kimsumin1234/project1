@@ -258,10 +258,10 @@ public class MemberController {
             adoptUserService.findIdEmail(fDto.getEmail());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
-            return "/member/findpwd1";
+            return "member/findpwd1";
         }
 
-        return "/member/findpwd2";
+        return "member/findpwd2";
     }
 
     @PostMapping("/findpwd2")
@@ -271,22 +271,22 @@ public class MemberController {
 
         // 유효성 검사
         if (result.hasErrors()) {
-            return "/member/findpwd2";
+            return "member/findpwd2";
         }
 
         try {
             adoptUserService.equalPhoneEmail(cDto.getPhone(), fDto.getEmail());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
-            return "/member/findpwd2";
+            return "member/findpwd2";
         }
 
         if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
             model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
-            return "/member/findpwd2";
+            return "member/findpwd2";
         } else {
             // session.invalidate();
-            return "/member/findpwd3";
+            return "member/findpwd3";
         }
 
     }
@@ -297,12 +297,12 @@ public class MemberController {
         log.info("비밀번호 수정 요청 {}", fDto);
 
         if (result.hasErrors()) {
-            return "/member/findpwd3";
+            return "member/findpwd3";
         }
 
         if (!fDto.getNewPassword().equals(fDto.getCheckNewPassword())) {
             model.addAttribute("findPwdError", "변경할 비밀번호와 다릅니다");
-            return "/member/findpwd3";
+            return "member/findpwd3";
         }
 
         adoptUserService.findPasswordUpdate(fDto);
