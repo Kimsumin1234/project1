@@ -61,12 +61,12 @@ public class ReviewController {
     public String getincrementViewCount(@RequestParam Long rno, HttpServletRequest request, Model model,
             HttpServletResponse response, @ModelAttribute("requestDto") PageRequestDto requestDto) {
 
-        HttpSession session = request.getSession();
-        if (session.isNew()) {
-            log.info("New session created: " + session.getId());
-        } else {
-            log.info("Existing session ID: " + session.getId());
-        }
+        // HttpSession session = request.getSession();
+        // if (session.isNew()) {
+        // log.info("New session created: " + session.getId());
+        // } else {
+        // log.info("Existing session ID: " + session.getId());
+        // }
 
         Cookie oldCookie = null;
         // Check if the user has already viewed this page
