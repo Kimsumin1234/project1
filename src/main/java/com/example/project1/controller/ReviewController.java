@@ -104,7 +104,7 @@ public class ReviewController {
         log.info(result);
         model.addAttribute("dto", result);
 
-        return "/review/read";
+        return "review/read";
 
     }
 
