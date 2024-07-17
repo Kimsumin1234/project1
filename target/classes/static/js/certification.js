@@ -72,7 +72,7 @@ addon1.addEventListener("click", () => {
       }
       certification.style.visibility = "visible";
       phoneCheck.innerHTML = ""; // 변경
-      phoneCheckSuccess.innerHTML = "인증 완료"; // 변경
+      phoneCheckSuccess.innerHTML = "전송 완료"; // 변경
       time = 180;
       timer = setInterval(function () {
         if (time > 0) {
