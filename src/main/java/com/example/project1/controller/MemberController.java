@@ -82,7 +82,7 @@ public class MemberController {
         log.info("닉네임 수정 요청 {}", nicknameChangeDto);
 
         if (result.hasErrors()) {
-            return "/member/edit";
+            return "member/edit";
         }
 
         String msg = "";
@@ -91,7 +91,7 @@ public class MemberController {
             msg = adoptUserService.nickNameUpdate(nicknameChangeDto);
         } catch (Exception e) {
             model.addAttribute("error3", e.getMessage());
-            return "/member/edit";
+            return "member/edit";
         }
 
         // Authentication 값을 업데이트
@@ -116,19 +116,19 @@ public class MemberController {
         log.info("비밀번호 수정 요청 {}", pDto);
 
         if (result.hasErrors()) {
-            return "/member/edit";
+            return "member/edit";
         }
 
         if (!pDto.getNewPassword().equals(pDto.getCheckNewPassword())) {
             model.addAttribute("error2", "변경할 비밀번호와 다릅니다");
-            return "/member/edit";
+            return "member/edit";
         }
 
         try {
             adoptUserService.passwordUpdate(pDto);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "/member/edit";
+            return "member/edit";
         }
 
         session.invalidate();
@@ -149,7 +149,7 @@ public class MemberController {
 
         if (!leaveMemberDto.getPassword().equals(leaveMemberDto.getCheckPassword())) {
             model.addAttribute("error2", "비밀번호 확인을 다시 해주세요.");
-            return "/member/leave";
+            return "member/leave";
         }
 
         String msg = "";
@@ -158,7 +158,7 @@ public class MemberController {
             msg = adoptUserService.leave(leaveMemberDto);
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
-            return "/member/leave";
+            return "member/leave";
         }
 
         // 회원탈퇴 성공하면 세션 날리기
@@ -181,24 +181,24 @@ public class MemberController {
         log.info("회원가입 페이지 요청 {}", memberDto);
         // 유효성 검사
         if (result.hasErrors()) {
-            return "/member/sms";
+            return "member/sms";
         }
 
         try {
             adoptUserService.validateDuplicationMemberPhone(cDto.getPhone());
         } catch (IllegalStateException e) {
             model.addAttribute("dupliError", e.getMessage());
-            return "/member/sms";
+            return "member/sms";
         }
 
         if (!cDto.getCertNum().equals(session.getAttribute("rNum"))) {
             model.addAttribute("smsError", "인증번호를 다시 확인해주세요.");
-            return "/member/sms";
+            return "member/sms";
         } else {
             // session.invalidate(); // 이거 때문에 이유는 모르지만 문제가 생겼음
             // rttr.addAttribute("memberDtoPhone", memberDto.getPhone());
             // return "redirect:/member/register";
-            return "/member/register";
+            return "member/register";
         }
 
     }
@@ -208,12 +208,12 @@ public class MemberController {
         log.info("회원가입 요청 {}", insertDto);
         // 유효성 검사
         if (result.hasErrors()) {
-            return "/member/register";
+            return "member/register";
         }
 
         if (!insertDto.getPassword().equals(insertDto.getCheckPassword())) {
             model.addAttribute("error2", "비밀번호 확인을 다시 해주세요.");
-            return "/member/register";
+            return "member/register";
         }
 
         String newEmail = "";
@@ -222,7 +222,7 @@ public class MemberController {
             newEmail = adoptUserService.register(insertDto);
         } catch (Exception e) {
             model.addAttribute("Exception", e.getMessage());
-            return "/member/register";
+            return "member/register";
         }
 
         rttr.addFlashAttribute("newEmail", newEmail);
@@ -241,7 +241,7 @@ public class MemberController {
 
         model.addAttribute("email", session.getAttribute("findId"));
         session.invalidate();
-        return "/member/resultfindid";
+        return "member/resultfindid";
     }
 
     @PreAuthorize("permitAll()")
