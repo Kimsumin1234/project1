@@ -68,3 +68,5 @@ replay_pid*
 src/test/
 ### 웹에 배포하려면 DB 정보는 git에 올라가면 안되서 제외 ###
 src/main/resources/application-db.properties
+### 웹에 배포하려면 소셜로그인 인증 정보는 git에 올라가면 안되서 제외 ###
+src/main/resources/application-oauth.properties
