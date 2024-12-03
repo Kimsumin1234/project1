@@ -49,7 +49,7 @@ public class ImageCheck {
   // 주기결정 : 0(초) *(분0-59) *(시간(0-23)) *(일(1-31)) *(월(1-12)) *(요일(0-7))
   // 0초 로 정하면 매 0초마다 스케쥴러를 실행해줘 (테스트 중이라 매0초 설정 "0 * * * * *")
   // 실제로는 새벽시간에 설정 할수도있다 "0 0 2 * * *"
-  @Scheduled(cron = "0 * * * * *")
+  @Scheduled(cron = "0 0 * * * *")
   public void checkFiles() {
     log.info("file check task 시작....");
 
