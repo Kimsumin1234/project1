@@ -21,20 +21,26 @@ import lombok.ToString;
 @Builder
 @ToString(exclude = "review")
 @Entity
-public class ReviewImage {
+public class ReviewImage extends BaseEntity {
 
-    @SequenceGenerator(name = "animal_review_image_seq_gen", sequenceName = "animal_review_image_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_review_image_seq_gen")
-    @Id
-    private Long inum;
+  @SequenceGenerator(
+    name = "animal_review_image_seq_gen",
+    sequenceName = "animal_review_image_seq",
+    allocationSize = 1
+  )
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "animal_review_image_seq_gen"
+  )
+  @Id
+  private Long inum;
 
-    private String uuid;
+  private String uuid;
 
-    private String imagename;
+  private String imagename;
 
-    private String path;
+  private String path;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Review review;
-
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Review review;
 }

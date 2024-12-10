@@ -22,9 +22,17 @@ public class QMissingimage extends EntityPathBase<Missingimage> {
 
     public static final QMissingimage missingimage = new QMissingimage("missingimage");
 
+    public final QBaseEntity _super = new QBaseEntity(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
+
     public final StringPath imagename = createString("imagename");
 
     public final NumberPath<Long> inum = createNumber("inum", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final QMissing missing;
 

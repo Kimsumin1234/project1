@@ -22,9 +22,17 @@ public class QReviewImage extends EntityPathBase<ReviewImage> {
 
     public static final QReviewImage reviewImage = new QReviewImage("reviewImage");
 
+    public final QBaseEntity _super = new QBaseEntity(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
+
     public final StringPath imagename = createString("imagename");
 
     public final NumberPath<Long> inum = createNumber("inum", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final StringPath path = createString("path");
 

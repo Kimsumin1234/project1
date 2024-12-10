@@ -22,20 +22,26 @@ import lombok.ToString;
 @Builder
 @ToString(exclude = "missing")
 @Entity
-public class Missingimage {
+public class Missingimage extends BaseEntity {
 
-    @SequenceGenerator(name = "missing_image_seq_gen", sequenceName = "missing_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "missing_image_seq_gen")
-    @Id
-    private Long inum;
+  @SequenceGenerator(
+    name = "missing_image_seq_gen",
+    sequenceName = "missing_seq",
+    allocationSize = 1
+  )
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "missing_image_seq_gen"
+  )
+  @Id
+  private Long inum;
 
-    private String uuid;
+  private String uuid;
 
-    private String imagename;
+  private String imagename;
 
-    private String path;
+  private String path;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Missing missing;
-
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Missing missing;
 }
