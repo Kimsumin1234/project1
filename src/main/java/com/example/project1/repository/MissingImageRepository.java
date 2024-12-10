@@ -3,10 +3,12 @@ package com.example.project1.repository;
 import com.example.project1.entity.Missing;
 import com.example.project1.entity.Missingimage;
 import com.example.project1.repository.missing.MissingMemberReviewRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface MissingImageRepository
   extends JpaRepository<Missingimage, Long>, MissingMemberReviewRepository {
@@ -15,9 +17,17 @@ public interface MissingImageRepository
   void deleteByMissing(Missing missing);
 
   // 어제 날짜 이미지 가져오기 (디비버에서 쿼리문 작성함)
+  // @Query(
+  //   value = "SELECT * FROM MISSINGIMAGE mi WHERE mi.PATH = TO_CHAR(SYSDATE -1,'yyyy\\mm\\dd')",
+  //   nativeQuery = true
+  // )
+  // List<Missingimage> getOldMissingImages();
+
   @Query(
-    value = "SELECT * FROM MISSINGIMAGE mi WHERE mi.PATH = TO_CHAR(SYSDATE -1,'yyyy\\mm\\dd')",
-    nativeQuery = true
+    "SELECT r FROM Missingimage r WHERE r.createdDate BETWEEN :start AND :end"
   )
-  List<Missingimage> getOldMissingImages();
+  List<Missingimage> findImagesByCreatedDateBetween(
+    @Param("start") LocalDateTime start,
+    @Param("end") LocalDateTime end
+  );
 }
