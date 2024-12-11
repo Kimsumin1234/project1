@@ -1,13 +1,10 @@
 package com.example.project1.schedule;
 
-import com.example.project1.dto.MissingimageDto;
-import com.example.project1.dto.ReviewImageDto;
 import com.example.project1.entity.Missingimage;
 import com.example.project1.entity.ReviewImage;
 import com.example.project1.repository.MissingImageRepository;
 import com.example.project1.repository.ReviewImageRepository;
 import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
