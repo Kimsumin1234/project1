@@ -53,12 +53,26 @@ jobs:
           username: ${{ env.EC2_SSH_USER }}
           key: ${{ env.PRIVATE_KEY }}
           script: |
-            CONTAINER_ID=$(sudo docker ps -q --filter "publish=80-8080")
-
+            # 기존 컨테이너 중지 및 삭제
+            CONTAINER_ID=$(sudo docker ps -q --filter "publish=8080")
             if [ ! -z "$CONTAINER_ID" ]; then
+              echo "Stopping and removing existing container..."
               sudo docker stop $CONTAINER_ID
               sudo docker rm $CONTAINER_ID
             fi
 
-            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}            
-            sudo docker run -d -p 8080:8080  ${{ env.DOCKER_IMAGE_NAME }}:latest
+            # 최신 이미지 가져오기
+            echo "Pulling latest Docker image..."
+            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:latest
+
+            # 새로운 컨테이너 실행
+            echo "Running new container..."
+            sudo docker run -d \
+              -p 8080:8080 \                             # 호스트와 컨테이너의 포트 매핑
+              -e com.example.upload.path="/app/upload" \ # 환경 변수 설정
+              -v /home/ec2-user/app/upload:/app/upload \ # 영구 저장 디렉토리 마운트
+              ${{ env.DOCKER_IMAGE_NAME }}:latest
+
+            # 컨테이너 실행 상태 확인
+            echo "Verifying container is running..."
+            sudo docker ps -a
