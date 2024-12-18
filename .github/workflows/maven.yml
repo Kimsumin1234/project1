@@ -53,15 +53,15 @@ jobs:
           username: ${{ env.EC2_SSH_USER }}
           key: ${{ env.PRIVATE_KEY }}
           script: |
+            echo "Pulling latest Docker image from Docker Hub..."
+            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:latest
+
             CONTAINER_ID=$(sudo docker ps -q --filter "publish=80-8080")
             if [ ! -z "$CONTAINER_ID" ]; then
               echo "Stopping and removing existing container..."
               sudo docker stop $CONTAINER_ID
               sudo docker rm $CONTAINER_ID
             fi
-
-            echo "Pulling latest Docker image..."
-            sudo docker pull ${{ env.DOCKER_IMAGE_NAME }}:latest
 
             echo "Running new container..."
             sudo docker run -d \
@@ -71,4 +71,17 @@ jobs:
               ${{ env.DOCKER_IMAGE_NAME }}:latest
 
             echo "Verifying container is running..."
+            sudo docker images
+            sudo docker ps
             sudo docker ps -a
+
+            echo "Checking logs of the new container..."
+            NEW_CONTAINER_ID=$(sudo docker ps -q --filter "ancestor=${{ env.DOCKER_IMAGE_NAME }}:latest")
+            if [ ! -z "$NEW_CONTAINER_ID" ]; then
+              sudo docker logs $NEW_CONTAINER_ID
+            else
+              echo "No running container found for the new image."
+            fi
+
+            echo "Pruning unused Docker images..."
+            sudo docker image prune -a -f
