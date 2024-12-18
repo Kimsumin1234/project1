@@ -75,13 +75,25 @@ jobs:
             sudo docker ps
             sudo docker ps -a
 
+            echo "Waiting for the container to start..."
+            sleep 5
+
             echo "Checking logs of the new container..."
             NEW_CONTAINER_ID=$(sudo docker ps -q --filter "ancestor=${{ env.DOCKER_IMAGE_NAME }}:latest")
+            if [ -z "$NEW_CONTAINER_ID" ]; then
+              echo "No running container found. Checking for recently stopped containers..."
+              NEW_CONTAINER_ID=$(sudo docker ps -aq --filter "ancestor=${{ env.DOCKER_IMAGE_NAME }}:latest" --filter "status=exited")
+            fi
+
             if [ ! -z "$NEW_CONTAINER_ID" ]; then
+              echo "Logs of the container:"
               sudo docker logs $NEW_CONTAINER_ID
             else
-              echo "No running container found for the new image."
+              echo "No matching container found."
             fi
+
+            echo "Waiting for the container to start..."
+            sleep 5
 
             echo "Pruning unused Docker images..."
             sudo docker image prune -a -f
