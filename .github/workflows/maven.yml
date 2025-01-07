@@ -68,6 +68,7 @@ jobs:
               -p 8080:8080 \
               -e com.example.upload.path="/app/upload" \
               -v /home/ec2-user/app/upload:/app/upload \
+              -v /home/ec2-user/app/application.log:/app/application.log \
               ${{ env.DOCKER_IMAGE_NAME }}:latest
 
             echo "Verifying container is running..."
