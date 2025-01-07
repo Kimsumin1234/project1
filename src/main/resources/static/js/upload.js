@@ -1,13 +1,30 @@
 // fileInput 찾기
 const fileInput = document.querySelector("#fileInput");
 
-function checkExtension(fileName) {
-  // 정규식 사용
-  const regex = /(.*?).(png|gif|jpg)$/;
+// 최대 파일 크기 (1MB) ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
+const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
-  // txt=>, 이미지 =>
-  console.log(regex.test(fileName));
+// function checkExtension(fileName) {
+//   // 정규식 사용
+//   const regex = /(.*?).(png|gif|jpg)$/;
+
+//   // txt=>, 이미지 =>
+//   console.log(regex.test(fileName));
+//   return regex.test(fileName);
+// }
+
+// 파일 확장자 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
+function checkExtension(fileName) {
+  const regex = /\.(png|gif|jpg|jpeg)$/i; // 허용되는 확장자
+  console.log(`파일 ${fileName} 확장자 검사:`, regex.test(fileName));
   return regex.test(fileName);
+}
+
+// 파일 크기 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
+function checkFileSize(file) {
+  const isValidSize = file.size <= MAX_FILE_SIZE;
+  console.log(`파일 ${file.name} 크기 검사:`, isValidSize);
+  return isValidSize;
 }
 
 // 업로드 파일 보여주기 찾기
@@ -28,28 +45,34 @@ function showUploadImages(arr) {
   uploadResult.insertAdjacentHTML("beforeend", tags);
 }
 
-document.querySelector("#fileInput").addEventListener("change", (e) => {
-  // fileInput change 이벤트
-  // checkExtension() 호출
-  // 이미지 파일이라면 FormData() 객체 생성 후
-  // append
-  const files = e.target.files; // input 안에 파일찾기
-
+// 파일 선택 시 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
+fileInput.addEventListener("change", (e) => {
+  const files = e.target.files;
   const formData = new FormData();
+  let validFiles = true; // 모든 파일이 유효한지 여부
 
-  for (let index = 0; index < files.length; index++) {
-    if (checkExtension(files[index].name)) {
-      formData.append("uploadFiles", files[index]);
+  for (let file of files) {
+    // 확장자와 크기 검사
+    if (!checkExtension(file.name)) {
+      alert("png, gif, jpg, jpeg 파일만 업로드 가능합니다.");
+      validFiles = false;
+      break;
     }
+    if (!checkFileSize(file)) {
+      alert("이미지 1개당 크기 제한은 1MB 미만 입니다.");
+      validFiles = false;
+      break;
+    }
+    formData.append("uploadFiles", file);
   }
 
-  for (const value of formData.values()) {
-    console.log(value);
+  if (!validFiles) {
+    e.target.value = ""; // 입력 초기화
+    return;
   }
 
-  console.log(formData.innerHTML);
-
-  fetch("/upload/uploadAjax", {
+  console.log("유효한 파일만 업로드 처리");
+  fetch("/imageupload/uploadAjax", {
     method: "post",
     headers: {
       "X-CSRF-TOKEN": csrfValue,
@@ -59,10 +82,45 @@ document.querySelector("#fileInput").addEventListener("change", (e) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-
       showUploadImages(data);
     });
 });
+// document.querySelector("#fileInput").addEventListener("change", (e) => {
+//   // fileInput change 이벤트
+//   // checkExtension() 호출
+//   // 이미지 파일이라면 FormData() 객체 생성 후
+//   // append
+//   const files = e.target.files; // input 안에 파일찾기
+
+//   const formData = new FormData();
+
+//   for (let index = 0; index < files.length; index++) {
+//     if (checkExtension(files[index].name)) {
+//       formData.append("uploadFiles", files[index]);
+//     }
+//   }
+
+//   for (const value of formData.values()) {
+//     console.log(value);
+//   }
+
+//   console.log(formData.innerHTML);
+
+//   fetch("/upload/uploadAjax", {
+//     method: "post",
+//     headers: {
+//       "X-CSRF-TOKEN": csrfValue,
+//     },
+//     body: formData,
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data);
+
+//       showUploadImages(data);
+//     });
+// });
+
 // form submit 기능 중지
 // uploadResult ul li 태그 요소 가져오기
 document.querySelector("#register-form").addEventListener("submit", (e) => {
@@ -88,7 +146,7 @@ document.querySelector("#register-form").addEventListener("submit", (e) => {
   }
   form.insertAdjacentHTML("beforeend", result);
 
-  console.log(form);
+  console.log("폼 제출", form);
 
   form.submit();
 });

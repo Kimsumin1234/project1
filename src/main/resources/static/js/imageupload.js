@@ -1,7 +1,7 @@
 // fileInput 찾기
 const fileInput = document.querySelector("#fileInput");
 
-// 최대 파일 크기 (1MB) ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 최대 파일 크기 (1MB) ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
 const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
 // function checkExtension(fileName) {
@@ -13,14 +13,14 @@ const MAX_FILE_SIZE = 1 * 1024 * 1024;
 //   return regex.test(fileName);
 // }
 
-// 파일 확장자 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 파일 확장자 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
 function checkExtension(fileName) {
   const regex = /\.(png|gif|jpg|jpeg)$/i; // 허용되는 확장자
   console.log(`파일 ${fileName} 확장자 검사:`, regex.test(fileName));
   return regex.test(fileName);
 }
 
-// 파일 크기 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 파일 크기 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
 function checkFileSize(file) {
   const isValidSize = file.size <= MAX_FILE_SIZE;
   console.log(`파일 ${file.name} 크기 검사:`, isValidSize);
@@ -45,7 +45,7 @@ function showUploadImages(arr) {
   uploadResult.insertAdjacentHTML("beforeend", tags);
 }
 
-// 파일 선택 시 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+// 파일 선택 시 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ2025/01/07 추가
 fileInput.addEventListener("change", (e) => {
   const files = e.target.files;
   const formData = new FormData();
@@ -59,7 +59,7 @@ fileInput.addEventListener("change", (e) => {
       break;
     }
     if (!checkFileSize(file)) {
-      alert("1MB 이상은 업로드가 불가능 합니다.");
+      alert("이미지 1개당 크기 제한은 1MB 미만 입니다.");
       validFiles = false;
       break;
     }
